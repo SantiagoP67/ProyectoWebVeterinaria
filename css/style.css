@@ -1,0 +1,135 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Hind', sans-serif;
+    background-color: #fff;
+}
+
+.container {
+    width: 1220px;
+    height: 575px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+}
+
+.text-content {
+    width: 649px;
+    height: 328px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+h1 {
+    color: #4E2A1E;
+    font-size: 64px;
+    font-family: 'Londrina Solid', cursive;
+    font-weight: 400;
+    text-align: center;
+    margin: 0;
+}
+
+p {
+    color: #4E2A1E;
+    font-size: 32px;
+    font-weight: 400;
+    text-align: center;
+    margin: 0;
+}
+
+.pet-image {
+    width: 500px;
+    height: 500px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    border: 1px solid #4E2A1E;
+}
+
+/* Reset básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Fuente base (asegúrate de tener importadas las fuentes necesarias) */
+  body {
+    font-family: 'Londrina Solid', cursive, sans-serif;
+  }
+  
+  /* Contenedor del header */
+  .header {
+    width: 1220px;
+    height: 100px;
+    padding: 20px;
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto; /* Centrar horizontalmente */
+  }
+  
+  /* Sección del logo */
+  .logo {
+    width: 230px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .logo-text {
+    color: #4e2a1e;
+    font-size: 32px;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  
+  /* Navegación principal */
+  .nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 0 10px;
+  }
+  
+  .nav-item {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 400;
+    word-wrap: break-word;
+    color: #4e2a1e;
+  }
+  
+  /* Botón de Login */
+  .login-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    height: 40px;
+    padding: 5px 30px;
+    background: #4e2a1e;
+    border-radius: 50px;
+  }
+  
+  .login-text {
+    text-align: center;
+    color: #f6e8d8;
+    font-size: 24px;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  
+  /* Contenedor para SVG */
+  .svg-wrapper {
+    position: relative;
+  }
+  
