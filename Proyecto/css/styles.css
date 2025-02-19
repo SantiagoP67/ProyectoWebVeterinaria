@@ -185,7 +185,7 @@ main {
 .testimonials-section {
     padding: 60px 20px;
     text-align: center;
-    background-color: #ffbd59;
+    background-color: rgb(240, 196, 147);
 }
 
 .testimonials-section h2 {
@@ -314,7 +314,31 @@ footer {
 }
 
 .footer-copyright {
-    margin-top: 20px;
     font-size: 14px;
     color: black;
+}
+
+footer .social-links {
+    margin-bottom: 1rem;
+}
+
+footer .social-links a {
+    margin: 0 2rem;
+    text-decoration: none;
+}
+
+footer .social-links img {
+    transition: transform 0.3s ease, filter 0.3s ease;
+    width: 50px;
+    height: auto;
+}
+
+footer .social-links a:hover img {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+footer p {
+    font-size: 1rem;
+    color: #ddd;
 }
