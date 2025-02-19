@@ -43,12 +43,103 @@ header {
     align-items: center;
 }
 .login-btn img {
-    height: 16px;
+    height: 30px;
     margin-left: 5px;
 }
 main {
     padding: 20px;
     text-align: center;
+}
+footer {
+    background-color: #4e2a1e;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.services-section {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 40px 20px;
+}
+.service-card {
+    width: 200px;
+    height: 250px;
+    perspective: 1000px;
+}
+.service-card-inner {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+.service-card:hover .service-card-inner {
+    transform: rotateY(180deg);
+}
+.service-card-front, .service-card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.service-card-front {
+    background-color: #cfb0a6;
+    color: #4e2a1e;
+}
+.service-card-back {
+    background-color: #6f3a27;
+    color: white;
+    transform: rotateY(180deg);
+    padding: 10px;
+    text-align: center;
+}
+.testimonials-section {
+    background-color: #ffbd59;
+    padding: 60px 20px;
+    text-align: center;
+}
+.testimonials-section h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #4e2a1e;
+}
+.testimonial {
+    background-color: #f6e8d8;
+    padding: 20px;
+    margin: 10px auto;
+    width: 80%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+.testimonial img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.testimonial-content {
+    display: flex;
+    align-items: center;
+}
+.testimonial-text {
+    flex: 1;
+}
+.stars {
+    color: gold;
 }
 footer {
     background-color: #4e2a1e;
