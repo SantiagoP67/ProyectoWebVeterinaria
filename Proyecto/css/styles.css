@@ -3,55 +3,129 @@ body {
     background-color: #f6e8d8;
     margin: 0;
     padding: 0;
-    color: #4e2a1e;
+    color: #643525;
 }
+
+/* Header */
 header {
-    background-color: #6f3a27;
-    padding: 10px 20px;
+    width: 100%;
+    height: 100px;
+    padding: 20px;
+    border-bottom: 1px solid black;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: white;
+    box-sizing: border-box;
 }
+
 .logo {
+    width: 230px;
     display: flex;
+    justify-content: center;
     align-items: center;
+    gap: 10px;
 }
+
 .logo img {
-    height: 40px;
-    margin-right: 10px;
+    width: 60px;
+    height: 60px;
 }
+
+.logo h1 {
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    font-family: 'Londrina Solid', sans-serif;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+/* Navegación */
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 20px;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
 }
+
 .nav-links a {
-    color: white;
     text-decoration: none;
-    font-size: 16px;
+    color: #4E2A1E;
+    font-size: 18px;
+    font-family: 'Londrina Solid', sans-serif;
+    transition: all 0.3s ease;
 }
+
+.nav-links a:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+/* Botón de login */
 .login-btn {
-    background-color: #ffbd59;
+    background-color: #a57768;
+    color: white;
     border: none;
-    padding: 8px 15px;
-    font-size: 16px;
-    color: #4e2a1e;
+    padding: 10px 20px;
+    font-size: 20px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 20px;
     display: flex;
     align-items: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
+
+.login-btn:hover {
+    background-color: #3C1F15;
+    transform: scale(1.05);
+}
+
 .login-btn img {
     height: 30px;
-    margin-left: 5px;
+    margin-left: 10px;
 }
+
+.description-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 20px;
+    max-width: 1220px;
+    margin: auto;
+}
+
+.description-text {
+    width: 60%;
+}
+
+.description-text h1 {
+    color: #4E2A1E;
+    font-size: 64px;
+    font-family: 'Londrina Solid', sans-serif;
+}
+
+.description-text p {
+    color: #4E2A1E;
+    font-size: 32px;
+    font-family: 'Hind', sans-serif;
+}
+
+.description-image img {
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    border: 1px solid #4E2A1E;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Resto del CSS (main, footer, servicios, testimonios) */
 main {
     padding: 20px;
     text-align: center;
 }
+
 footer {
-    background-color: #4e2a1e;
     color: white;
     text-align: center;
     padding: 10px;
@@ -61,18 +135,19 @@ footer {
 }
 
 .services-section {
-    background-color: #ffffff;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
     padding: 40px 20px;
 }
+
 .service-card {
     width: 200px;
     height: 250px;
     perspective: 1000px;
 }
+
 .service-card-inner {
     width: 100%;
     height: 100%;
@@ -80,9 +155,11 @@ footer {
     transform-style: preserve-3d;
     position: relative;
 }
+
 .service-card:hover .service-card-inner {
     transform: rotateY(180deg);
 }
+
 .service-card-front, .service-card-back {
     width: 100%;
     height: 100%;
@@ -95,10 +172,11 @@ footer {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 .service-card-front {
-    background-color: #cfb0a6;
     color: #4e2a1e;
 }
+
 .service-card-back {
     background-color: #6f3a27;
     color: white;
@@ -106,16 +184,18 @@ footer {
     padding: 10px;
     text-align: center;
 }
+
 .testimonials-section {
-    background-color: #ffbd59;
     padding: 60px 20px;
     text-align: center;
 }
+
 .testimonials-section h2 {
     font-size: 28px;
     margin-bottom: 20px;
     color: #4e2a1e;
 }
+
 .testimonial {
     background-color: #f6e8d8;
     padding: 20px;
@@ -125,28 +205,23 @@ footer {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: left;
 }
+
 .testimonial img {
     width: 60px;
     height: 60px;
     border-radius: 50%;
     margin-right: 10px;
 }
+
 .testimonial-content {
     display: flex;
     align-items: center;
 }
+
 .testimonial-text {
     flex: 1;
 }
+
 .stars {
     color: gold;
-}
-footer {
-    background-color: #4e2a1e;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
 }
