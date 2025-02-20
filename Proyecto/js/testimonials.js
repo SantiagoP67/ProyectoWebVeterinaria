@@ -69,7 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const stars = document.querySelectorAll(".star-rating span");
     const ratingInput = document.getElementById("user-rating");
 
-    // Efecto de estrellas
     stars.forEach((star, index) => {
         star.addEventListener("mouseover", function () {
             stars.forEach((s, i) => {
