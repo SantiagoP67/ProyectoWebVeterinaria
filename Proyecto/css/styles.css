@@ -602,21 +602,31 @@ footer {
     text-decoration: underline;
 }
 
+.footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px; /* Espacio entre el logo y las redes */
+}
+
 .footer-logo img {
     width: 120px;
     height: auto;
     filter: brightness(0.8);
+    margin-bottom: 5px;
 }
 
-.footer-copyright {
-    margin-top: 10px;
-    font-size: 12px;
-    opacity: 0.7;
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Espaciado entre los íconos */
+    margin-top: 5px;
 }
 
-footer .social-links {
-    margin-top: 8px;
+footer .social-links a {
+    margin: 0 5px;
 }
+
 footer .social-links img {
     transition: transform 0.3s ease, filter 0.3s ease;
     width: 30px;
@@ -624,12 +634,13 @@ footer .social-links img {
     filter: brightness(0.9); /* Mantiene el color con un ligero ajuste */
 }
 
-
-footer .social-links a {
-    margin: 0 10px;
-}
-
 footer .social-links a:hover img {
     transform: scale(1.2);
     filter: brightness(1.5);
+}
+
+.footer-copyright {
+    margin-top: 10px;
+    font-size: 12px;
+    opacity: 0.7;
 }
