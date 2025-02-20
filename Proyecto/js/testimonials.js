@@ -116,3 +116,32 @@ document.addEventListener("DOMContentLoaded", () => {
         stars.forEach(s => s.classList.remove("active"));
     });
 });
+
+//para la seccion de fundaciones
+document.addEventListener("DOMContentLoaded", function () {
+    const carousel = document.querySelector(".carousel");
+    const prevBtn = document.querySelector(".prev-btn");
+    const nextBtn = document.querySelector(".next-btn");
+
+    let scrollAmount = 0;
+    const cardWidth = document.querySelector(".foundation-card").offsetWidth + 250; 
+
+    prevBtn.addEventListener("click", function () {
+        scrollAmount -= cardWidth;
+        if (scrollAmount < 0) scrollAmount = 0;
+        carousel.scrollTo({
+            left: scrollAmount,
+            behavior: "smooth"
+        });
+    });
+
+    nextBtn.addEventListener("click", function () {
+        if (scrollAmount < carousel.scrollWidth - carousel.clientWidth) {
+            scrollAmount += cardWidth;
+            carousel.scrollTo({
+                left: scrollAmount,
+                behavior: "smooth"
+            });
+        }
+    });
+});
