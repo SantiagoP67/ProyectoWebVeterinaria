@@ -143,47 +143,43 @@
         </section>
         <section class="testimonials-section">
             <h2>Customer Testimonials</h2>
-            <div class="testimonial-grid">
-                <div class="testimonial">
-                    <div class="testimonial-content">
-                        <img src="../images/client.jpeg" alt="Client" />
-                        <div class="testimonial-text">
-                            <p>"Excellent service, very attentive to my pet!"</p>
-                            <p>- Peter Parker</p>
-                            <p class="stars">★★★★★</p>
-                            <p class="testimonial-date">January 15, 2024</p>
-                            <p class="testimonial-service">Service: General Checkup</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial">
-                    <div class="testimonial-content">
-                        <img src="../images/client.jpeg" alt="Client" />
-                        <div class="testimonial-text">
-                            <p>"The surgery went perfectly, and my dog recovered quickly!"</p>
-                            <p>- Walter White</p>
-                            <p class="stars">★★★★★</p>
-                            <p class="testimonial-date">February 10, 2024</p>
-                            <p class="testimonial-service">Service: Surgery</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial">
-                    <div class="testimonial-content">
-                        <img src="../images/client.jpeg" alt="Client" />
-                        <div class="testimonial-text">
-                            <p>"Amazing grooming services! My cat looks fabulous."</p>
-                            <p>- Mary Jane</p>
-                            <p class="stars">★★★★★</p>
-                            <p class="testimonial-date">March 5, 2024</p>
-                            <p class="testimonial-service">Service: Grooming</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="testimonial-grid"></div>
         </section>
-    </main>
-    
+        <section class="add-testimonial">
+            <h2>Add a Testimonial</h2>
+            <form id="testimonial-form">
+                <label for="user-name">Your Name:</label>
+                <input type="text" id="user-name" placeholder="John Doe" required />
+        
+                <label for="user-review">Your Review:</label>
+                <textarea id="user-review" placeholder="Write your review here..." required></textarea>
+        
+                <label for="user-service">Service:</label>
+                <select id="user-service" required>
+                    <option value="">Select a Service</option>
+                    <option value="General Checkup">General Checkup</option>
+                    <option value="Surgery">Surgery</option>
+                    <option value="Grooming">Grooming</option>
+                    <option value="Vaccination">Vaccination</option>
+                    <option value="Other">Other</option>
+                </select>
+        
+                <label for="user-image">Image URL:</label>
+                <input type="url" id="user-image" placeholder="https://example.com/image.jpg" required />
+        
+                <label>Rating:</label>
+                <div class="star-rating">
+                    <span data-value="1">☆</span>
+                    <span data-value="2">☆</span>
+                    <span data-value="3">☆</span>
+                    <span data-value="4">☆</span>
+                    <span data-value="5">☆</span>
+                </div>
+                <input type="hidden" id="user-rating" required />
+                <button type="submit">Submit Review</button>
+            </form>
+        </section>        
+    </main>    
     <footer>
       <section class="footer-container">
         <div class="footer-info">
@@ -241,5 +237,6 @@
         </div>
       </section>
     </footer>
+    <script src="../js/testimonials.js"></script>
   </body>
 </html>
