@@ -28,16 +28,22 @@ header {
 .logo img {
     width: 60px;
     height: 60px;
+    border-radius: 50%; /* Hace que la imagen sea redonda */
+    object-fit: cover;  /* Asegura que la imagen se ajuste bien dentro del círculo */
 }
 
 .logo h1 {
     text-align: center;
-    color: black;
-    font-size: 24px;
-    font-family: 'Londrina Solid', sans-serif;
-    font-weight: 400;
+    color: #4b2e2e; /* Un café oscuro elegante, puedes cambiarlo a #000 para negro */
+    font-size: 28px;
+    font-family: 'Playfair Display', serif; /* Fuente más estilizada y bonita */
+    font-weight: 600; /* Un poco más gruesa pero sin exagerar */
     word-wrap: break-word;
+    letter-spacing: 1.5px; /* Espaciado para que se vea más sofisticado */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Sombra suave para darle profundidad */
 }
+
+
 
 .nav-links {
     list-style: none;
