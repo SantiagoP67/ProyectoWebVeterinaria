@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background:rgb(255, 255, 255);
+    background:#DDE2E4;
     color: #333;
 }
 
@@ -17,7 +17,7 @@ header {
     box-sizing: border-box;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px); 
-    background-color:rgb(79, 170, 234); 
+    background-color:#74A7C3; 
     color: white;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
 }
@@ -58,19 +58,19 @@ header {
 
 .nav-links a {
     text-decoration: none;
-    color: #4E2A1E;
+    color: #000000;
     font-size: 18px;
     font-family: 'Londrina Solid', sans-serif;
     transition: all 0.3s ease;
 }
 
 .nav-links a:hover {
-    color: black;
+    color: #1b79b0;
     text-decoration: underline;
 }
 
 .login-btn {
-    background-color: #a57768;
+    background-color: #3C5B6F;;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -83,7 +83,7 @@ header {
 }
 
 .login-btn:hover {
-    background-color: #3C1F15;
+    background-color:  #5E7E92;
     transform: scale(1.05);
 }
 
@@ -137,7 +137,7 @@ main {
     flex-wrap: wrap;
     gap: 20px;
     padding: 40px 20px;
-    background-color: #bd8c7c;
+    background-color: #B3C4D6;
     border-radius: 30px;
     margin-bottom: 20px;
 }
@@ -243,7 +243,7 @@ main {
 .testimonials-section {
     padding: 80px 20px;
     text-align: center;
-    background: linear-gradient(to bottom, #FAF3F0 0%, #E4D2C8 100%);
+    background-color: #F5F5F5;
 }
 
 /* Título con más impacto */
@@ -371,11 +371,13 @@ main {
     outline: none;
 }
 
+
+
 /* Botón con animación de escala */
 #testimonial-form button {
     margin-top: 15px;
     padding: 12px;
-    background: #a57768;
+    background:  #3C5B6F;
     color: white;
     font-size: 18px;
     border: none;
@@ -387,7 +389,7 @@ main {
 
 /* Hover para el botón */
 #testimonial-form button:hover {
-    background: #3C1F15;
+    background: #5E7E92;
     transform: scale(1.05);
 }
 
@@ -442,7 +444,7 @@ main {
 .associated-foundations {
     text-align: center;
     padding: 50px 20px;
-    background: linear-gradient(to bottom, #F7E7E2 0%, #EADBD5 50%, #CFB0A6 100%);
+    background-color: #F5F5F5;
 }
 
 .carousel-container {
@@ -597,7 +599,7 @@ footer {
     text-align: center;
     font-size: 14px;
     color: black;
-    background-color:rgb(79, 170, 234);
+    background-color: #74A7C3;
        backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-top: 1px solid rgba(0, 0, 0, 0.2);
@@ -647,7 +649,7 @@ footer {
 }
 
 .footer-section ul li:hover {
-    color: #ff758c; /* Un toque de color en hover */
+    color: #1b79b0; 
     text-decoration: underline;
 }
 
