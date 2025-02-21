@@ -119,29 +119,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //para la seccion de fundaciones
 document.addEventListener("DOMContentLoaded", function () {
-    const carousel = document.querySelector(".carousel");
-    const prevBtn = document.querySelector(".prev-btn");
-    const nextBtn = document.querySelector(".next-btn");
+    const track = document.querySelector(".carousel-track");
+    const cards = document.querySelectorAll(".foundation-card");
 
-    let scrollAmount = 0;
-    const cardWidth = document.querySelector(".foundation-card").offsetWidth + 250; 
-
-    prevBtn.addEventListener("click", function () {
-        scrollAmount -= cardWidth;
-        if (scrollAmount < 0) scrollAmount = 0;
-        carousel.scrollTo({
-            left: scrollAmount,
-            behavior: "smooth"
-        });
+    let speed = 0.5; // Velocidad más lenta
+    let position = 0;
+    
+    // Duplicar las tarjetas para efecto infinito
+    cards.forEach(card => {
+        let clone = card.cloneNode(true);
+        track.appendChild(clone);
     });
 
-    nextBtn.addEventListener("click", function () {
-        if (scrollAmount < carousel.scrollWidth - carousel.clientWidth) {
-            scrollAmount += cardWidth;
-            carousel.scrollTo({
-                left: scrollAmount,
-                behavior: "smooth"
-            });
+    function animate() {
+        position -= speed;
+        track.style.transform = `translateX(${position}px)`;
+
+        // Reiniciar posición para efecto infinito
+        if (position <= -track.scrollWidth / 2) {
+            position = 0;
         }
-    });
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
 });
