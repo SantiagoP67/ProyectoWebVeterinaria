@@ -41,7 +41,6 @@ header {
     width: 60px;
     height: 60px;
     object-fit: cover; 
-    margin-bottom: -10px;
 }
 
 .logo h1 {
@@ -251,17 +250,23 @@ main {
     padding: 80px 20px;
     text-align: center;
     background-color: #F5F5F5;
+    border-radius: 30px;
+
 }
 
 /* Título con más impacto */
 .testimonials-section h2 {
-    font-size: 36px;
-    margin-bottom: 50px;
+    text-align: center;
+    padding: 10px 10px; /* Reduce el padding superior e inferior */
+    background-color: #F5F5F5;
+    font-family: 'Alice', serif;
+    font-size: 30px;
     color: #4e2a1e;
-    font-family: 'Londrina Solid', sans-serif;
+    margin-top: 0;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
+
 
 /* Distribución más fluida */
 .testimonial-grid {
@@ -341,9 +346,9 @@ main {
 /* Título del formulario más llamativo */
 .add-testimonial h2 {
     font-size: 30px;
-    margin-bottom: 20px;
     color: #4e2a1e;
-    font-family: 'Londrina Solid', sans-serif;
+    margin-bottom: 20px;
+    font-family: 'Alice', serif;
 }
 
 /* Espaciado mejorado en los inputs */
@@ -452,6 +457,13 @@ main {
     text-align: center;
     padding: 50px 20px;
     background-color: #F5F5F5;
+    font-family: 'Alice', serif;
+    font-size: 20px;
+    color: #4e2a1e;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .carousel-container {
