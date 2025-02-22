@@ -70,7 +70,6 @@ header {
 }
 
 .nav-links a:hover {
-  color: #1b79b0;
   text-decoration: underline;
 }
 
@@ -108,26 +107,28 @@ header {
 
 .description-text {
   width: 60%;
+  margin-left: 40px;
 }
 
 .description-text h1 {
-  color: #4e2a1e;
+  color: black;
   font-size: 64px;
   font-family: "Londrina Solid", sans-serif;
 }
 
 .description-text p {
-  color: #4e2a1e;
+  color: black;
   font-size: 32px;
   font-family: "Hind", sans-serif;
 }
 
 .description-image img {
-  margin-left: 20px;
+  margin-left: 40px;
+  margin-right: 40px;
   width: 500px;
   height: 500px;
   border-radius: 50%;
-  border: 1px solid #4e2a1e;
+  border: 1px solid black;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -142,7 +143,7 @@ main {
   background-color: #b3c4d6;
   font-family: "Alice", serif;
   font-size: 20px;
-  color: #4e2a1e;
+  color: black;
   margin-top: 0;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -167,8 +168,8 @@ main {
 }
 
 .service-card {
-  width: 200px;
-  min-height: 250px;
+  width: 225px;
+  min-height: 280px;
   perspective: 1000px;
 }
 
@@ -230,7 +231,7 @@ main {
 .service-card-front {
   background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
   background-position: center; /* Centra la imagen en el fondo */
-  color: #4e2a1e;
+  color: black;
   transform: rotateY(0deg);
   font-size: 17px;
 }
@@ -330,7 +331,7 @@ main {
   background-color: #f5f5f5;
   font-family: "Alice", serif;
   font-size: 30px;
-  color: #4e2a1e;
+  color: black;
   margin-top: 0;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -378,20 +379,6 @@ main {
   align-items: center;
 }
 
-/* Texto con más equilibrio */
-.testimonial-text p {
-  margin: 5px 0;
-  font-size: 17px;
-  color: #4e2a1e;
-  line-height: 1.6;
-}
-
-/* Estrellas más visibles */
-.testimonial-text .stars {
-  color: gold;
-  font-size: 20px;
-}
-
 /* Fechas y categorías con menor importancia */
 .testimonial-date,
 .testimonial-service {
@@ -412,19 +399,15 @@ main {
   border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-/* Título del formulario más llamativo */
-.add-testimonial h2 {
-  font-size: 30px;
-  color: #4e2a1e;
-  margin-bottom: 20px;
-  font-family: "Alice", serif;
-}
-
 /* Espaciado mejorado en los inputs */
 #testimonial-form {
   display: flex;
   flex-direction: column;
   gap: 15px;
+}
+
+.add-testimonial label {
+  text-align: left;
 }
 
 /* Inputs con un estilo más moderno */
@@ -439,7 +422,7 @@ main {
   font-size: 16px;
   font-family: "Hind", sans-serif;
   background-color: rgba(255, 255, 255, 0.9);
-  color: #4e2a1e;
+  color: black;
   transition: border-color 0.3s ease, background 0.3s ease;
 }
 
@@ -470,55 +453,6 @@ main {
 #testimonial-form button:hover {
   background: #5e7e92;
   transform: scale(1.05);
-}
-
-.star-rating {
-  display: flex;
-  justify-content: center;
-  font-size: 24px;
-  cursor: pointer;
-  margin-top: 10px;
-  gap: 5px;
-}
-
-.star-rating span {
-  transition: color 0.3s ease, transform 0.2s ease;
-  color: #ccc;
-}
-
-.star-rating span.active {
-  color: gold;
-  transform: scale(1.2);
-}
-
-.star-rating span:hover ~ span {
-  color: #ccc;
-}
-
-.testimonial img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.testimonials {
-  width: 90%;
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 20px;
-  background: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.testimonial-card {
-  background: white;
-  padding: 15px;
-  margin: 10px 0;
-  border-radius: 5px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .carousel-container {
@@ -712,7 +646,6 @@ footer {
 }
 
 .footer-section ul li:hover {
-  color: #1b79b0;
   text-decoration: underline;
 }
 
@@ -724,10 +657,11 @@ footer {
 }
 
 .footer-logo img {
+  margin-top: 10px;
   width: 120px;
   height: auto;
   filter: brightness(0.8);
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .social-links {
@@ -754,7 +688,6 @@ footer .social-links a:hover img {
 }
 
 .footer-copyright {
-  margin-top: 10px;
   font-size: 12px;
   opacity: 0.7;
 }
