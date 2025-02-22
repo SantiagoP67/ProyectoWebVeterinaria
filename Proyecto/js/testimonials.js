@@ -1,53 +1,53 @@
 class Testimonial {
-    constructor(text, name, image, rating, service, date) {
-        this.text = this.formatText(text);
-        this.name = name;
-        this.image = image || "https://via.placeholder.com/60";
-        this.rating = "⭐".repeat(rating);
-        this.service = service;
-        this.date = date || new Date().toLocaleDateString();
-    }
+  constructor(text, name, image, rating, service, date) {
+    this.text = this.formatText(text);
+    this.name = name;
+    this.image = image || "https://via.placeholder.com/60";
+    this.rating = "⭐".repeat(rating);
+    this.service = service;
+    this.date = date || new Date().toLocaleDateString();
+  }
 
-    formatText(text) {
-        return text.replace(/(\S{15,})/g, '$1- ');
-    }
+  formatText(text) {
+    return text.replace(/(\S{15,})/g, "$1- ");
+  }
 }
 
 const testimonials = [
-    new Testimonial(
-        "Excellent service, very attentive to my pet!",
-        "Peter Parker",
-        "https://randomuser.me/api/portraits/men/10.jpg",
-        5,
-        "General Checkup",
-        "January 15, 2024"
-    ),
-    new Testimonial(
-        "The surgery went perfectly, and my dog recovered quickly!",
-        "Walter White",
-        "https://randomuser.me/api/portraits/men/20.jpg",
-        4,
-        "Surgery",
-        "February 10, 2024"
-    ),
-    new Testimonial(
-        "Amazing grooming services! My cat looks fabulous.",
-        "Mary Jane",
-        "https://randomuser.me/api/portraits/women/30.jpg",
-        3,
-        "Grooming",
-        "March 5, 2024"
-    )
+  new Testimonial(
+    "¡Excelente servicio, muy atentos con mi mascota!",
+    "Peter Parker",
+    "https://randomuser.me/api/portraits/men/10.jpg",
+    5,
+    "Consulta General",
+    "15 de enero de 2024"
+  ),
+  new Testimonial(
+    "¡La cirugía salió perfectamente y mi perro se recuperó rápido!",
+    "Walter White",
+    "https://randomuser.me/api/portraits/men/20.jpg",
+    4,
+    "Cirugía",
+    "10 de febrero de 2024"
+  ),
+  new Testimonial(
+    "¡Increíble servicio de peluquería! Mi gato luce fabuloso.",
+    "Mary Jane",
+    "https://randomuser.me/api/portraits/women/30.jpg",
+    3,
+    "Peluquería",
+    "5 de marzo de 2024"
+  ),
 ];
 
 function rebuildTestimonials() {
-    const testimonialsContainer = document.querySelector(".testimonial-grid");
-    testimonialsContainer.innerHTML = "";
+  const testimonialsContainer = document.querySelector(".testimonial-grid");
+  testimonialsContainer.innerHTML = "";
 
-    testimonials.forEach((testimonial) => {
-        const testimonialCard = document.createElement("div");
-        testimonialCard.className = "testimonial";
-        testimonialCard.innerHTML = `
+  testimonials.forEach((testimonial) => {
+    const testimonialCard = document.createElement("div");
+    testimonialCard.className = "testimonial";
+    testimonialCard.innerHTML = `
             <div class="testimonial-content">
                 <img src="${testimonial.image}" alt="Client" />
                 <div class="testimonial-text">
@@ -55,93 +55,100 @@ function rebuildTestimonials() {
                     <p>- ${testimonial.name}</p>
                     <p class="stars">${testimonial.rating}</p>
                     <p class="testimonial-date">${testimonial.date}</p>
-                    <p class="testimonial-service">Service: <strong>${testimonial.service}</strong></p>
+                    <p class="testimonial-service">Servicio: <strong>${testimonial.service}</strong></p>
                 </div>
             </div>
         `;
-        testimonialsContainer.appendChild(testimonialCard);
-    });
+    testimonialsContainer.appendChild(testimonialCard);
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    rebuildTestimonials();
+  rebuildTestimonials();
 
-    const stars = document.querySelectorAll(".star-rating span");
-    const ratingInput = document.getElementById("user-rating");
+  const stars = document.querySelectorAll(".star-rating span");
+  const ratingInput = document.getElementById("user-rating");
 
-    stars.forEach((star, index) => {
-        star.addEventListener("mouseover", function () {
-            stars.forEach((s, i) => {
-                s.classList.toggle("active", i <= index);
-            });
-        });
-
-        star.addEventListener("mouseout", function () {
-            const selectedRating = parseInt(ratingInput.value) || 0;
-            stars.forEach((s, i) => {
-                s.classList.toggle("active", i < selectedRating);
-            });
-        });
-
-        star.addEventListener("click", function () {
-            let value = this.getAttribute("data-value");
-            ratingInput.value = value;
-
-            stars.forEach((s, i) => {
-                s.classList.toggle("active", i < value);
-            });
-        });
+  stars.forEach((star, index) => {
+    star.addEventListener("mouseover", function () {
+      stars.forEach((s, i) => {
+        s.classList.toggle("active", i <= index);
+      });
     });
 
-    document.getElementById("testimonial-form").addEventListener("submit", function (event) {
-        event.preventDefault();
+    star.addEventListener("mouseout", function () {
+      const selectedRating = parseInt(ratingInput.value) || 0;
+      stars.forEach((s, i) => {
+        s.classList.toggle("active", i < selectedRating);
+      });
+    });
 
-        const name = document.getElementById("user-name").value;
-        const review = document.getElementById("user-review").value;
-        const service = document.getElementById("user-service").value;
-        const image = document.getElementById("user-image").value;
-        const rating = parseInt(document.getElementById("user-rating").value);
+    star.addEventListener("click", function () {
+      let value = this.getAttribute("data-value");
+      ratingInput.value = value;
 
-        if (!rating) {
-            alert("Please select a rating.");
-            return;
-        }
+      stars.forEach((s, i) => {
+        s.classList.toggle("active", i < value);
+      });
+    });
+  });
 
-        const newTestimonial = new Testimonial(review, name, image, rating, service);
-        testimonials.push(newTestimonial);
+  document
+    .getElementById("testimonial-form")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
 
-        rebuildTestimonials();
-        this.reset();
-        ratingInput.value = "";
-        stars.forEach(s => s.classList.remove("active"));
+      const name = document.getElementById("user-name").value;
+      const review = document.getElementById("user-review").value;
+      const service = document.getElementById("user-service").value;
+      const image = document.getElementById("user-image").value;
+      const rating = parseInt(document.getElementById("user-rating").value);
+
+      if (!rating) {
+        alert("Please select a rating.");
+        return;
+      }
+
+      const newTestimonial = new Testimonial(
+        review,
+        name,
+        image,
+        rating,
+        service
+      );
+      testimonials.push(newTestimonial);
+
+      rebuildTestimonials();
+      this.reset();
+      ratingInput.value = "";
+      stars.forEach((s) => s.classList.remove("active"));
     });
 });
 
-//para la seccion de fundaciones
 document.addEventListener("DOMContentLoaded", function () {
-    const track = document.querySelector(".carousel-track");
-    const cards = document.querySelectorAll(".foundation-card");
+  const track = document.querySelector(".carousel-track");
+  const cards = document.querySelectorAll(".foundation-card");
 
-    let speed = 0.5; // Velocidad más lenta
-    let position = 0;
-    
-    // Duplicar las tarjetas para efecto infinito
-    cards.forEach(card => {
-        let clone = card.cloneNode(true);
-        track.appendChild(clone);
-    });
+  let speed = 0.5; // Velocidad más lenta
+  let position = 0;
 
-    function animate() {
-        position -= speed;
-        track.style.transform = `translateX(${position}px)`;
+  // Duplicar las tarjetas para efecto infinito
+  cards.forEach((card) => {
+    let clone = card.cloneNode(true);
+    track.appendChild(clone);
+  });
 
-        // Reiniciar posición para efecto infinito
-        if (position <= -track.scrollWidth / 2) {
-            position = 0;
-        }
+  function animate() {
+    position -= speed;
+    track.style.transform = `translateX(${position}px)`;
 
-        requestAnimationFrame(animate);
+    // Reiniciar posición para efecto infinito
+    if (position <= -track.scrollWidth / 2) {
+      position = 0;
     }
 
-    animate();
+    requestAnimationFrame(animate);
+  }
+
+  animate();
 });
