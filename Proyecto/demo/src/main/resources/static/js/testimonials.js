@@ -1,3 +1,4 @@
+// Lógica para Testimonios
 class Testimonial {
   constructor(text, name, image, rating, service, date) {
     this.text = this.formatText(text);
@@ -48,91 +49,93 @@ function rebuildTestimonials() {
     const testimonialCard = document.createElement("div");
     testimonialCard.className = "testimonial";
     testimonialCard.innerHTML = `
-            <div class="testimonial-content">
-                <img src="${testimonial.image}" alt="Client" />
-                <div class="testimonial-text">
-                    <p><strong>"${testimonial.text}</strong>"</p>
-                    <p>- ${testimonial.name}</p>
-                    <p class="stars">${testimonial.rating}</p>
-                    <p class="testimonial-date">${testimonial.date}</p>
-                    <p class="testimonial-service">Servicio: <strong>${testimonial.service}</strong></p>
-                </div>
-            </div>
-        `;
+      <div class="testimonial-content">
+        <img src="${testimonial.image}" alt="Cliente" />
+        <div class="testimonial-text">
+          <p><strong>"${testimonial.text}</strong>"</p>
+          <p>- ${testimonial.name}</p>
+          <p class="stars">${testimonial.rating}</p>
+          <p class="testimonial-date">${testimonial.date}</p>
+          <p class="testimonial-service">Servicio: <strong>${testimonial.service}</strong></p>
+        </div>
+      </div>
+    `;
     testimonialsContainer.appendChild(testimonialCard);
   });
 }
 
+// Lógica para Agendar Cita
 document.addEventListener("DOMContentLoaded", () => {
   rebuildTestimonials();
 
-  const stars = document.querySelectorAll(".star-rating span");
-  const ratingInput = document.getElementById("user-rating");
+  const vetOptions = document.querySelectorAll(".vet-option");
+  const selectedVetInput = document.getElementById("selected-vet");
+  const appointmentBtn = document.getElementById("appointment-btn");
 
-  stars.forEach((star, index) => {
-    star.addEventListener("mouseover", function () {
-      stars.forEach((s, i) => {
-        s.classList.toggle("active", i <= index);
+  // Función para verificar la validez del formulario de agendar cita
+  function checkAppointmentFormValidity() {
+    const name = document.getElementById("appointment-name").value;
+    const details = document.getElementById("appointment-details").value;
+    const service = document.getElementById("appointment-service").value;
+    const image = document.getElementById("appointment-image").value;
+    const vet = selectedVetInput.value;
+
+    // Habilitar el botón solo si todos los campos están completos
+    if (name && details && service && image && vet) {
+      appointmentBtn.disabled = false;
+    } else {
+      appointmentBtn.disabled = true;
+    }
+  }
+
+  // Eventos para los campos del formulario de agendar cita
+  document.querySelectorAll("#appointment-form input, #appointment-form textarea, #appointment-form select").forEach((input) => {
+    input.addEventListener("input", checkAppointmentFormValidity);
+  });
+
+  // Evento para evitar que el formulario se desplace al seleccionar un servicio
+  document.getElementById("appointment-service").addEventListener("change", (e) => {
+    e.preventDefault();
+    checkAppointmentFormValidity();
+  });
+
+  // Eventos para las opciones de veterinaria
+  vetOptions.forEach((vet) => {
+    vet.addEventListener("click", () => {
+      vetOptions.forEach((v) => {
+        v.classList.remove("selected");
+        v.style.background = "rgba(255, 255, 255, 0.7)";
+        v.style.transform = "scale(1)";
       });
-    });
 
-    star.addEventListener("mouseout", function () {
-      const selectedRating = parseInt(ratingInput.value) || 0;
-      stars.forEach((s, i) => {
-        s.classList.toggle("active", i < selectedRating);
-      });
-    });
+      vet.classList.add("selected");
+      vet.style.background = "#3c5b6f";
+      vet.style.transform = "scale(1.3)";
 
-    star.addEventListener("click", function () {
-      let value = this.getAttribute("data-value");
-      ratingInput.value = value;
-
-      stars.forEach((s, i) => {
-        s.classList.toggle("active", i < value);
-      });
+      selectedVetInput.value = vet.getAttribute("data-vet");
+      checkAppointmentFormValidity();
     });
   });
 
-  document
-    .getElementById("testimonial-form")
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
+  // Evitar que el formulario se envíe si no se selecciona una veterinaria
+  document.getElementById("appointment-form").addEventListener("submit", function (e) {
+    if (!selectedVetInput.value) {
+      e.preventDefault();
+      alert("Debes seleccionar una veterinaria.");
+    }
+  });
 
-      const name = document.getElementById("user-name").value;
-      const review = document.getElementById("user-review").value;
-      const service = document.getElementById("user-service").value;
-      const image = document.getElementById("user-image").value;
-      const rating = parseInt(document.getElementById("user-rating").value);
-
-      if (!rating) {
-        alert("Please select a rating.");
-        return;
-      }
-
-      const newTestimonial = new Testimonial(
-        review,
-        name,
-        image,
-        rating,
-        service
-      );
-      testimonials.push(newTestimonial);
-
-      rebuildTestimonials();
-      this.reset();
-      ratingInput.value = "";
-      stars.forEach((s) => s.classList.remove("active"));
-    });
+  // Verificar la validez del formulario al cargar la página
+  checkAppointmentFormValidity();
 });
 
 document.addEventListener("DOMContentLoaded", function () {
   const track = document.querySelector(".carousel-track");
   const cards = document.querySelectorAll(".foundation-card");
 
-  let speed = 0.5; // Velocidad más lenta
+  let speed = 0.5;
   let position = 0;
 
-  // Duplicar las tarjetas para efecto infinito
   cards.forEach((card) => {
     let clone = card.cloneNode(true);
     track.appendChild(clone);
@@ -142,7 +145,6 @@ document.addEventListener("DOMContentLoaded", function () {
     position -= speed;
     track.style.transform = `translateX(${position}px)`;
 
-    // Reiniciar posición para efecto infinito
     if (position <= -track.scrollWidth / 2) {
       position = 0;
     }

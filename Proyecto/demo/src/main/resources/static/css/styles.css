@@ -386,37 +386,53 @@ main {
   color: #666;
 }
 
-/* FORMULARIO - Más destacado */
-.add-testimonial {
-  width: 90%;
-  max-width: 500px;
-  margin: 3rem auto;
-  padding: 25px;
+/* Estilo para la sección de Agendar Cita */
+.appointment-section {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #b3c4d6;
+  border-radius: 30px;
+  margin: 20px auto;
+  max-width: 1200px;
+}
+
+.appointment-section h2 {
+  font-family: "Alice", serif;
+  font-size: 30px;
+  color: black;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.appointment-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
   background: rgba(255, 255, 255, 0.8);
+  padding: 25px;
   border-radius: 12px;
   box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.1);
-  text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-/* Espaciado mejorado en los inputs */
-#testimonial-form {
+/* Estilo del formulario */
+.form-container {
+  width: 45%;
+  text-align: left;
+}
+
+.form-container form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.add-testimonial label {
-  text-align: left;
-}
-
-/* Inputs con un estilo más moderno */
-#testimonial-form input,
-#testimonial-form select,
-#testimonial-form textarea {
+.form-container input,
+.form-container select,
+.form-container textarea {
   width: 95%;
   padding: 12px;
-  margin-top: 5px;
+  margin-top: 0px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 16px;
@@ -426,17 +442,15 @@ main {
   transition: border-color 0.3s ease, background 0.3s ease;
 }
 
-/* Cambios al enfocar inputs */
-#testimonial-form input:focus,
-#testimonial-form select:focus,
-#testimonial-form textarea:focus {
+.form-container input:focus,
+.form-container select:focus,
+.form-container textarea:focus {
   border-color: #a57768;
   background: #ffffff;
   outline: none;
 }
 
-/* Botón con animación de escala */
-#testimonial-form button {
+.form-container button {
   margin-top: 15px;
   padding: 12px;
   background: #3c5b6f;
@@ -449,10 +463,104 @@ main {
   font-family: "Londrina Solid", sans-serif;
 }
 
-/* Hover para el botón */
-#testimonial-form button:hover {
+.form-container button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.form-container button:enabled:hover {
   background: #5e7e92;
   transform: scale(1.05);
+}
+
+/* Estilo del contenedor del mapa */
+.map-container {
+  width: 50%;
+}
+
+.map-container h3 {
+  font-family: "Alice", serif;
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+/* Estilo del mapa */
+.vet-map {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  background: url('../../static/images/mapa.bmp') no-repeat center/cover;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo de los círculos de veterinarias */
+.vet-option {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.vet-option img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.vet-option span {
+  position: absolute;
+  bottom: -25px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+  display: none;
+}
+
+/* Hover */
+.vet-option:hover {
+  transform: scale(1.2);
+  background: rgba(110, 168, 254, 0.8);
+}
+
+.vet-option:hover img {
+  transform: scale(1.1);
+}
+
+.vet-option:hover span {
+  display: block;
+}
+
+/* Click - Seleccionado */
+.vet-option.selected {
+  background: #3c5b6f;
+  transform: scale(1.3);
+}
+
+/* Posicionamiento en el mapa */
+#vet1 { top: 20%; left: 30%; }
+#vet2 { top: 50%; left: 60%; }
+#vet3 { bottom: 10%; right: 50%; }
+
+.associated-foundations h2 {
+  text-align: center;
+  padding-top: 40px;
+  font-family: "Alice", serif;
+  font-size: 30px;
+  color: black;
+  margin-top: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .carousel-container {
