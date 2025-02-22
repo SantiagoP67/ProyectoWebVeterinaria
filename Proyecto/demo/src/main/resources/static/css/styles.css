@@ -327,7 +327,7 @@ main {
 /* Título con más impacto */
 .testimonials-section h2 {
   text-align: center;
-  padding: 10px 10px; /* Reduce el padding superior e inferior */
+  padding: 0px 10px; /* Reduce el padding superior e inferior */
   background-color: #f5f5f5;
   font-family: "Alice", serif;
   font-size: 30px;
