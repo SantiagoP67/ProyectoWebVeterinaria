@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-import com.veterinaria.demo.servicio.TratamientoService;  
+import com.veterinaria.demo.servicio.TratamientoService;
 
 
 @Controller
