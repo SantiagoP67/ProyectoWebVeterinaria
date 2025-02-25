@@ -6,15 +6,13 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import com.veterinaria.demo.entidad.Cliente; 
+import com.veterinaria.demo.entidad.Administrador;
 
 @Repository
-public class ClienteRepository{
-   /* public Cliente findById(int id){
+public class AdministradorRepository{
+
+    /*public Administrador findById(int id){
         return data.get(id);
-    }
-    
-    public Collection<Cliente> findAll(){
-        return data.values();
     }*/
+
 }
