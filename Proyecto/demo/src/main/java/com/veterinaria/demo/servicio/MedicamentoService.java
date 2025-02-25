@@ -1,8 +1,4 @@
-package com.veterinaria.demo.servicio;
-
-import java.util.List;
-
-import com.veterinaria.demo.entidad.Medicamento; 
+package com.veterinaria.demo.servicio; 
 
 public interface MedicamentoService{
 

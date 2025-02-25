@@ -1,10 +1,8 @@
 package com.veterinaria.demo.servicio;
 
-import com.veterinaria.demo.entidad.Tratamiento; 
 import com.veterinaria.demo.repositorio.TratamientoRepository; 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import java.util.List;
 import org.springframework.stereotype.Service;
 
 

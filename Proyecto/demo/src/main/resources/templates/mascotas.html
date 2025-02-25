@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Mascotas</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<h1>Lista de Mascotas</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Raza</th>
+        <th>Edad</th>
+        <th>Peso</th>
+        <th>Enfermedad</th>
+        <th>Foto</th>
+        <th>Estado</th>
+        <th>Detalles</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="mascota : ${mascotas}">
+        <td th:text="${mascota.id}"></td>
+        <td th:text="${mascota.nombre}"></td>
+        <td th:text="${mascota.raza}"></td>
+        <td th:text="${mascota.edad}"></td>
+        <td th:text="${mascota.peso}"></td>
+        <td th:text="${mascota.enfermedad}"></td>
+        <td>
+            <img th:src="${mascota.foto}" alt="Foto" width="50">
+        </td>
+        <td th:text="${mascota.activa ? 'Activa' : 'Inactiva'}"></td>
+        <td>
+            <a th:href="@{/mascota/mascotas/{id}(id=${mascota.id})}">Ver detalles</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
+
+
+
