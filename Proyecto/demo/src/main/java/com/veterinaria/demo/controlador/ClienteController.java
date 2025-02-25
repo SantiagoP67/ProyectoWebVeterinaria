@@ -5,24 +5,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-import com.veterinaria.demo.servicio.MedicamentoService; 
+import com.veterinaria.demo.servicio.ClienteService; 
 
 @Controller
-@RequestMapping("/medicamento")
+@RequestMapping("/cliente")
 public class MedicamentoController{
 
     @Autowired 
-    MedicamentoService medicamentoService;
+    ClienteService clienteService;
 
     /*Pagina para mostrar Medicamentos 
     @GetMapping ("/all")
-    public String mostrarMedicamentos(){
-        return "mostrarMedicamentos"; 
+    public String mostrarClientes(){
+        return "mostrarClientes"; 
     }*/ 
 
     /*Pagina para buscar medicamentos
     @GetMapping ("/find")
-    public String buscarInfoMedicamento(){
-        return "mostrarInfoMedicamento"; 
+    public String buscarInfoClientes(){
+        return "mostrarInfoClientes"; 
     }*/
 }
