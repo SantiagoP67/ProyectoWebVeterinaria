@@ -17,6 +17,6 @@ public class AdministradorServiceImpl implements AdministradorService{
    /*  @Override
     public Administrador SearchById(int id) {
         return administradorRepository.findById(id).orElse(null);
-    }
+    }*/
   
 }
