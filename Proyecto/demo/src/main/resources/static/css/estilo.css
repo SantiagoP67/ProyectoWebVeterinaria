@@ -1,72 +1,80 @@
-/* Estilos generales */
+/* Importación de fuente */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #DDE2E4;
-    color: #4e2a1e;
+    font-family: 'Poppins', sans-serif;
+    background-color: #F4F8FB;
+    color: #333;
     margin: 20px;
     text-align: center;
 }
 
+/* Contenedor principal */
+.container {
+    max-width: 90%;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
 /* Encabezado */
 h1 {
-    color: #4e2a1e;
+    color: #205375;
     font-size: 28px;
-    text-transform: uppercase;
-    border-bottom: 4px solid #3470AD;
+    font-weight: 600;
+    border-bottom: 3px solid #40A8C4;
     display: inline-block;
-    padding-bottom: 5px;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
 }
 
 /* Estilos de la tabla */
 table {
     width: 100%;
-    margin-top: 20px;
     border-collapse: collapse;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    background: white;
     border-radius: 8px;
     overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilos del encabezado de la tabla */
+/* Encabezado de la tabla */
 th {
-    background-color: #3470AD;
+    background-color: #40A8C4;
     color: white;
-    font-size: 1.1rem;
+    font-size: 1rem;
     text-align: left;
-    padding: 12px 15px;
-    border-radius: 10px 10px 0 0;
+    padding: 15px;
     font-weight: bold;
-    position: relative;
 }
 
-/* Línea decorativa bajo los encabezados */
-th::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 3px;
-    background-color: #5E7E92;
-    left: 0;
-    bottom: -2px;
+th:first-child {
+    border-radius: 8px 0 0 0;
 }
 
-/* Estilos de las celdas */
+th:last-child {
+    border-radius: 0 8px 0 0;
+}
+
+/* Celdas */
 td {
-    padding: 12px 15px;
+    padding: 12px;
     text-align: left;
     font-size: 1rem;
-    border-bottom: 1px solid #5E7E92;
-    color: #4e2a1e;
+    border-bottom: 1px solid #D0E1E7;
+    color: #333;
 }
 
-/* Filas pares */
+/* Filas pares e impares */
 tr:nth-child(even) td {
-    background-color: #ffffff;
+    background-color: #E8F1F5;
 }
 
-/* Filas impares */
 tr:nth-child(odd) td {
-    background-color: #DDE2E4;
+    background-color: #FFFFFF;
 }
 
 /* Última fila sin borde */
@@ -74,26 +82,39 @@ tr:last-child td {
     border-bottom: none;
 }
 
-/* Efecto hover en las filas */
-tbody tr:hover td {
-    background-color: rgba(116, 167, 195, 0.3);
+/* Efecto hover */
+tbody tr:hover {
+    background-color: rgba(64, 168, 196, 0.2);
     transition: background-color 0.3s ease;
-    box-shadow: 0 0 10px rgba(116, 167, 195, 0.2);
 }
 
 /* Estilos para imágenes */
 img {
+    width: 150px; /* Ajusta el tamaño según tus necesidades */
+    height: 100px;
     border-radius: 8px;
-    border: 2px solid #5E7E92;
+    border: 2px solid #40A8C4;
+    object-fit: cover; /* Asegura que la imagen se ajuste al tamaño sin deformarse */
 }
 
-/* Enlaces */
+/* Enlaces y botones */
 a {
-    color: #3470AD;
+    color: white;
+    background-color: #205375;
+    padding: 8px 12px;
+    border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
+    display: inline-block;
+    transition: background 0.3s ease;
 }
 
 a:hover {
-    color: #4e2a1e;
+    background-color: #112D4E;
+}
+
+/* Accesibilidad en foco */
+a:focus {
+    outline: 2px dashed #112D4E;
+    outline-offset: 2px;
 }

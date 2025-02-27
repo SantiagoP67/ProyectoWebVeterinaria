@@ -1,9 +1,13 @@
+/* Importación de fuente similar a la de la página principal */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
 /* Estilos generales */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #DDE2E4;
-    color: #4e2a1e;
-    margin: 20px;
+    font-family: 'Poppins', sans-serif;
+    background-color: #F4F8FB;
+    color: #205375;
+    margin: 0;
+    padding: 20px;
     text-align: center;
 }
 
@@ -12,19 +16,20 @@ body {
     max-width: 600px;
     margin: 0 auto;
     background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Encabezado */
 h1 {
-    color: #4e2a1e;
+    color: #205375;
     font-size: 28px;
+    font-weight: 600;
     text-transform: uppercase;
-    border-bottom: 4px solid #3470AD;
+    border-bottom: 4px solid #40A8C4;
     display: inline-block;
-    padding-bottom: 5px;
+    padding-bottom: 8px;
     margin-bottom: 20px;
 }
 
@@ -33,43 +38,53 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
 .datos p {
     font-size: 18px;
-    background-color: #74A7C3;
+    background-color: #40A8C4;
     color: white;
-    padding: 10px;
+    padding: 12px;
     border-radius: 8px;
-    width: 80%;
+    width: 90%;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
 }
 
-/* Imagen */
+/* Imagen de la mascota */
 .img-container {
-    margin-top: 15px;
-}
-
-img {
-    width: 200px;
-    height: 200px;
-    border-radius: 10px;
-    border: 3px solid #5E7E92;
-}
-
-/* Enlace */
-a {
-    display: inline-block;
-    background-color: #3470AD;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
     margin-top: 20px;
 }
 
+img {
+    width: 220px;
+    height: 220px;
+    border-radius: 12px;
+    border: 3px solid #205375;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Enlace de regreso */
+a {
+    display: inline-block;
+    background-color: #205375;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 25px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
 a:hover {
-    background-color: #4e2a1e;
+    background-color: #112D4E;
+    transform: scale(1.05);
+}
+
+/* Accesibilidad en foco */
+a:focus {
+    outline: 2px dashed #112D4E;
+    outline-offset: 3px;
 }
