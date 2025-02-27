@@ -9,7 +9,7 @@ import com.veterinaria.demo.servicio.ClienteService;
 
 @Controller
 @RequestMapping("/cliente")
-public class MedicamentoController{
+public class ClienteController{
 
     @Autowired 
     ClienteService clienteService;
