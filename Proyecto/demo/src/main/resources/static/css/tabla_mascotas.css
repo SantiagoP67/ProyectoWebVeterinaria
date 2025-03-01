@@ -7,6 +7,10 @@ body {
     color: #333;
     margin: 20px;
     text-align: center;
+    background-image: url('https://static.vecteezy.com/system/resources/previews/014/435/034/non_2x/seamless-dog-pattern-with-paw-prints-cat-foots-texture-pattern-with-doggy-pawprints-dog-texture-hand-drawn-illustration-in-doodle-style-on-white-background-vector.jpg');
+            background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
+            background-position: center;
+            background-repeat: repeat;
 }
 
 /* Contenedor principal */
@@ -46,9 +50,10 @@ th {
     background-color: #40A8C4;
     color: white;
     font-size: 1rem;
-    text-align: left;
+    text-align: center;
     padding: 15px;
     font-weight: bold;
+    border:1px;
 }
 
 th:first-child {
@@ -62,10 +67,11 @@ th:last-child {
 /* Celdas */
 td {
     padding: 12px;
-    text-align: left;
+    text-align: center;
     font-size: 1rem;
     border-bottom: 1px solid #D0E1E7;
     color: #333;
+    border: 1px;
 }
 
 /* Filas pares e impares */

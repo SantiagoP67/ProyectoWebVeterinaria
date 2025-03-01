@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Mascotas</title>
-    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+    <link rel="stylesheet" th:href="@{/css/tabla_mascotas.css}">
 </head>
 <body>
 <h1>Lista de Mascotas</h1>
 <table border="1">
     <thead>
     <tr>
-        <th>ID</th>
         <th>Nombre</th>
         <th>Raza</th>
         <th>Edad</th>
@@ -24,7 +23,6 @@
     </thead>
     <tbody>
     <tr th:each="mascota : ${mascotas}">
-        <td th:text="${mascota.id}"></td>
         <td th:text="${mascota.nombre}"></td>
         <td th:text="${mascota.raza}"></td>
         <td th:text="${mascota.edad}"></td>
@@ -42,6 +40,3 @@
 </table>
 </body>
 </html>
-
-
-

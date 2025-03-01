@@ -1,71 +1,92 @@
-/* Importación de fuente similar a la de la página principal */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-/* Estilos generales */
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #F4F8FB;
     color: #205375;
     margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Centrar verticalmente en la pantalla */
+    background-image: url('https://static.vecteezy.com/system/resources/previews/014/435/034/non_2x/seamless-dog-pattern-with-paw-prints-cat-foots-texture-pattern-with-doggy-pawprints-dog-texture-hand-drawn-illustration-in-doodle-style-on-white-background-vector.jpg');
+        background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
+        background-position: center;
+        background-repeat: repeat;
+}
+
+.container {
+    width: 800px;
+    background-color: white;
     padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-/* Contenedor principal */
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Encabezado */
 h1 {
     color: #205375;
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 600;
     text-transform: uppercase;
     border-bottom: 4px solid #40A8C4;
     display: inline-block;
     padding-bottom: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
-/* Datos de la mascota */
-.datos {
+.content {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 12px;
+    justify-content: space-between;
+    gap: 20px;
 }
 
-.datos p {
-    font-size: 18px;
+.datos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+    gap: 12px;
+    flex: 1;
+}
+
+.dato {
     background-color: #40A8C4;
     color: white;
-    padding: 12px;
+    padding: 10px;
     border-radius: 8px;
-    width: 90%;
+    text-align: center;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+}
+
+.label {
+    font-size: 13px;
+    font-weight: bold;
+    color: #F0F8FF;
+    display: block;
+}
+
+.info {
+    font-size: 16px;
     font-weight: 500;
+    color: white;
 }
 
-/* Imagen de la mascota */
 .img-container {
-    margin-top: 20px;
+    flex-shrink: 0;
+    margin-left: 20px;
 }
 
-img {
+.img-container img {
     width: 220px;
     height: 220px;
+    object-fit: cover;
     border-radius: 12px;
     border: 3px solid #205375;
     box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Enlace de regreso */
 a {
     display: inline-block;
     background-color: #205375;
@@ -74,17 +95,11 @@ a {
     border-radius: 6px;
     text-decoration: none;
     font-weight: bold;
-    margin-top: 25px;
+    margin-top: 20px;
     transition: background 0.3s ease, transform 0.2s ease;
 }
 
 a:hover {
     background-color: #112D4E;
     transform: scale(1.05);
-}
-
-/* Accesibilidad en foco */
-a:focus {
-    outline: 2px dashed #112D4E;
-    outline-offset: 3px;
 }

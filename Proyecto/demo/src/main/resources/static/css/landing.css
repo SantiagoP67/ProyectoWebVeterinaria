@@ -265,7 +265,7 @@ main {
     text-transform: none;
     position: relative;
   }
-  
+
   .service-card-back::before {
     content: "";
     position: absolute;
@@ -276,7 +276,7 @@ main {
     background: rgba(116, 167, 195, 0.7); /* Capa azul semitransparente */
     border-radius: 10px;
   }
-  
+
   .service-card-back p {
     padding: 20px;
     position: relative; /* Asegura que el texto esté sobre la capa azul */
@@ -285,36 +285,36 @@ main {
     color: #ffffff; /* Cambia el color del texto a blanco */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Agrega un sombreado para mejor contraste */
   }
-  
-  
+
+
   /* Asignar la misma imagen de la parte frontal a la parte trasera */
   .service-card:nth-child(1) .service-card-back {
     background-image: url("../images/consulta.bmp");
   }
-  
+
   .service-card:nth-child(2) .service-card-back {
     background-image: url("../images/cirugia.bmp");
   }
-  
+
   .service-card:nth-child(3) .service-card-back {
     background-image: url("../images/hospital.bmp");
   }
-  
+
   .service-card:nth-child(4) .service-card-back {
     background-image: url("../images/estetica.bmp");
   }
-  
+
   .service-card:nth-child(5) .service-card-back {
     background-image: url("../images/monitoreo.bmp");
   }
-  
+
   .service-card:nth-child(6) .service-card-back {
     background-image: url("../images/vacunacion.bmp");
   }
-  
+
   .service-card:nth-child(7) .service-card-back {
     background-image: url("../images/lab.bmp");
-  }  
+  }
 
 .testimonials-section {
   padding: 80px 20px;
@@ -798,4 +798,3 @@ footer .social-links a:hover img {
   font-size: 12px;
   opacity: 0.7;
 }
-
