@@ -65,29 +65,72 @@
                 <h3>Max</h3>
                 <p>Pastor Alemán</p>
             </div>
-        
-        
-            
+                
+            <!-- Tarjeta 2: Gran Danés -->
             <div class="mascota">
+                <div class="mascota-header">
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" 
+                            class="icono-editar"
+                            onclick="editarMascota()">
+                        <span class="tooltip-text">Editar Información Mascota</span>
+                    </div>
+
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png" 
+                            class="icono-archivo"
+                            onclick="verArchivo()">
+                        <span class="tooltip-text">Ver Historial Clínico</span>
+                    </div>
+                </div>
                 <img src="https://nfnatcane.es/blog/wp-content/uploads/2020/01/gran-dan%C3%A9s-posando.jpg" alt="Gran Danés">
-                <h3>Duke</h3>
+                <h3>Thor</h3>
                 <p>Gran Danés</p>
             </div>
-        
+
+            <!-- Tarjeta 3: Beagle -->
             <div class="mascota">
-                <img src="https://www.zooplus.es/magazine/wp-content/uploads/2017/10/Beagle-1.jpg" alt="Golden Retriever">
+                <div class="mascota-header">
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" 
+                            class="icono-editar"
+                            onclick="editarMascota()">
+                        <span class="tooltip-text">Editar Información Mascota</span>
+                    </div>
+
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png" 
+                            class="icono-archivo"
+                            onclick="verArchivo()">
+                        <span class="tooltip-text">Ver Historial Clínico</span>
+                    </div>
+                </div>
+                <img src="https://www.zooplus.es/magazine/wp-content/uploads/2017/10/Beagle-1.jpg" alt="Beagle">
                 <h3>Bella</h3>
                 <p>Beagle</p>
             </div>
-        
-            <!-- Tarjetas generadas dinámicamente con Thymeleaf 
+
+            <!-- Tarjetas generadas dinámicamente con Thymeleaf
             <div class="mascota" th:each="mascota : ${mascotas}">
+                <div class="mascota-header">
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" 
+                            class="icono-editar"
+                            onclick="editarMascota()">
+                        <span class="tooltip-text">Editar Información Mascota</span>
+                    </div>
+
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png" 
+                            class="icono-archivo"
+                            onclick="verArchivo()">
+                        <span class="tooltip-text">Ver Historial Clínico</span>
+                    </div>
+                </div>
                 <img th:src="${mascota.foto}" alt="Foto de mascota">
                 <h3 th:text="${mascota.nombre}"></h3>
                 <p th:text="${mascota.raza}"></p>
             </div> -->
-        </div>
-        
 
         <div class="mascotas-footer">
             <button class="btn-registrar" onclick="redirigirAFormulario()">Registrar Mascota</button>
