@@ -1,0 +1,87 @@
+.formularioLogin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 50px;
+    background-color: #f9f9f9;
+}
+
+.formularioTexto {
+    max-width: 400px;
+}
+
+.formularioTexto h1 {
+    font-size: 28px;
+    color: #333;
+}
+
+.formularioTexto p {
+    font-size: 16px;
+    color: #666;
+}
+
+.formularioContainer {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.formularioContainer h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    font-weight: bold;
+    text-align: left;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 12px;
+    background-color: #3c5b6f
+    ;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color:  #5e7e92;
+}
+
+.registro {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.registro a {
+    color:  #5e7e92;
+    text-decoration: none;
+}
+
+.registro a:hover {
+    text-decoration: underline;
+}
+
+.description-image img {
+    max-width: 300px;
+    border-radius: 10px;
+}
