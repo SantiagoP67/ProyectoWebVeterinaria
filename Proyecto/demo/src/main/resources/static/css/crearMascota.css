@@ -1,0 +1,160 @@
+/* Estilos generales del formulario */
+.formularioRegistro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+/* Contenedor del formulario */
+.formularioContainer {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 400px;
+    max-width: 90%;
+}
+
+/* Título */
+.formularioContainer h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 22px;
+}
+
+/* Formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Etiquetas */
+label {
+    font-weight: bold;
+    text-align: left;
+    display: block;
+}
+
+/* Campos de entrada */
+input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Botón */
+button {
+    padding: 12px;
+    background-color: #3c5b6f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    justify-content: center;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #5e7e92;
+}
+
+
+.mascotas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 tarjetas por fila */
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Contenedor de la tarjeta */
+.mascota {
+    background: #DAE8F2;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative; /* Necesario para que los íconos se posicionen correctamente */
+}
+
+/* Ajustar tamaño de imagen */
+.mascota img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Contenedor para los iconos */
+.mascota-header {
+    position: absolute;
+    top: 8px;
+    left: 0;
+    right: 0;
+    width: calc(100% - 20px); /* Ajuste para que no sobresalga */
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    z-index: 3; /* Asegura que esté por encima del contenido */
+}
+
+
+/* Ajuste de los íconos */
+.icono-editar, .icono-archivo, .icono-eliminar{
+    width: 25px !important;
+    height: 25px !important;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    border-radius: 50%; /* Iconos redondos */
+    padding: 5px;
+}
+
+
+/* Animación al pasar el mouse */
+.icono-editar:hover, .icono-archivo:hover {
+    transform: scale(1.3);
+}
+/* Contenedor para que el tooltip funcione bien */
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Estilos del tooltip */
+.tooltip-text {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.2s ease-in-out;
+    transform: translateY(-5px);
+    
+    /* Ajustar la posición */
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Mostrar el tooltip al hacer hover sobre el contenedor */
+.tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(-10px);
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Mascotas</title>
+    <link rel="stylesheet" href="../static/css/header_footer.css">
+    <link rel="stylesheet" href="../static/css/login.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+          <img src="../static/images/logo2.png" alt="Logo" />
+          <span class="logo-text">Beagle Giggle</span>
+        </div>
+        <nav>
+          <ul class="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="#">Servicios</a></li>
+            <li><a href="#">Conócenos</a></li>
+            <li><a href="#">Contáctanos</a></li>
+          </ul>
+        </nav>
+      </header>
+
+    <section class="formularioLogin">
+        <div class="formularioContainer">
+            <h2>Registrar</h2>
+            <form action="registro.php" method="POST">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese nombre completo" required>
+    
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" placeholder="Ingrese correo electrónico" required>
+
+                <label for="username">Cédula:</label>
+                <input type="text" id="cedula" name="cedula" placeholder="Escriba la cedula" required>
+
+                <label for="username">Usuario:</label>
+                <input type="text" id="username" name="username" placeholder="Escriba un nombre de usuario" required>
+    
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" placeholder="Cree una contraseña" required>
+    
+                <label for="confirm_password">Confirmar contraseña:</label>
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Repita la contraseña" required>
+
+                <button type="submit">Guardar</button>
+            </form>
+        </div>
+    </section>
+    
+    <footer>
+        <section class="footer-container">
+            <div class="footer-info">
+                <div class="footer-section">
+                    <h3>Servicios</h3>
+                    <ul>
+                        <li>Consulta médica</li>
+                        <li>Cirugía</li>
+                        <li>Hospitalización</li>
+                        <li>Monitoreo</li>
+                        <li>Vacunación</li>
+                        <li>Laboratorio clínico</li>
+                    </ul>
+                </div>
+                <div class="footer-logo">
+                    <img src="../static/images/logo.png" alt="Logo" />
+                    <div class="social-links">
+                        <a href="https://meta.com/beaglegiggle" target="_blank" title="Meta">
+                            <img src="../static/images/meta.png" alt="Meta" />
+                        </a>
+                        <a href="https://www.instagram.com/beaglegiggle" target="_blank" title="Instagram">
+                            <img src="../static/images/instagram.png" alt="Instagram" />
+                        </a>
+                        <a href="https://www.x.com/in/beaglegiggle" target="_blank" title="X">
+                            <img src="../static/images/x.png" alt="X" />
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Información</h3>
+                    <ul>
+                        <li>(+57) 3194479483</li>
+                        <li>Calle 12A #78 - 34</li>
+                        <li>beaglegiggle@atencion.com</li>
+                        <li>www.beaglegiggle.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                © 2025 BeagleGiggle. Todos los derechos reservados.
+            </div>
+        </section>
+    </footer>
+
+    <script>
+        function openLoginModal() {
+            document.getElementById("loginModal").style.display = "block";
+        }
+
+        function closeLoginModal() {
+            document.getElementById("loginModal").style.display = "none";
+        }
+
+        function openTab(evt, tabName) {
+            let tabcontent = document.getElementsByClassName("tabcontent");
+            for (let i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            let tablinks = document.getElementsByClassName("tablink");
+            for (let i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>
