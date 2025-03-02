@@ -1,10 +1,18 @@
+.clientes-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 tarjetas por fila */
+    gap: 15px; /* Espacio entre tarjetas */
+    padding: 20px;
+    justify-content: center;
+}
+
 .persona-card {
-    width: 220px;
-    background-color:#DAE8F2; 
-    border-radius: 12px;
+    width: 200px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
     padding: 15px;
     text-align: center;
-    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;

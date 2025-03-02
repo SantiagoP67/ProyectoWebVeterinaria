@@ -12,6 +12,7 @@
 
 </head>
 <body>
+    <!-- Header-->
     <header>
         <div class="logo">
           <img src="../static/images/logo2.png" alt="Logo" />
@@ -31,6 +32,8 @@
 
       <h2>Bienvenido administrador</h2>
 
+
+<!-- Mostrar mascotas dinamicamente-->
     <section class="mascotas">
         <div class="mascotas-header">
             <h2>Mascotas</h2>
@@ -138,35 +141,85 @@
         </div>
     </section>
     
-    
+    <!-- Mostrar Clientes Dinamicamente -->
     <section class="mascotas">
         <div class="mascotas-header">
             <h2>Clientes</h2>
             <button class="btn-agregar">Nuevo Cliente</button>
         </div>
 
-        <div class="persona-card">
-            <div class="persona-header">
-                <div class="tooltip-container">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" 
-                        class="icono-editar"
-                        onclick="editarPersona()">
-                    <span class="tooltip-text">Editar Información</span>
+        <!-- Contenedor de clientes -->
+        <div class="clientes-container">
+            <!--  Ejemplo de Cliente 1 (Estático) -->
+            <div class="persona-card">
+                <div class="persona-header">
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" 
+                            class="icono-editar"
+                            onclick="editarPersona(1)">
+                        <span class="tooltip-text">Editar Información</span>
+                    </div>
+                    
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" 
+                            class="icono-eliminar"
+                            onclick="eliminarPersona(1)">
+                        <span class="tooltip-text">Eliminar Persona</span>
+                    </div>
                 </div>
-                
-                <div class="tooltip-container">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" 
-                        class="icono-eliminar"
-                        onclick="eliminarPersona()">
-                    <span class="tooltip-text">Eliminar Persona</span>
-                </div>
+
+                <h3 class="persona-nombre">Juan Pérez</h3>
+                <button class="btn-ver-mascotas" onclick="verMascotas(1)">Ver Mascotas</button>
             </div>
 
-            <h3 class="persona-nombre">Juan Pérez</h3>
+            <!-- 🔹 Ejemplo de Cliente 2 (Estático) -->
+            <div class="persona-card">
+                <div class="persona-header">
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" 
+                            class="icono-editar"
+                            onclick="editarPersona(2)">
+                        <span class="tooltip-text">Editar Información</span>
+                    </div>
+                    
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" 
+                            class="icono-eliminar"
+                            onclick="eliminarPersona(2)">
+                        <span class="tooltip-text">Eliminar Persona</span>
+                    </div>
+                </div>
 
-            <button class="btn-ver-mascotas" onclick="verMascotas()">Ver Mascotas</button>
+                <h3 class="persona-nombre">María López</h3>
+                <button class="btn-ver-mascotas" onclick="verMascotas(2)">Ver Mascotas</button>
+            </div>
+
+            <!--  Clientes dinámicos con Thymeleaf -->
+            <div th:each="cliente : ${clientes}" class="persona-card">
+                <div class="persona-header">
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png"
+                            class="icono-editar"
+                            th:onclick="'editarPersona(' + ${cliente.id} + ')'" >
+                        <span class="tooltip-text">Editar Información</span>
+                    </div>
+
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
+                            class="icono-eliminar"
+                            th:onclick="'eliminarPersona(' + ${cliente.id} + ')'" >
+                        <span class="tooltip-text">Eliminar Persona</span>
+                    </div>
+                </div>
+
+                <h3 class="persona-nombre" th:text="${cliente.nombre}">Nombre Cliente</h3>
+                <button class="btn-ver-mascotas" th:onclick="'verMascotas(' + ${cliente.id} + ')'">Ver Mascotas</button>
+            </div>
+
         </div>
     </section>
+
+    <!-- Mostrar Servicios Dinamicamente -->
 
     <section class="mascotas">
         <div class="mascotas-header">
@@ -175,6 +228,8 @@
         </div>
     </section>
     
+     <!-- Mostrar Medicamentos Dinamicamente -->
+
     <section class="mascotas">
         <div class="mascotas-header">
             <h2>Medicamento</h2>
@@ -182,6 +237,8 @@
         </div>
     </section>
     
+        <!-- Mostrar Informe -->
+
     <section class="mascotas">
         <div class="mascotas-header">
             <h2>Informe</h2>
