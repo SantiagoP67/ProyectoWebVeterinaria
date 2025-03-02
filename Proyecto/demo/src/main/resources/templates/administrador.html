@@ -157,9 +157,9 @@
                 <div class="persona-header">
                     <div class="tooltip-container">
                         <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" 
-                            class="icono-editar"
-                            onclick="editarPersona(1)">
-                        <span class="tooltip-text">Editar Información</span>
+                        class="icono-editar" 
+                        onclick="redirigirAEditar(123)"> <!-- Aquí va el ID del usuario -->
+                        <span class="tooltip-text">Editar Información Mascota</span>
                     </div>
                     
                     <div class="tooltip-container">
@@ -179,9 +179,9 @@
                 <div class="persona-header">
                     <div class="tooltip-container">
                         <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" 
-                            class="icono-editar"
-                            onclick="editarPersona(2)">
-                        <span class="tooltip-text">Editar Información</span>
+                        class="icono-editar" 
+                        onclick="redirigirAEditar(123)"> <!-- Aquí va el ID del usuario -->
+                        <span class="tooltip-text">Editar Información Mascota</span>
                     </div>
                     
                     <div class="tooltip-container">
@@ -196,13 +196,13 @@
                 <button class="btn-ver-mascotas" onclick="verMascotas(2)">Ver Mascotas</button>
             </div>
 
-            <!--  Clientes dinámicos con Thymeleaf -->
+            <!--  Clientes dinámicos con Thymeleaf 
             <div th:each="cliente : ${clientes}" class="persona-card">
                 <div class="persona-header">
                     <div class="tooltip-container">
                         <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png"
                             class="icono-editar"
-                            th:onclick="'editarPersona(' + ${cliente.id} + ')'" >
+                            th:onclick="'window.location.href=\'editar_info_usuario.html?id=' + ${cliente.id} + '\';'">
                         <span class="tooltip-text">Editar Información</span>
                     </div>
 
@@ -216,7 +216,7 @@
 
                 <h3 class="persona-nombre" th:text="${cliente.nombre}">Nombre Cliente</h3>
                 <button class="btn-ver-mascotas" th:onclick="'verMascotas(' + ${cliente.id} + ')'">Ver Mascotas</button>
-            </div>
+            </div>-->
 
         </div>
     </section>
@@ -342,6 +342,10 @@
     }
     function editarMascota(id) {
         window.location.href = `editar_mascota.html?id=${id}`;
+    }
+    function redirigirAEditar(id) {
+        // Redirige a la página editar_info_usuario.html y pasa el ID como parámetro
+        window.location.href = "editar_info_usuario.html?id=" + id;
     }
     </script>
 
