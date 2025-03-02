@@ -112,7 +112,7 @@ button:hover {
 
 
 /* Ajuste de los íconos */
-.icono-editar, .icono-archivo {
+.icono-editar, .icono-archivo, .icono-eliminar{
     width: 25px !important;
     height: 25px !important;
     cursor: pointer;
