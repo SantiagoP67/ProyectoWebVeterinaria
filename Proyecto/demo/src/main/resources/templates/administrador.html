@@ -118,9 +118,10 @@
             <div class="mascota" th:each="mascota : ${mascotas}">
                 <div class="mascota-header">
                     <div class="tooltip-container">
-                        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" 
-                            class="icono-editar"
-                            onclick="editarMascota()">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" 
+                    class="icono-editar"
+                    th:onclick="'editarMascota(' + ${mascota.id} + ')'">
+
                         <span class="tooltip-text">Editar Información Mascota</span>
                     </div>
 
@@ -145,8 +146,9 @@
     <section class="mascotas">
         <div class="mascotas-header">
             <h2>Clientes</h2>
-            <button class="btn-agregar">Nuevo Cliente</button>
+            <button class="btn-agregar" onclick="window.location.href='registro.html'">Nuevo Cliente</button>
         </div>
+        
 
         <!-- Contenedor de clientes -->
         <div class="clientes-container">
@@ -328,6 +330,9 @@
 
         function redirigirAFormulario() {
         window.location.href = "crear_mascota.html"; // Redirige a la nueva página
+    }
+    function editarMascota(id) {
+        window.location.href = `editar_mascota.html?id=${id}`;
     }
     </script>
 

@@ -19,37 +19,44 @@
             <li><a href="#">Servicios</a></li>
             <li><a href="#">Conócenos</a></li>
             <li><a href="#">Contáctanos</a></li>
+            <li>Administrador</li>
           </ul>
         </nav>
        
       </header>
 
-      <section class="formularioLogin">
+      <section class="formularioRegistro">
         <div class="formularioContainer">
-            <h2>Registrar</h2>
-            <form action="registro.php" method="POST">
+            <h2>Editar Información Mascota</h2>
+            <form action="#" method="post">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre completo" required>
-    
-                <label for="email">Correo electrónico:</label>
-                <input type="email" id="email" name="email" placeholder="Ingresa tu correo" required>
-    
-                <label for="username">Usuario:</label>
-                <input type="text" id="username" name="username" placeholder="Elige un nombre de usuario" required>
-    
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" placeholder="Crea una contraseña" required>
-    
-                <label for="confirm_password">Confirmar contraseña:</label>
-                <input type="password" id="confirm_password" name="confirm_password" placeholder="Repite tu contraseña" required>
-    
-                <button type="submit">Guardar</button>
-                <p class="registro">¿Ya tienes cuenta? <a href="inicio_sesion.html">Inicia sesión aquí</a></p>
+                <input type="text" id="nombre" name="nombre" required>
+
+                <label for="raza">Raza:</label>
+                <input type="text" id="raza" name="raza" required>
+
+                <label for="edad">Edad:</label>
+                <input type="number" id="edad" name="edad" min="0" required>
+
+                <label for="peso">Peso (kg):</label>
+                <input type="number" id="peso" name="peso" step="0.1" required>
+
+                <label for="enfermedad">Enfermedad:</label>
+                <input type="text" id="enfermedad" name="enfermedad">
+
+                <label for="foto">Foto (URL):</label>
+                <input type="url" id="foto" name="foto">
+
+                <label for="activa">Estado:</label>
+                <select id="activa" name="activa">
+                    <option value="true">En tratamiento</option>
+                    <option value="false">No en tratamiento</option>
+                </select>
+
+                <button type="submit">Guardar Cambios</button>
             </form>
         </div>
     </section>
-    
-    
 
    <footer>
       <section class="footer-container">
