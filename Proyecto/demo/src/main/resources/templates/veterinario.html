@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Mascotas</title>
+    <link rel="stylesheet" href="../static/css/header_footer.css">
+    <link rel="stylesheet" href="../static/css/secciones.css">
+    <link rel="stylesheet" href="../static/css/crearMascota.css">
+    <link rel="stylesheet" href="../static/css/mascotasPorUsuario.css">
+
+
+</head>
+<body>
+    <!-- Header-->
+    <header>
+        <div class="logo">
+          <img src="../static/images/logo2.png" alt="Logo" />
+          <span class="logo-text">Beagle Giggle</span>
+        </div>
+        <nav>
+          <ul class="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="#">Servicios</a></li>
+            <li><a href="#">Conócenos</a></li>
+            <li><a href="#">Contáctanos</a></li>
+            <li>Administrador</li>
+          </ul>
+        </nav>
+       
+      </header>
+
+      <h2>Bienvenido administrador</h2>
+
+
+<!-- Mostrar mascotas dinamicamente-->
+    <section class="mascotas">
+        <div class="mascotas-header">
+            <h2>Mascotas</h2>
+            <div class="filtro">
+                <label for="filtro-estado">Filtrar por:</label>
+                <select id="filtro-estado">
+                    <option value="todas">Todas</option>
+                    <option value="en-tratamiento">En tratamiento</option>
+                    <option value="no-tratamiento">No en tratamiento</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="mascotas-grid"> 
+            <div class="mascota">
+                <div class="mascota-header">
+                    <!-- Contenedor del icono con tooltip -->
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" 
+                            class="icono-editar"
+                            onclick="editarMascota()">
+                        <span class="tooltip-text">Editar Información Mascota</span>
+                    </div>
+        
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png" 
+                            class="icono-archivo"
+                            onclick="verArchivo()">
+                        <span class="tooltip-text">Ver Historial Clínico</span>
+                    </div>
+                </div>
+                <img src="https://www.zooplus.es/magazine/wp-content/uploads/2019/03/deutscher-sch%C3%A4ferhund.jpg" alt="Pastor Alemán">
+                <h3>Max</h3>
+                <p>Pastor Alemán</p>
+            </div>
+                
+            <!-- Tarjeta 2: Gran Danés -->
+            <div class="mascota">
+                <div class="mascota-header">
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" 
+                            class="icono-editar"
+                            onclick="editarMascota()">
+                        <span class="tooltip-text">Editar Información Mascota</span>
+                    </div>
+
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png" 
+                            class="icono-archivo"
+                            onclick="verArchivo()">
+                        <span class="tooltip-text">Ver Historial Clínico</span>
+                    </div>
+                </div>
+                <img src="https://nfnatcane.es/blog/wp-content/uploads/2020/01/gran-dan%C3%A9s-posando.jpg" alt="Gran Danés">
+                <h3>Thor</h3>
+                <p>Gran Danés</p>
+            </div>
+
+            <!-- Tarjeta 3: Beagle -->
+            <div class="mascota">
+                <div class="mascota-header">
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" 
+                            class="icono-editar"
+                            onclick="editarMascota()">
+                        <span class="tooltip-text">Editar Información Mascota</span>
+                    </div>
+
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png" 
+                            class="icono-archivo"
+                            onclick="verArchivo()">
+                        <span class="tooltip-text">Ver Historial Clínico</span>
+                    </div>
+                </div>
+                <img src="https://www.zooplus.es/magazine/wp-content/uploads/2017/10/Beagle-1.jpg" alt="Beagle">
+                <h3>Bella</h3>
+                <p>Beagle</p>
+            </div>
+
+            <!-- Tarjetas generadas dinámicamente con Thymeleaf
+            <div class="mascota" th:each="mascota : ${mascotas}">
+                <div class="mascota-header">
+                    <div class="tooltip-container">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" 
+                    class="icono-editar"
+                    th:onclick="'editarMascota(' + ${mascota.id} + ')'">
+
+                        <span class="tooltip-text">Editar Información Mascota</span>
+                    </div>
+
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png" 
+                            class="icono-archivo"
+                            onclick="verArchivo()">
+                        <span class="tooltip-text">Ver Historial Clínico</span>
+                    </div>
+                </div>
+                <img th:src="${mascota.foto}" alt="Foto de mascota">
+                <h3 th:text="${mascota.nombre}"></h3>
+                <p th:text="${mascota.raza}"></p>
+            </div> -->
+        </div>
+        <div class="mascotas-footer">
+            <button class="btn-registrar" onclick="redirigirAFormulario()">Registrar Mascota</button>
+        </div>
+    </section>
+    
+    <!-- Mostrar Clientes Dinamicamente -->
+    <section class="mascotas">
+        <div class="mascotas-header">
+            <h2>Clientes</h2>
+            <button class="btn-agregar" onclick="window.location.href='registro_usuario.html'">Nuevo Cliente</button>
+        </div>
+        
+
+        <!-- Contenedor de clientes -->
+        <div class="clientes-container">
+            <!--  Ejemplo de Cliente 1 (Estático) -->
+            <div class="persona-card">
+                <div class="persona-header">
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" 
+                        class="icono-editar" 
+                        onclick="redirigirAEditar(123)"> <!-- Aquí va el ID del usuario -->
+                        <span class="tooltip-text">Editar Información Mascota</span>
+                    </div>
+                    
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" 
+                            class="icono-eliminar"
+                            onclick="eliminarPersona(1)">
+                        <span class="tooltip-text">Eliminar Persona</span>
+                    </div>
+                </div>
+
+                <h3 class="persona-nombre">Juan Pérez</h3>
+                <button class="btn-ver-mascotas" onclick="verMascotas(1)">Ver Mascotas</button>
+            </div>
+
+            <!-- 🔹 Ejemplo de Cliente 2 (Estático) -->
+            <div class="persona-card">
+                <div class="persona-header">
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" 
+                        class="icono-editar" 
+                        onclick="redirigirAEditar(123)"> <!-- Aquí va el ID del usuario -->
+                        <span class="tooltip-text">Editar Información Mascota</span>
+                    </div>
+                    
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" 
+                            class="icono-eliminar"
+                            onclick="eliminarPersona(2)">
+                        <span class="tooltip-text">Eliminar Persona</span>
+                    </div>
+                </div>
+
+                <h3 class="persona-nombre">María López</h3>
+                <button class="btn-ver-mascotas" onclick="verMascotas(2)">Ver Mascotas</button>
+            </div>
+
+            <!--  Clientes dinámicos con Thymeleaf 
+            <div th:each="cliente : ${clientes}" class="persona-card">
+                <div class="persona-header">
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png"
+                            class="icono-editar"
+                            th:onclick="'window.location.href=\'editar_info_usuario.html?id=' + ${cliente.id} + '\';'">
+                        <span class="tooltip-text">Editar Información</span>
+                    </div>
+
+                    <div class="tooltip-container">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
+                            class="icono-eliminar"
+                            th:onclick="'eliminarPersona(' + ${cliente.id} + ')'" >
+                        <span class="tooltip-text">Eliminar Persona</span>
+                    </div>
+                </div>
+
+                <h3 class="persona-nombre" th:text="${cliente.nombre}">Nombre Cliente</h3>
+                <button class="btn-ver-mascotas" th:onclick="'verMascotas(' + ${cliente.id} + ')'">Ver Mascotas</button>
+            </div>-->
+
+        </div>
+    </section>
+
+        <!-- Mostrar Veterinarios Dinamicamente -->
+
+        <section class="mascotas">
+            <div class="mascotas-header">
+                <h2>Profesionales Veterinarios</h2>
+                <button class="btn-agregar" onclick="window.location.href='registro_usuario.html'">Nuevo Veterinario</button>
+            </div>
+        </section>
+    <!-- Mostrar Servicios Dinamicamente -->
+
+    <section class="mascotas">
+        <div class="mascotas-header">
+            <h2>Servicios</h2>
+            <button class="btn-agregar">Agregar Servicio</button>
+        </div>
+    </section>
+    
+     <!-- Mostrar Medicamentos Dinamicamente -->
+
+    <section class="mascotas">
+        <div class="mascotas-header">
+            <h2>Medicamento</h2>
+            <button class="btn-agregar">Medicamento</button>
+        </div>
+    </section>
+
+    
+        <!-- Mostrar Informe -->
+
+    <section class="mascotas">
+        <div class="mascotas-header">
+            <h2>Informe</h2>
+            <button class="btn-agregar">Generar Informe</button>
+        </div>
+    </section>
+
+   <footer>
+      <section class="footer-container">
+        <div class="footer-info">
+          <div class="footer-section">
+            <h3>Servicios</h3>
+            <ul>
+              <li>Consulta médica</li>
+              <li>Cirugía</li>
+              <li>Hospitalización</li>
+              <li>Monitoreo</li>
+              <li>Vacunación</li>
+              <li>Laboratorio clínico</li>
+            </ul>
+          </div>
+          <div class="footer-logo">
+            <img src="../static/images/logo.png" alt="Logo" />
+            <div class="social-links">
+              <a
+                href="https://meta.com/beaglegiggle"
+                target="_blank"
+                title="Meta"
+              >
+                <img src="../static/images/meta.png" alt="Meta" />
+              </a>
+              <a
+                href="https://www.instagram.com/beaglegiggle"
+                target="_blank"
+                title="Instagram"
+              >
+                <img src="../static/images/instagram.png" alt="Instagram" />
+              </a>
+              <a
+                href="https://www.x.com/in/beaglegiggle"
+                target="_blank"
+                title="X"
+              >
+                <img src="../static/images/x.png" alt="X" />
+              </a>
+            </div>
+          </div>
+          <div class="footer-section">
+            <h3>Información</h3>
+            <ul>
+              <li>(+57) 3194479483</li>
+              <li>Calle 12A #78 - 34</li>
+              <li>beaglegiggle@atencion.com</li>
+              <li>www.beaglegiggle.com</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          © 2025 BeagleGiggle. Todos los derechos reservados.
+        </div>
+      </section>
+    </footer>
+
+    <script>
+        function openLoginModal() {
+            document.getElementById("loginModal").style.display = "block";
+        }
+
+        function closeLoginModal() {
+            document.getElementById("loginModal").style.display = "none";
+        }
+
+        function openTab(evt, tabName) {
+            let tabcontent = document.getElementsByClassName("tabcontent");
+            for (let i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            let tablinks = document.getElementsByClassName("tablink");
+            for (let i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
+
+        function redirigirAFormulario() {
+        window.location.href = "crear_mascota.html"; // Redirige a la nueva página
+    }
+    function editarMascota(id) {
+        window.location.href = `editar_mascota.html?id=${id}`;
+    }
+    function redirigirAEditar(id) {
+        // Redirige a la página editar_info_usuario.html y pasa el ID como parámetro
+        window.location.href = "editar_info_usuario.html?id=" + id;
+    }
+    </script>
+
+</body>
+</html>
