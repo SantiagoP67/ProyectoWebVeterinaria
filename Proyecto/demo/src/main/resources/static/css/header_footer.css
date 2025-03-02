@@ -67,6 +67,7 @@ header {
   
   .nav-links {
     list-style: none;
+    color: #000000;
     display: flex;
     gap: 25px;
     margin: 0;
