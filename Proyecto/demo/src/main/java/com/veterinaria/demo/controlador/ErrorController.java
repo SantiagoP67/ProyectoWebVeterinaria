@@ -1,7 +1,7 @@
 package com.veterinaria.demo.controlador;
 
 import org.springframework.web.bind.annotation.ControllerAdvice; 
-import org.springframework.ui.model; 
+import org.springframework.ui.Model; 
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
