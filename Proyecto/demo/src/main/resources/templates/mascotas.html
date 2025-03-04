@@ -8,6 +8,9 @@
 </head>
 <body>
 <h1>Lista de Mascotas</h1>
+<div class="button-container">
+    <a href="/mascota" class="btn-agregar">Agregar Mascota</a>
+</div>
 <table border="1">
     <thead>
     <tr>
@@ -19,6 +22,7 @@
         <th>Foto</th>
         <th>Estado</th>
         <th>Detalles</th>
+        <th>Acciones</th>
     </tr>
     </thead>
     <tbody>
@@ -28,12 +32,17 @@
         <td th:text="${mascota.edad}"></td>
         <td th:text="${mascota.peso}"></td>
         <td th:text="${mascota.enfermedad}"></td>
+        <td><img th:src="${mascota.foto}" alt="Foto" width="50"></td>
+        <td th:text="${mascota.estado == 1 ? 'Activa' : 'Inactiva'}"></td>
+        <td><a th:href="@{/mascota/mascotas/{id}(id=${mascota.idMascota})}">Ver detalles</a></td>
         <td>
-            <img th:src="${mascota.foto}" alt="Foto" width="50">
-        </td>
-        <td th:text="${mascota.activa ? 'Activa' : 'Inactiva'}"></td>
-        <td>
-            <a th:href="@{/mascota/mascotas/{id}(id=${mascota.id})}">Ver detalles</a>
+            <a th:href="@{/mascota/editar/{id}(id=${mascota.idMascota})}" class="btn-editar">Editar</a>
+            <form th:action="@{/mascota/eliminar/{id}(id=${mascota.idMascota})}"
+                  method="post"
+                  onsubmit="return confirm('¿Estás seguro de eliminar esta mascota?');">
+                <button type="submit" class="btn-eliminar">Eliminar</button>
+            </form>
+
         </td>
     </tr>
     </tbody>

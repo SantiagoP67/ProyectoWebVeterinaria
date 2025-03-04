@@ -1,91 +1,41 @@
 package com.veterinaria.demo.entidad;
 
+import jakarta.persistence.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import java.util.List;
+
+@Entity
+@Table(name = "cliente")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Cliente {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idCliente;
+
     private String nombre;
-    private int cedula;
     private String correo;
-    private int celular;
+    private String celular;
+
+    @Column(name = "cedula", unique = true)
+    private String cedula;
+
+    @Column(name = "nombreUsuario", unique = true)
     private String nombreUsuario;
 
-    //Faltaria la lista de Mascotas
-    //private List <Mascota> mascotas;
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<Mascota> mascotas;
 
-    // Constructor
-    public Cliente(int id, String nombre, int cedula, String correo, int celular, String nombreUsuario) {
-        this.id = id;
-        this.nombre = nombre;
-        this.cedula = cedula;
-        this.correo = correo;
-        this.celular = celular;
-        this.nombreUsuario = nombreUsuario;
-    }
-    //Constructor completo 
-    /*   // Constructor
-    public Cliente(int id, String nombre, int cedula, String correo, int celular, String nombreUsuario, List<Mascota> mascotas) {
-        this.id = id;
-        this.nombre = nombre;
-        this.cedula = cedula;
-        this.correo = correo;
-        this.celular = celular;
-        this.nombreUsuario = nombreUsuario;
-        this.mascotas = mascotas;
-    } */
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<Testimonio> testimonios;
 
-    // Getters y Setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(int cedula) {
-        this.cedula = cedula;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public int getCelular() {
-        return celular;
-    }
-
-    public void setCelular(int celular) {
-        this.celular = celular;
-    }
-
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
-
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
-
-   /* public List<Mascota> getMascotas() {
-        return mascotas;
-    }
-
-    public void setMascotas(List<Mascota> mascotas) {
-        this.mascotas = mascotas;
-    }*/ 
+    @ManyToOne
+    @JoinColumn(name = "idRegistro", nullable = false)
+    private Registro registro;
 }

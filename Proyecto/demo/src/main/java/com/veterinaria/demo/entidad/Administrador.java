@@ -1,64 +1,29 @@
 package com.veterinaria.demo.entidad;
 
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "administrador")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Administrador {
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idAdministrador;
+
     private String nombre;
-    private int cedula;
+
+    @Column(name = "cedula", unique = true)
+    private String cedula;
+
+    @Column(name = "nombreUsuario", unique = true)
     private String nombreUsuario;
 
-    // Constructor vacío
-    public Administrador() {
-    }
-
-    // Constructor con parámetros
-    public Administrador(int id, String nombre, int cedula, String nombreUsuario) {
-        this.id = id;
-        this.nombre = nombre;
-        this.cedula = cedula;
-        this.nombreUsuario = nombreUsuario;
-    }
-
-    // Getters y Setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(int cedula) {
-        this.cedula = cedula;
-    }
-
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
-
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
-
-    // Método toString para representar el objeto como cadena
-    @Override
-    public String toString() {
-        return "Administrador{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", cedula=" + cedula +
-                ", nombreUsuario='" + nombreUsuario + '\'' +
-                '}';
-    }
+    @ManyToOne
+    @JoinColumn(name = "idRegistro", nullable = false)
+    private Registro registro;
 }

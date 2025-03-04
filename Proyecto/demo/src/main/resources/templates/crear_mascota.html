@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Mascotas</title>
-    <link rel="stylesheet" href="../static/css/header_footer.css">
-    <link rel="stylesheet" href="../static/css/login.css">
+    <link rel="stylesheet" th:href="@{css/header_footer.css}">
+    <link rel="stylesheet" th:href="@{/css/crearMascota.css}">
 </head>
 <body>
     <header>
@@ -70,7 +70,7 @@
             </ul>
           </div>
           <div class="footer-logo">
-            <img src="../static/images/logo.png" alt="Logo" />
+            <img th:src="@{images/logo.png}" alt="Logo" />
             <div class="social-links">
               <a
                 href="https://meta.com/beaglegiggle"

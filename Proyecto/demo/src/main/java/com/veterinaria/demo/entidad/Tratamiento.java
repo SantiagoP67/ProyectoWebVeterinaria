@@ -1,29 +1,41 @@
 package com.veterinaria.demo.entidad;
 
-// POJO
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.Date;
+import java.util.List;
+
+@Entity
+@Table(name = "tratamiento")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Tratamiento {
-    private String fecha;
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idTratamiento;
 
-    public Tratamiento(String fecha, int id) {
-        this.fecha = fecha;
-        this.id = id;
-    }
+    private String codigo;
 
-    // Getters y Setters
-    public String getFecha() {
-        return fecha;
-    }
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
+    private String detalles;
 
-    public int getId() {
-        return id;
-    }
+    @ManyToOne
+    @JoinColumn(name = "idVeterinario", nullable = false)
+    private Veterinario veterinario;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    @ManyToOne
+    @JoinColumn(name = "idMascota", nullable = false)
+    private Mascota mascota;
+
+    @ManyToOne
+    @JoinColumn(name = "idServicio", nullable = false)
+    private Servicio servicio;
+
+    @OneToMany(mappedBy = "tratamiento", cascade = CascadeType.ALL)
+    private List<TratamientoMedicamento> tratamientoMedicamentos;
 }

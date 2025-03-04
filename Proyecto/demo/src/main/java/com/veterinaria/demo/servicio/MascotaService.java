@@ -5,5 +5,8 @@ import java.util.List;
 
 public interface MascotaService {
     List<Mascota> obtenerTodasMascotas();
-    Mascota obtenerMascotaPorId(Long id);
+    Mascota obtenerMascotaPorId(Integer id);
+    Mascota crearMascota(Mascota mascota, String cedula);
+    Mascota actualizarMascota(Integer id, Mascota mascota);
+    void eliminarMascota(Integer id);
 }
