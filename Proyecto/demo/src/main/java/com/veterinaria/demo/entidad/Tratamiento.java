@@ -25,15 +25,18 @@ public class Tratamiento {
     private String detalles;
 
     @ManyToOne
-    @JoinColumn(name = "idVeterinario", nullable = false)
+    @JoinColumn(name = "idVeterinario", nullable = true)
+    @org.hibernate.annotations.OnDelete(action = org.hibernate.annotations.OnDeleteAction.SET_NULL)
     private Veterinario veterinario;
 
     @ManyToOne
-    @JoinColumn(name = "idMascota", nullable = false)
+    @JoinColumn(name = "idMascota", nullable = true)
+    @org.hibernate.annotations.OnDelete(action = org.hibernate.annotations.OnDeleteAction.SET_NULL)
     private Mascota mascota;
 
     @ManyToOne
-    @JoinColumn(name = "idServicio", nullable = false)
+    @JoinColumn(name = "idServicio", nullable = true)
+    @org.hibernate.annotations.OnDelete(action = org.hibernate.annotations.OnDeleteAction.SET_NULL)
     private Servicio servicio;
 
     @OneToMany(mappedBy = "tratamiento", cascade = CascadeType.ALL)
