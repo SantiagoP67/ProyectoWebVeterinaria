@@ -26,13 +26,13 @@ public class Veterinario {
     @Column(name = "nombreUsuario")
     private String nombreUsuario;
 
+    @Column(name = "contrasenha", unique = true)
+    private String contrasena;
+
     @OneToMany(mappedBy = "veterinario", cascade = CascadeType.ALL)
     private List<Cita> citas;
 
     @OneToMany(mappedBy = "veterinario", cascade = CascadeType.ALL)
     private List<Tratamiento> tratamientos;
 
-    @ManyToOne
-    @JoinColumn(name = "idRegistro", nullable = false)
-    private Registro registro;
 }

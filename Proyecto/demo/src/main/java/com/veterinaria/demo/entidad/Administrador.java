@@ -23,7 +23,6 @@ public class Administrador {
     @Column(name = "nombreUsuario", unique = true)
     private String nombreUsuario;
 
-    @ManyToOne
-    @JoinColumn(name = "idRegistro", nullable = false)
-    private Registro registro;
+    @Column(name = "contrasenha", unique = true)
+    private String contrasena;
 }

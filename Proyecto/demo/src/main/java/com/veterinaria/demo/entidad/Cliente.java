@@ -29,13 +29,13 @@ public class Cliente {
     @Column(name = "nombreUsuario", unique = true)
     private String nombreUsuario;
 
+    @Column(name = "contrasenha", unique = true)
+    private String contrasena;
+
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Mascota> mascotas;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Testimonio> testimonios;
 
-    @ManyToOne
-    @JoinColumn(name = "idRegistro", nullable = false)
-    private Registro registro;
 }

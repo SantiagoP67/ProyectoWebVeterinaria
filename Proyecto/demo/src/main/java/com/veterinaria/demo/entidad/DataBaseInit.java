@@ -16,8 +16,6 @@ import java.util.List;
 @Transactional
 public class DataBaseInit implements ApplicationRunner {
 
-    private final TipoUsuarioRepository tipoUsuarioRepository;
-    private final RegistroRepository registroRepository;
     private final ClienteRepository clienteRepository;
     private final VeterinarioRepository veterinarioRepository;
     private final AdministradorRepository administradorRepository;
@@ -31,28 +29,17 @@ public class DataBaseInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        // Creación de tipo de usuario
-        TipoUsuario clienteTipo = new TipoUsuario(null, "Cliente", null);
-        TipoUsuario veterinarioTipo = new TipoUsuario(null, "Veterinario", null);
-        TipoUsuario administradorTipo = new TipoUsuario(null, "Administrador", null);
-        tipoUsuarioRepository.saveAll(List.of(clienteTipo, veterinarioTipo, administradorTipo));
-
-        // Creación de registros
-        Registro registroCliente = new Registro("cliente123", "password123", clienteTipo, null, null, null);
-        Registro registroVeterinario = new Registro("vet123", "passwordVet", veterinarioTipo, null, null, null);
-        Registro registroAdmin = new Registro("admin123", "passwordAdmin", administradorTipo, null, null, null);
-        registroRepository.saveAll(List.of(registroCliente, registroVeterinario, registroAdmin));
 
         // Creación de clientes
-        Cliente cliente = new Cliente(null, "Juan Pérez", "juan@gmail.com", "123456789", "100200300", "juan_p", null, null, registroCliente);
+        Cliente cliente = new Cliente(null, "Juan Pérez", "juan@gmail.com", "123456789", "100200300", "juan_p","123", null, null);
         clienteRepository.save(cliente);
 
         // Creación de veterinarios
-        Veterinario veterinario = new Veterinario(null, "Dr. Smith", "123456", "Veterinario General", "foto.png", 1, 10, "drsmith", null, null, registroVeterinario);
+        Veterinario veterinario = new Veterinario(null, "Dr. Smith", "123456", "Veterinario General", "foto.png", 1, 10, "drsmith","123", null, null);
         veterinarioRepository.save(veterinario);
 
         // Creación de administradores
-        Administrador administrador = new Administrador(null, "Carlos López", "987654321", "carlos_admin", registroAdmin);
+        Administrador administrador = new Administrador(null, "Carlos López", "987654321", "carlos_admin","123");
         administradorRepository.save(administrador);
 
         // Creación de servicios
