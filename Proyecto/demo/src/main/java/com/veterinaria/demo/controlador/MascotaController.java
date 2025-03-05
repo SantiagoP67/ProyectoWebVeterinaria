@@ -2,14 +2,12 @@ package com.veterinaria.demo.controlador;
 
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
 import com.veterinaria.demo.entidad.Mascota;
 import com.veterinaria.demo.servicio.MascotaService;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("mascota")
@@ -20,30 +18,30 @@ public class MascotaController {
         this.mascotaService = mascotaService;
     }
 
-    @GetMapping("/mascotas")
+    @GetMapping
     public String mostrarMascotas(Model model) {
         List<Mascota> mascotas = mascotaService.obtenerTodasMascotas();
         model.addAttribute("mascotas", mascotas);
         return "mascotas";
     }
 
-    @GetMapping("/mascotas/{id}")
+    @GetMapping("/{id}")
     public String detalleMascota(@PathVariable Integer id, Model model) {
         Mascota mascota = mascotaService.obtenerMascotaPorId(id);
         model.addAttribute("mascota", mascota);
         return "detalle_mascota";
     }
 
-    @GetMapping
+    @GetMapping("/crear")
     public String mostrarFormularioCreacion(Model model) {
-        model.addAttribute("mascota", new Mascota()); // Para enlazar el formulario con un objeto vacío
+        model.addAttribute("mascota", new Mascota());
         return "crear_mascota";
     }
 
-    @PostMapping
-    public String crearmascota(@ModelAttribute Mascota mascota, @RequestParam("cedula") String cedula) {
+    @PostMapping("/crear")
+    public String crearMascota(@ModelAttribute Mascota mascota, @RequestParam("cedula") String cedula) {
         mascotaService.crearMascota(mascota, cedula);
-        return "redirect:/mascota/mascotas";
+        return "redirect:/mascota";
     }
 
     @GetMapping("/editar/{id}")
@@ -56,14 +54,12 @@ public class MascotaController {
     @PostMapping("/actualizar/{id}")
     public String actualizarMascota(@PathVariable Integer id, @ModelAttribute Mascota mascota) {
         mascotaService.actualizarMascota(id, mascota);
-        return "redirect:/mascota/mascotas";
+        return "redirect:/mascota";
     }
 
-    @DeleteMapping("/eliminar/{id}")
+    @PostMapping("/eliminar/{id}")
     public String eliminarMascota(@PathVariable Integer id) {
         mascotaService.eliminarMascota(id);
-        return "redirect:/mascota/mascotas";
+        return "redirect:/mascota";
     }
-
-
 }
