@@ -9,7 +9,7 @@
 <body>
 <h1>Lista de Mascotas</h1>
 <div class="button-container">
-    <a href="/mascota" class="btn-agregar">Agregar Mascota</a>
+    <a th:href="@{/mascota/crear}" class="btn-agregar">Agregar Mascota</a>
 </div>
 <table border="1">
     <thead>
@@ -34,11 +34,12 @@
         <td th:text="${mascota.enfermedad}"></td>
         <td><img th:src="${mascota.foto}" alt="Foto" width="50"></td>
         <td th:text="${mascota.estado == 1 ? 'Activa' : 'Inactiva'}"></td>
-        <td><a th:href="@{/mascota/mascotas/{id}(id=${mascota.idMascota})}">Ver detalles</a></td>
+        <td><a th:href="@{/mascota/{id}(id=${mascota.idMascota})}">Ver detalles</a></td>
         <td>
             <a th:href="@{/mascota/editar/{id}(id=${mascota.idMascota})}" class="btn-editar">Editar</a>
-            <form th:action="@{/mascota/eliminar/{id}(id=${mascota.idMascota})}" method="post">
-                <input type="hidden" name="_method" value="delete"/>
+            <form th:action="@{/mascota/eliminar/{id}(id=${mascota.idMascota})}" 
+                  method="post" 
+                  onsubmit="return confirm('¿Estás seguro de eliminar esta mascota?');">
                 <button type="submit" class="btn-eliminar">Eliminar</button>
             </form>
         </td>
