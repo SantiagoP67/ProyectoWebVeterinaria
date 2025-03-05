@@ -1,15 +1,26 @@
 package com.veterinaria.demo.entidad;
 
-import com.veterinaria.demo.repositorio.*;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
-import org.springframework.stereotype.Component;
-import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
-
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.stereotype.Component;
+
+import com.veterinaria.demo.repositorio.AdministradorRepository;
+import com.veterinaria.demo.repositorio.ClienteRepository;
+import com.veterinaria.demo.repositorio.FacturaRepository;
+import com.veterinaria.demo.repositorio.MascotaRepository;
+import com.veterinaria.demo.repositorio.MedicamentoRepository;
+import com.veterinaria.demo.repositorio.MetodoPagoRepository;
+import com.veterinaria.demo.repositorio.ServicioRepository;
+import com.veterinaria.demo.repositorio.TratamientoMedicamentoRepository;
+import com.veterinaria.demo.repositorio.TratamientoRepository;
+import com.veterinaria.demo.repositorio.VeterinarioRepository;
+
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
@@ -57,6 +68,7 @@ public class DataBaseInit implements ApplicationRunner {
         // Creación de una mascota
         Mascota mascota = new Mascota(null, "Firulais", "Labrador", 3, 20.5f, "Ninguna", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Labrador_on_Quantock_%282175262184%29.jpg/640px-Labrador_on_Quantock_%282175262184%29.jpg", new Date(), new Date(), null, 1, cliente);
         mascotaRepository.save(mascota);
+        
 
         // Creación de un tratamiento
         Tratamiento tratamiento = new Tratamiento(null, "TRAT123", new Date(), "Tratamiento básico", veterinario, mascota, servicioConsulta, null);
