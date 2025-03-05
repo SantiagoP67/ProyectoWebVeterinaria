@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Mascotas</title>
-    <link rel="stylesheet" href="../static/css/header_footer.css">
-    <link rel="stylesheet" href="../static/css/login.css">
+    <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}">
+    <link rel="stylesheet" th:href="@{/css/login.css(v=${#dates.createNow().getTime()})}">
 </head>
 <body>
     <header>
@@ -41,8 +41,7 @@
 
     </section>
     
-
-   <footer>
+    <footer>
       <section class="footer-container">
         <div class="footer-info">
           <div class="footer-section">
@@ -57,28 +56,28 @@
             </ul>
           </div>
           <div class="footer-logo">
-            <img src="../static/images/logo.png" alt="Logo" />
+            <img src="https://i.postimg.cc/zH1YsdSN/logo.png" alt="Logo" />
             <div class="social-links">
               <a
                 href="https://meta.com/beaglegiggle"
                 target="_blank"
                 title="Meta"
               >
-                <img src="../static/images/meta.png" alt="Meta" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Meta" />
               </a>
               <a
                 href="https://www.instagram.com/beaglegiggle"
                 target="_blank"
                 title="Instagram"
               >
-                <img src="../static/images/instagram.png" alt="Instagram" />
+                <img src="https://i0.wp.com/eltallerdehector.com/wp-content/uploads/2022/06/2a008-logo-instagram-icono.png?fit=512%2C512&ssl=1" alt="Instagram" />
               </a>
               <a
                 href="https://www.x.com/in/beaglegiggle"
                 target="_blank"
                 title="X"
               >
-                <img src="../static/images/x.png" alt="X" />
+                <img src="https://images.freeimages.com/image/large-previews/f35/x-twitter-logo-on-black-circle-5694247.png" alt="X" />
               </a>
             </div>
           </div>
