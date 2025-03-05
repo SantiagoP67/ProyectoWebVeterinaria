@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Beagle Giggle</title>
-    <link rel="stylesheet" href="../static/css/landing.css">
+    <link rel="stylesheet" th:href="@{/css/landing.css}">
   </head>
   <body>
     <header>
       <div class="logo">
-        <img src="../static/images/logo2.png" alt="Logo" />
+        <img src="https://i.postimg.cc/4yjfvPcB/logo2.png" alt="Logo" />
         <span class="logo-text">Beagle Giggle</span>
       </div>
       <nav>
@@ -20,8 +20,11 @@
           <li><a href="#">Contáctanos</a></li>
         </ul>
       </nav>
-      <button class="login-btn" onclick="window.location.href='inicio_sesion.html';" >
-        Iniciar sesión <img src="../static/images/usuario.png" alt="Login" />
+      <button class="login-btn" th:onclick="|window.location.href='@{/inicio_sesion}'|">
+        Iniciar sesión <img src="https://cdn-icons-png.flaticon.com/256/5087/5087579.png" alt="Imagen externa" />
+    </button>
+    
+   
       </button>
     </header>
 
@@ -34,7 +37,7 @@
         </p>
       </div>
       <div class="description-image">
-        <img src="../static/images/descripcion.png" alt="Descripción" />
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/026/976/745/small_2x/3d-icon-cute-young-veterinarian-woman-with-dog-cartoon-style-on-isolated-transparent-background-generative-ai-png.png" alt="Descripción" />
       </div>
     </section>
     <main>
@@ -195,7 +198,7 @@
                 data-vet="Veterinaria Los Pinos"
               >
                 <img
-                  src="../static/images/vet1.bmp"
+                  src="https://i.postimg.cc/431p87Bz/vet1.png"
                   alt="Veterinaria Los Pinos"
                 />
                 <span>Los Pinos</span>
@@ -206,14 +209,14 @@
                 data-vet="Veterinaria Patitas Felices"
               >
                 <img
-                  src="../static/images/vet2.bmp"
+                  src="https://i.postimg.cc/nzcBNFPN/vet2.png"
                   alt="Veterinaria Patitas Felices"
                 />
                 <span>Patitas Felices</span>
               </div>
               <div class="vet-option" id="vet3" data-vet="Veterinaria Huellas">
                 <img
-                  src="../static/images/vet3.bmp"
+                  src="https://i.postimg.cc/gJS8p99j/vet3.png"
                   alt="Veterinaria Huellas"
                 />
                 <span>Huellas</span>
@@ -228,7 +231,7 @@
           <div class="carousel">
             <div class="carousel-track">
               <div class="foundation-card">
-                <img src="../static/images/f1.bmp" alt="Fundación 1" />
+                <img src="https://img.lalr.co/cms/2019/09/04155109/2016112523195825802.jpg?size=xl" alt="Fundación 1" />
                 <div class="info">
                   <h3>Fundación Animal Save</h3>
                   <p>
@@ -238,7 +241,7 @@
                 </div>
               </div>
               <div class="foundation-card">
-                <img src="../static/images/f2.bmp" alt="Fundación 2" />
+                <img src="https://blog.oxfamintermon.org/wp-content/uploads/2018/06/voluntariado-con-animales-1.jpg" alt="Fundación 2" />
                 <div class="info">
                   <h3>Fundación Protectora de Animales Sucre</h3>
                   <p>
@@ -248,7 +251,7 @@
                 </div>
               </div>
               <div class="foundation-card">
-                <img src="../static/images/f3.bmp" alt="Fundación 3" />
+                <img src="https://www.fundacionperroamor.com/urongeec/elementor/thumbs/Fundacion-pmamwc5jrxnbx4mf3m7znwm0hnua1ulv0gcd7xbthk.jpeg" alt="Fundación 3" />
                 <div class="info">
                   <h3>Patrulla Animal</h3>
                   <p>
@@ -258,7 +261,7 @@
                 </div>
               </div>
               <div class="foundation-card">
-                <img src="../static/images/f4.bmp" alt="Fundación 4" />
+                <img src="https://oem.com.mx/elsoldetlaxcala/img/16371591/1672780987/BASE_LANDSCAPE/1200/Colitas%20felices.jpg" alt="Fundación 4" />
                 <div class="info">
                   <h3>Fundación de Ayuda a los Animales</h3>
                   <p>
@@ -268,7 +271,7 @@
                 </div>
               </div>
               <div class="foundation-card">
-                <img src="../static/images/f5.bmp" alt="Fundación 5" />
+                <img src="https://miredvista.co/wp-content/uploads/2022/11/liliana-morales-26.jpg" alt="Fundación 5" />
                 <div class="info">
                   <h3>Vida Animal</h3>
                   <p>
@@ -278,7 +281,7 @@
                 </div>
               </div>
               <div class="foundation-card">
-                <img src="../static/images/f6.bmp" alt="Fundación 6" />
+                <img src="https://stakeholders.com.pe/wp-content/uploads/2023/04/trained-dogs-2022-11-10-18-03-18-utc-scaled.jpg" alt="Fundación 6" />
                 <div class="info">
                   <h3>Peluditos en Apuros</h3>
                   <p>
@@ -288,7 +291,7 @@
                 </div>
               </div>
               <div class="foundation-card">
-                <img src="../static/images/f7.bmp" alt="Fundación 7" />
+                <img src="https://elcomercio.pe/resizer/sYS7edz0yuMj1-10gQgnZVftjrY=/1200x1200/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/UWCUD6LJS5FQXLQTAASALWYALA.jpg" alt="Fundación 7" />
                 <div class="info">
                   <h3>Ayúdame</h3>
                   <p>
@@ -327,28 +330,28 @@
             </ul>
           </div>
           <div class="footer-logo">
-            <img src="../static/images/logo.png" alt="Logo" />
+            <img src="https://i.postimg.cc/zH1YsdSN/logo.png" alt="Logo" />
             <div class="social-links">
               <a
                 href="https://meta.com/beaglegiggle"
                 target="_blank"
                 title="Meta"
               >
-                <img src="../static/images/meta.png" alt="Meta" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Meta" />
               </a>
               <a
                 href="https://www.instagram.com/beaglegiggle"
                 target="_blank"
                 title="Instagram"
               >
-                <img src="../static/images/instagram.png" alt="Instagram" />
+                <img src="https://i0.wp.com/eltallerdehector.com/wp-content/uploads/2022/06/2a008-logo-instagram-icono.png?fit=512%2C512&ssl=1" alt="Instagram" />
               </a>
               <a
                 href="https://www.x.com/in/beaglegiggle"
                 target="_blank"
                 title="X"
               >
-                <img src="../static/images/x.png" alt="X" />
+                <img src="https://images.freeimages.com/image/large-previews/f35/x-twitter-logo-on-black-circle-5694247.png" alt="X" />
               </a>
             </div>
           </div>
