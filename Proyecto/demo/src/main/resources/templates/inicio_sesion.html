@@ -27,8 +27,8 @@
       <section class="formularioLogin">
         <div class="formularioContainer">
             <h2>Iniciar Sesión</h2>
-            <form action="login.php" method="POST">
-                <label for="username">Usuario:</label>
+            <form th:action="@{/inicio_sesion}" method="POST">
+            <label for="username">Usuario:</label>
                 <input type="text" id="username" name="username" placeholder="Ingresa tu usuario" required>
     
                 <label for="password">Contraseña:</label>

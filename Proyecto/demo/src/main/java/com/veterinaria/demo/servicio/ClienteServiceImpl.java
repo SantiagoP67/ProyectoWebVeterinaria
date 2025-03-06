@@ -44,4 +44,9 @@ public class ClienteServiceImpl implements ClienteService{
     public void eliminarCliente(Integer id) {
         clienteRepository.deleteById(id);
     }
+
+    @Override
+    public Cliente validarCliente(String username, String password) {
+        return clienteRepository.findByNombreUsuarioAndContrasena(username, password);
+    }
 }

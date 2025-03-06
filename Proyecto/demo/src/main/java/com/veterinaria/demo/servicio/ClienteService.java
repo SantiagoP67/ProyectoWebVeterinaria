@@ -10,5 +10,6 @@ public interface ClienteService{
     Cliente crearCliente(Cliente cliente);
     Cliente editarCliente(Integer id, Cliente cliente);
     void eliminarCliente(Integer id);
+    Cliente validarCliente(String username, String password);
 }
 
