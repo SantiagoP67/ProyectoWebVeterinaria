@@ -8,7 +8,8 @@ public class AuthController {
 
     @GetMapping("/inicio_sesion")
     public String mostrarPaginaLogin() {
-        return "inicio_sesion"; 
+
+        return "inicio_sesion";
     }
 
     @GetMapping("/index")
@@ -21,6 +22,6 @@ public class AuthController {
     }
     @GetMapping("/registro_usuario")
     public String mostrarPaginaRegistro() {
-        return "registro_usuario"; // Debe existir en src/main/resources/templates/
+        return "registro_usuario";
     }
 }

@@ -56,4 +56,9 @@ public class MascotaServiceImpl implements MascotaService {
     public void eliminarMascota(Integer id) {
         mascotaRepository.deleteById(id);
     }
+
+    @Override
+    public List<Mascota> obtenerMascotasPorCliente(Integer idCliente) {
+        return mascotaRepository.findByClienteIdCliente(idCliente);
+    }
 }

@@ -2,6 +2,7 @@ package com.veterinaria.demo.controlador;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -72,5 +73,12 @@ public class MascotaController {
     public String eliminarMascota(@PathVariable Integer id) {
         mascotaService.eliminarMascota(id);
         return "redirect:/mascota";
+    }
+
+    @GetMapping("/mascotas")
+    public String listarMascotas(@RequestParam("idCliente") Integer idCliente, Model model) {
+        List<Mascota> mascotas = mascotaService.obtenerMascotasPorCliente(idCliente);
+        model.addAttribute("mascotas", mascotas);
+        return "verMascotaCliente"; // Asegúrate de que este sea el nombre correcto de tu plantilla HTML.
     }
 }
