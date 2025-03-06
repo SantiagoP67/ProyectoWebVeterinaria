@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Clientes</title>
+    <link rel="stylesheet" th:href="@{/css/tabla_mascotas.css}">
+    <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}">
+</head>
+
+<header>
+    <div class="logo">
+        <img th:src="@{/images/logo2.png}" alt="Logo" />
+        <span class="logo-text">Beagle Giggle</span>
+    </div>
+    <nav>
+        <ul class="nav-links">
+            <li><a th:href="@{/}">Inicio</a></li>
+            <li><a href="#">Servicios</a></li>
+            <li><a href="#">Conócenos</a></li>
+            <li><a href="#">Contáctanos</a></li>
+        </ul>
+    </nav>
+</header>
+
+<body>
+<h1>Lista de Clientes</h1>
+<div class="button-container">
+    <a th:href="@{/cliente/crear}" class="btn-agregar">Agregar Cliente</a>
+</div>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Correo</th>
+        <th>Teléfono</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cliente : ${clientes}">
+        <td th:text="${cliente.nombre}"></td>
+        <td th:text="${cliente.correo}"></td>
+        <td th:text="${cliente.cedula}"></td>
+        <td th:text="${cliente.celular}"></td>
+        <td>
+            <a th:href="@{/cliente/editar/{id}(id=${cliente.idCliente})}" class="btn-editar">Editar</a>
+            <form th:action="@{/cliente/eliminar/{id}(id=${cliente.idCliente})}"
+                  method="post"
+                  onsubmit="return confirm('¿Estás seguro de eliminar este cliente?');">
+                <button type="submit" class="btn-eliminar">Eliminar</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<footer>
+    <section class="footer-container">
+        <div class="footer-info">
+            <div class="footer-section">
+                <h3>Servicios</h3>
+                <ul>
+                    <li>Consulta médica</li>
+                    <li>Cirugía</li>
+                    <li>Hospitalización</li>
+                    <li>Monitoreo</li>
+                    <li>Vacunación</li>
+                    <li>Laboratorio clínico</li>
+                </ul>
+            </div>
+            <div class="footer-logo">
+                <img src="https://i.postimg.cc/zH1YsdSN/logo.png" alt="Logo" />
+                <div class="social-links">
+                    <a href="https://meta.com/beaglegiggle" target="_blank" title="Meta">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Meta" />
+                    </a>
+                    <a href="https://www.instagram.com/beaglegiggle" target="_blank" title="Instagram">
+                        <img src="https://i0.wp.com/eltallerdehector.com/wp-content/uploads/2022/06/2a008-logo-instagram-icono.png?fit=512%2C512&ssl=1" alt="Instagram" />
+                    </a>
+                    <a href="https://www.x.com/in/beaglegiggle" target="_blank" title="X">
+                        <img src="https://images.freeimages.com/image/large-previews/f35/x-twitter-logo-on-black-circle-5694247.png" alt="X" />
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Información</h3>
+                <ul>
+                    <li>(+57) 3194479483</li>
+                    <li>Calle 12A #78 - 34</li>
+                    <li>beaglegiggle@atencion.com</li>
+                    <li>www.beaglegiggle.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            © 2025 BeagleGiggle. Todos los derechos reservados.
+        </div>
+    </section>
+</footer>
+</body>
+</html>
