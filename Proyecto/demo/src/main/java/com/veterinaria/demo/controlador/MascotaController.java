@@ -4,8 +4,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.veterinaria.demo.ErrorHeading.NotFoundException;
 import com.veterinaria.demo.entidad.Mascota;
 import com.veterinaria.demo.servicio.MascotaService;
 
@@ -28,8 +34,13 @@ public class MascotaController {
     @GetMapping("/{id}")
     public String detalleMascota(@PathVariable Integer id, Model model) {
         Mascota mascota = mascotaService.obtenerMascotaPorId(id);
-        model.addAttribute("mascota", mascota);
-        return "detalle_mascota";
+        if(mascota!= null){
+            model.addAttribute("mascota", mascota);
+            return "detalle_mascota";
+        }else {
+            throw new NotFoundException(id, "La mascota con ID " + id + " no existe.");
+        }
+
     }
 
     @GetMapping("/crear")
