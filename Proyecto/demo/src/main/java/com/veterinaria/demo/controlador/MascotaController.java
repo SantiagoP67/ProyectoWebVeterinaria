@@ -63,7 +63,7 @@ public class MascotaController {
         return "editar_mascota";
     }
 
-    @PostMapping("/actualizar/{id}")
+    @PostMapping("/editar/{id}")
     public String actualizarMascota(@PathVariable Integer id, @ModelAttribute Mascota mascota) {
         mascotaService.actualizarMascota(id, mascota);
         return "redirect:/mascota";

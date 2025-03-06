@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lista de Mascotas</title>
-    <link rel="stylesheet" href="../static/css/header_footer.css" />
-    <link rel="stylesheet" href="../static/css/secciones.css" />
-    <link rel="stylesheet" href="../static/css/crearMascota.css" />
+    <link rel="stylesheet" th:href="@{/css/secciones.css(v=${#dates.createNow().getTime()})}" />
+    <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}" />
+    <link rel="stylesheet" th:href="@{/css/crearMascota.css(v=${#dates.createNow().getTime()})}" />
   </head>
   <body>
     <header>
@@ -28,130 +28,14 @@
     <h2>Bienvenido Cliente</h2>
 
     <!-- Mostrar mascotas dinamicamente-->
-    <section class="mascotas">
-      <h2>Mascotas</h2>
-
-      <div class="mascotas-grid">
-        <div class="mascota">
-          <div class="mascota-header">
-            <!-- Contenedor del icono con tooltip -->
-            <div class="tooltip-container">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png"
-                class="icono-editar"
-                onclick="editarMascota()"
-              />
-              <span class="tooltip-text">Editar Información Mascota</span>
-            </div>
-
-            <div class="tooltip-container">
-              <img
-                src="https://cdn-icons-png.flaticon.com/128/1001/1001371.png"
-                class="icono-archivo"
-                onclick="verArchivo()"
-              />
-              <span class="tooltip-text">Ver Historial Clínico</span>
-            </div>
-
-            <div class="tooltip-container">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
-                class="icono-eliminar"
-                onclick="eliminarMascota()"
-              />
-              <span class="tooltip-text">Eliminar Mascota</span>
-            </div>
-          </div>
-          <img
-            src="https://www.zooplus.es/magazine/wp-content/uploads/2019/03/deutscher-sch%C3%A4ferhund.jpg"
-            alt="Pastor Alemán"
-          />
-          <h3>Max</h3>
-          <p>Pastor Alemán</p>
-        </div>
-
-        <!-- Tarjeta 2: Gran Danés -->
-        <div class="mascota">
-          <div class="mascota-header">
-            <div class="tooltip-container">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png"
-                class="icono-editar"
-                onclick="editarMascota()"
-              />
-              <span class="tooltip-text">Editar Información Mascota</span>
-            </div>
-
-            <div class="tooltip-container">
-              <img
-                src="https://cdn-icons-png.flaticon.com/128/1001/1001371.png"
-                class="icono-archivo"
-                onclick="verArchivo()"
-              />
-              <span class="tooltip-text">Ver Historial Clínico</span>
-            </div>
-
-            <div class="tooltip-container">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
-                class="icono-eliminar"
-                onclick="eliminarMascota()"
-              />
-              <span class="tooltip-text">Eliminar Mascota</span>
-            </div>
-          </div>
-          <img
-            src="https://nfnatcane.es/blog/wp-content/uploads/2020/01/gran-dan%C3%A9s-posando.jpg"
-            alt="Gran Danés"
-          />
-          <h3>Thor</h3>
-          <p>Gran Danés</p>
-        </div>
-
-        <!-- Tarjeta 3: Beagle -->
-        <div class="mascota">
-          <div class="mascota-header">
-            <div class="tooltip-container">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png"
-                class="icono-editar"
-                onclick="editarMascota()"
-              />
-              <span class="tooltip-text">Editar Información Mascota</span>
-            </div>
-
-            <div class="tooltip-container">
-              <img
-                src="https://cdn-icons-png.flaticon.com/128/1001/1001371.png"
-                class="icono-archivo"
-                onclick="verArchivo()"
-              />
-              <span class="tooltip-text">Ver Historial Clínico</span>
-            </div>
-
-            <div class="tooltip-container">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
-                class="icono-eliminar"
-                onclick="eliminarMascota()"
-              />
-              <span class="tooltip-text">Eliminar Mascota</span>
-            </div>
-          </div>
-          <img
-            src="https://www.zooplus.es/magazine/wp-content/uploads/2017/10/Beagle-1.jpg"
-            alt="Beagle"
-          />
-          <h3>Bella</h3>
-          <p>Beagle</p>
-        </div>
-
+  
         <div class="mascota" th:each="mascota : ${mascotas}">
           <div class="mascota-header">
             <div class="tooltip-container">
-              <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png"
-                   class="icono-editar"
-                   th:onclick="'editarMascota(' + ${mascota.idMascota} + ')'"/>
+              <a th:href="@{/mascota/editar/{id}(id=${mascota.idMascota})}">
+                <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png"
+                     class="icono-editar"/>
+              </a>
               <span class="tooltip-text">Editar Información Mascota</span>
             </div>
             <div class="tooltip-container">
@@ -161,9 +45,10 @@
               <span class="tooltip-text">Ver Historial Clínico</span>
             </div>
             <div class="tooltip-container">
+              <a th:href="@{/mascota/eliminar/{id}(id=${mascota.idMascota})}">
               <img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
-                   class="icono-eliminar"
-                   th:onclick="'eliminarMascota(' + ${mascota.idMascota} + ')'"/>
+                   class="icono-eliminar"/>
+              </a>
               <span class="tooltip-text">Eliminar Mascota</span>
             </div>
           </div>
@@ -182,9 +67,7 @@
         </select>
       </div>
       <div class="mascotas-footer">
-        <button class="btn-registrar" onclick="redirigirAFormulario()">
-          Registrar Mascota
-        </button>
+        <a th:href="@{/mascota/crear}" class="btn-agregar">Agregar Mascota</a>
       </div>
     </section>
 

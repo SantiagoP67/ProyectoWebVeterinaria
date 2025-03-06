@@ -25,10 +25,10 @@ public class AuthController {
                                Model model) {
 
         Cliente cliente = clienteService.validarCliente(username, password);
-
+        Integer idCliente = cliente.getIdCliente();                           
         if (cliente != null) {
             model.addAttribute("mensaje", "Inicio de sesión exitoso");
-            return "index"; // Redirigir a la página principal
+            return "redirect:/mascota/mascotas?idCliente=" + idCliente + ""; // Redirigir a la página principal
         } else {
             model.addAttribute("error", "Usuario o contraseña incorrectos");
             return "inicio_sesion";
