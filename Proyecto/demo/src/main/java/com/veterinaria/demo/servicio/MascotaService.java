@@ -1,7 +1,8 @@
 package com.veterinaria.demo.servicio;
 
-import com.veterinaria.demo.entidad.Mascota;
 import java.util.List;
+
+import com.veterinaria.demo.entidad.Mascota;
 
 public interface MascotaService {
     List<Mascota> obtenerTodasMascotas();
@@ -10,4 +11,5 @@ public interface MascotaService {
     Mascota crearMascota(Mascota mascota, String cedula);
     Mascota actualizarMascota(Integer id, Mascota mascota);
     void eliminarMascota(Integer id);
+    void cambiarEstado(Integer id, Mascota mascota);
 }
