@@ -78,8 +78,8 @@ public class MascotaController {
     }
 
     @PostMapping("/eliminar/{id}")
-    public String eliminarMascota(@PathVariable Integer id) {
-        mascotaService.eliminarMascota(id);
+    public String eliminarMascota(@PathVariable Integer id, @ModelAttribute Mascota mascota) {
+        mascotaService.cambiarEstado(id, mascota);
         return "redirect:/mascota";
     }
 

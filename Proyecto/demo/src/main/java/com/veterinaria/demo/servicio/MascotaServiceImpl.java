@@ -1,13 +1,14 @@
 package com.veterinaria.demo.servicio;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.veterinaria.demo.entidad.Cliente;
 import com.veterinaria.demo.entidad.Mascota;
 import com.veterinaria.demo.repositorio.ClienteRepository;
 import com.veterinaria.demo.repositorio.MascotaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class MascotaServiceImpl implements MascotaService {
@@ -51,6 +52,15 @@ public class MascotaServiceImpl implements MascotaService {
         mascotaActual.setFoto(mascota.getFoto());
         return mascotaRepository.save(mascotaActual);
     }
+    @Override
+    public void cambiarEstado(Integer id, Mascota mascota){
+        Mascota mascotaActual = mascotaRepository.findById(id).orElse(null);
+        if (mascotaActual != null) {
+            mascotaActual.setEstado(mascota.getEstado());
+            mascotaRepository.save(mascotaActual); // Guardar los cambios
+        }
+    }
+    
 
     @Override
     public void eliminarMascota(Integer id) {
