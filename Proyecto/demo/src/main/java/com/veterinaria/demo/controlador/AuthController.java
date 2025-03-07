@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.veterinaria.demo.entidad.Cliente;
 import com.veterinaria.demo.servicio.ClienteService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class AuthController {
 
@@ -24,16 +26,21 @@ public class AuthController {
     @PostMapping("/inicio_sesion")
     public String iniciarSesion(@RequestParam("username") String username,
                                 @RequestParam("password") String password,
-                                Model model) {
+                                Model model, HttpSession session ) {
         Cliente cliente = clienteService.validarCliente(username, password);
     
         if (cliente == null) { 
             model.addAttribute("error", "Usuario o contraseña incorrectos");
-            return "inicio_sesion"; // Volver a la página de login con error
+            return "inicio_sesion"; 
         }
     
-        return "redirect:/index"; // Si las credenciales son correctas, redirige a la página principal
+
+        // Guardar la cédula en la sesión
+        session.setAttribute("cedula", cliente.getCedula());
+        
+        return "verMascotaCliente"; 
     }
+    
     
 
     @GetMapping("index")
