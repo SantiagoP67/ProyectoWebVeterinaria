@@ -50,7 +50,8 @@
         <td th:text="${mascota.edad}"></td>
         <td th:text="${mascota.peso}"></td>
         <td th:text="${mascota.enfermedad}"></td>
-        <td><img th:src="${mascota.foto}" alt="Foto" width="50"></td>
+        <td><img th:src="${mascota.foto}" alt="Foto" width="50"
+               th:classappend="${mascota.estado == 0} ? 'imagen-inactiva' : ''"></td>
         <td th:text="${mascota.estado == 1 ? 'Activa' : 'Inactiva'}"></td>
         <td><a th:href="@{/mascota/{id}(id=${mascota.idMascota})}">Ver detalles</a></td>
         <td>

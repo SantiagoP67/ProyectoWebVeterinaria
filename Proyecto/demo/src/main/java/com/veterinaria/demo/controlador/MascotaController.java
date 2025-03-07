@@ -57,7 +57,7 @@ public class MascotaController {
 
         if (cedula != null) {
             mascotaService.crearMascota(mascota, cedula);
-            return "redirect:/mascota";
+            return "verMascotaCliente";
         } else {
             return "redirect:/inicio_sesion?error=sesionExpirada";
         }

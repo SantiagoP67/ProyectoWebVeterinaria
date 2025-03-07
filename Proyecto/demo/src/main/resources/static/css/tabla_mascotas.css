@@ -124,3 +124,6 @@ a:focus {
     outline: 2px dashed #112D4E;
     outline-offset: 2px;
 }
+.imagen-inactiva {
+    filter: grayscale(100%);
+}
