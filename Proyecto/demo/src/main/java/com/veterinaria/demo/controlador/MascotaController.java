@@ -2,7 +2,6 @@ package com.veterinaria.demo.controlador;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.veterinaria.demo.ErrorHeading.NotFoundException;
 import com.veterinaria.demo.entidad.Mascota;
 import com.veterinaria.demo.servicio.MascotaService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("mascota")
@@ -51,10 +52,17 @@ public class MascotaController {
     }
 
     @PostMapping("/crear")
-    public String crearMascota(@ModelAttribute Mascota mascota, @RequestParam("cedula") String cedula) {
-        mascotaService.crearMascota(mascota, cedula);
-        return "redirect:/mascota";
+    public String crearMascota(@ModelAttribute Mascota mascota, HttpSession session) {
+        String cedula = (String) session.getAttribute("cedula"); // Obtener cédula de la sesión
+
+        if (cedula != null) {
+            mascotaService.crearMascota(mascota, cedula);
+            return "redirect:/mascota";
+        } else {
+            return "redirect:/inicio_sesion?error=sesionExpirada";
+        }
     }
+
 
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEdicion(@PathVariable Integer id, Model model) {
