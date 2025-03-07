@@ -14,4 +14,6 @@ public class ErrorController {
         model.addAttribute("id", ex.getId());  
         return "pagina_error";
     }
+
+    
 }
