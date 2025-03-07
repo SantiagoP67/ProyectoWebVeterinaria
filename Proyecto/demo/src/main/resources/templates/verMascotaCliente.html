@@ -16,11 +16,11 @@
       </div>
       <nav>
         <ul class="nav-links">
-          <li><a href="index.html">Inicio</a></li>
+          <li><a th:href="@{/index}">Inicio</a></li>
           <li><a href="#">Servicios</a></li>
           <li><a href="#">Conócenos</a></li>
           <li><a href="#">Contáctanos</a></li>
-          <li>Administrador</li>
+          <li>Perfil Cliente</li>
         </ul>
       </nav>
     </header>
@@ -28,83 +28,35 @@
     <h2>Bienvenido Cliente</h2>
 
     <!-- Mostrar mascotas dinamicamente-->
-  
-        <div class="mascota" th:each="mascota : ${mascotas}">
+    <section class="lista-mascotas">
+      <div class="mascota" th:each="mascota : ${mascotas}">
           <div class="mascota-header">
-            <div class="tooltip-container">
-              <a th:href="@{/mascota/editar/{id}(id=${mascota.idMascota})}">
-                <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png"
-                     class="icono-editar"/>
-              </a>
-              <span class="tooltip-text">Editar Información Mascota</span>
-            </div>
-            <div class="tooltip-container">
-              <img src="https://cdn-icons-png.flaticon.com/128/1001/1001371.png"
-                   class="icono-archivo"
-                   th:onclick="'verArchivo(' + ${mascota.idMascota} + ')'"/>
-              <span class="tooltip-text">Ver Historial Clínico</span>
-            </div>
-            <div class="tooltip-container">
-              <a th:href="@{/mascota/eliminar/{id}(id=${mascota.idMascota})}">
-              <img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
-                   class="icono-eliminar"/>
-              </a>
-              <span class="tooltip-text">Eliminar Mascota</span>
-            </div>
+              <div class="tooltip-container">
+                  <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" 
+                      class="icono-editar"
+                      th:onclick="'editarMascota(' + ${mascota.id} + ')'">
+                  <span class="tooltip-text">Editar Información Mascota</span>
+              </div>
+              <div class="tooltip-container">
+                  <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png" 
+                      class="icono-archivo"
+                      onclick="verArchivo()">
+                  <span class="tooltip-text">Ver Historial Clínico</span>
+              </div>
           </div>
-          <img th:src="${mascota.foto}" alt="Foto de mascota"/>
+          <img th:src="${mascota.foto}" alt="Foto de mascota">
           <h3 th:text="${mascota.nombre}"></h3>
           <p th:text="${mascota.raza}"></p>
-        </div>
+      </div>
+  </section>
+  
+    <!-- Boton para registrar nueva mascota de ese usuario-->
 
-      </div>
-      <div class="filtro">
-        <label for="filtro-estado">Filtrar por:</label>
-        <select id="filtro-estado">
-          <option value="todas">Todas</option>
-          <option value="en-tratamiento">En tratamiento</option>
-          <option value="no-tratamiento">No en tratamiento</option>
-        </select>
-      </div>
       <div class="mascotas-footer">
         <a th:href="@{/mascota/crear}" class="btn-agregar">Agregar Mascota</a>
       </div>
     </section>
 
-    <section class="mascotas">
-      <div class="mascotas-header">
-        <h2>Profesionales Veterinarios</h2>
-        <button class="btn-agregar">Registrar Veterinario</button>
-      </div>
-    </section>
-
-    <section class="mascotas">
-      <div class="mascotas-header">
-        <h2>Clientes</h2>
-        <button class="btn-agregar">Registrar Cliente</button>
-      </div>
-    </section>
-
-    <section class="mascotas">
-      <div class="mascotas-header">
-        <h2>Servicios</h2>
-        <button class="btn-agregar">Agregar Servicio</button>
-      </div>
-    </section>
-
-    <section class="mascotas">
-      <div class="mascotas-header">
-        <h2>Medicamento</h2>
-        <button class="btn-agregar">Medicamento</button>
-      </div>
-    </section>
-
-    <section class="mascotas">
-      <div class="mascotas-header">
-        <h2>Informe</h2>
-        <button class="btn-agregar">Generar Informe</button>
-      </div>
-    </section>
 
     <footer>
       <section class="footer-container">
