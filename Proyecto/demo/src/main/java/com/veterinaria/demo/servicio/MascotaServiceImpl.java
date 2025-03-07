@@ -57,7 +57,7 @@ public class MascotaServiceImpl implements MascotaService {
         Mascota mascotaActual = mascotaRepository.findById(id).orElse(null);
         if (mascotaActual != null) {
             mascotaActual.setEstado(mascota.getEstado());
-            mascotaRepository.save(mascotaActual); // Guardar los cambios
+            mascotaRepository.save(mascotaActual); 
         }
     }
     
