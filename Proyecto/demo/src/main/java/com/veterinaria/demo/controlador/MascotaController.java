@@ -57,7 +57,7 @@ public class MascotaController {
 
         if (cedula != null) {
             mascotaService.crearMascota(mascota, cedula);
-            return "redirect:/mascota";
+            return "verMascotaCliente";
         } else {
             return "redirect:/inicio_sesion?error=sesionExpirada";
         }
@@ -78,8 +78,8 @@ public class MascotaController {
     }
 
     @PostMapping("/eliminar/{id}")
-    public String eliminarMascota(@PathVariable Integer id) {
-        mascotaService.eliminarMascota(id);
+    public String eliminarMascota(@PathVariable Integer id, @ModelAttribute Mascota mascota) {
+        mascotaService.cambiarEstado(id, mascota);
         return "redirect:/mascota";
     }
 
