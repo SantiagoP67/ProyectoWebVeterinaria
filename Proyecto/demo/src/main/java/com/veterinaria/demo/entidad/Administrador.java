@@ -14,8 +14,9 @@ public class Administrador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idAdministrador;
-
     private String nombre;
+    private String correo;
+    private String foto;
 
     @Column(name = "cedula", unique = true)
     private String cedula;

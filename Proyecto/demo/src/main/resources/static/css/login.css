@@ -19,14 +19,14 @@
 /* Contenedor del formulario */
 .formularioContainer {
     background: white;
-    margin: 0 auto; /* Centrado sin margen extra */
+    margin: 0 auto;
     max-width: 400px;
-    padding: 40px; /* Más espacio interno */
+    padding: 20px 60px 40px 40px;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 450px; /* Aumenta el tamaño del formulario */
-    max-width: 90%; /* Evita que sea demasiado grande en pantallas pequeñas */
+    width: 450px;
+    max-width: 90%;
 }
 
 /* Títulos */
@@ -131,4 +131,11 @@ option {
         font-size: 0.9rem;
         padding: 10px;
     }
+}
+
+input:-webkit-autofill {
+    background-color: white !important;
+    color: black !important;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: 0 0 0px 1000px white inset !important;
 }

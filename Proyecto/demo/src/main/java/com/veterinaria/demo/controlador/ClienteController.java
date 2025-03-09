@@ -40,7 +40,7 @@ public class ClienteController{
             return "registro_usuario";
         }
 
-        clienteService.crearCliente(cliente); // Guarda en la BD
+        clienteService.crearCliente(cliente);
         return "redirect:/cliente";
     }
 
