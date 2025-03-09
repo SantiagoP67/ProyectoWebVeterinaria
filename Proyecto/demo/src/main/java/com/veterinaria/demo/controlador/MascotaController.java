@@ -2,6 +2,8 @@ package com.veterinaria.demo.controlador;
 
 import java.util.List;
 
+import com.veterinaria.demo.entidad.Cliente;
+import com.veterinaria.demo.servicio.ClienteService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +23,11 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("mascota")
 public class MascotaController {
     private final MascotaService mascotaService;
+    private final ClienteService clienteService;
 
-    public MascotaController(MascotaService mascotaService) {
+    public MascotaController(MascotaService mascotaService, ClienteService clienteService) {
         this.mascotaService = mascotaService;
+        this.clienteService = clienteService;
     }
 
     @GetMapping
@@ -85,8 +89,12 @@ public class MascotaController {
 
     @GetMapping("/mascotas")
     public String listarMascotas(@RequestParam("idCliente") Integer idCliente, Model model) {
+        Cliente cliente = clienteService.obtenerClientePorId(idCliente); // Método para obtener el cliente
         List<Mascota> mascotas = mascotaService.obtenerMascotasPorCliente(idCliente);
+
         model.addAttribute("mascotas", mascotas);
+        model.addAttribute("nombreCliente", cliente.getNombre());
+
         return "verMascotaCliente";
     }
 }

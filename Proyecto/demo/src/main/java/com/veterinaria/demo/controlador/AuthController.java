@@ -40,8 +40,11 @@ public class AuthController {
 
         Cliente cliente = clienteService.validarCliente(username, password);
         if (cliente != null) {
+            session.setAttribute("idCliente", cliente.getIdCliente());
             session.setAttribute("cedula", cliente.getCedula());
-            return "verMascotaCliente";
+            session.setAttribute("nombreCliente", cliente.getNombre());
+            session.setAttribute("fotoCliente", cliente.getFoto());
+            return "index";
         }
 
         Veterinario veterinario = veterinarioService.validarVeterinario(username, password);

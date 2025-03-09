@@ -154,3 +154,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   animate();
 });
+
+function toggleMenu() {
+  document.querySelector(".user-menu").classList.toggle("active");
+}
+
+// Cierra el menú si se hace clic fuera de él
+document.addEventListener("click", function(event) {
+  const userMenu = document.querySelector(".user-menu");
+  if (!userMenu.contains(event.target)) {
+    userMenu.classList.remove("active");
+  }
+});

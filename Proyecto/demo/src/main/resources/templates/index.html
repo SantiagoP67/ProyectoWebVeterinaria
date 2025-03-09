@@ -7,28 +7,39 @@
     <link rel="stylesheet" th:href="@{/css/landing.css}">
   </head>
   <body>
-    <header>
-      <div class="logo">
-        <img src="https://i.postimg.cc/4yjfvPcB/logo2.png" alt="Logo" />
-        <span class="logo-text">Beagle Giggle</span>
-      </div>
-      <nav>
-        <ul class="nav-links">
-          <li><a th:href="@{/index}">Inicio</a></li>
-          <li><a href="#">Servicios</a></li>
-          <li><a href="#">Conócenos</a></li>
-          <li><a href="#">Contáctanos</a></li>
-        </ul>
-      </nav>
-      <button class="login-btn" th:onclick="|window.location.href='@{/inicio_sesion}'|">
-        Iniciar sesión <img src="https://cdn-icons-png.flaticon.com/256/5087/5087579.png" alt="Imagen externa" />
-    </button>
-    
-   
-      </button>
-    </header>
+  <header>
+    <div class="logo">
+      <img src="https://i.postimg.cc/4yjfvPcB/logo2.png" alt="Logo" />
+      <span class="logo-text">Beagle Giggle</span>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a th:href="@{/index}">Inicio</a></li>
+        <li><a href="#">Servicios</a></li>
+        <li><a href="#">Conócenos</a></li>
+        <li><a href="#">Contáctanos</a></li>
+      </ul>
+    </nav>
 
-    <section class="description-section">
+    <!-- Botón de inicio de sesión si no hay sesión -->
+    <button class="login-btn" th:if="${session.cedula == null}" th:onclick="|window.location.href='@{/inicio_sesion}'|">
+      Iniciar sesión
+      <img src="https://cdn-icons-png.flaticon.com/256/5087/5087579.png" alt="Imagen externa" />
+    </button>
+
+    <!-- Botón de usuario con menú desplegable si hay sesión -->
+    <div class="user-menu" th:if="${session.cedula != null}">
+      <button class="login-btn user-btn" onclick="toggleMenu()">
+        <span th:text="${session.nombreCliente}">Usuario</span>
+        <img th:src="${session.fotoCliente}" alt="Foto del Cliente" class="user-img" />
+      </button>
+      <div class="dropdown-menu" id="userDropdown">
+        <a th:href="@{/cliente/editar/{id}(id=${session.idCliente})}">Editar Usuario</a>
+        <a th:href="@{/mascota/mascotas(idCliente=${session.idCliente})}">Ver Mascotas</a>
+      </div>
+    </div>
+  </header>
+  <section class="description-section">
       <div class="description-text">
         <h1>Mantén a tu mascota protegida</h1>
         <p>
