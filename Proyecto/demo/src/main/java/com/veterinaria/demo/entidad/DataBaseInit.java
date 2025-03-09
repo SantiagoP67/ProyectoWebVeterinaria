@@ -841,16 +841,20 @@ public class DataBaseInit implements ApplicationRunner {
         mascotaRepository.save(mascota100);
 
         /* Creación de un tratamiento */
-        Tratamiento tratamiento = new Tratamiento(null, "TRAT123", new Date(), "Tratamiento básico", veterinario1,
+        Tratamiento tratamiento1 = new Tratamiento(1, "TRAT123", new Date(), "Tratamiento básico", veterinario1,
                 mascota1, servicioConsulta, null);
-        tratamientoRepository.save(tratamiento);
+        tratamientoRepository.save(tratamiento1);
+
+        Tratamiento tratamiento2 = new Tratamiento(2, "TRAT123", new Date(), "Tratamiento básico", veterinario1,
+        mascota2, servicioConsulta, null);
+        tratamientoRepository.save(tratamiento2);
 
         // Creación de un medicamento
         Medicamento medicamento = new Medicamento(null, "Antibiótico", 100.0f, 150.0f, 50, 10, null);
         medicamentoRepository.save(medicamento);
 
         // Asociación entre tratamiento y medicamento
-        TratamientoMedicamento tratamientoMedicamento = new TratamientoMedicamento(null, tratamiento, medicamento, 2);
+        TratamientoMedicamento tratamientoMedicamento = new TratamientoMedicamento(null, tratamiento1, medicamento, 2);
         tratamientoMedicamentoRepository.save(tratamientoMedicamento);
 
         System.out.println("Base de datos inicializada con datos de ejemplo.");

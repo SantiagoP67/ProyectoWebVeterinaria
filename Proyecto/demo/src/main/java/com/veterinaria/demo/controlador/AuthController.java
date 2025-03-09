@@ -1,5 +1,9 @@
 package com.veterinaria.demo.controlador;
 
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.veterinaria.demo.entidad.Administrador;
 import com.veterinaria.demo.entidad.Cliente;
+import com.veterinaria.demo.entidad.Mascota;
 import com.veterinaria.demo.entidad.Veterinario;
 import com.veterinaria.demo.servicio.AdministradorService;
 import com.veterinaria.demo.servicio.ClienteService;
@@ -50,11 +55,35 @@ public class AuthController {
         Veterinario veterinario = veterinarioService.validarVeterinario(username, password);
         if (veterinario != null) {
             session.setAttribute("cedula", veterinario.getCedula());
+            session.setAttribute("idVeterinario", veterinario.getIdVeterinario());
             session.setAttribute("nombre", veterinario.getNombre());
             session.setAttribute("foto", veterinario.getFoto()); // Asegúrate de tener un método getUrlFoto()
-            return "veterinario";
+
+// Obtener lista de mascotas atendidas por el veterinario
+List<Mascota> mascotasAtendidas = veterinarioService.obtenerMascotasAtendidas(veterinario.getIdVeterinario());
+
+            // Verificar si la lista tiene datos
+            if (mascotasAtendidas.isEmpty()) {
+                System.out.println("No hay mascotas atendidas para el veterinario con ID: " + veterinario.getIdVeterinario());
+            } else {
+                System.out.println("Mascotas atendidas encontradas:");
+                for (Mascota m : mascotasAtendidas) {
+                    System.out.println("ID: " + m.getIdMascota() + ", Nombre: " + m.getNombre() + ", Raza: " + m.getRaza());
+                }
+            }
+
+            // Guardar en sesión
+            session.setAttribute("mascotasAtendidas", mascotasAtendidas);
+
+
+            // Obtener lista de clientes dueños de esas mascotas (evitando duplicados)
+            Set<Cliente> clientes = mascotasAtendidas.stream()
+                .map(Mascota::getCliente)
+                .collect(Collectors.toSet());
+            session.setAttribute("clientesAtendidos", clientes);
+
+            return "veterinario";  
         }
-        
 
         Administrador administrador = administradorService.validarAdministrador(username, password);
         if (administrador != null) {
