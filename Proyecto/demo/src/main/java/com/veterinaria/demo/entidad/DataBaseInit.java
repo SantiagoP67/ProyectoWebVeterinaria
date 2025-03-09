@@ -293,11 +293,31 @@ public class DataBaseInit implements ApplicationRunner {
         clienteRepository.save(cliente50);
 
         // Creación de veterinarios
-        Veterinario veterinario = new Veterinario(null, "Dr. Smith", "123456", "Veterinario General",
-                "https://universidadeuropea.com/resources/media/images/medicina-veterinaria-1200x630.2e16d0ba.fill-767x384.jpg",
-                1, 10,
-                "vet", "123", null, null);
-        veterinarioRepository.save(veterinario);
+        Veterinario veterinario1 = new Veterinario(null, "Dra. Martínez", "654321", "Especialista en Cirugía",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDcaEWpYQklMDUzSJPss_l5V9T7yC2xtK7OA&s",
+                1, 12, "vet1", "pass1", null, null);
+        veterinarioRepository.save(veterinario1);
+
+        Veterinario veterinario2 = new Veterinario(null, "Dr. Gómez", "789012", "Dermatología Veterinaria",
+                "https://images.freeimages.com/images/premium/previews/1916/19167116-male-vet-in-lab-coat-with-cat.jpg",
+                1, 8, "vet2", "pass2", null, null);
+        veterinarioRepository.save(veterinario2);
+
+        Veterinario veterinario3 = new Veterinario(null, "Dra. Fernández", "345678", "Cardiología Veterinaria",
+                "https://media.istockphoto.com/id/1995860815/es/foto/mujer-veterinaria-sosteniendo-al-perro-jack-russell.jpg?s=612x612&w=0&k=20&c=ZLFwLWVnPXnCx876vI312OhVUUOEU5Z_9ZHQfvBS4jk=",
+                0, 15, "vet3", "pass3", null, null);
+        veterinarioRepository.save(veterinario3);
+
+        Veterinario veterinario4 = new Veterinario(null, "Dr. Rodríguez", "901234", "Neurología Veterinaria",
+                "https://www.shutterstock.com/image-photo/senior-greyhaired-man-wearing-veterinarian-260nw-2163179989.jpg",
+                1, 20, "vet4", "pass4", null, null);
+        veterinarioRepository.save(veterinario4);
+
+        Veterinario veterinario5 = new Veterinario(null, "Dra. López", "567890", "Especialista en Animales Exóticos",
+                "https://i0.wp.com/blog.leasemd.mx/wp-content/uploads/2023/10/Leasing-Equipos-Veterinarios-Mexico.png?fit=800%2C533&ssl=1",
+                0, 18, "vet5", "pass5", null, null);
+        veterinarioRepository.save(veterinario5);
+
 
         // Creación de administrador
         Administrador administrador = new Administrador(null, "Carlos López", "carlosl@gmail.com",
@@ -821,7 +841,7 @@ public class DataBaseInit implements ApplicationRunner {
         mascotaRepository.save(mascota100);
 
         /* Creación de un tratamiento */
-        Tratamiento tratamiento = new Tratamiento(null, "TRAT123", new Date(), "Tratamiento básico", veterinario,
+        Tratamiento tratamiento = new Tratamiento(null, "TRAT123", new Date(), "Tratamiento básico", veterinario1,
                 mascota1, servicioConsulta, null);
         tratamientoRepository.save(tratamiento);
 
