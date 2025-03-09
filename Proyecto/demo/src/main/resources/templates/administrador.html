@@ -30,18 +30,9 @@
     <h2>Bienvenido administrador</h2>
 
     <!-- Mostrar mascotas dinamicamente-->
+    <!-- Mostrar mascotas dinamicamente-->
     <section class="mascotas">
-      <div class="mascotas-header">
-        <h2>Mascotas</h2>
-        <div class="filtro">
-          <label for="filtro-estado">Filtrar por:</label>
-          <select id="filtro-estado">
-            <option value="todas">Todas</option>
-            <option value="en-tratamiento">En tratamiento</option>
-            <option value="no-tratamiento">No en tratamiento</option>
-          </select>
-        </div>
-      </div>
+      <h2>Mascotas</h2>
 
       <div class="mascotas-grid">
         <div class="mascota">
@@ -58,11 +49,20 @@
 
             <div class="tooltip-container">
               <img
-                src="https://cdn-icons-png.flaticon.com/512/716/716784.png"
+                src="https://cdn-icons-png.flaticon.com/128/1001/1001371.png"
                 class="icono-archivo"
                 onclick="verArchivo()"
               />
               <span class="tooltip-text">Ver Historial Clínico</span>
+            </div>
+
+            <div class="tooltip-container">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
+                class="icono-eliminar"
+                onclick="eliminarMascota()"
+              />
+              <span class="tooltip-text">Eliminar Mascota</span>
             </div>
           </div>
           <img
@@ -87,11 +87,20 @@
 
             <div class="tooltip-container">
               <img
-                src="https://cdn-icons-png.flaticon.com/512/716/716784.png"
+                src="https://cdn-icons-png.flaticon.com/128/1001/1001371.png"
                 class="icono-archivo"
                 onclick="verArchivo()"
               />
               <span class="tooltip-text">Ver Historial Clínico</span>
+            </div>
+
+            <div class="tooltip-container">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
+                class="icono-eliminar"
+                onclick="eliminarMascota()"
+              />
+              <span class="tooltip-text">Eliminar Mascota</span>
             </div>
           </div>
           <img
@@ -116,11 +125,20 @@
 
             <div class="tooltip-container">
               <img
-                src="https://cdn-icons-png.flaticon.com/512/716/716784.png"
+                src="https://cdn-icons-png.flaticon.com/128/1001/1001371.png"
                 class="icono-archivo"
                 onclick="verArchivo()"
               />
               <span class="tooltip-text">Ver Historial Clínico</span>
+            </div>
+
+            <div class="tooltip-container">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
+                class="icono-eliminar"
+                onclick="eliminarMascota()"
+              />
+              <span class="tooltip-text">Eliminar Mascota</span>
             </div>
           </div>
           <img
@@ -153,6 +171,14 @@
                 <h3 th:text="${mascota.nombre}"></h3>
                 <p th:text="${mascota.raza}"></p>
             </div> -->
+      </div>
+      <div class="filtro">
+        <label for="filtro-estado">Filtrar por:</label>
+        <select id="filtro-estado">
+          <option value="todas">Todas</option>
+          <option value="en-tratamiento">En tratamiento</option>
+          <option value="no-tratamiento">No en tratamiento</option>
+        </select>
       </div>
       <div class="mascotas-footer">
         <button class="btn-registrar" onclick="redirigirAFormulario()">
@@ -215,7 +241,7 @@
         <div class="cliente-card">
           <div class="cliente-header">
             <!-- Nombre del cliente -->
-            <h3 class="cliente-nombre">María Go</h3>
+            <h3 class="cliente-nombre">María Gómez</h3>
             <!-- Íconos de editar y eliminar -->
             <div class="cliente-iconos">
               <div class="tooltip-container">
@@ -240,15 +266,15 @@
             <div class="cliente-info-left">
               <img
                 src="https://randomuser.me/api/portraits/women/3.jpg"
-                alt="Foto de María Go"
+                alt="Foto de María Gómez"
                 class="cliente-foto"
               />
             </div>
             <div class="cliente-info-right">
-              <p><strong>Correo:</strong> maria.go@example.com</p>
+              <p><strong>Correo:</strong> maria.gomez@example.com</p>
               <p><strong>Celular:</strong> +57 987 654 3210</p>
               <p><strong>Cédula:</strong> 987654321</p>
-              <p><strong>Usuario:</strong> mariago</p>
+              <p><strong>Usuario:</strong> mariagomez</p>
             </div>
           </div>
         </div>
@@ -299,7 +325,7 @@
       <!-- Botón "Nuevo cliente" al final y centrado -->
       <div class="clientes-footer">
         <button
-          class="btn-agregar"
+          class="btn-registrar"
           onclick="window.location.href='registro_usuario.html'"
         >
           Nuevo Cliente
