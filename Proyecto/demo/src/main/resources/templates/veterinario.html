@@ -19,8 +19,15 @@
         <!-- Mostrar imagen y nombre del veterinario si está autenticado -->
       <div class="user-info" th:if="${session.nombre}">
         <img th:src="${session.foto}" alt="Foto de perfil" class="profile-pic" />
-        <span th:text="${session.nombre}"></span>
+        <div class="dropdown">
+          <span class="username" th:text="${session.nombre}"></span>
+          <div class="dropdown-menu">
+            <a href="/editar-perfil">Editar datos</a>
+            <a href="/cerrar-sesion">Cerrar sesión</a>
+          </div>
+        </div>
       </div>
+
     </header>
 
     <h2>Bienvenido  <span th:text="${session.nombre}"></span></h2>
@@ -428,5 +435,7 @@
         window.location.href = "editar_info_usuario.html?id=" + id;
       }
     </script>
+    <script th:src="@{/js/CerrarSesion.js}"></script>
+
   </body>
 </html>
