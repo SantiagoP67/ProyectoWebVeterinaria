@@ -311,3 +311,20 @@ button:hover {
     opacity: 1;
     transform: translateY(-10px);
 }
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #3c1f15;
+    font-family: "Alice", serif;
+
+  }
+  
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  

@@ -16,14 +16,11 @@
         <img src="https://i.postimg.cc/4yjfvPcB/logo2.png" alt="Logo" />
         <span class="logo-text">Beagle Giggle</span>
       </div>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="#">Servicios</a></li>
-          <li><a href="#">Conócenos</a></li>
-          <li><a href="#">Contáctanos</a></li>
-        </ul>
-      </nav>
+        <!-- Mostrar imagen y nombre del veterinario si está autenticado -->
+      <div class="user-info" th:if="${session.nombre}">
+        <img th:src="${session.foto}" alt="Foto de perfil" class="profile-pic" />
+        <span th:text="${session.nombre}"></span>
+      </div>
     </header>
 
     <h2>Bienvenido Veterinario</h2>

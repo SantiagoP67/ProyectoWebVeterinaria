@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.veterinaria.demo.entidad.Administrador;
 import com.veterinaria.demo.entidad.Cliente;
 import com.veterinaria.demo.entidad.Veterinario;
-import com.veterinaria.demo.servicio.ClienteService;
 import com.veterinaria.demo.servicio.AdministradorService;
+import com.veterinaria.demo.servicio.ClienteService;
 import com.veterinaria.demo.servicio.VeterinarioService;
 
 import jakarta.servlet.http.HttpSession;
@@ -47,8 +47,11 @@ public class AuthController {
         Veterinario veterinario = veterinarioService.validarVeterinario(username, password);
         if (veterinario != null) {
             session.setAttribute("cedula", veterinario.getCedula());
+            session.setAttribute("nombre", veterinario.getNombre());
+            session.setAttribute("foto", veterinario.getFoto()); // Asegúrate de tener un método getUrlFoto()
             return "veterinario";
         }
+        
 
         Administrador administrador = administradorService.validarAdministrador(username, password);
         if (administrador != null) {
