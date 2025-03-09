@@ -8,31 +8,64 @@
     <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}">
 </head>
 <body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img th:src="@{/images/logo2.png}" alt="Logo" />
+            <span class="logo-text">Beagle Giggle</span>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a th:href="@{/}">Inicio</a></li>
+                <li><a href="#">Servicios</a></li>
+                <li><a href="#">Conócenos</a></li>
+                <li><a href="#">Contáctanos</a></li>
+                <li>Administrador</li>
+            </ul>
+        </nav>
+    </header>
 
-    <div class="container">
-        <h1>Detalle de Mascota</h1>
-        <div class="content">
-            <div class="datos">
-                <div class="dato">
-                    <span class="label">Nombre:</span>
-                    <span class="info" th:text="${mascota.nombre}"></span>
+    <!-- Contenido principal -->
+    <div class="page-container">
+        <div class="container">
+            <h1>Detalle de Mascota</h1>
+            <div class="content">
+                <!-- Imagen de la mascota -->
+                <div class="img-container">
+                    <img th:src="${mascota.foto}" alt="Foto de la mascota" class="mascota-img" />
                 </div>
-                <div class="dato">
-                    <span class="label">Raza:</span>
-                    <span class="info" th:text="${mascota.raza}"></span>
-                </div>
-                <div class="dato">
-                    <span class="label">Edad:</span>
-                    <span class="info" th:text="${mascota.edad}"></span>
-                </div>
-                <div class="dato">
-                    <span class="label">Peso:</span>
-                    <span class="info" th:text="${mascota.peso}"></span>
+                <!-- Datos de la mascota -->
+                <div class="datos">
+                    <div class="dato">
+                        <span class="label">Nombre:</span>
+                        <span class="info" th:text="${mascota.nombre}"></span>
+                    </div>
+                    <div class="dato">
+                        <span class="label">Raza:</span>
+                        <span class="info" th:text="${mascota.raza}"></span>
+                    </div>
+                    <div class="dato">
+                        <span class="label">Edad:</span>
+                        <span class="info" th:text="${mascota.edad}"></span>
+                    </div>
+                    <div class="dato">
+                        <span class="label">Peso:</span>
+                        <span class="info" th:text="${mascota.peso}"></span>
+                    </div>
+                    <div class="dato">
+                        <span class="label">Enfermedad:</span>
+                        <span class="info" th:text="${mascota.enfermedad}"></span>
+                    </div>
+                    <div class="dato">
+                        <span class="label">Estado:</span>
+                        <span class="info" th:text="${mascota.estado == 1 ? 'Activa' : 'Inactiva'}"></span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Footer -->
     <footer>
         <section class="footer-container">
             <div class="footer-info">
@@ -76,6 +109,5 @@
             </div>
         </section>
     </footer>
-
 </body>
 </html>

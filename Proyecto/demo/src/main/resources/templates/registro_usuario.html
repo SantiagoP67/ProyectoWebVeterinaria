@@ -189,12 +189,11 @@
 
     <script>
       window.onload = function () {
-    document.querySelectorAll("input").forEach(input => {
-        input.value = "";
-        input.placeholder = input.getAttribute("placeholder");
-    });
-};
-
+        document.querySelectorAll("input").forEach((input) => {
+          input.value = "";
+          input.placeholder = input.getAttribute("placeholder");
+        });
+      };
 
       function openLoginModal() {
         document.getElementById("loginModal").style.display = "block";

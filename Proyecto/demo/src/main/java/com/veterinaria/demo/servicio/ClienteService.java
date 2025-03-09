@@ -12,4 +12,3 @@ public interface ClienteService{
     void eliminarCliente(Integer id);
     Cliente validarCliente(String username, String password);
 }
-

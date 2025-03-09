@@ -6,7 +6,6 @@
     <title>Lista de Mascotas</title>
     <link rel="stylesheet" th:href="@{/css/tabla_mascotas.css}">
     <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}">
-
 </head>
 
 <header>
@@ -25,101 +24,99 @@
 </header>
 
 <body>
-<h1>Lista de Mascotas</h1>
-<div class="button-container">
-    <a th:href="@{/mascota/crear}" class="btn-agregar">Agregar Mascota</a>
-</div>
-<table border="1">
-    <thead>
-    <tr>
-        <th>Nombre</th>
-        <th>Raza</th>
-        <th>Edad</th>
-        <th>Peso</th>
-        <th>Enfermedad</th>
-        <th>Foto</th>
-        <th>Estado</th>
-        <th>Detalles</th>
-        <th>Acciones</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="mascota : ${mascotas}">
-        <td th:text="${mascota.nombre}"></td>
-        <td th:text="${mascota.raza}"></td>
-        <td th:text="${mascota.edad}"></td>
-        <td th:text="${mascota.peso}"></td>
-        <td th:text="${mascota.enfermedad}"></td>
-        <td><img th:src="${mascota.foto}" alt="Foto" width="50"
-               th:classappend="${mascota.estado == 0} ? 'imagen-inactiva' : ''"></td>
-        <td th:text="${mascota.estado == 1 ? 'Activa' : 'Inactiva'}"></td>
-        <td><a th:href="@{/mascota/{id}(id=${mascota.idMascota})}">Ver detalles</a></td>
-        <td>
-            <a th:href="@{/mascota/editar/{id}(id=${mascota.idMascota})}" class="btn-editar">Editar</a>
-            <form th:action="@{/mascota/eliminar/{id}(id=${mascota.idMascota})}" 
-                  method="post" 
-                  onsubmit="return confirm('¿Estás seguro de eliminar esta mascota?');">
-                <button type="submit" class="btn-eliminar">Eliminar</button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <div class="mascotas-container">
+        <h1>Lista de Mascotas</h1>
+        <div class="button-container">
+            <a th:href="@{/mascota/crear}" class="btn-agregar">Agregar Mascota</a>
+        </div>
+        <div class="tabla-mascotas-container">
+            <table class="tabla-mascotas">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Raza</th>
+                        <th>Edad</th>
+                        <th>Peso</th>
+                        <th>Enfermedad</th>
+                        <th>Foto</th>
+                        <th>Estado</th>
+                        <th>Dueño</th>
+                        <th>Detalles</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="mascota : ${mascotas}">
+                        <td th:text="${mascota.nombre}"></td>
+                        <td th:text="${mascota.raza}"></td>
+                        <td th:text="${mascota.edad}"></td>
+                        <td th:text="${mascota.peso}"></td>
+                        <td th:text="${mascota.enfermedad}"></td>
+                        <td>
+                            <img th:src="${mascota.foto}" alt="Foto" class="foto-mascota"
+                                 th:classappend="${mascota.estado == 0} ? 'imagen-inactiva' : ''">
+                        </td>
+                        <td th:text="${mascota.estado == 1 ? 'Activa' : 'Inactiva'}"></td>
+                        <td th:text="${mascota.cliente.nombre}"></td> <!-- Columna Dueño -->
+                        <td>
+                            <a th:href="@{/mascota/{id}(id=${mascota.idMascota})}" class="btn-detalles">Ver detalles</a>
+                        </td>
+                        <td>
+                            <a th:href="@{/mascota/editar/{id}(id=${mascota.idMascota})}" class="btn-editar">Editar</a>
+                            <form th:action="@{/mascota/eliminar/{id}(id=${mascota.idMascota})}" 
+                                  method="post" 
+                                  onsubmit="return confirm('¿Estás seguro de eliminar esta mascota?');">
+                                <button type="submit" class="btn-eliminar">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-<footer>
-    <section class="footer-container">
-      <div class="footer-info">
-        <div class="footer-section">
-          <h3>Servicios</h3>
-          <ul>
-            <li>Consulta médica</li>
-            <li>Cirugía</li>
-            <li>Hospitalización</li>
-            <li>Monitoreo</li>
-            <li>Vacunación</li>
-            <li>Laboratorio clínico</li>
-          </ul>
-        </div>
-        <div class="footer-logo">
-          <img src="https://i.postimg.cc/zH1YsdSN/logo.png" alt="Logo" />
-          <div class="social-links">
-            <a
-              href="https://meta.com/beaglegiggle"
-              target="_blank"
-              title="Meta"
-            >
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Meta" />
-            </a>
-            <a
-              href="https://www.instagram.com/beaglegiggle"
-              target="_blank"
-              title="Instagram"
-            >
-              <img src="https://i0.wp.com/eltallerdehector.com/wp-content/uploads/2022/06/2a008-logo-instagram-icono.png?fit=512%2C512&ssl=1" alt="Instagram" />
-            </a>
-            <a
-              href="https://www.x.com/in/beaglegiggle"
-              target="_blank"
-              title="X"
-            >
-              <img src="https://images.freeimages.com/image/large-previews/f35/x-twitter-logo-on-black-circle-5694247.png" alt="X" />
-            </a>
-          </div>
-        </div>
-        <div class="footer-section">
-          <h3>Información</h3>
-          <ul>
-            <li>(+57) 3194479483</li>
-            <li>Calle 12A #78 - 34</li>
-            <li>beaglegiggle@atencion.com</li>
-            <li>www.beaglegiggle.com</li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-copyright">
-        © 2025 BeagleGiggle. Todos los derechos reservados.
-      </div>
-    </section>
-  </footer>
+    <footer>
+        <section class="footer-container">
+            <div class="footer-info">
+                <div class="footer-section">
+                    <h3>Servicios</h3>
+                    <ul>
+                        <li>Consulta médica</li>
+                        <li>Cirugía</li>
+                        <li>Hospitalización</li>
+                        <li>Monitoreo</li>
+                        <li>Vacunación</li>
+                        <li>Laboratorio clínico</li>
+                    </ul>
+                </div>
+                <div class="footer-logo">
+                    <img src="https://i.postimg.cc/zH1YsdSN/logo.png" alt="Logo" />
+                    <div class="social-links">
+                        <a href="https://meta.com/beaglegiggle" target="_blank" title="Meta">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Meta" />
+                        </a>
+                        <a href="https://www.instagram.com/beaglegiggle" target="_blank" title="Instagram">
+                            <img src="https://i0.wp.com/eltallerdehector.com/wp-content/uploads/2022/06/2a008-logo-instagram-icono.png?fit=512%2C512&ssl=1" alt="Instagram" />
+                        </a>
+                        <a href="https://www.x.com/in/beaglegiggle" target="_blank" title="X">
+                            <img src="https://images.freeimages.com/image/large-previews/f35/x-twitter-logo-on-black-circle-5694247.png" alt="X" />
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Información</h3>
+                    <ul>
+                        <li>(+57) 3194479483</li>
+                        <li>Calle 12A #78 - 34</li>
+                        <li>beaglegiggle@atencion.com</li>
+                        <li>www.beaglegiggle.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                © 2025 BeagleGiggle. Todos los derechos reservados.
+            </div>
+        </section>
+    </footer>
 </body>
 </html>

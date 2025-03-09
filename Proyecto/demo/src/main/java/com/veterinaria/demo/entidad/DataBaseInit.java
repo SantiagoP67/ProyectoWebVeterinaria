@@ -118,7 +118,7 @@ public class DataBaseInit implements ApplicationRunner {
         clienteRepository.save(cliente15);
 
         Cliente cliente16 = new Cliente(null, "Diego Paredes", "diego.paredes@gmail.com", "3216789012",
-                "https://www.donnamoderna.com/content/uploads/2022/07/Donna-sorridente-830x625.jpg",
+                "https://concepto.de/wp-content/uploads/2018/08/persona-e1533759204552.jpg",
                 "369741852", "diegop", "pass16", null, null);
         clienteRepository.save(cliente16);
 
@@ -296,13 +296,13 @@ public class DataBaseInit implements ApplicationRunner {
         Veterinario veterinario = new Veterinario(null, "Dr. Smith", "123456", "Veterinario General",
                 "https://universidadeuropea.com/resources/media/images/medicina-veterinaria-1200x630.2e16d0ba.fill-767x384.jpg",
                 1, 10,
-                "drsmith", "123", null, null);
+                "vet", "123", null, null);
         veterinarioRepository.save(veterinario);
 
-        // Creación de administradores
+        // Creación de administrador
         Administrador administrador = new Administrador(null, "Carlos López", "carlosl@gmail.com",
                 "https://portal.unbosque.edu.co/sites/default/files/inline-images/en-que-puede-trabajar-un-administrador-de-empresas.jpg",
-                "987654321", "carlos_admin", "123");
+                "987654321", "admin", "123");
         administradorRepository.save(administrador);
 
         // Creación de servicios

@@ -23,7 +23,7 @@ public class AuthController {
     private ClienteService clienteService;
 
     @Autowired
-    private VeterninarioService veterinarioService;
+    private VeterinarioService veterinarioService;
 
     @Autowired
     private AdministradorService administradorService;
@@ -35,25 +35,25 @@ public class AuthController {
 
     @PostMapping("/inicio_sesion")
     public String iniciarSesion(@RequestParam("username") String username,
-            @RequestParam("password") String password,
-            Model model, HttpSession session) {
+                                @RequestParam("password") String password,
+                                Model model, HttpSession session) {
 
         Cliente cliente = clienteService.validarCliente(username, password);
         if (cliente != null) {
             session.setAttribute("cedula", cliente.getCedula());
-            return "redirect:/verMascotaCliente";
+            return "verMascotaCliente";
         }
 
         Veterinario veterinario = veterinarioService.validarVeterinario(username, password);
         if (veterinario != null) {
             session.setAttribute("cedula", veterinario.getCedula());
-            return "redirect:/veterinario";
+            return "veterinario";
         }
 
         Administrador administrador = administradorService.validarAdministrador(username, password);
         if (administrador != null) {
             session.setAttribute("cedula", administrador.getCedula());
-            return "redirect:/administrador";
+            return "administrador";
         }
 
         // Si no coincide con ninguno, muestra error
