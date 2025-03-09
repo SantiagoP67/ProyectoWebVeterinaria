@@ -34,5 +34,4 @@ public class Veterinario {
 
     @OneToMany(mappedBy = "veterinario", cascade = CascadeType.ALL)
     private List<Tratamiento> tratamientos;
-
 }

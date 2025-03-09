@@ -22,6 +22,7 @@ public class Cliente {
     private String nombre;
     private String correo;
     private String celular;
+    private String foto;
 
     @Column(name = "cedula", unique = true)
     private String cedula;
@@ -37,5 +38,4 @@ public class Cliente {
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Testimonio> testimonios;
-
 }

@@ -37,6 +37,7 @@ public class ClienteServiceImpl implements ClienteService{
         clienteactual.setCedula( cliente.getCedula());
         clienteactual.setNombreUsuario(cliente.getNombreUsuario());
         clienteactual.setContrasena( cliente.getContrasena());
+        clienteactual.setFoto(cliente.getFoto());
         return clienteRepository.save(clienteactual);
     }
 

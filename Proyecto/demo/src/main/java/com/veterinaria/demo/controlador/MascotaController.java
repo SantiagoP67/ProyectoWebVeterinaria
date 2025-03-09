@@ -87,6 +87,6 @@ public class MascotaController {
     public String listarMascotas(@RequestParam("idCliente") Integer idCliente, Model model) {
         List<Mascota> mascotas = mascotaService.obtenerMascotasPorCliente(idCliente);
         model.addAttribute("mascotas", mascotas);
-        return "verMascotaCliente"; // Asegúrate de que este sea el nombre correcto de tu plantilla HTML.
+        return "verMascotaCliente";
     }
 }

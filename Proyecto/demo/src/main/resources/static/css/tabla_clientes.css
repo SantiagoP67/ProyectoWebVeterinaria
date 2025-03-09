@@ -1,9 +1,9 @@
 /* Contenedor principal */
-.mascotas-container {
-    max-width: 90%;
-    margin: 2rem auto;
+.clientes-container {
+    max-width: 100%;
+    margin: 1rem 1rem;
     background: white;
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 12px;
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -11,46 +11,24 @@
 }
 
 /* Título de la sección */
-.mascotas-container h1 {
+.clientes-container h2 {
     color: #205375;
     font-size: 2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
     font-weight: 600;
 }
 
-/* Botón de agregar */
-.button-container {
-    margin-top: 0.5rem;
-}
-
-.btn-agregar {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    border-radius: 6px;
-    background-color: #205375;
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    font-size: 1rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.btn-agregar:hover {
-    background-color: #112D4E;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.clientes-container h1 {
+    margin-bottom: 0;
 }
 
 /* Tabla */
-.tabla-mascotas-container {
+.tabla-clientes-container {
     margin-top: 1.5rem;
-    overflow-x: auto;
+    overflow-x: auto; /* Para tablas responsivas */
 }
 
-.tabla-mascotas {
+.tabla-clientes {
     width: 100%;
     border-collapse: collapse;
     background: white;
@@ -60,7 +38,7 @@
     margin: 0 auto;
 }
 
-.tabla-mascotas th {
+.tabla-clientes th {
     background-color: #40A8C4;
     color: white;
     padding: 1rem;
@@ -71,7 +49,7 @@
     letter-spacing: 0.05rem;
 }
 
-.tabla-mascotas td {
+.tabla-clientes td {
     padding: 1rem;
     text-align: center;
     font-size: 1rem;
@@ -79,38 +57,38 @@
     color: #333;
 }
 
-.tabla-mascotas tr:nth-child(even) td {
+.tabla-clientes tr:nth-child(even) td {
     background-color: #F5F9FA;
 }
 
-.tabla-mascotas tr:nth-child(odd) td {
+.tabla-clientes tr:nth-child(odd) td {
     background-color: #FFFFFF;
 }
 
-.tabla-mascotas tbody tr:hover {
+.tabla-clientes tbody tr:hover {
     background-color: rgba(64, 168, 196, 0.1);
     transition: background-color 0.3s ease;
     cursor: pointer;
 }
 
 /* Estilos de imagen */
-.foto-mascota {
+.foto-cliente {
     width: 50px;
     height: 50px;
-    border-radius: 50%;
+    border-radius: 50%; /* Imagen redonda */
     border: 2px solid #40A8C4;
     object-fit: cover;
     transition: transform 0.3s ease;
 }
 
-.foto-mascota:hover {
-    transform: scale(1.1);
+.foto-cliente:hover {
+    transform: scale(1.1); /* Efecto de zoom al pasar el mouse */
 }
 
 /* Botones */
 .btn-editar,
 .btn-eliminar,
-.btn-detalles {
+.btn-agregar {
     display: inline-block;
     padding: 0.5rem 1rem;
     border-radius: 6px;
@@ -123,7 +101,7 @@
     cursor: pointer;
 }
 
-.btn-editar {
+.btn-editar, .btn-agregar {
     background-color: #205375;
     color: white;
 }
@@ -133,50 +111,52 @@
     color: white;
 }
 
-.btn-detalles {
-    background-color: #40A8C4;
-    color: white;
-}
-
-.btn-editar:hover {
+.btn-editar:hover, .btn-agregar:hover {
     background-color: #112D4E;
-    transform: translateY(-2px);
+    transform: translateY(-2px); /* Efecto de elevación */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .btn-eliminar:hover {
     background-color: #E60000;
-    transform: translateY(-2px);
+    transform: translateY(-2px); /* Efecto de elevación */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.btn-detalles:hover {
-    background-color: #2E86AB;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+/* Botón de agregar */
+.btn-agregar {
+    margin-top: 1.5rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-agregar i {
+    font-size: 1.2rem;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .mascotas-container {
+    .clientes-container {
         padding: 1rem;
     }
 
-    .tabla-mascotas th,
-    .tabla-mascotas td {
+    .tabla-clientes th,
+    .tabla-clientes td {
         padding: 0.8rem;
         font-size: 0.9rem;
     }
 
     .btn-editar,
     .btn-eliminar,
-    .btn-detalles,
     .btn-agregar {
         padding: 0.4rem 0.8rem;
         font-size: 0.8rem;
     }
 
-    .foto-mascota {
+    .foto-cliente {
         width: 40px;
         height: 40px;
     }
