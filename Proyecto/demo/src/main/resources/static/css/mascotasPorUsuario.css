@@ -53,3 +53,37 @@
 .btn-ver-mascotas:hover {
     background-color: #5e7e92;
 }
+.clientes-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center; /* Centra las tarjetas */
+}
+
+.cliente-card {
+    width: 250px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.cliente-foto {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; /* Hace que la imagen sea circular */
+    object-fit: cover; /* Recorta la imagen para que encaje bien */
+}
+
+.cliente-card h3 {
+    margin: 10px 0 5px;
+    font-size: 18px;
+    color: #333;
+}
+
+.cliente-card p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666;
+}

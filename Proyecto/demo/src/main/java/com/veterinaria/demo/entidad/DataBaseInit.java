@@ -158,7 +158,7 @@ public class DataBaseInit implements ApplicationRunner {
         clienteRepository.save(cliente23);
 
         Cliente cliente24 = new Cliente(null, "Óscar Naranjo", "oscar.naranjo@gmail.com", "3294567890",
-                "https://centrointegraldepsicologia.com/wp-content/uploads/2023/06/El-Sindrome-de-la-Buena-Persona-Los-Limites-Olvidados-1024x576.png",
+                "https://img.freepik.com/fotos-premium/retrato-hombre-joven-guapo_53876-38137.jpg?semt=ais_hybrid",
                 "852741369", "oscarn", "pass24", null, null);
         clienteRepository.save(cliente24);
 
@@ -178,7 +178,7 @@ public class DataBaseInit implements ApplicationRunner {
         clienteRepository.save(cliente27);
 
         Cliente cliente28 = new Cliente(null, "Emilio Vargas", "emilio.vargas@gmail.com", "3338901234",
-                "https://www.portafolio.co/files/article_new_multimedia/uploads/2024/02/06/65c27d24da9df.jpeg",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6TxYHqrtHNmxOgeapPvtw6i9EkKaQ-khhRQ&s",
                 "100003", "emiliov", "pass28", null, null);
         clienteRepository.save(cliente28);
 
@@ -342,12 +342,12 @@ public class DataBaseInit implements ApplicationRunner {
         // Creación de mascotas
         Mascota mascota1 = new Mascota(null, "Firulais", "Labrador", 3, 20.5f, "Otitis",
                 "https://img.huffingtonpost.es/files/image_1200_720/uploads/2023/06/22/un-perro-de-raza-labrador.jpeg",
-                new Date(), new Date(), null, 1, cliente1);
+                new Date(), new Date(), null, 1, cliente28);
         mascotaRepository.save(mascota1);
 
         Mascota mascota2 = new Mascota(null, "Max", "Bulldog", 2, 15.0f, "Problemas respiratorios",
                 "https://www.rover.com/blog/wp-content/uploads/2015/03/black-dog.jpg", new Date(), new Date(), null, 1,
-                cliente2);
+                cliente24);
         mascotaRepository.save(mascota2);
 
         Mascota mascota3 = new Mascota(null, "Luna", "Beagle", 4, 12.3f, "Alergia alimentaria",
@@ -357,7 +357,7 @@ public class DataBaseInit implements ApplicationRunner {
 
         Mascota mascota4 = new Mascota(null, "Rocky", "Golden Retriever", 5, 25.0f, "Displasia de cadera",
                 "https://cdn.dogsplanet.com/wp-content/uploads/2019/10/beagle-sentado.jpg", new Date(), new Date(),
-                null, 1, cliente4);
+                null, 1, cliente44);
         mascotaRepository.save(mascota4);
 
         Mascota mascota5 = new Mascota(null, "Bella", "Poodle", 2, 8.5f, "Problemas dentales",
@@ -848,6 +848,14 @@ public class DataBaseInit implements ApplicationRunner {
         Tratamiento tratamiento2 = new Tratamiento(2, "TRAT123", new Date(), "Tratamiento básico", veterinario1,
         mascota2, servicioConsulta, null);
         tratamientoRepository.save(tratamiento2);
+
+        Tratamiento tratamiento3 = new Tratamiento(3, "TRAT123", new Date(), "Tratamiento con seguimiento", veterinario1,
+        mascota3, servicioConsulta, null);
+        tratamientoRepository.save(tratamiento3);
+
+        Tratamiento tratamiento4 = new Tratamiento(4, "TRAT123", new Date(), "Tratamiento con seguimiento", veterinario1,
+        mascota4, servicioConsulta, null);
+        tratamientoRepository.save(tratamiento4);
 
         // Creación de un medicamento
         Medicamento medicamento = new Medicamento(null, "Antibiótico", 100.0f, 150.0f, 50, 10, null);
