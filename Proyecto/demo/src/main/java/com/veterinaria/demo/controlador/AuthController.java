@@ -19,6 +19,7 @@ import com.veterinaria.demo.servicio.AdministradorService;
 import com.veterinaria.demo.servicio.ClienteService;
 import com.veterinaria.demo.servicio.VeterinarioService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -110,4 +111,11 @@ List<Mascota> mascotasAtendidas = veterinarioService.obtenerMascotasAtendidas(ve
     public String mostrarPaginaRegistro() {
         return "registro_usuario";
     }
+
+    @GetMapping("/cerrar-sesion")
+    public String cerrarSesion(HttpServletRequest request) {
+        request.getSession().invalidate(); // Cierra la sesión del usuario
+        return "redirect:/"; // Redirige al index
+    }
+
 }

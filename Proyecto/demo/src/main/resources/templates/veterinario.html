@@ -61,8 +61,10 @@
                           </div>
                       </div>
                       <a th:href="@{/mascota/{id}(id=${mascota.idMascota})}" class="btn-detalles">
-                        <img th:src="${mascota.foto}" alt="Foto de mascota">
-                    </a>
+                        <img th:src="${mascota.foto}" alt="Foto de mascota"
+                             th:classappend="${mascota.estado == 1} ? 'img-inactiva' : ''">
+                    </a>                    
+                    
                       <h3 th:text="${mascota.nombre}"></h3>
                       <p th:text="${mascota.raza}"></p>
                   </div>
