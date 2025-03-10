@@ -22,7 +22,7 @@
         <div class="dropdown">
           <span class="username" th:text="${session.nombre}"></span>
           <div class="dropdown-menu">
-            <a href="/editar-perfil">Editar datos</a>
+            <a th:href="@{/veterinario/editar/{id}(id=${session.idVeterinario})}">Editar datos</a>
             <a href="/cerrar-sesion">Cerrar sesión</a>
           </div>
         </div>
