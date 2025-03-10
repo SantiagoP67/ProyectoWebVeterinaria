@@ -79,10 +79,13 @@
 
       <!-- Botón para registrar nueva mascota -->
       <div class="mascotas-footer">
-          <button class="btn-registrar" onclick="redirigirAFormulario()">
-              Registrar Mascota
-          </button>
-      </div>
+        <a th:href="@{/mascota/crear}" class="btn-registrar">Registrar Mascota</a>
+    </div>
+
+        <!-- Botón para registrar nueva mascota -->
+        <div class="mascotas-footer">
+          <a th:href="@{/mascota}" class="btn-registrar">Ver todas las Mascotas</a>
+        </div>
     </section>
 
     <!-- Mostrar Clientes Dinamicamente -->
