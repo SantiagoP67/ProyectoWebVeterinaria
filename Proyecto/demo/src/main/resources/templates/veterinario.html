@@ -44,11 +44,14 @@
                   <div class="mascota">
                       <div class="mascota-header">
                           <div class="tooltip-container">
-                              <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" 
-                                  class="icono-editar"
-                                  th:onclick="'editarMascota(' + ${mascota.idMascota} + ')'">
-                              <span class="tooltip-text">Editar Información Mascota</span>
-                          </div>
+                            <a th:href="@{/mascota/editar/{id}(id=${mascota.idMascota})}">
+                                <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" 
+                                    class="icono-editar" />
+                            </a>
+                            <span class="tooltip-text">Editar Información Mascota</span>
+                         </div>
+                      
+                      
 
                           <div class="tooltip-container">
                               <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png" 
@@ -57,7 +60,9 @@
                               <span class="tooltip-text">Ver Historial Clínico</span>
                           </div>
                       </div>
-                      <img th:src="${mascota.foto}" alt="Foto de mascota">
+                      <a th:href="@{/mascota/{id}(id=${mascota.idMascota})}" class="btn-detalles">
+                        <img th:src="${mascota.foto}" alt="Foto de mascota">
+                    </a>
                       <h3 th:text="${mascota.nombre}"></h3>
                       <p th:text="${mascota.raza}"></p>
                   </div>
