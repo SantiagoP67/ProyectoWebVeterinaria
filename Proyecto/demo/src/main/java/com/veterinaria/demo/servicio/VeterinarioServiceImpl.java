@@ -1,9 +1,13 @@
 package com.veterinaria.demo.servicio;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.veterinaria.demo.entidad.Mascota;
 import com.veterinaria.demo.entidad.Veterinario;
+import com.veterinaria.demo.repositorio.TratamientoRepository;
 import com.veterinaria.demo.repositorio.VeterinarioRepository;
 
 @Service
@@ -11,6 +15,8 @@ public class VeterinarioServiceImpl implements VeterinarioService {
     
     @Autowired
     private VeterinarioRepository veterinarioRepository;
+    @Autowired
+    private TratamientoRepository tratamientoRepository;
 
     @Override
     public List<Veterinario> obtenerTodosVeterinarios() {
@@ -51,4 +57,10 @@ public class VeterinarioServiceImpl implements VeterinarioService {
     public Veterinario validarVeterinario(String username, String password) {
         return veterinarioRepository.findByNombreUsuarioAndContrasena(username, password);
     }
+
+    @Override 
+    public List<Mascota> obtenerMascotasAtendidas(Integer idVeterinario) {
+        return tratamientoRepository.findMascotasByVeterinarioId(idVeterinario);
+    }
+    
 }
