@@ -88,37 +88,26 @@
         </div>
     </section>
 
-    <!-- Mostrar Clientes Dinámicamente -->
-    <section class="mascotas">
-      <h2>Clientes</h2>
+<!-- Mostrar Clientes Dinámicamente -->
+<section class="mascotas">
+  <h2>Clientes</h2>
 
-      <!-- Verifica si la lista está vacía antes de recorrerla -->
-      <div th:if="${session.clientesAtendidos == null or #lists.isEmpty(session.clientesAtendidos)}">
-          <p>⚠ No se encontraron clientes para las mascotas atendidas.</p>
+  <!-- Verifica si la lista está vacía antes de recorrerla -->
+  <div th:if="${session.clientesAtendidos == null or #lists.isEmpty(session.clientesAtendidos)}">
+      <p>⚠ No se encontraron clientes para las mascotas atendidas.</p>
+  </div>
+
+  <!-- Contenedor de tarjetas de clientes -->
+  <div class="clientes-container" th:if="${session.clientesAtendidos != null and not #lists.isEmpty(session.clientesAtendidos)}">
+      <div class="cliente-card" th:each="cliente : ${session.clientesAtendidos}">
+          <img th:src="${cliente.foto}" alt="Foto del cliente" class="cliente-foto">
+          <h3 th:text="${cliente.nombre}"></h3>
+          <p>ID: <span th:text="${cliente.idCliente}"></span></p>
+          <p>Email: <span th:text="${cliente.correo}"></span></p>
       </div>
- <!-- Tabla para mostrar clientes si existen -->
-      <table th:if="${session.clientesAtendidos != null and not #lists.isEmpty(session.clientesAtendidos)}">
-        <thead>
-          <tr>
-              <th>ID Cliente</th>
-              <th>Nombre</th>
-              <th>Correo</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr th:each="cliente : ${session.clientesAtendidos}">
-            <td th:text="${cliente.idCliente}"></td>
-            <td th:text="${cliente.nombre}"></td>
-            <td th:text="${cliente.correo}"></td>
-            <td>
-              <img th:src="${cliente.foto}" alt="Foto del cliente" width="100">
-          </td>
-          
-          </tr>
-      </tbody>
-      </table>
-     
-    </section>
+  </div>
+</section>
+
 
     
 
