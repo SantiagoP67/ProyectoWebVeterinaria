@@ -52,9 +52,15 @@ public class VeterinarioController{
     public String mostrarFormularioEdicion(@PathVariable Integer id, Model model){
         Veterinario veterinario = veterinarioService.obtenerVeterinarioPorId(id);
         model.addAttribute("veterinario", veterinario);
-        return("editar_info_veterinario");
+        return("registro_veterinario");
     }
 
+    @PostMapping("/editar/{id}")
+    public String actualizarVeterinario(@PathVariable Integer id, @ModelAttribute Veterinario veterinario) {
+        veterinarioService.editarVeterinario(id, veterinario);
+        return "redirect:/veterinario"; // Redirigir a la lista de veterinarios
+    }
+    
     /*  @PostMapping("/actualizar/{id}")
     public String actualizarCliente(@PathVariable Integer id, Cliente cliente){
         clienteService.editarCliente(id, cliente);
