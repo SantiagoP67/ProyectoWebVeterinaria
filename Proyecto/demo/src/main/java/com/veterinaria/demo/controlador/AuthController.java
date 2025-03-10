@@ -125,8 +125,8 @@ public class AuthController {
 
     @GetMapping("/cerrar-sesion")
     public String cerrarSesion(HttpServletRequest request) {
-        request.getSession().invalidate(); // Cierra la sesión del usuario
-        return "redirect:/"; // Redirige al index
+        request.getSession().invalidate(); 
+        return "redirect:/"; 
     }
 
 }
