@@ -1,0 +1,6 @@
+.tabla-clientes-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las tarjetas pasen a la siguiente línea si no caben */
+    justify-content: center; /* Centra las tarjetas en la fila */
+    gap: 20px; /* Espaciado entre las tarjetas */
+}

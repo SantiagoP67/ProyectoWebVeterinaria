@@ -80,8 +80,28 @@ h2 {
     transition: background 0.3s ease;
     padding: 10px 15px;
     font-size: 16px;
+    text-decoration: none;
 }
 
 .btn-registrar:hover {
     background-color: #488ea3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.lista-mascotas {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las tarjetas pasen a la siguiente línea si no caben */
+    justify-content: center; /* Centra las tarjetas en la fila */
+    gap: 20px; /* Espaciado entre las tarjetas */
+}
+
+.btn-agregar {
+    text-decoration: none;
+    margin-bottom: 40px;
+}
+
+.btn-agregar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
