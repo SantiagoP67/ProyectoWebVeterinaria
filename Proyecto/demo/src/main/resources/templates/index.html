@@ -36,6 +36,8 @@
       <div class="dropdown-menu" id="userDropdown">
         <a th:href="@{/cliente/editar/{id}(id=${session.idCliente})}">Editar Usuario</a>
         <a th:href="@{/mascota/mascotas(idCliente=${session.idCliente})}">Ver Mascotas</a>
+        <a href="/cerrar-sesion">Cerrar sesión</a>
+
       </div>
     </div>
   </header>
