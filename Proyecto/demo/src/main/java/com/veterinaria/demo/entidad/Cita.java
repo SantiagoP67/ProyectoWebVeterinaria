@@ -1,5 +1,6 @@
 package com.veterinaria.demo.entidad;
 
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -7,8 +8,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "cita")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cita {

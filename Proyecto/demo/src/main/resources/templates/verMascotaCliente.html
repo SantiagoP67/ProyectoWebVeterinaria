@@ -4,9 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ver mascotas</title>
-    <link rel="stylesheet" th:href="@{/css/secciones.css(v=${#dates.createNow().getTime()})}" />
-    <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}" />
-    <link rel="stylesheet" th:href="@{/css/crearMascota.css(v=${#dates.createNow().getTime()})}" />
+    <link
+      rel="stylesheet"
+      th:href="@{/css/secciones.css(v=${#dates.createNow().getTime()})}"
+    />
+    <link
+      rel="stylesheet"
+      th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}"
+    />
+    <link
+      rel="stylesheet"
+      th:href="@{/css/crearMascota.css(v=${#dates.createNow().getTime()})}"
+    />
   </head>
   <body>
     <header>
@@ -30,8 +39,8 @@
     <!-- Mostrar mascotas dinamicamente-->
     <section class="lista-mascotas">
       <div class="mascota" th:each="mascota : ${mascotas}">
-          <div class="mascota-header">
-              <div class="tooltip-container">
+        <div class="mascota-header">
+          <!----<div class="tooltip-container">
                   <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" 
                       class="icono-editar"
                       th:onclick="'editarMascota(' + ${mascota.idMascota} + ')'">
@@ -42,22 +51,13 @@
                       class="icono-archivo"
                       onclick="verArchivo()">
                   <span class="tooltip-text">Ver Historial Clínico</span>
-              </div>
-          </div>
-          <img th:src="${mascota.foto}" alt="Foto de mascota">
-          <h3 th:text="${mascota.nombre}"></h3>
-          <p th:text="${mascota.raza}"></p>
-      </div>
-  </section>
-  
-    <!-- Boton para registrar nueva mascota de ese usuario-->
-
-      <div class="mascotas-footer">
-        <a th:href="@{/mascota/crear}" class="btn-agregar">Agregar Mascota</a>
+              </div>--->
+        </div>
+        <img th:src="${mascota.foto}" alt="Foto de mascota" />
+        <h3 th:text="${mascota.nombre}"></h3>
+        <p th:text="${mascota.raza}"></p>
       </div>
     </section>
-
-
     <footer>
       <section class="footer-container">
         <div class="footer-info">
@@ -80,21 +80,30 @@
                 target="_blank"
                 title="Meta"
               >
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Meta" />
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png"
+                  alt="Meta"
+                />
               </a>
               <a
                 href="https://www.instagram.com/beaglegiggle"
                 target="_blank"
                 title="Instagram"
               >
-                <img src="https://i0.wp.com/eltallerdehector.com/wp-content/uploads/2022/06/2a008-logo-instagram-icono.png?fit=512%2C512&ssl=1" alt="Instagram" />
+                <img
+                  src="https://i0.wp.com/eltallerdehector.com/wp-content/uploads/2022/06/2a008-logo-instagram-icono.png?fit=512%2C512&ssl=1"
+                  alt="Instagram"
+                />
               </a>
               <a
                 href="https://www.x.com/in/beaglegiggle"
                 target="_blank"
                 title="X"
               >
-                <img src="https://images.freeimages.com/image/large-previews/f35/x-twitter-logo-on-black-circle-5694247.png" alt="X" />
+                <img
+                  src="https://images.freeimages.com/image/large-previews/f35/x-twitter-logo-on-black-circle-5694247.png"
+                  alt="X"
+                />
               </a>
             </div>
           </div>
