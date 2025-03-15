@@ -155,7 +155,7 @@ main {
 .services-section-title {
   text-align: center;
   padding: 10px 10px; /* Reduce el padding superior e inferior */
-  background-color: #b3c4d6;
+  background-color:  #dde2e4;;
   font-family: "Alice", serif;
   font-size: 20px;
   color: black;
@@ -171,15 +171,36 @@ main {
   margin-top: 50px;
 }
 
-.services-section {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 25px;
-  padding: 40px 20px;
-  border-radius: 30px;
-  margin-bottom: 20px;
+.services-section { 
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px; /* Reduce el espacio entre cartas */
+  justify-content: center; /* Centra las cartas dentro del contenedor */
+  padding: 0 10px; /* Evita márgenes grandes en los lados */
+  max-width: 60%; /* Limita el ancho para que no se estiren demasiado */
+  margin: 0 auto; /* Centra la sección en la página */
 }
+
+@media (max-width: 900px) {
+  .services-section {
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center; /* Asegura que la fila de 3 esté centrada */
+
+  }
+}
+
+@media (max-width: 600px) {
+  .services-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 400px) {
+  .services-section {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 
 .service-card {
   width: 225px;
@@ -404,7 +425,7 @@ main {
 .appointment-section {
   text-align: center;
   padding: 40px 20px;
-  background-color: #b3c4d6;
+  background-color:  #6f99af;
   border-radius: 30px;
   margin: 20px auto;
   max-width: 1200px;
@@ -450,7 +471,7 @@ main {
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 16px;
-  font-family: "Hind", sans-serif;
+  font-family: "Alice", serif;
   background-color: rgba(255, 255, 255, 0.9);
   color: black;
   transition: border-color 0.3s ease, background 0.3s ease;
@@ -474,7 +495,7 @@ main {
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s ease;
-  font-family: "Londrina Solid", sans-serif;
+  font-family: "Alice", serif;
 }
 
 .form-container button:disabled {
