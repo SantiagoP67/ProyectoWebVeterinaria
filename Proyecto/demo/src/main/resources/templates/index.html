@@ -15,7 +15,7 @@
     <nav>
       <ul class="nav-links">
         <li><a th:href="@{/index}">Inicio</a></li>
-        <li><a href="#">Servicios</a></li>
+        <li><a th:href="@{#servicios}">Servicios</a></li>
         <li><a href="#">Conócenos</a></li>
         <li><a href="#">Contáctanos</a></li>
       </ul>
@@ -24,7 +24,7 @@
     <!-- Botón de inicio de sesión si no hay sesión -->
     <button class="login-btn" th:if="${session.cedula == null}" th:onclick="|window.location.href='@{/inicio_sesion}'|">
       Iniciar sesión
-      <img src="https://cdn-icons-png.flaticon.com/256/5087/5087579.png" alt="Imagen externa" />
+      <img src="https://i.postimg.cc/nzdHNQd0/seguridad.png" alt="Imagen externa" />
     </button>
 
     <!-- Botón de usuario con menú desplegable si hay sesión -->
@@ -41,20 +41,19 @@
       </div>
     </div>
   </header>
-  <section class="description-section">
+
+    <section class="description-section">
       <div class="description-text">
         <h1>Mantén a tu mascota protegida</h1>
         <p>
           Somos un sistema para la gestión de clínicas veterinarias
-          especializadas en la hospitalización y el cuidado de perros.
+          especializadas en la hospitalización y el cuidado de tus mascotas.
         </p>
       </div>
-      <div class="description-image">
-        <img src="https://static.vecteezy.com/system/resources/thumbnails/026/976/745/small_2x/3d-icon-cute-young-veterinarian-woman-with-dog-cartoon-style-on-isolated-transparent-background-generative-ai-png.png" alt="Descripción" />
-      </div>
     </section>
+  
     <main>
-      <section class="services-section-title">
+      <section id="servicios" class="services-section-title">
         <h2>Servicios</h2>
         <div class="services-section">
           <div class="service-card">
@@ -314,7 +313,7 @@
                 </div>
               </div>
               <div class="foundation-card">
-                <img src="../static/images/f8.bmp" alt="Fundación 8" />
+                <img src="https://estaticos-cdn.prensaiberica.es/clip/97046842-7a83-496a-b573-35c1e9b4d53e_mobile-ep-aspect-ratio_640w_0.jpg" alt="Fundación 8" />
                 <div class="info">
                   <h3>Patitas al Rescate</h3>
                   <p>
