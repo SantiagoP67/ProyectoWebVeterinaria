@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Beagle Giggle</title>
     <link rel="stylesheet" th:href="@{/css/landing.css}">
+    <link rel="stylesheet" th:href="@{/css/header_footer.css}">
   </head>
   <body>
   <header>
@@ -16,8 +17,8 @@
       <ul class="nav-links">
         <li><a th:href="@{/index}">Inicio</a></li>
         <li><a th:href="@{#servicios}">Servicios</a></li>
-        <li><a href="#">Conócenos</a></li>
-        <li><a href="#">Contáctanos</a></li>
+        <li><a th:href="@{#footer}">Conócenos</a></li>
+        <li><a th:href="@{#footer}">Contáctanos</a></li>
       </ul>
     </nav>
 
