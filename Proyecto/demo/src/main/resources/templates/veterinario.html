@@ -16,6 +16,14 @@
         <img src="https://i.postimg.cc/4yjfvPcB/logo2.png" alt="Logo" />
         <span class="logo-text">Beagle Giggle</span>
       </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a th:href="@{/index}">Inicio</a></li>
+          <li><a th:href="@{#servicios}">Servicios</a></li>
+          <li><a th:href="@{#footer}">Conócenos</a></li>
+          <li><a th:href="@{#footer}">Contáctanos</a></li>
+        </ul>
+      </nav>
         <!-- Mostrar imagen y nombre del veterinario si está autenticado -->
       <div class="user-info" th:if="${session.nombre}">
         <img th:src="${session.foto}" alt="Foto de perfil" class="profile-pic" />
@@ -27,11 +35,10 @@
           </div>
         </div>
       </div>
-
     </header>
-
+    <div class="saludo">
     <h2>Bienvenido  <span th:text="${session.nombre}"></span></h2>
-
+    </div>
     <!-- Sección para mostrar mascotas dinámicamente -->
     <section class="mascotas">
       <h2>Mascotas</h2>
@@ -54,7 +61,7 @@
                       
 
                           <div class="tooltip-container">
-                              <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png" 
+                              <img src="https://cdn-icons-png.freepik.com/512/32/32223.png" 
                                   class="icono-archivo"
                                   th:onclick="'verArchivo(' + ${mascota.idMascota} + ')'">
                               <span class="tooltip-text">Ver Historial Clínico</span>
@@ -79,7 +86,7 @@
       <!-- Botón para registrar nueva mascota -->
       <div class="mascotas-footer">
         <a th:href="@{/mascota/crear}" class="btn-registrar">Registrar Mascota</a>
-    </div>
+      </div>
 
         <!-- Botón para registrar nueva mascota -->
         <div class="mascotas-footer">
@@ -87,32 +94,26 @@
         </div>
     </section>
 
-<!-- Mostrar Clientes Dinámicamente -->
-<section class="mascotas">
-  <h2>Clientes</h2>
+    <!-- Mostrar Clientes Dinámicamente -->
+    <section class="mascotas">
+      <h2>Clientes</h2>
 
-  <!-- Verifica si la lista está vacía antes de recorrerla -->
-  <div th:if="${session.clientesAtendidos == null or #lists.isEmpty(session.clientesAtendidos)}">
-      <p>⚠ No se encontraron clientes para las mascotas atendidas.</p>
-  </div>
-
-  <!-- Contenedor de tarjetas de clientes -->
-  <div class="clientes-container" th:if="${session.clientesAtendidos != null and not #lists.isEmpty(session.clientesAtendidos)}">
-      <div class="cliente-card" th:each="cliente : ${session.clientesAtendidos}">
-          <img th:src="${cliente.foto}" alt="Foto del cliente" class="cliente-foto">
-          <h3 th:text="${cliente.nombre}"></h3>
-          <p>ID: <span th:text="${cliente.idCliente}"></span></p>
-          <p>Email: <span th:text="${cliente.correo}"></span></p>
+      <!-- Verifica si la lista está vacía antes de recorrerla -->
+      <div th:if="${session.clientesAtendidos == null or #lists.isEmpty(session.clientesAtendidos)}">
+          <p>⚠ No se encontraron clientes para las mascotas atendidas.</p>
       </div>
-  </div>
-</section>
 
-
-    
-
-
-  
-      <!--Footer -->
+      <!-- Contenedor de tarjetas de clientes -->
+      <div class="clientes-container" th:if="${session.clientesAtendidos != null and not #lists.isEmpty(session.clientesAtendidos)}">
+          <div class="cliente-card" th:each="cliente : ${session.clientesAtendidos}">
+              <img th:src="${cliente.foto}" alt="Foto del cliente" class="cliente-foto">
+              <h3 th:text="${cliente.nombre}"></h3>
+              <p>ID: <span th:text="${cliente.idCliente}"></span></p>
+              <p>Email: <span th:text="${cliente.correo}"></span></p>
+          </div>
+      </div>
+    </section>  
+    <!--Footer -->
     <footer>
       <section class="footer-container">
         <div class="footer-info">
@@ -177,42 +178,6 @@
         </div>
       </section>
     </footer>
-
-    <script>
-      function openLoginModal() {
-        document.getElementById("loginModal").style.display = "block";
-      }
-
-      function closeLoginModal() {
-        document.getElementById("loginModal").style.display = "none";
-      }
-
-      function openTab(evt, tabName) {
-        let tabcontent = document.getElementsByClassName("tabcontent");
-        for (let i = 0; i < tabcontent.length; i++) {
-          tabcontent[i].style.display = "none";
-        }
-
-        let tablinks = document.getElementsByClassName("tablink");
-        for (let i = 0; i < tablinks.length; i++) {
-          tablinks[i].classList.remove("active");
-        }
-
-        document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.classList.add("active");
-      }
-
-      function redirigirAFormulario() {
-        window.location.href = "crear_mascota.html"; // Redirige a la nueva página
-      }
-      function editarMascota(id) {
-        window.location.href = `editar_mascota.html?id=${id}`;
-      }
-      function redirigirAEditar(id) {
-        // Redirige a la página editar_info_usuario.html y pasa el ID como parámetro
-        window.location.href = "editar_info_usuario.html?id=" + id;
-      }
-    </script>
     <script th:src="@{/js/CerrarSesion.js}"></script>
 
   </body>
