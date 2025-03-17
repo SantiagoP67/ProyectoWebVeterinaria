@@ -57,7 +57,7 @@ public class AuthController {
             session.setAttribute("cedula", veterinario.getCedula());
             session.setAttribute("idVeterinario", veterinario.getIdVeterinario());
             session.setAttribute("nombre", veterinario.getNombre());
-            session.setAttribute("foto", veterinario.getFoto()); // Asegúrate de tener un método getUrlFoto()
+            session.setAttribute("foto", veterinario.getFoto());
 
         // Obtener lista de mascotas atendidas por el veterinario
         List<Mascota> mascotasAtendidas = veterinarioService.obtenerMascotasAtendidas(veterinario.getIdVeterinario());
@@ -72,7 +72,6 @@ public class AuthController {
                 }
             }
 
-                        // Guardar en sesión la lista de mascotas atendidas
             session.setAttribute("mascotasAtendidas", mascotasAtendidas);
 
         // Obtener lista de clientes sin duplicados
