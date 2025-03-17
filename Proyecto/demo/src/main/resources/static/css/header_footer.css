@@ -111,7 +111,7 @@ header {
 .user-menu {
   position: relative;
   display: inline-block;
-  z-index: 10;
+  z-index: 2;
 }
 
 /* Estilos del menú desplegable */
@@ -126,7 +126,7 @@ header {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   min-width: 150px;
   overflow: visible !important;
-  z-index: 100;
+  z-index: 2;
 }
 
 /* Estilos de los enlaces dentro del menú */

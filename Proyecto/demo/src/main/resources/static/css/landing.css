@@ -103,8 +103,8 @@ html {
 
 
 .service-card {
-  width: 225px;
-  min-height: 280px;
+  width: 210px;
+  min-height: 250px;
   perspective: 1000px;
 }
 
@@ -352,7 +352,7 @@ html {
 .appointment-section {
   text-align: center;
   padding: 40px 20px;
-  background-color:  #7fcaf3;
+  background-color:  #8cd1f6;
   border-radius: 30px;
   margin: 20px auto;
   max-width: 1200px;
