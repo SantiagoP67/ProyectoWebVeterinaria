@@ -24,7 +24,7 @@
 
     <!-- Botón de usuario -->
     <div class="user-menu">
-      <th:block th:if="${session.cedula != null}">
+      <div class="user-menu" th:if="${session.cedula != null}">
         <button class="login-btn user-btn" onclick="toggleMenu()">
           <span th:text="${session.nombreCliente}"></span>
           <img th:src="${session.fotoCliente}" alt="Foto del Cliente" class="user-img" />
@@ -34,14 +34,14 @@
           <a th:href="@{/mascota/mascotas(idCliente=${session.idCliente})}">Ver Mascotas</a>
           <a href="/cerrar-sesion">Cerrar sesión</a>
         </div>
-      </th:block>
+      </div>
 
-      <th:block th:if="${session.cedula == null}">
+      <div class="user-menu" th:if="${session.cedula == null}">
         <a th:href="@{/inicio_sesion}" class="login-btn user-btn">
           <span>Iniciar sesión</span>
           <img src="https://w7.pngwing.com/pngs/946/556/png-transparent-computer-icons-login-user-profile-client-smiley-%D0%B7%D0%BD%D0%B0%D1%87%D0%BA%D0%B8-windows-10-thumbnail.png" alt="Icono de usuario" class="user-img" />
         </a>
-      </th:block>
+      </div>
     </div>
   </header>
 
