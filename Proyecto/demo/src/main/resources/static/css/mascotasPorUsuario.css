@@ -1,89 +1,141 @@
-.clientes-container {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 tarjetas por fila */
-    gap: 15px; /* Espacio entre tarjetas */
-    padding: 20px;
-    justify-content: center;
-}
+.clientes-section {
+    position: relative;
+    overflow: hidden;
+    padding: 50px 20px;
+    text-align: center;
+  }
+  
+  .clientes-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(https://www.shutterstock.com/image-vector/seamless-brown-neutral-colors-dog-600nw-2510238231.jpg);
+    background-size: cover;
+    background-position: center;
+    transform: scaleY(-1);
+    z-index: -1;
+  }  
 
 .persona-card {
-    width: 200px;
-    background-color: #DAE8F2;
-    border-radius: 10px;
-    padding: 15px;
-    text-align: center;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+  width: 200px;
+  background-color: #dae8f2;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 .persona-header {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .tooltip-container img {
-    width: 22px;
-    height: 22px;
-    cursor: pointer;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
 }
 
 .persona-nombre {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-    margin: 8px 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin: 8px 0;
 }
 
 .btn-ver-mascotas {
-    padding: 12px;
-    background-color: #3c5b6f;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    justify-content: center;
-    font-size: 16px;
-    transition: background 0.3s;
+  padding: 12px;
+  background-color: #3c5b6f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  justify-content: center;
+  font-size: 16px;
+  transition: background 0.3s;
 }
 
 .btn-ver-mascotas:hover {
-    background-color: #5e7e92;
+  background-color: #5e7e92;
 }
+
+/* Contenedor principal con marco */
+.clientes {
+  width: 100%;
+  margin: 20px auto;
+  padding: 20px;
+  background: #dae8f2;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  border: 3px solid #3c5b6f; /* Marco alrededor */
+}
+
+/* Contenedor de tarjetas en cuadrícula */
 .clientes-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center; /* Centra las tarjetas */
+  display: flex;
+  flex-direction: row;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(250px, 1fr)
+  ); /* Diseño adaptable */
+  gap: 20px;
+  justify-content: center;
+  margin: 0;
 }
 
+/* Estilos generales de la tarjeta */
 .cliente-card {
-    width: 250px;
-    padding: 15px;
-    border-radius: 10px;
-    background: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid #5e7e92; /* Marco individual */
+  max-width: 300px; /* Evita que las tarjetas sean demasiado anchas */
+  margin: auto; /* Centrar si hay menos tarjetas */
 }
 
+/* Efecto hover */
+.cliente-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Foto del cliente */
 .cliente-foto {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%; /* Hace que la imagen sea circular */
-    object-fit: cover; /* Recorta la imagen para que encaje bien */
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #3c5b6f;
 }
 
-.cliente-card h3 {
-    margin: 10px 0 5px;
-    font-size: 18px;
-    color: #333;
+/* Nombre del cliente */
+.cliente-nombre {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #333;
 }
 
-.cliente-card p {
-    margin: 5px 0;
-    font-size: 14px;
-    color: #666;
+/* Datos alineados a la izquierda */
+.cliente-info-right {
+  text-align: left;
+  margin-top: 10px;
+}
+
+.cliente-info-right p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
 }
