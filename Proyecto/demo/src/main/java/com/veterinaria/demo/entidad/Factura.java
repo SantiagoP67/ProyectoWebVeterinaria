@@ -1,28 +1,23 @@
 package com.veterinaria.demo.entidad;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import java.util.List;
 
 @Entity
 @Table(name = "factura")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Factura {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idFactura")
     private Integer idFactura;
 
-    @Column(name = "fecha", nullable = false)
+    @Column(nullable = false)
     private java.sql.Timestamp fecha;
 
-    @Column(name = "total", nullable = false)
+    @Column(nullable = false)
     private Float total;
 
     @ManyToMany

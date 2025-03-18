@@ -7,17 +7,18 @@ import java.util.List;
 
 @Entity
 @Table(name = "servicio")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Servicio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idServicio;
-
+    @Column(nullable = false)
     private String nombre;
+    @Column(nullable = false)
     private String descripcion;
+    @Column(nullable = false)
     private Float precioBase;
 
     @OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL)
