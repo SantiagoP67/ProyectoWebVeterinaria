@@ -28,16 +28,16 @@ public class Mascota {
     private String foto;
 
     @Temporal(TemporalType.DATE)
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Date fechaNacimiento;
 
     @Temporal(TemporalType.DATE)
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Date fechaIngreso;
 
     @Temporal(TemporalType.DATE)
     private Date fechaSalida;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Integer estado;
 
     @ManyToOne
