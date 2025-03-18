@@ -49,6 +49,8 @@ public class AuthController {
             session.setAttribute("cedula", cliente.getCedula());
             session.setAttribute("nombreCliente", cliente.getNombre());
             session.setAttribute("fotoCliente", cliente.getFoto());
+            session.setAttribute("rol", "CLIENTE");  // Asignar rol
+
             return "index";
         }
 
@@ -58,6 +60,8 @@ public class AuthController {
             session.setAttribute("idVeterinario", veterinario.getIdVeterinario());
             session.setAttribute("nombre", veterinario.getNombre());
             session.setAttribute("foto", veterinario.getFoto());
+            session.setAttribute("rol", "VETERINARIO");  // Asignar rol
+
 
         // Obtener lista de mascotas atendidas por el veterinario
         List<Mascota> mascotasAtendidas = veterinarioService.obtenerMascotasAtendidas(veterinario.getIdVeterinario());
@@ -99,6 +103,8 @@ public class AuthController {
         Administrador administrador = administradorService.validarAdministrador(username, password);
         if (administrador != null) {
             session.setAttribute("cedula", administrador.getCedula());
+            session.setAttribute("rol", "ADMINISTRADOR");  // Asignar rol
+
             return "administrador";
         }
 
