@@ -31,7 +31,7 @@ public class ClienteController{
         Cliente cliente = clienteService.obtenerClientePorId(id);
         if(cliente != null){
             model.addAttribute("cliente", cliente);
-            return "detalle-cliente";
+            return "detalle_cliente";
         }else {
             throw new NotFoundException(id, "El cliente con ID " + id + " no existe.");
         }

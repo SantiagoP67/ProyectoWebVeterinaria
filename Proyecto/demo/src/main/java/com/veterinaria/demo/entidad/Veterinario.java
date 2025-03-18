@@ -30,7 +30,7 @@ public class Veterinario {
     @Column(nullable = false, unique = true)
     private String nombreUsuario;
 
-    @Column(name = "contrasenha", unique = true, nullable = false)
+    @Column(name = "contrasenha", nullable = false)
     private String contrasena;
 
     @OneToMany(mappedBy = "veterinario", cascade = CascadeType.ALL)

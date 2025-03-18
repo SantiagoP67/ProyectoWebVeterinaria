@@ -65,8 +65,8 @@
                             <a th:href="@{/mascota/editar/{id}(id=${mascota.idMascota})}" class="btn-editar">Editar</a>
                             <form th:action="@{/mascota/eliminar/{id}(id=${mascota.idMascota})}" 
                                   method="post" 
-                                  onsubmit="return confirm('¿Estás seguro de eliminar esta mascota?');">
-                                <button type="submit" class="btn-eliminar">Eliminar</button>
+                                  onsubmit="return confirm('¿Estás seguro de desactivar esta mascota?');">
+                                <button type="submit" class="btn-eliminar">Desactivar</button>
                             </form>
                         </td>
                     </tr>

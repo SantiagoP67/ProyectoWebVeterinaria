@@ -29,7 +29,7 @@ public class Cliente {
     @Column(unique = true, nullable = false)
     private String nombreUsuario;
 
-    @Column(name = "contrasenha", unique = true, nullable = false)
+    @Column(name = "contrasenha", nullable = false)
     private String contrasena;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
