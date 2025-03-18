@@ -17,8 +17,8 @@
       <ul class="nav-links">
         <li><a th:href="@{/index}">Inicio</a></li>
         <li><a th:href="@{#servicios}">Servicios</a></li>
-        <li><a th:href="@{#footer}">Conócenos</a></li>
-        <li><a th:href="@{#footer}">Contáctanos</a></li>
+        <li><a th:href="@{#conocenos}">Conócenos</a></li>
+        <li><a th:href="@{#contactanos}">Contáctanos</a></li>
       </ul>
     </nav>
 
@@ -150,12 +150,12 @@
         </div>
       </section>
 
-      <section class="testimonials-section">
+      <section id="conocenos" class="testimonials-section">
         <h2>Testimonios de clientes</h2>
         <div class="testimonial-grid"></div>
       </section>
       <!-- Sección de Agendar Cita -->
-      <section class="appointment-section">
+      <section id="contactanos" class="appointment-section">
         <h2>Agenda tu cita</h2>
         <div class="appointment-container">
           <!-- Formulario -->
@@ -238,6 +238,9 @@
           </div>
         </div>
       </section>
+
+
+
       <section class="associated-foundations">
         <h2>Fundaciones Asociadas</h2>
         <div class="carousel-container">
