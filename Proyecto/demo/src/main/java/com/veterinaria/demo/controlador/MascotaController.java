@@ -42,6 +42,7 @@ public class MascotaController {
         Mascota mascota = mascotaService.obtenerMascotaPorId(id);
         if(mascota!= null){
             model.addAttribute("mascota", mascota);
+            model.addAttribute("dueno", mascota.getCliente());
             return "detalle_mascota";
         }else {
             throw new NotFoundException(id, "La mascota con ID " + id + " no existe.");

@@ -1,5 +1,6 @@
 package com.veterinaria.demo.controlador;
 
+import com.veterinaria.demo.ErrorHeading.NotFoundException;
 import com.veterinaria.demo.entidad.Cliente;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,17 @@ public class ClienteController{
         List<Cliente> clientes = clienteService.obtenerTodosClientes();
         model.addAttribute("clientes", clientes);
         return "clientes";
+    }
+
+    @GetMapping("/{id}")
+    public String detalleCliente(@PathVariable Integer id, Model model){
+        Cliente cliente = clienteService.obtenerClientePorId(id);
+        if(cliente != null){
+            model.addAttribute("cliente", cliente);
+            return "detalle-cliente";
+        }else {
+            throw new NotFoundException(id, "El cliente con ID " + id + " no existe.");
+        }
     }
 
     @GetMapping("/crear")

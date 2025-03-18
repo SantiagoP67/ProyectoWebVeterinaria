@@ -59,6 +59,15 @@
                         <span class="label">Estado:</span>
                         <span class="info" th:text="${mascota.estado == 1 ? 'Activa' : 'Inactiva'}"></span>
                     </div>
+                    <div class = "dato">
+                        <span class="label">Dueño:</span>
+                        <span class="info" th:text="${dueno.nombre}"></span>
+                    </div>
+                    <button class="btn-detalles"
+                            th:onclick="|window.location.href='@{/cliente/{id}(id=${dueno.idCliente})}'|">
+                        Ver detalles del dueño
+                    </button>
+
                 </div>
             </div>
         </div>

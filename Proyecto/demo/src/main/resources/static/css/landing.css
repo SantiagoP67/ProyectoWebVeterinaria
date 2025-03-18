@@ -15,14 +15,13 @@ header {
 .description-section {
   display: flex;
   flex-direction: column;
-  z-index: 0; /* Enviar esta sección al fondo */
+  z-index: 0;
   justify-content: flex-start;
   align-items: center;
   text-align: center;
   height: 100vh;
   background: url("https://i.postimg.cc/KYgCr3Td/pexels-lum3n-44775-406014.jpg") no-repeat center center/cover;
   position: relative;
-  overflow: visible !important;
 }
 
 /* EFECTO DIFUMINADO PARA MEJORAR LEGIBILIDAD */
@@ -707,6 +706,7 @@ header {
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   padding: 10px;
   border-radius: 5px;
+  z-index: 1000;
 }
 
 .dropdown-menu.show {
