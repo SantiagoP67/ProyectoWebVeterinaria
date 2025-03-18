@@ -36,42 +36,19 @@
     </a>
 
 
-      <!-- Botón de usuario con menú desplegable si hay sesión -->
+    <!-- Botón de usuario con menú desplegable si hay sesión -->
     <div class="user-menu" th:if="${session.cedula != null}">
       <button class="login-btn user-btn" onclick="toggleMenu()">
         <span th:text="${session.nombreCliente}">Usuario</span>
         <img th:src="${session.fotoCliente}" alt="Foto del Cliente" class="user-img" />
       </button>
       <div class="dropdown-menu" id="userDropdown">
-        <!-- Opción específica para CLIENTE -->
-        <a th:if="${session.rol == 'CLIENTE'}" 
-          th:href="@{/cliente/editar/{id}(id=${session.idCliente})}">
-          Editar Usuario
-        </a>
-
-        <!-- Opción específica para VETERINARIO -->
-        <a th:if="${session.rol == 'VETERINARIO'}" 
-          th:href="@{/veterinario/editar/{id}(id=${session.idVeterinario})}">
-          Editar Veterinario
-        </a>
-
-        <!-- Opción específica para ADMINISTRADOR -->
-        <a th:if="${session.rol == 'ADMINISTRADOR'}" 
-          th:href="@{/admin/panel}">
-          Panel de Administración
-        </a>
-
-        <!-- Opción disponible para CLIENTE y VETERINARIO -->
-        <a th:if="${session.rol == 'CLIENTE' or session.rol == 'VETERINARIO'}"
-          th:href="@{/mascota/mascotas(idCliente=${session.idCliente})}">
-          Ver Mascotas
-        </a>
-
-        <!-- Opción para cerrar sesión disponible para todos -->
+        <a th:href="@{/cliente/editar/{id}(id=${session.idCliente})}">Editar Usuario</a>
+        <a th:href="@{/mascota/mascotas(idCliente=${session.idCliente})}">Ver Mascotas</a>
         <a href="/cerrar-sesion">Cerrar sesión</a>
+
       </div>
     </div>
-
   </header>
 
 
@@ -449,7 +426,5 @@
       </section>
     </footer>
     <script th:src="@{js/testimonials.js}"></script>
-    <script th:src="@{js/index.js}"></script>
-
   </body>
 </html>
