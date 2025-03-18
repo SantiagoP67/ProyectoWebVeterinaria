@@ -1,106 +1,153 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Editar información de mascota</title>
-    <link rel="stylesheet" th:href="@{/css/header_footer.css}">
-    <link rel="stylesheet" th:href="@{/css/crearMascota.css}">
-</head>
-<body>
-<header>
-    <div class="logo">
+    <link rel="stylesheet" th:href="@{/css/header_footer.css}" />
+    <link rel="stylesheet" th:href="@{/css/crearMascota.css}" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
         <img th:src="@{/images/logo2.png}" alt="Logo" />
         <span class="logo-text">Beagle Giggle</span>
-    </div>
-    <nav>
+      </div>
+      <nav>
         <ul class="nav-links">
+
           <li><a th:href="@{/index}">Inicio</a></li>
           <li><a th:href="@{/index#servicios}">Servicios</a></li>
           <li><a th:href="@{/index#conocenos}">Conócenos</a></li>
           <li><a th:href="@{/index#contactanos}">Contáctanos</a></li>
+         <li>Administrador</li>
         </ul>
       </nav>
 </header>
 
-<section class="formularioRegistro">
-    <div class="formularioContainer">
+
+    <section class="formularioRegistro">
+      <div class="formularioContainer">
         <h2>Editar Información Mascota</h2>
-        <form th:action="@{/mascota/editar/{id}(id=${mascota.idMascota})}" th:object="${mascota}" method="post">
+        <form
+          th:action="@{/mascota/editar/{id}(id=${mascota.idMascota})}"
+          th:object="${mascota}"
+          method="post"
+        >
+          <label for="nombre">Nombre:</label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            th:field="*{nombre}"
+            required
+          />
 
-        
+          <label for="raza">Raza:</label>
+          <input
+            type="text"
+            id="raza"
+            name="raza"
+            th:field="*{raza}"
+            required
+          />
 
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" th:field="*{nombre}" required>
+          <label for="edad">Edad:</label>
+          <input
+            type="number"
+            id="edad"
+            name="edad"
+            th:field="*{edad}"
+            min="0"
+            required
+          />
 
-            <label for="raza">Raza:</label>
-            <input type="text" id="raza" name="raza" th:field="*{raza}" required>
+          <label for="peso">Peso (kg):</label>
+          <input
+            type="number"
+            id="peso"
+            name="peso"
+            th:field="*{peso}"
+            step="0.1"
+            required
+          />
 
-            <label for="edad">Edad:</label>
-            <input type="number" id="edad" name="edad" th:field="*{edad}" min="0" required>
+          <label for="enfermedad">Enfermedad:</label>
+          <input
+            type="text"
+            id="enfermedad"
+            name="enfermedad"
+            th:field="*{enfermedad}"
+          />
 
-            <label for="peso">Peso (kg):</label>
-            <input type="number" id="peso" name="peso" th:field="*{peso}" step="0.1" required>
+          <label for="foto">Foto (URL):</label>
+          <input type="url" id="foto" name="foto" th:field="*{foto}" />
 
-            <label for="enfermedad">Enfermedad:</label>
-            <input type="text" id="enfermedad" name="enfermedad" th:field="*{enfermedad}">
+          <label for="activa">Estado en el sistema:</label>
+          <select id="activa" name="activa" th:field="*{estado}">
+            <option th:value="1">Activa</option>
+            <option th:value="0">No activa</option>
+          </select>
 
-            <label for="foto">Foto (URL):</label>
-            <input type="url" id="foto" name="foto" th:field="*{foto}">
-
-            <label for="activa">Estado en el sistema:</label>
-            <select id="activa" name="activa" th:field="*{estado}">
-                <option th:value="1">Activa</option>
-                <option th:value="0">No activa</option>
-            </select>
-
-            <button type="submit">Guardar Cambios</button>
+          <button type="submit">Guardar Cambios</button>
         </form>
-    </div>
-</section>
+      </div>
+    </section>
 
-<footer>
-    <section class="footer-container">
+    <footer>
+      <section class="footer-container">
         <div class="footer-info">
-            <div class="footer-section">
-                <h3>Servicios</h3>
-                <ul>
-                    <li>Consulta médica</li>
-                    <li>Cirugía</li>
-                    <li>Hospitalización</li>
-                    <li>Monitoreo</li>
-                    <li>Vacunación</li>
-                    <li>Laboratorio clínico</li>
-                </ul>
+          <div class="footer-section">
+            <h3>Servicios</h3>
+            <ul>
+              <li>Consulta médica</li>
+              <li>Cirugía</li>
+              <li>Hospitalización</li>
+              <li>Monitoreo</li>
+              <li>Vacunación</li>
+              <li>Laboratorio clínico</li>
+            </ul>
+          </div>
+          <div class="footer-logo">
+            <img th:src="@{/images/logo.png}" alt="Logo" />
+            <div class="social-links">
+              <a
+                href="https://meta.com/beaglegiggle"
+                target="_blank"
+                title="Meta"
+              >
+                <img th:src="@{/images/meta.png}" alt="Meta" />
+              </a>
+              <a
+                href="https://www.instagram.com/beaglegiggle"
+                target="_blank"
+                title="Instagram"
+              >
+                <img th:src="@{/images/instagram.png}" alt="Instagram" />
+              </a>
+              <a
+                href="https://www.x.com/in/beaglegiggle"
+                target="_blank"
+                title="X"
+              >
+                <img th:src="@{/images/x.png}" alt="X" />
+              </a>
             </div>
-            <div class="footer-logo">
-                <img th:src="@{/images/logo.png}" alt="Logo" />
-                <div class="social-links">
-                    <a href="https://meta.com/beaglegiggle" target="_blank" title="Meta">
-                        <img th:src="@{/images/meta.png}" alt="Meta" />
-                    </a>
-                    <a href="https://www.instagram.com/beaglegiggle" target="_blank" title="Instagram">
-                        <img th:src="@{/images/instagram.png}" alt="Instagram" />
-                    </a>
-                    <a href="https://www.x.com/in/beaglegiggle" target="_blank" title="X">
-                        <img th:src="@{/images/x.png}" alt="X" />
-                    </a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h3>Información</h3>
-                <ul>
-                    <li>(+57) 3194479483</li>
-                    <li>Calle 12A #78 - 34</li>
-                    <li>beaglegiggle@atencion.com</li>
-                    <li>www.beaglegiggle.com</li>
-                </ul>
-            </div>
+          </div>
+          <div class="footer-section">
+            <h3>Información</h3>
+            <ul>
+              <li>(+57) 3194479483</li>
+              <li>Calle 12A #78 - 34</li>
+              <li>beaglegiggle@atencion.com</li>
+              <li>www.beaglegiggle.com</li>
+            </ul>
+          </div>
         </div>
         <div class="footer-copyright">
-            © 2025 BeagleGiggle. Todos los derechos reservados.
+          © 2025 BeagleGiggle. Todos los derechos reservados.
         </div>
-    </section>
-</footer>
-</body>
+      </section>
+    </footer>
+  </body>
 </html>
