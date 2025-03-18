@@ -4,67 +4,60 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Beagle Giggle</title>
-    <link rel="stylesheet" th:href="@{/css/landing.css}">
-    <link rel="stylesheet" th:href="@{/css/header_footer.css}">
+    <link rel="stylesheet" th:href="@{/css/landing.css}" />
+    <link rel="stylesheet" th:href="@{/css/header_footer.css}" />
   </head>
   <body>
-  <header>
-    <div class="logo">
-      <img src="https://i.postimg.cc/4yjfvPcB/logo2.png" alt="Logo" />
-      <span class="logo-text">Beagle Giggle</span>
-    </div>
-    <nav>
-      <ul class="nav-links">
-        <li><a th:href="@{/index}">Inicio</a></li>
-        <li><a th:href="@{#servicios}">Servicios</a></li>
-        <li><a th:href="@{#footer}">Conócenos</a></li>
-        <li><a th:href="@{#footer}">Contáctanos</a></li>
-      </ul>
-    </nav>
-
-    <!-- Botón de inicio de sesión si no hay sesión -->
-    <button class="login-btn" th:if="${session.cedula == null}" th:onclick="|window.location.href='@{/inicio_sesion}'|">
-      Iniciar sesión
-      <img src="https://i.postimg.cc/nzdHNQd0/seguridad.png" alt="Imagen externa" />
-    </button>
-
-      <!-- Botón de usuario con menú desplegable si hay sesión -->
-    <div class="user-menu" th:if="${session.cedula != null}">
-      <button class="login-btn user-btn" onclick="toggleMenu()">
-        <span th:text="${session.nombreCliente}">Usuario</span>
-        <img th:src="${session.fotoCliente}" alt="Foto del Cliente" class="user-img" />
-      </button>
-      <div class="dropdown-menu" id="userDropdown">
-        <!-- Opción específica para CLIENTE -->
-        <a th:if="${session.rol == 'CLIENTE'}" 
-          th:href="@{/cliente/editar/{id}(id=${session.idCliente})}">
-          Editar Usuario
-        </a>
-
-        <!-- Opción específica para VETERINARIO -->
-        <a th:if="${session.rol == 'VETERINARIO'}" 
-          th:href="@{/veterinario/editar/{id}(id=${session.idVeterinario})}">
-          Editar Veterinario
-        </a>
-
-        <!-- Opción específica para ADMINISTRADOR -->
-        <a th:if="${session.rol == 'ADMINISTRADOR'}" 
-          th:href="@{/admin/panel}">
-          Panel de Administración
-        </a>
-
-        <!-- Opción disponible para CLIENTE y VETERINARIO -->
-        <a th:if="${session.rol == 'CLIENTE' or session.rol == 'VETERINARIO'}"
-          th:href="@{/mascota/mascotas(idCliente=${session.idCliente})}">
-          Ver Mascotas
-        </a>
-
-        <!-- Opción para cerrar sesión disponible para todos -->
-        <a href="/cerrar-sesion">Cerrar sesión</a>
+    <header>
+      <div class="logo">
+        <img src="https://i.postimg.cc/4yjfvPcB/logo2.png" alt="Logo" />
+        <span class="logo-text">Beagle Giggle</span>
       </div>
-    </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a th:href="@{/index}">Inicio</a></li>
+          <li><a th:href="@{#servicios}">Servicios</a></li>
+          <li><a th:href="@{#footer}">Conócenos</a></li>
+          <li><a th:href="@{#footer}">Contáctanos</a></li>
+        </ul>
+      </nav>
 
-  </header>
+<!-- Botón de usuario con menú desplegable si hay sesión -->
+<div class="user-menu" th:if="${session.cedula != null}">
+  <button class="login-btn user-btn" onclick="toggleMenu()">
+    <span th:text="${session.nombreCliente}">Usuario</span>
+    <img th:src="${session.fotoCliente}" alt="Foto del Cliente" class="user-img" />
+  </button>
+  <div class="dropdown-menu" id="userDropdown">
+    <!-- Opción específica para CLIENTE -->
+    <a th:if="${session.rol == 'CLIENTE'}" 
+      th:href="@{/cliente/editar/{id}(id=${session.idCliente})}">
+      Editar Usuario
+    </a>
+
+    <!-- Opción específica para VETERINARIO -->
+    <a th:if="${session.rol == 'VETERINARIO'}" 
+      th:href="@{/veterinario/editar/{id}(id=${session.idVeterinario})}">
+      Editar Veterinario
+    </a>
+
+    <!-- Opción específica para ADMINISTRADOR -->
+    <a th:if="${session.rol == 'ADMINISTRADOR'}" 
+      th:href="@{/admin/panel}">
+      Panel de Administración
+    </a>
+
+    <!-- Opción disponible para CLIENTE y VETERINARIO -->
+    <a th:if="${session.rol == 'CLIENTE' or session.rol == 'VETERINARIO'}"
+      th:href="@{/mascota/mascotas(idCliente=${session.idCliente})}">
+      Ver Mascotas
+    </a>
+
+    <!-- Opción para cerrar sesión disponible para todos -->
+    <a href="/cerrar-sesion">Cerrar sesión</a>
+  </div>
+</div>
+
 
     <section class="description-section">
       <div class="description-text">
@@ -75,7 +68,7 @@
         </p>
       </div>
     </section>
-  
+
     <main>
       <section id="servicios" class="services-section-title">
         <h2>Servicios</h2>
@@ -267,7 +260,10 @@
           <div class="carousel">
             <div class="carousel-track">
               <div class="foundation-card">
-                <img src="https://img.lalr.co/cms/2019/09/04155109/2016112523195825802.jpg?size=xl" alt="Fundación 1" />
+                <img
+                  src="https://img.lalr.co/cms/2019/09/04155109/2016112523195825802.jpg?size=xl"
+                  alt="Fundación 1"
+                />
                 <div class="info">
                   <h3>Fundación Animal Save</h3>
                   <p>
@@ -277,7 +273,10 @@
                 </div>
               </div>
               <div class="foundation-card">
-                <img src="https://blog.oxfamintermon.org/wp-content/uploads/2018/06/voluntariado-con-animales-1.jpg" alt="Fundación 2" />
+                <img
+                  src="https://blog.oxfamintermon.org/wp-content/uploads/2018/06/voluntariado-con-animales-1.jpg"
+                  alt="Fundación 2"
+                />
                 <div class="info">
                   <h3>Fundación Protectora de Animales Sucre</h3>
                   <p>
@@ -287,7 +286,10 @@
                 </div>
               </div>
               <div class="foundation-card">
-                <img src="https://www.fundacionperroamor.com/urongeec/elementor/thumbs/Fundacion-pmamwc5jrxnbx4mf3m7znwm0hnua1ulv0gcd7xbthk.jpeg" alt="Fundación 3" />
+                <img
+                  src="https://www.fundacionperroamor.com/urongeec/elementor/thumbs/Fundacion-pmamwc5jrxnbx4mf3m7znwm0hnua1ulv0gcd7xbthk.jpeg"
+                  alt="Fundación 3"
+                />
                 <div class="info">
                   <h3>Patrulla Animal</h3>
                   <p>
@@ -297,7 +299,10 @@
                 </div>
               </div>
               <div class="foundation-card">
-                <img src="https://oem.com.mx/elsoldetlaxcala/img/16371591/1672780987/BASE_LANDSCAPE/1200/Colitas%20felices.jpg" alt="Fundación 4" />
+                <img
+                  src="https://oem.com.mx/elsoldetlaxcala/img/16371591/1672780987/BASE_LANDSCAPE/1200/Colitas%20felices.jpg"
+                  alt="Fundación 4"
+                />
                 <div class="info">
                   <h3>Fundación de Ayuda a los Animales</h3>
                   <p>
@@ -307,7 +312,10 @@
                 </div>
               </div>
               <div class="foundation-card">
-                <img src="https://miredvista.co/wp-content/uploads/2022/11/liliana-morales-26.jpg" alt="Fundación 5" />
+                <img
+                  src="https://miredvista.co/wp-content/uploads/2022/11/liliana-morales-26.jpg"
+                  alt="Fundación 5"
+                />
                 <div class="info">
                   <h3>Vida Animal</h3>
                   <p>
@@ -317,7 +325,10 @@
                 </div>
               </div>
               <div class="foundation-card">
-                <img src="https://stakeholders.com.pe/wp-content/uploads/2023/04/trained-dogs-2022-11-10-18-03-18-utc-scaled.jpg" alt="Fundación 6" />
+                <img
+                  src="https://stakeholders.com.pe/wp-content/uploads/2023/04/trained-dogs-2022-11-10-18-03-18-utc-scaled.jpg"
+                  alt="Fundación 6"
+                />
                 <div class="info">
                   <h3>Peluditos en Apuros</h3>
                   <p>
@@ -327,7 +338,10 @@
                 </div>
               </div>
               <div class="foundation-card">
-                <img src="https://elcomercio.pe/resizer/sYS7edz0yuMj1-10gQgnZVftjrY=/1200x1200/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/UWCUD6LJS5FQXLQTAASALWYALA.jpg" alt="Fundación 7" />
+                <img
+                  src="https://elcomercio.pe/resizer/sYS7edz0yuMj1-10gQgnZVftjrY=/1200x1200/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/UWCUD6LJS5FQXLQTAASALWYALA.jpg"
+                  alt="Fundación 7"
+                />
                 <div class="info">
                   <h3>Ayúdame</h3>
                   <p>
@@ -337,7 +351,10 @@
                 </div>
               </div>
               <div class="foundation-card">
-                <img src="https://estaticos-cdn.prensaiberica.es/clip/97046842-7a83-496a-b573-35c1e9b4d53e_mobile-ep-aspect-ratio_640w_0.jpg" alt="Fundación 8" />
+                <img
+                  src="https://estaticos-cdn.prensaiberica.es/clip/97046842-7a83-496a-b573-35c1e9b4d53e_mobile-ep-aspect-ratio_640w_0.jpg"
+                  alt="Fundación 8"
+                />
                 <div class="info">
                   <h3>Patitas al Rescate</h3>
                   <p>
@@ -373,21 +390,30 @@
                 target="_blank"
                 title="Meta"
               >
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Meta" />
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png"
+                  alt="Meta"
+                />
               </a>
               <a
                 href="https://www.instagram.com/beaglegiggle"
                 target="_blank"
                 title="Instagram"
               >
-                <img src="https://i0.wp.com/eltallerdehector.com/wp-content/uploads/2022/06/2a008-logo-instagram-icono.png?fit=512%2C512&ssl=1" alt="Instagram" />
+                <img
+                  src="https://i0.wp.com/eltallerdehector.com/wp-content/uploads/2022/06/2a008-logo-instagram-icono.png?fit=512%2C512&ssl=1"
+                  alt="Instagram"
+                />
               </a>
               <a
                 href="https://www.x.com/in/beaglegiggle"
                 target="_blank"
                 title="X"
               >
-                <img src="https://images.freeimages.com/image/large-previews/f35/x-twitter-logo-on-black-circle-5694247.png" alt="X" />
+                <img
+                  src="https://images.freeimages.com/image/large-previews/f35/x-twitter-logo-on-black-circle-5694247.png"
+                  alt="X"
+                />
               </a>
             </div>
           </div>
