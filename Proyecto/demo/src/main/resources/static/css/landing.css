@@ -523,6 +523,19 @@ header {
 #vet2 { top: 50%; left: 60%; }
 #vet3 { bottom: 10%; right: 50%; }
 
+
+.associated-foundations {
+  background-image: 
+    url('https://i.postimg.cc/kMVv77kk/175618270-camino-y-sendero-de-huellas-de-perros-que-se-alejan-patr-n-de-huella-animal-silueta-de-hue.png'),
+    url('https://i.postimg.cc/kMVv77kk/175618270-camino-y-sendero-de-huellas-de-perros-que-se-alejan-patr-n-de-huella-animal-silueta-de-hue.png');
+  background-size: 200px, 190px; /* Tamaño de cada imagen */
+  background-repeat: no-repeat, no-repeat; /* No repetir las imágenes */
+  background-position: top left, bottom right; /* Una en la parte superior izquierda, otra en la inferior derecha */
+  padding: 50px 0;
+}
+
+
+
 .associated-foundations h2 {
   text-align: center;
   padding-top: 40px;
