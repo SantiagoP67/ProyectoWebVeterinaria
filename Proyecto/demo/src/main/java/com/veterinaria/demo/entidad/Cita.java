@@ -18,7 +18,7 @@ public class Cita {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaHora;
-
+    @Column(nullable = false)
     private String sede;
 
     @ManyToOne
@@ -26,10 +26,10 @@ public class Cita {
     private Mascota mascota;
 
     @ManyToOne
-    @JoinColumn(name = "idVeterinario", nullable = false)
+    @JoinColumn(name = "idVeterinario")
     private Veterinario veterinario;
 
     @ManyToOne
-    @JoinColumn(name = "idServicio", nullable = false)
+    @JoinColumn(name = "idServicio")
     private Servicio servicio;
 }

@@ -5,8 +5,7 @@ import lombok.*;
 
 @Entity
 @Table(name = "administrador")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Administrador {
@@ -14,16 +13,19 @@ public class Administrador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idAdministrador;
+    @Column(nullable = false)
     private String nombre;
+    @Column(nullable = false)
     private String correo;
+    @Column(nullable = false)
     private String foto;
 
-    @Column(name = "cedula", unique = true)
+    @Column(unique = true, nullable = false)
     private String cedula;
 
-    @Column(name = "nombreUsuario", unique = true)
+    @Column(unique = true, nullable = false)
     private String nombreUsuario;
 
-    @Column(name = "contrasenha", unique = true)
+    @Column(name = "contrasenha", unique = true, nullable = false)
     private String contrasena;
 }

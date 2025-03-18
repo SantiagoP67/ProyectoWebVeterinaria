@@ -2,35 +2,34 @@ package com.veterinaria.demo.entidad;
 
 import jakarta.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import java.util.List;
 
 @Entity
 @Table(name = "cliente")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCliente;
-
+    @Column(nullable = false)
     private String nombre;
+    @Column(nullable = false)
     private String correo;
+    @Column(nullable = false)
     private String celular;
+    @Column(nullable = false)
     private String foto;
 
-    @Column(name = "cedula", unique = true)
+    @Column(unique = true, nullable = false)
     private String cedula;
 
-    @Column(name = "nombreUsuario", unique = true)
+    @Column(unique = true, nullable = false)
     private String nombreUsuario;
 
-    @Column(name = "contrasenha", unique = true)
+    @Column(name = "contrasenha", unique = true, nullable = false)
     private String contrasena;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)

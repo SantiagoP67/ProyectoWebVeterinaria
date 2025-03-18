@@ -8,20 +8,20 @@ import java.util.List;
 
 @Entity
 @Table(name = "tratamiento")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Tratamiento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idTratamiento;
-
+    @Column(nullable = false)
     private String codigo;
 
     @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
     private Date fecha;
-
+    @Column(nullable = false)
     private String detalles;
 
     @ManyToOne

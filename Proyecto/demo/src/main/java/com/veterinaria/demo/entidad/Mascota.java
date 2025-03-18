@@ -7,31 +7,37 @@ import java.util.Date;
 
 @Entity
 @Table(name = "mascota")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Mascota {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idMascota;
-
+    @Column(nullable = false)
     private String nombre;
+    @Column(nullable = false)
     private String raza;
+    @Column(nullable = false)
     private Integer edad;
+    @Column(nullable = false)
     private Float peso;
+    @Column(nullable = false)
     private String enfermedad;
+    @Column(nullable = false)
     private String foto;
 
     @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
     private Date fechaNacimiento;
 
     @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
     private Date fechaIngreso;
 
     @Temporal(TemporalType.DATE)
     private Date fechaSalida;
-
+    @Column(nullable = false)
     private Integer estado;
 
     @ManyToOne
