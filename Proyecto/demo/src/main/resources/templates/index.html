@@ -16,11 +16,12 @@
     <nav>
       <ul class="nav-links">
         <li><a th:href="@{/index}">Inicio</a></li>
-        <li><a th:href="@{#servicios}">Servicios</a></li>
-        <li><a th:href="@{#conocenos}">Conócenos</a></li>
-        <li><a th:href="@{#contactanos}">Contáctanos</a></li>
+        <li><a th:href="@{/index#servicios}">Servicios</a></li>
+        <li><a th:href="@{/index#conocenos}">Conócenos</a></li>
+        <li><a th:href="@{/index#contactanos}">Contáctanos</a></li>
       </ul>
     </nav>
+    
 
     <!-- Botón de inicio de sesión si no hay sesión -->
     <button class="login-btn" th:if="${session.cedula == null}" th:onclick="|window.location.href='@{/inicio_sesion}'|">
