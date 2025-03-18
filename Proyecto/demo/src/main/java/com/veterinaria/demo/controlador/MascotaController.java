@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.veterinaria.demo.entidad.Cliente;
 import com.veterinaria.demo.servicio.ClienteService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,29 +53,16 @@ public class MascotaController {
     @GetMapping("/crear")
     public String mostrarFormularioCreacion(Model model) {
         model.addAttribute("mascota", new Mascota());
-
-        // Obtener la lista de clientes desde el servicio y pasarlos al modelo
-        List<Cliente> clientes = clienteService.obtenerTodosClientes();
-        model.addAttribute("clientes", clientes);
-
         return "crear_mascota";
     }
 
-
     @PostMapping("/crear")
-    public String crearMascota(@RequestParam("cedula") String cedula,
-                               @ModelAttribute Mascota mascota,
-                               HttpSession session) {
+    public String crearMascota(@ModelAttribute Mascota mascota, HttpSession session) {
+        String cedula = (String) session.getAttribute("cedula"); // Obtener cédula de la sesión
 
         if (cedula != null) {
             mascotaService.crearMascota(mascota, cedula);
-
-            String rol = (String) session.getAttribute("rol");
-            if ("VETERINARIO".equals(rol)) {
-                return "redirect:/veterinario"; // Asegúrate de que esta ruta lleve a la vista del veterinario
-            }
-
-            return "redirect:/inicio_sesion";
+            return "verMascotaCliente";
         } else {
             return "redirect:/inicio_sesion?error=sesionExpirada";
         }
