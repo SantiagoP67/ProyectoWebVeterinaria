@@ -63,7 +63,7 @@ public class MascotaController {
 
         if (cedula != null) {
             mascotaService.crearMascota(mascota, cedula);
-            return "verMascotaCliente";
+            return "ver_mascota_cliente";
         } else {
             return "redirect:/inicio_sesion?error=sesionExpirada";
         }
@@ -97,6 +97,6 @@ public class MascotaController {
         model.addAttribute("mascotas", mascotas);
         model.addAttribute("nombreCliente", cliente.getNombre());
 
-        return "verMascotaCliente";
+        return "ver_mascota_cliente";
     }
 }
