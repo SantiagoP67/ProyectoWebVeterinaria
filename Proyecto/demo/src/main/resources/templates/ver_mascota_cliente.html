@@ -23,6 +23,19 @@
           <li><a th:href="@{/index#contactanos}">Contáctanos</a></li>
        </ul>
       </nav>
+
+            <!-- Sección para Cliente -->
+            <div class="user-menu" th:if="${session.rol == 'CLIENTE'}">
+              <button class="login-btn user-btn" onclick="toggleMenu()">
+                  <span th:text="${session.nombreCliente}"></span>
+                  <img th:src="${session.fotoCliente}" alt="Foto del Cliente" class="user-img" />
+              </button>
+              <div class="dropdown-menu" id="userDropdown">
+                  <a th:href="@{/cliente/editar/{id}(id=${session.idCliente})}">Editar Usuario</a>
+                  <a th:href="@{/mascota/mascotas(idCliente=${session.idCliente})}">Ver Mascotas</a>
+                  <a href="/cerrar-sesion">Cerrar sesión</a>
+              </div>
+          </div>
     </header>
 
     <h2>Bienvenido <span th:text="${nombreCliente}"></span></h2>

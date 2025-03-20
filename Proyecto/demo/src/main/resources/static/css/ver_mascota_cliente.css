@@ -33,3 +33,15 @@
     font-size: 1em;
     color: #777;
   }
+
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
