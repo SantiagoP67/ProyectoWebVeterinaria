@@ -1,33 +1,56 @@
 /* Contenedor principal */
-.clientes-container {
-  max-width: 100%;
-  margin: 1rem 1rem;
+.container {
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto;
   background: white;
-  padding: 1rem;
+  padding: 2rem;
   border-radius: 12px;
   box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
 /* Título de la sección */
-.clientes-container h2 {
+.container h1 {
   color: #205375;
   font-size: 2rem;
-  margin-bottom: 0;
+  margin-bottom: 1rem;
   font-weight: 600;
 }
 
-.clientes-container h1 {
-  margin-bottom: 0;
+/* Botón de agregar */
+.button-container {
+  margin-top: 0.5rem;
+}
+
+.btn-agregar {
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  background-color: #205375;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-agregar:hover {
+  background-color: #112d4e;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Tabla */
-.tabla-clientes-container {
+.tabla-container {
   margin-top: 1.5rem;
-  overflow-x: auto; /* Para tablas responsivas */
+  overflow-x: auto;
 }
 
-.tabla-clientes {
+.tabla {
   width: 100%;
   border-collapse: collapse;
   background: white;
@@ -37,7 +60,7 @@
   margin: 0 auto;
 }
 
-.tabla-clientes th {
+.tabla th {
   background-color: #40a8c4;
   color: white;
   padding: 1rem;
@@ -48,7 +71,7 @@
   letter-spacing: 0.05rem;
 }
 
-.tabla-clientes td {
+.tabla td {
   padding: 1rem;
   text-align: center;
   font-size: 1rem;
@@ -56,43 +79,38 @@
   color: #333;
 }
 
-.tabla-clientes tr:nth-child(even) td {
+.tabla tr:nth-child(even) td {
   background-color: #f5f9fa;
 }
 
-.tabla-clientes tr:nth-child(odd) td {
+.tabla tr:nth-child(odd) td {
   background-color: #ffffff;
 }
 
-.tabla-clientes tbody tr:hover {
+.tabla tbody tr:hover {
   background-color: rgba(64, 168, 196, 0.1);
   transition: background-color 0.3s ease;
   cursor: pointer;
 }
 
 /* Estilos de imagen */
-.foto-cliente {
+.foto-tabla {
   width: 50px;
   height: 50px;
-  border-radius: 50%; /* Imagen redonda */
+  border-radius: 50%;
   border: 2px solid #40a8c4;
   object-fit: cover;
   transition: transform 0.3s ease;
 }
 
-.foto-cliente:hover {
-  transform: scale(1.1); /* Efecto de zoom al pasar el mouse */
-}
-
-.button-container {
-  display: block; /* Asegura que ocupe todo el ancho */
-  margin-top: 15px; /* Espaciado entre el título y el botón */
+.foto-tabla:hover {
+  transform: scale(1.1);
 }
 
 /* Botones */
 .btn-editar,
 .btn-eliminar,
-.btn-agregar {
+.btn-detalles {
   display: inline-block;
   padding: 0.5rem 1rem;
   border-radius: 6px;
@@ -105,8 +123,7 @@
   cursor: pointer;
 }
 
-.btn-editar,
-.btn-agregar {
+.btn-editar {
   background-color: #205375;
   color: white;
 }
@@ -116,53 +133,50 @@
   color: white;
 }
 
-.btn-editar:hover,
-.btn-agregar:hover {
+.btn-detalles {
+  background-color: #40a8c4;
+  color: white;
+}
+
+.btn-editar:hover {
   background-color: #112d4e;
-  transform: translateY(-2px); /* Efecto de elevación */
+  transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .btn-eliminar:hover {
   background-color: #e60000;
-  transform: translateY(-2px); /* Efecto de elevación */
+  transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Botón de agregar */
-.btn-agregar {
-  margin-top: 1.5rem;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.btn-agregar i {
-  font-size: 1.2rem;
+.btn-detalles:hover {
+  background-color: #2e86ab;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .clientes-container {
+  .container {
     padding: 1rem;
   }
 
-  .tabla-clientes th,
-  .tabla-clientes td {
+  .tabla th,
+  .tabla td {
     padding: 0.8rem;
     font-size: 0.9rem;
   }
 
   .btn-editar,
   .btn-eliminar,
+  .btn-detalles,
   .btn-agregar {
     padding: 0.4rem 0.8rem;
     font-size: 0.8rem;
   }
 
-  .foto-cliente {
+  .foto-tabla {
     width: 40px;
     height: 40px;
   }

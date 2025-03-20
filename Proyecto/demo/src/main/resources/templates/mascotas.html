@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lista de Mascotas</title>
-    <link rel="stylesheet" th:href="@{/css/tabla_mascotas.css}" />
+    <link rel="stylesheet" th:href="@{/css/tabla.css}" />
     <link rel="stylesheet" th:href="@{/css/crear_mascota.css}" />
     <link
       rel="stylesheet"
@@ -40,13 +40,13 @@
   </header>
 
   <body>
-    <div class="mascotas-container">
+    <div class="container">
       <h1>Lista de Mascotas</h1>
       <div class="button-container">
         <a th:href="@{/mascota/crear}" class="btn-agregar">Agregar Mascota</a>
       </div>
-      <div class="tabla-mascotas-container">
-        <table class="tabla-mascotas">
+      <div class="tabla-container">
+        <table class="tabla">
           <thead>
             <tr>
               <th>Nombre</th>
@@ -71,8 +71,8 @@
               <td>
                 <img
                   th:src="${mascota.foto}"
-                  alt="Foto"
-                  class="foto-mascota"
+                  alt="Foto de mascota"
+                  class="foto-tabla"
                   th:classappend="${mascota.estado == 0} ? 'imagen-inactiva' : ''"
                 />
               </td>
@@ -82,9 +82,8 @@
               <td>
                 <a
                   th:href="@{/mascota/{id}(id=${mascota.idMascota})}"
-                  class="btn-detalles"
-                  >Ver detalles</a
-                >
+                  class="btn-detalles">
+                  Ver detalles</a>
               </td>
               <td>
                 <a
