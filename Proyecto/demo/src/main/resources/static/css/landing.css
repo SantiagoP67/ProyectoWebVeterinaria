@@ -1,12 +1,3 @@
-body,
-html {
-  overflow: visible !important;
-}
-
-header {
-  overflow: visible !important;
-}
-
 .description-section {
   position: relative;
   width: 100%;

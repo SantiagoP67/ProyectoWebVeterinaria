@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Veterinario</title>
     <link rel="stylesheet" th:href="@{/css/header_footer.css}" />
-    <link rel="stylesheet" th:href="@{/css/secciones.css}" />
+    <link rel="stylesheet" th:href="@{/css/botones.css}" />
     <link rel="stylesheet" th:href="@{/css/crear_mascota.css}" />
     <link rel="stylesheet" th:href="@{/css/clientes.css}" />
   </head>
@@ -98,16 +98,12 @@
 
       <!-- Botón para registrar nueva mascota -->
       <div class="mascotas-footer">
-        <a th:href="@{/mascota/crear}" class="btn-registrar"
-          >Registrar Mascota</a
+        <a th:href="@{/mascota/crear}" class="btn-registrar">
+          Registrar Mascota</a
         >
-      </div>
-
-      <!-- Botón para ver todas las mascotas -->
-      <div class="mascotas-footer">
-        <a th:href="@{/mascota}" class="btn-registrar"
-          >Ver todas las Mascotas</a
-        >
+        <a th:href="@{/mascota}" class="btn-registrar">
+          Ver todas las Mascotas</a
+      >
       </div>
     </section>
 
@@ -147,11 +143,10 @@
         >
       </div>
     </section>
-
-    <!-- Footer -->
     <footer>
       <section class="footer-container">
         <div class="footer-info">
+          <!-- Sección de Servicios -->
           <div class="footer-section">
             <h3>Servicios</h3>
             <ul>
@@ -163,41 +158,24 @@
               <li>Laboratorio clínico</li>
             </ul>
           </div>
+    
+          <!-- Logo en el centro -->
           <div class="footer-logo">
             <img src="https://i.postimg.cc/zH1YsdSN/logo.png" alt="Logo" />
             <div class="social-links">
-              <a
-                href="https://meta.com/beaglegiggle"
-                target="_blank"
-                title="Meta"
-              >
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png"
-                  alt="Meta"
-                />
+              <a href="https://meta.com/beaglegiggle" target="_blank" title="Meta">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Meta" />
               </a>
-              <a
-                href="https://www.instagram.com/beaglegiggle"
-                target="_blank"
-                title="Instagram"
-              >
-                <img
-                  src="https://i0.wp.com/eltallerdehector.com/wp-content/uploads/2022/06/2a008-logo-instagram-icono.png?fit=512%2C512&ssl=1"
-                  alt="Instagram"
-                />
+              <a href="https://www.instagram.com/beaglegiggle" target="_blank" title="Instagram">
+                <img src="https://i0.wp.com/eltallerdehector.com/wp-content/uploads/2022/06/2a008-logo-instagram-icono.png?fit=512%2C512&ssl=1" alt="Instagram" />
               </a>
-              <a
-                href="https://www.x.com/in/beaglegiggle"
-                target="_blank"
-                title="X"
-              >
-                <img
-                  src="https://images.freeimages.com/image/large-previews/f35/x-twitter-logo-on-black-circle-5694247.png"
-                  alt="X"
-                />
+              <a href="https://www.x.com/in/beaglegiggle" target="_blank" title="X">
+                <img src="https://images.freeimages.com/image/large-previews/f35/x-twitter-logo-on-black-circle-5694247.png" alt="X" />
               </a>
             </div>
           </div>
+    
+          <!-- Sección de Información -->
           <div class="footer-section">
             <h3>Información</h3>
             <ul>
@@ -208,11 +186,12 @@
             </ul>
           </div>
         </div>
+    
         <div class="footer-copyright">
           © 2025 BeagleGiggle. Todos los derechos reservados.
         </div>
       </section>
-    </footer>
+    </footer>    
     <script th:src="@{/js/cerrar_sesion.js}"></script>
   </body>
 </html>

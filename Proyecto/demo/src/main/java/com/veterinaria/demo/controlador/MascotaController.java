@@ -70,6 +70,7 @@ public class MascotaController {
 
         if (cedula != null) {
             mascotaService.crearMascota(mascota, cedula);
+
             List<Mascota> mascotasAtendidas = (List<Mascota>) session.getAttribute("mascotasAtendidas");
 
             if (mascotasAtendidas == null) {
@@ -85,7 +86,7 @@ public class MascotaController {
 
             List<Cliente> clientes = mascotasAtendidas.stream()
                     .map(Mascota::getCliente)
-                    .distinct()  // Evita duplicados en la lista
+                    .distinct()
                     .collect(Collectors.toList());
 
             // Depuración: mostrar clientes en consola

@@ -2,7 +2,6 @@
 .page-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   background-color: #F4F8FB;
   background-image: url('https://static.vecteezy.com/system/resources/previews/014/435/034/non_2x/seamless-dog-pattern-with-paw-prints-cat-foots-texture-pattern-with-doggy-pawprints-dog-texture-hand-drawn-illustration-in-doodle-style-on-white-background-vector.jpg');
   background-size: cover;
@@ -83,7 +82,7 @@ h1 {
     margin: 0 auto;
 }
 
-.dato {
+.dato, .btn-detalles {
     background-color: #40A8C4;
     color: white;
     padding: 20px;
@@ -106,6 +105,19 @@ h1 {
     font-weight: 500;
     color: white;
 }
+
+.btn-detalles {
+    background-color: #205375;
+    color: white;
+    border: none;
+}
+
+.btn-detalles:hover {
+    background-color: #2e86ab;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 
 /* Responsive */
 @media (max-width: 1024px) {
@@ -143,21 +155,4 @@ h1 {
     .datos {
         gap: 20px;
     }
-}
-
-/* Estilo del botón "Ver detalles del cliente" */
-.btn-detalles {
-    background-color: #205375; /* Color azul oscuro */
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    font-size: 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-left: 10px; /* Separación con el nombre */
-}
-
-.btn-detalles:hover {
-    background-color: #173f5f; /* Azul más oscuro al pasar el cursor */
 }
