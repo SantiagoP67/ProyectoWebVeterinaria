@@ -1,9 +1,8 @@
 package com.veterinaria.demo.controlador;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import com.veterinaria.demo.entidad.Cliente;
-import com.veterinaria.demo.servicio.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.veterinaria.demo.ErrorHeading.NotFoundException;
+import com.veterinaria.demo.entidad.Cliente;
 import com.veterinaria.demo.entidad.Mascota;
+import com.veterinaria.demo.servicio.ClienteService;
 import com.veterinaria.demo.servicio.MascotaService;
+import com.veterinaria.demo.servicio.VeterinarioService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -29,6 +31,9 @@ public class MascotaController {
 
     @Autowired
     private ClienteService clienteService;
+
+    @Autowired
+    private VeterinarioService veterinarioService;
 
 
     @GetMapping
@@ -54,20 +59,59 @@ public class MascotaController {
     @GetMapping("/crear")
     public String mostrarFormularioCreacion(Model model) {
         model.addAttribute("mascota", new Mascota());
+        model.addAttribute("clientes", clienteService.obtenerTodosClientes());
         return "crear_mascota";
     }
 
     @PostMapping("/crear")
-    public String crearMascota(@ModelAttribute Mascota mascota, HttpSession session) {
-        String cedula = (String) session.getAttribute("cedula"); // Obtener cédula de la sesión
+    public String crearMascota(@RequestParam("cedula") String cedula,
+                               @ModelAttribute Mascota mascota,
+                               HttpSession session, Model model) {
 
         if (cedula != null) {
             mascotaService.crearMascota(mascota, cedula);
-            return "verMascotaCliente";
+
+            // Recuperar la lista de la sesión
+            List<Mascota> mascotasAtendidas = (List<Mascota>) session.getAttribute("mascotasAtendidas");
+
+            if (mascotasAtendidas == null) {
+                // Si no existe la lista en la sesión, obtenerla del servicio
+                mascotasAtendidas = veterinarioService.obtenerMascotasAtendidas((int) session.getAttribute("idVeterinario"));
+            }
+
+            // Agregar la nueva mascota a la lista
+            mascotasAtendidas.add(mascota);
+
+            // Guardar la lista actualizada en la sesión
+            session.setAttribute("mascotasAtendidas", mascotasAtendidas);
+
+            List<Cliente> clientes = mascotasAtendidas.stream()
+                    .map(Mascota::getCliente)
+                    .distinct()  // Evita duplicados en la lista
+                    .collect(Collectors.toList());
+
+            // Depuración: mostrar clientes en consola
+            System.out.println("🔍 Clientes encontrados:");
+            clientes.forEach(c -> System.out.println("ID: " + c.getIdCliente() + ", Nombre: " + c.getNombre()));
+
+            // Verificar si hay clientes
+            if (clientes.isEmpty()) {
+                System.out.println("⚠ No se encontraron clientes para las mascotas atendidas.");
+            }
+            session.setAttribute("clientesAtendidos", clientes);
+
+            String rol = (String) session.getAttribute("rol");
+            if ("VETERINARIO".equals(rol)) {
+                return "redirect:/veterinario";
+            }
+
+            return "redirect:/inicio_sesion";
         } else {
             return "redirect:/inicio_sesion?error=sesionExpirada";
         }
     }
+
+
 
 
     @GetMapping("/editar/{id}")
@@ -97,6 +141,6 @@ public class MascotaController {
         model.addAttribute("mascotas", mascotas);
         model.addAttribute("nombreCliente", cliente.getNombre());
 
-        return "verMascotaCliente";
+        return "ver_mascota_cliente";
     }
 }
