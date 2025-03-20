@@ -85,6 +85,12 @@
     transform: scale(1.1); /* Efecto de zoom al pasar el mouse */
 }
 
+.button-container {
+    display: block;  /* Asegura que ocupe todo el ancho */
+    margin-top: 15px; /* Espaciado entre el título y el botón */
+}
+
+
 /* Botones */
 .btn-editar,
 .btn-eliminar,
