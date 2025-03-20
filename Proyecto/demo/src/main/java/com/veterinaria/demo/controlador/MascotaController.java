@@ -63,7 +63,7 @@ public class MascotaController {
         return "crear_mascota";
     }
 
-    @PostMapping("/crear")
+  @PostMapping("/crear")
     public String crearMascota(@RequestParam("cedula") String cedula,
                                @ModelAttribute Mascota mascota,
                                HttpSession session, Model model) {
@@ -110,7 +110,6 @@ public class MascotaController {
             return "redirect:/inicio_sesion?error=sesionExpirada";
         }
     }
-
 
 
 

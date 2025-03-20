@@ -10,7 +10,7 @@
     <link rel="stylesheet" th:href="@{/css/mascotas_usuario.css}" />
   </head>
   <body>
-    <!-- Header-->
+    <!-- Header -->
     <header>
       <div class="logo">
         <img src="https://i.postimg.cc/4yjfvPcB/logo2.png" alt="Logo" />
@@ -24,74 +24,91 @@
           <li><a th:href="@{#footer}">Contáctanos</a></li>
         </ul>
       </nav>
-        <!-- Mostrar imagen y nombre del veterinario si está autenticado -->
+      <!-- Mostrar imagen y nombre del veterinario si está autenticado -->
       <div class="user-info" th:if="${session.nombre}">
-        <img th:src="${session.foto}" alt="Foto de perfil" class="profile-pic" />
+        <img
+          th:src="${session.foto}"
+          alt="Foto de perfil"
+          class="profile-pic"
+        />
         <div class="dropdown">
           <span class="username" th:text="${session.nombre}"></span>
           <div class="dropdown-menu">
-           <!--  <a th:href="@{/veterinario/editar/{id}(id=${session.idVeterinario})}">Editar datos</a>-->
+            <!-- <a th:href="@{/veterinario/editar/{id}(id=${session.idVeterinario})}">Editar datos</a> -->
             <a href="/cerrar-sesion">Cerrar sesión</a>
           </div>
         </div>
       </div>
     </header>
+
     <div class="saludo">
-    <h2>Bienvenido  <span th:text="${session.nombre}"></span></h2>
+      <h2>Bienvenido <span th:text="${session.nombre}"></span></h2>
     </div>
+
     <!-- Sección para mostrar mascotas dinámicamente -->
     <section class="mascotas">
       <h2>Mascotas</h2>
 
       <!-- Contenedor de mascotas atendidas -->
       <div class="mascotas-container">
-          <!-- Si hay mascotas, las muestra -->
-          <th:block th:if="${not #lists.isEmpty(session.mascotasAtendidas)}">
-              <th:block th:each="mascota : ${session.mascotasAtendidas}">
-                  <div class="mascota">
-                      <div class="mascota-header">
-                          <div class="tooltip-container">
-                            <a th:href="@{/mascota/editar/{id}(id=${mascota.idMascota})}">
-                                <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" 
-                                    class="icono-editar" />
-                            </a>
-                            <span class="tooltip-text">Editar Información Mascota</span>
-                         </div>
-                      
-                      
-
-                          <div class="tooltip-container">
-                              <img src="https://cdn-icons-png.freepik.com/512/32/32223.png" 
-                                  class="icono-archivo"
-                                  th:onclick="'verArchivo(' + ${mascota.idMascota} + ')'">
-                              <span class="tooltip-text">Ver Historial Clínico</span>
-                          </div>
-                      </div>
-                      <a th:href="@{/mascota/{id}(id=${mascota.idMascota})}" class="btn-detalles">
-                        <img th:src="${mascota.foto}" alt="Foto de mascota"
-                             th:classappend="${mascota.estado == 1} ? 'img-inactiva' : ''">
-                    </a>                    
-                      <h3 th:text="${mascota.nombre}"></h3>
-                      <p th:text="${mascota.raza}"></p>
-                  </div>
-              </th:block>
+        <!-- Si hay mascotas, las muestra -->
+        <th:block th:if="${not #lists.isEmpty(session.mascotasAtendidas)}">
+          <th:block th:each="mascota : ${session.mascotasAtendidas}">
+            <div class="mascota">
+              <div class="mascota-header">
+                <div class="tooltip-container">
+                  <a th:href="@{/mascota/editar/{id}(id=${mascota.idMascota})}">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png"
+                      class="icono-editar"
+                    />
+                  </a>
+                  <span class="tooltip-text">Editar Información Mascota</span>
+                </div>
+                <div class="tooltip-container">
+                  <img
+                    src="https://cdn-icons-png.freepik.com/512/32/32223.png"
+                    class="icono-archivo"
+                    th:onclick="'verArchivo(' + ${mascota.idMascota} + ')'"
+                  />
+                  <span class="tooltip-text">Ver Historial Clínico</span>
+                </div>
+              </div>
+              <a
+                th:href="@{/mascota/{id}(id=${mascota.idMascota})}"
+                class="btn-detalles"
+              >
+                <img
+                  th:src="${mascota.foto}"
+                  alt="Foto de mascota"
+                  th:classappend="${mascota.estado == 1} ? 'img-inactiva' : ''"
+                />
+              </a>
+              <h3 th:text="${mascota.nombre}"></h3>
+              <p th:text="${mascota.raza}"></p>
+            </div>
           </th:block>
+        </th:block>
 
-          <!-- Si no hay mascotas, muestra un mensaje -->
-          <p th:if="${#lists.isEmpty(session.mascotasAtendidas)}">
-              No hay mascotas atendidas registradas.
-          </p>
+        <!-- Si no hay mascotas, muestra un mensaje -->
+        <p th:if="${#lists.isEmpty(session.mascotasAtendidas)}">
+          No hay mascotas atendidas registradas.
+        </p>
       </div>
 
       <!-- Botón para registrar nueva mascota -->
       <div class="mascotas-footer">
-        <a th:href="@{/mascota/crear}" class="btn-registrar">Registrar Mascota</a>
+        <a th:href="@{/mascota/crear}" class="btn-registrar"
+          >Registrar Mascota</a
+        >
       </div>
 
-        <!-- Botón para registrar nueva mascota -->
-        <div class="mascotas-footer">
-          <a th:href="@{/mascota}" class="btn-registrar">Ver todas las Mascotas</a>
-        </div>
+      <!-- Botón para ver todas las mascotas -->
+      <div class="mascotas-footer">
+        <a th:href="@{/mascota}" class="btn-registrar"
+          >Ver todas las Mascotas</a
+        >
+      </div>
     </section>
 
     <!-- Mostrar Clientes Dinámicamente -->
@@ -99,24 +116,39 @@
       <h2>Clientes</h2>
 
       <!-- Verifica si la lista está vacía antes de recorrerla -->
-      <div th:if="${session.clientesAtendidos == null or #lists.isEmpty(session.clientesAtendidos)}">
-          <p>⚠ No se encontraron clientes para las mascotas atendidas.</p>
+      <div
+        th:if="${session.clientesAtendidos == null or #lists.isEmpty(session.clientesAtendidos)}"
+      >
+        <p>⚠ No se encontraron clientes para las mascotas atendidas.</p>
       </div>
 
       <!-- Contenedor de tarjetas de clientes -->
-      <div class="clientes-container" th:if="${session.clientesAtendidos != null and not #lists.isEmpty(session.clientesAtendidos)}">
-          <div class="cliente-card" th:each="cliente : ${session.clientesAtendidos}">
-              <img th:src="${cliente.foto}" alt="Foto del cliente" class="cliente-foto">
-              <h3 th:text="${cliente.nombre}"></h3>
-              <p>ID: <span th:text="${cliente.idCliente}"></span></p>
-              <p>Email: <span th:text="${cliente.correo}"></span></p>
-          </div>
+      <div
+        class="clientes-container"
+        th:if="${session.clientesAtendidos != null and not #lists.isEmpty(session.clientesAtendidos)}"
+      >
+        <div
+          class="cliente-card"
+          th:each="cliente : ${session.clientesAtendidos}"
+        >
+          <img
+            th:src="${cliente.foto}"
+            alt="Foto del cliente"
+            class="cliente-foto"
+          />
+          <h3 th:text="${cliente.nombre}"></h3>
+          <p>ID: <span th:text="${cliente.idCliente}"></span></p>
+          <p>Email: <span th:text="${cliente.correo}"></span></p>
+        </div>
       </div>
       <div class="mascotas-footer">
-        <a th:href="@{/cliente}" class="btn-registrar">Ver todos los Clientes</a>
+        <a th:href="@{/cliente}" class="btn-registrar"
+          >Ver todos los Clientes</a
+        >
       </div>
-    </section>  
-    <!--Footer -->
+    </section>
+
+    <!-- Footer -->
     <footer>
       <section class="footer-container">
         <div class="footer-info">
