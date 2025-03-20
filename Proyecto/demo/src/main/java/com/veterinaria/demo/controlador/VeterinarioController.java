@@ -1,6 +1,7 @@
 package com.veterinaria.demo.controlador;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,8 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.veterinaria.demo.entidad.Cliente;
+import com.veterinaria.demo.entidad.Mascota;
 import com.veterinaria.demo.entidad.Veterinario;
 import com.veterinaria.demo.servicio.VeterinarioService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/veterinario")
@@ -72,4 +77,24 @@ public class VeterinarioController{
         clienteService.eliminarCliente(id);
         return "redirect:/cliente";
     }*/ 
+    @GetMapping("mascotas_atendidas")
+public String verMascotasAtendidas(HttpSession session) {
+    Integer idVeterinario = (Integer) session.getAttribute("idVeterinario");
+    
+    if (idVeterinario == null) {
+        return "redirect:/inicio_sesion"; 
+    }
+
+    List<Mascota> mascotasAtendidas = veterinarioService.obtenerMascotasAtendidas(idVeterinario);
+    session.setAttribute("mascotasAtendidas", mascotasAtendidas);
+
+    List<Cliente> clientes = mascotasAtendidas.stream()
+        .map(Mascota::getCliente)
+        .distinct()
+        .collect(Collectors.toList());
+    session.setAttribute("clientesAtendidos", clientes);
+
+    return "veterinario"; // Retornar la vista del veterinario
+}
+
 }
