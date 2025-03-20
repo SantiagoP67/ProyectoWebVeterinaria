@@ -1,0 +1,35 @@
+.lista-mascotas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+  }
+  .mascota {
+    background: #dae8f2;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    text-align: center;
+    width: 250px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .mascota:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  }
+  .mascota img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  .mascota h3 {
+    margin: 10px 0 5px;
+    font-size: 1.2em;
+    color: #333;
+  }
+  .mascota p {
+    font-size: 1em;
+    color: #777;
+  }
