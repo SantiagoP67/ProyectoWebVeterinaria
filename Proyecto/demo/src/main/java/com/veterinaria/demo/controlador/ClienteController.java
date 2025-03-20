@@ -53,7 +53,7 @@ public class ClienteController{
         }
 
         clienteService.crearCliente(cliente);
-        return "redirect:/cliente";
+        return "redirect:/inicio_sesion";
     }
 
     @GetMapping("/editar/{id}")
@@ -67,6 +67,7 @@ public class ClienteController{
     public String actualizarCliente(@PathVariable Integer id, Cliente cliente){
         clienteService.editarCliente(id, cliente);
         return "redirect:/cliente";
+        //Debería ser index, pero no encuentra al usuario
     }
 
     @PostMapping("/eliminar/{id}")

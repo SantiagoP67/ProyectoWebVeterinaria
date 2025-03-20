@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-/* Contenedor principal del formulario */
+/* Estilos generales para formularios de login y registro */
 .formularioLogin,
 .formularioRegistro {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    padding: 10px;
-    background-color: #F4F8FB; /* Fondo claro */
+    padding: 20px;
+    background-color: #f4f8fb; /* Fondo claro */
     background-image: url('https://static.vecteezy.com/system/resources/previews/014/435/034/non_2x/seamless-dog-pattern-with-paw-prints-cat-foots-texture-pattern-with-doggy-pawprints-dog-texture-hand-drawn-illustration-in-doodle-style-on-white-background-vector.jpg');
     background-size: cover;
     background-position: center;
@@ -32,14 +32,11 @@
 /* Contenedor del formulario */
 .formularioContainer {
     background: white;
-    margin: 0 auto;
-    max-width: 400px;
-    padding: 20px 60px 40px 40px;
+    padding: 30px;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 450px;
-    max-width: 90%;
+    width: 400px;
     position: relative;
     z-index: 2; /* Asegura que el formulario esté por encima del fondo */
 }
@@ -62,15 +59,30 @@ form {
 label {
     font-weight: bold;
     text-align: left;
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    color: #333;
 }
 
 /* Campos de entrada */
-input {
-    width: 100%;
+input,
+select {
+    max-width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
+    background-color: #fff;
+    color: #555;
+    cursor: pointer;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+select:focus,
+input:focus {
+    border-color: #000000;
+    outline: none;
 }
 
 /* Botón */
@@ -104,39 +116,15 @@ button:hover {
     text-decoration: underline;
 }
 
-/* Estilos para el formulario de selección de tipo de usuario */
-label {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 8px;
-    display: block;
-    color: #333;
-}
-
-select {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    background-color: #fff;
-    color: #555;
-    cursor: pointer;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-select:focus {
-    border-color: #000000;  
-}
-
+/* Estilos para opciones de select */
 option {
     padding: 10px;
     font-size: 1rem;
     background-color: #fff;
-    color:  #3c5b6f;
+    color: #3c5b6f;
 }
 
-/* Diseño de los campos cuando el formulario es grande (responsive) */
+/* Diseño responsive */
 @media (max-width: 600px) {
     label {
         font-size: 1rem;
@@ -148,6 +136,7 @@ option {
     }
 }
 
+/* Estilos para autocompletado de navegadores */
 input:-webkit-autofill {
     background-color: white !important;
     color: black !important;

@@ -6,7 +6,7 @@
     <title>Ver mascotas</title>
     <link rel="stylesheet" th:href="@{/css/secciones.css(v=${#dates.createNow().getTime()})}" />
     <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}" />
-    <link rel="stylesheet" th:href="@{/css/ver_mascota_cliente.css(v=${#dates.createNow().getTime()})}" />
+    <link rel="stylesheet" th:href="@{/css/crear_mascota.css}" />
 
   </head>
   <body>
@@ -37,20 +37,37 @@
               </div>
           </div>
     </header>
-
-    <h2>Bienvenido <span th:text="${nombreCliente}"></span></h2>
-
-    <section class="lista-mascotas">
-      <div class="mascota" th:each="mascota : ${mascotas}">
-        <a th:href="@{/mascota/{id}(id=${mascota.idMascota})}" class="btn-detalles">
-          <img th:src="${mascota.foto}" alt="Foto de mascota"
-               th:classappend="${mascota.estado == 1} ? 'img-inactiva' : ''"/>
-        </a>
-        
-        <h3 th:text="${mascota.nombre}"></h3>
-        <p th:text="${mascota.raza}"></p>
+    <div class="saludo">
+      <h2>Bienvenido <span th:text="${nombreCliente}"></span>
+    </div>
+    
+    <!-- Sección para mostrar mascotas dinámicamente -->
+    <section class="mascotas">
+      <h2>Mis mascotas</h2>
+    
+      <!-- Contenedor de mascotas -->
+      <div class="mascotas-container">
+        <!-- Si hay mascotas, las muestra -->
+        <th:block th:if="${not #lists.isEmpty(mascotas)}">
+          <th:block th:each="mascota : ${mascotas}">
+            <div class="mascota">
+              <a th:href="@{/mascota/{id}(id=${mascota.idMascota})}" class="btn-detalles">
+                <img th:src="${mascota.foto}" alt="Foto de mascota"
+                     th:classappend="${mascota.estado == 1} ? 'img-inactiva' : ''"/>
+              </a>
+              <h3 th:text="${mascota.nombre}"></h3>
+              <p th:text="${mascota.raza}"></p>
+            </div>
+          </th:block>
+        </th:block>
+    
+        <!-- Si no hay mascotas, muestra un mensaje -->
+        <p th:if="${#lists.isEmpty(mascotas)}">
+          No hay mascotas registradas.
+        </p>
       </div>
     </section>
+    
 
     <footer>
       <section class="footer-container">
@@ -116,6 +133,6 @@
         </div>
       </section>
     </footer>
-    <script th:src="@{js/login.js}"></script>
+    <script th:src="@{js/cerrar_sesion.js}"></script>
   </body>
 </html>

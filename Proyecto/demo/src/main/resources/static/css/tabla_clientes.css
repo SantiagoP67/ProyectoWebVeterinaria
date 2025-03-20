@@ -1,169 +1,170 @@
 /* Contenedor principal */
 .clientes-container {
-    max-width: 100%;
-    margin: 1rem 1rem;
-    background: white;
-    padding: 1rem;
-    border-radius: 12px;
-    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 100%;
+  margin: 1rem 1rem;
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Título de la sección */
 .clientes-container h2 {
-    color: #205375;
-    font-size: 2rem;
-    margin-bottom: 0;
-    font-weight: 600;
+  color: #205375;
+  font-size: 2rem;
+  margin-bottom: 0;
+  font-weight: 600;
 }
 
 .clientes-container h1 {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 /* Tabla */
 .tabla-clientes-container {
-    margin-top: 1.5rem;
-    overflow-x: auto; /* Para tablas responsivas */
+  margin-top: 1.5rem;
+  overflow-x: auto; /* Para tablas responsivas */
 }
 
 .tabla-clientes {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    margin: 0 auto;
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
 }
 
 .tabla-clientes th {
-    background-color: #40A8C4;
-    color: white;
-    padding: 1rem;
-    font-weight: 600;
-    text-align: center;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05rem;
+  background-color: #40a8c4;
+  color: white;
+  padding: 1rem;
+  font-weight: 600;
+  text-align: center;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
 }
 
 .tabla-clientes td {
-    padding: 1rem;
-    text-align: center;
-    font-size: 1rem;
-    border-bottom: 1px solid #E0E7EC;
-    color: #333;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1rem;
+  border-bottom: 1px solid #e0e7ec;
+  color: #333;
 }
 
 .tabla-clientes tr:nth-child(even) td {
-    background-color: #F5F9FA;
+  background-color: #f5f9fa;
 }
 
 .tabla-clientes tr:nth-child(odd) td {
-    background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 .tabla-clientes tbody tr:hover {
-    background-color: rgba(64, 168, 196, 0.1);
-    transition: background-color 0.3s ease;
-    cursor: pointer;
+  background-color: rgba(64, 168, 196, 0.1);
+  transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
 /* Estilos de imagen */
 .foto-cliente {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%; /* Imagen redonda */
-    border: 2px solid #40A8C4;
-    object-fit: cover;
-    transition: transform 0.3s ease;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Imagen redonda */
+  border: 2px solid #40a8c4;
+  object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
 .foto-cliente:hover {
-    transform: scale(1.1); /* Efecto de zoom al pasar el mouse */
+  transform: scale(1.1); /* Efecto de zoom al pasar el mouse */
 }
 
 .button-container {
-    display: block;  /* Asegura que ocupe todo el ancho */
-    margin-top: 15px; /* Espaciado entre el título y el botón */
+  display: block; /* Asegura que ocupe todo el ancho */
+  margin-top: 15px; /* Espaciado entre el título y el botón */
 }
-
 
 /* Botones */
 .btn-editar,
 .btn-eliminar,
 .btn-agregar {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-    margin: 0.2rem;
-    border: none;
-    cursor: pointer;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  margin: 0.2rem;
+  border: none;
+  cursor: pointer;
 }
 
-.btn-editar, .btn-agregar {
-    background-color: #205375;
-    color: white;
+.btn-editar,
+.btn-agregar {
+  background-color: #205375;
+  color: white;
 }
 
 .btn-eliminar {
-    background-color: #FF4D4D;
-    color: white;
+  background-color: #ff4d4d;
+  color: white;
 }
 
-.btn-editar:hover, .btn-agregar:hover {
-    background-color: #112D4E;
-    transform: translateY(-2px); /* Efecto de elevación */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.btn-editar:hover,
+.btn-agregar:hover {
+  background-color: #112d4e;
+  transform: translateY(-2px); /* Efecto de elevación */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .btn-eliminar:hover {
-    background-color: #E60000;
-    transform: translateY(-2px); /* Efecto de elevación */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #e60000;
+  transform: translateY(-2px); /* Efecto de elevación */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Botón de agregar */
 .btn-agregar {
-    margin-top: 1.5rem;
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .btn-agregar i {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .clientes-container {
-        padding: 1rem;
-    }
+  .clientes-container {
+    padding: 1rem;
+  }
 
-    .tabla-clientes th,
-    .tabla-clientes td {
-        padding: 0.8rem;
-        font-size: 0.9rem;
-    }
+  .tabla-clientes th,
+  .tabla-clientes td {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
 
-    .btn-editar,
-    .btn-eliminar,
-    .btn-agregar {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.8rem;
-    }
+  .btn-editar,
+  .btn-eliminar,
+  .btn-agregar {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
 
-    .foto-cliente {
-        width: 40px;
-        height: 40px;
-    }
+  .foto-cliente {
+    width: 40px;
+    height: 40px;
+  }
 }

@@ -130,6 +130,24 @@ header {
   z-index: 99999 !important;
 }
 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 150px;
+  overflow: hidden;
+  z-index: 100;
+}
+
 /* Estilos de los enlaces dentro del menú */
 .dropdown-menu a {
   display: block;
@@ -137,19 +155,16 @@ header {
   color: #333;
   text-decoration: none;
   transition: background-color 0.3s ease;
-  z-index: 99999;
 }
 
 .dropdown-menu a:hover {
   background-color: #f0f0f0;
-  z-index: 99999;
 }
 
 /* Mostrar el menú cuando está activo */
 .user-menu.active .dropdown-menu {
   display: block;
 }
-
 
 main {
   padding: 20px;
