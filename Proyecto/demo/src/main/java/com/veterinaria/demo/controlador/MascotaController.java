@@ -70,8 +70,6 @@ public class MascotaController {
 
         if (cedula != null) {
             mascotaService.crearMascota(mascota, cedula);
-
-            // Recuperar la lista de la sesión
             List<Mascota> mascotasAtendidas = (List<Mascota>) session.getAttribute("mascotasAtendidas");
 
             if (mascotasAtendidas == null) {
@@ -110,9 +108,6 @@ public class MascotaController {
             return "redirect:/inicio_sesion?error=sesionExpirada";
         }
     }
-
-
-
 
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEdicion(@PathVariable Integer id, Model model) {

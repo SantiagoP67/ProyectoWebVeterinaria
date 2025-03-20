@@ -68,8 +68,7 @@ p {
 .services-section-title {
   text-align: center;
   padding: 10px 10px;
-  background-color:  #dde2e4;;
-  font-family: "Alice", serif;
+  background-color:  #dde2e4;
   font-size: 20px;
   color: black;
   margin-top: 0;
@@ -210,7 +209,6 @@ p {
     transform: rotateY(180deg);
     text-align: center;
     font-size: 17px;
-    font-family: "Alice", serif;
     text-transform: none;
     position: relative;
   }
@@ -372,7 +370,6 @@ p {
 }
 
 .appointment-section h2 {
-  font-family: "Alice", serif;
   font-size: 30px;
   color: black;
   text-transform: uppercase;
@@ -411,7 +408,6 @@ p {
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 16px;
-  font-family: "Alice", serif;
   background-color: rgba(255, 255, 255, 0.9);
   color: black;
   transition: border-color 0.3s ease, background 0.3s ease;
@@ -435,7 +431,6 @@ p {
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s ease;
-  font-family: "Alice", serif;
 }
 
 .form-container button:disabled {
@@ -454,7 +449,6 @@ p {
 }
 
 .map-container h3 {
-  font-family: "Alice", serif;
   font-size: 20px;
   margin-bottom: 10px;
   text-align: left;
@@ -543,7 +537,6 @@ p {
 .associated-foundations h2 {
   text-align: center;
   padding-top: 40px;
-  font-family: "Alice", serif;
   font-size: 30px;
   color: black;
   margin-top: 0;
