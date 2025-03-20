@@ -66,7 +66,7 @@ public class ClienteController{
     @PostMapping("/actualizar/{id}")
     public String actualizarCliente(@PathVariable Integer id, Cliente cliente){
         clienteService.editarCliente(id, cliente);
-        return "redirect:/index";
+        return "redirect:/cliente";
     }
 
     @PostMapping("/eliminar/{id}")
