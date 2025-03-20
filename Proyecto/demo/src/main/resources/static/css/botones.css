@@ -1,4 +1,4 @@
-/* Estilos del botón */
+/* Estilos de todos los botón excepto los de landing y login. Detalle mascotas modifica el de registrar*/
 .btn-registrar {
   background-color: #205375;
   color: white;

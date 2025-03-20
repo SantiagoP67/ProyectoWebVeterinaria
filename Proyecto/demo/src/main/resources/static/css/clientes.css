@@ -1,3 +1,4 @@
+/* Estilos para la sección de clientes en veterinario*/
 .clientes-section {
   position: relative;
   overflow: hidden;
@@ -25,6 +26,12 @@
   cursor: pointer;
 }
 
+.clientes-section h2 {
+  padding-bottom: 20px;
+  font-size: 24px;
+  margin: 0;
+}
+
 /* Contenedor principal con marco */
 .clientes {
   width: 100%;
@@ -48,6 +55,7 @@
   gap: 20px;
   justify-content: center;
   margin: 0;
+  margin-top: 20px;
 }
 
 /* Estilos generales de la tarjeta */

@@ -6,11 +6,7 @@
     <title>Lista de Mascotas</title>
     <link rel="stylesheet" th:href="@{/css/tabla.css}" />
     <link rel="stylesheet" th:href="@{/css/botones.css}" />
-    <link rel="stylesheet" th:href="@{/css/crear_mascota.css}" />
-    <link
-      rel="stylesheet"
-      th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}"
-    />
+    <link rel="stylesheet" th:href="@{/css/header_footer.css(v=${#dates.createNow().getTime()})}" />
   </head>
 
   <header>
@@ -27,21 +23,20 @@
       </ul>
     </nav>
 
-    <!-- Mostrar imagen y nombre del veterinario si está autenticado -->
+    <!--
     <div class="user-info" th:if="${session.nombre}">
       <img th:src="${session.foto}" alt="Foto de perfil" class="profile-pic" />
       <div class="dropdown">
         <span class="username" th:text="${session.nombre}"></span>
         <div class="dropdown-menu">
-          <!-- <a th:href="@{/veterinario/editar/{id}(id=${session.idVeterinario})}">Editar datos</a> -->
           <a href="/cerrar-sesion">Cerrar sesión</a>
         </div>
       </div>
-    </div>
+    </div>-->
   </header>
 
   <body>
-    <div class="container">
+    <div class="container-principal">
       <h1>Lista de Mascotas</h1>
       <div class="button-container">
         <a th:href="@{/mascota/crear}" class="btn-agregar">Agregar Mascota</a>
