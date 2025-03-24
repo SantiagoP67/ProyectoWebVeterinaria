@@ -318,6 +318,27 @@ public class DataBaseInit implements ApplicationRunner {
                 0, 18, "vet5", "pass5", null, null);
         veterinarioRepository.save(veterinario5);
 
+        Veterinario veterinario6 = new Veterinario(null, "Dr. Ramírez", "678901", "Cirujano Veterinario",
+                        "https://www.diarioveterinario.com/images/showid2/2860071?w=900&mh=700", 1, 15, "vet6", "pass6", null, null);
+        veterinarioRepository.save(veterinario6);
+
+        Veterinario veterinario7 = new Veterinario(null, "Dra. Fernández", "789012", "Especialista en Animales de Granja",
+                        "https://sumimascotas.com/wp-content/uploads/2023/05/9.Dia-del-Veterinario-Colombia-1.jpg", 0, 20, "vet7", "pass7", null, null);
+        veterinarioRepository.save(veterinario7);
+
+        Veterinario veterinario8 = new Veterinario(null, "Dr. Morales", "890123", "Dermatólogo Veterinario",
+                        "https://blog.agrovetmarket.com/wp-content/uploads/2020/05/vet.jpg", 1, 12, "vet8", "pass8", null, null);
+        veterinarioRepository.save(veterinario8);
+
+        Veterinario veterinario9 = new Veterinario(null, "Dra. Castillo", "901234", "Especialista en Rehabilitación Animal",
+                        "https://cdn0.expertoanimal.com/es/posts/3/6/3/cuando_llevar_a_mi_cachorro_al_veterinario_por_primera_vez_23363_600_square.jpg", 0, 10, "vet9", "pass9", null, null);
+        veterinarioRepository.save(veterinario9);
+
+        Veterinario veterinario10 = new Veterinario(null, "Dr. Pérez", "012345", "Especialista en Cirugía",
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSN6GFsKiPWtTdAKZyKXFQj1P8L7BZkX2ziLb1thmXaYtGlJlJirPSlaG8bKB6i7hRrLJY&usqp=CAU", 1, 8, "vet10", "pass10", null, null);
+        veterinarioRepository.save(veterinario10);
+
+
 
         // Creación de administrador
         Administrador administrador = new Administrador(null, "Carlos López", "carlosl@gmail.com",
