@@ -1,6 +1,8 @@
 package com.veterinaria.demo.entidad;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -861,31 +863,50 @@ public class DataBaseInit implements ApplicationRunner {
                 cliente50);
         mascotaRepository.save(mascota100);
 
-        /* Creación de un tratamiento */
-        Tratamiento tratamiento1 = new Tratamiento(1, "TRAT123", new Date(), "Tratamiento básico", veterinario1,
-                mascota1, servicioConsulta, null);
-        tratamientoRepository.save(tratamiento1);
+        // Creación de 10 tratamientos
+        List<Tratamiento> tratamientos = Arrays.asList(
+        new Tratamiento(1, "TRAT001", new Date(), "Desparasitación interna", veterinario2, mascota1, servicioConsulta, null),
+        new Tratamiento(2, "TRAT002", new Date(), "Control de pulgas y garrapatas", veterinario1, mascota2, servicioConsulta, null),
+        new Tratamiento(3, "TRAT003", new Date(), "Tratamiento antiinflamatorio", veterinario5, mascota3, servicioConsulta, null),
+        new Tratamiento(4, "TRAT004", new Date(), "Antibiótico para infecciones", veterinario4, mascota4, servicioConsulta, null),
+        new Tratamiento(5, "TRAT005", new Date(), "Analgésico postoperatorio", veterinario1, mascota5, servicioConsulta, null),
+        new Tratamiento(6, "TRAT006", new Date(), "Reducción de estrés", veterinario6, mascota6, servicioConsulta, null),
+        new Tratamiento(7, "TRAT007", new Date(), "Cuidado renal", veterinario1, mascota7, servicioConsulta, null),
+        new Tratamiento(8, "TRAT008", new Date(), "Tratamiento digestivo", veterinario6, mascota8, servicioConsulta, null),
+        new Tratamiento(9, "TRAT009", new Date(), "Terapia para articulaciones", veterinario3, mascota9, servicioConsulta, null),
+        new Tratamiento(10, "TRAT010", new Date(), "Tratamiento para infecciones urinarias", veterinario6, mascota10, servicioConsulta, null)
+        );
+        tratamientoRepository.saveAll(tratamientos);
 
-        Tratamiento tratamiento2 = new Tratamiento(2, "TRAT123", new Date(), "Tratamiento básico", veterinario1,
-        mascota2, servicioConsulta, null);
-        tratamientoRepository.save(tratamiento2);
+        // Creación de medicamentos
+        List<Medicamento> medicamentos = Arrays.asList(
+        new Medicamento(null, "Advantix", 150.0f, 200.0f, 50, 10, null),
+        new Medicamento(null, "Drontal", 100.0f, 130.0f, 60, 15, null),
+        new Medicamento(null, "Vetoquinol", 80.0f, 110.0f, 40, 20, null),
+        new Medicamento(null, "Cortaf", 75.0f, 100.0f, 45, 12, null),
+        new Medicamento(null, "Milbemax", 120.0f, 150.0f, 70, 8, null),
+        new Medicamento(null, "Metronidazol", 90.0f, 120.0f, 55, 16, null),
+        new Medicamento(null, "Rimadyl", 200.0f, 250.0f, 30, 5, null),
+        new Medicamento(null, "Panacur", 85.0f, 110.0f, 50, 18, null),
+        new Medicamento(null, "Zylkene", 150.0f, 180.0f, 35, 6, null),
+        new Medicamento(null, "Bexacat", 110.0f, 140.0f, 40, 7, null)
+        );
+        medicamentoRepository.saveAll(medicamentos);
 
-        Tratamiento tratamiento3 = new Tratamiento(3, "TRAT123", new Date(), "Tratamiento con seguimiento", veterinario1,
-        mascota3, servicioConsulta, null);
-        tratamientoRepository.save(tratamiento3);
+        // Asociar tratamientos con medicamentos (1 tratamiento = 1 medicamento)
+        List<TratamientoMedicamento> tratamientosMedicamentos = new ArrayList<>();
+        for (int i = 0; i < tratamientos.size(); i++) {
+        Tratamiento tratamiento = tratamientos.get(i);
+        Medicamento medicamento = medicamentos.get(i); // Asociación 1 a 1
 
-        Tratamiento tratamiento4 = new Tratamiento(4, "TRAT123", new Date(), "Tratamiento con seguimiento", veterinario1,
-        mascota4, servicioConsulta, null);
-        tratamientoRepository.save(tratamiento4);
+        TratamientoMedicamento tratamientoMedicamento = new TratamientoMedicamento(null, tratamiento, medicamento, 2);
+        tratamientosMedicamentos.add(tratamientoMedicamento);
+        }
 
-        // Creación de un medicamento
-        Medicamento medicamento = new Medicamento(null, "Antibiótico", 100.0f, 150.0f, 50, 10, null);
-        medicamentoRepository.save(medicamento);
+        // Guardar asociaciones en la base de datos
+        tratamientoMedicamentoRepository.saveAll(tratamientosMedicamentos);
 
-        // Asociación entre tratamiento y medicamento
-        TratamientoMedicamento tratamientoMedicamento = new TratamientoMedicamento(null, tratamiento1, medicamento, 2);
-        tratamientoMedicamentoRepository.save(tratamientoMedicamento);
-
+        
         System.out.println("Base de datos inicializada con datos de ejemplo.");
     }
 }
