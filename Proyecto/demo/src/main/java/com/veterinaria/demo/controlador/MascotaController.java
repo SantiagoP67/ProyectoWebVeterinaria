@@ -1,6 +1,93 @@
 package com.veterinaria.demo.controlador;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import com.veterinaria.demo.entidad.Cliente;
+import com.veterinaria.demo.entidad.Mascota;
+import com.veterinaria.demo.repositorio.ClienteRepository;
+import com.veterinaria.demo.repositorio.MascotaRepository;
+import com.veterinaria.demo.servicio.ClienteService;
+import com.veterinaria.demo.servicio.MascotaService;
+import com.veterinaria.demo.servicio.VeterinarioService;
+
+@RestController
+@RequestMapping("mascota")
+@CrossOrigin(origins = "http://localhost:4200")
+public class MascotaController {
+
+    @Autowired
+    private MascotaService mascotaService;
+
+    @Autowired
+    private MascotaRepository mascotaRepository;
+
+    @Autowired
+    private ClienteService clienteService;
+
+    @Autowired
+    private ClienteRepository clienteRepository;
+
+    @Autowired
+    private VeterinarioService veterinarioService;
+
+    /**
+     * Muestra todas las mascotas registradas.
+     * URL: http://localhost:8082/mascota
+     */
+    @GetMapping
+    public List<Mascota> mostrarMascotas(Model model) {
+        return mascotaService.obtenerTodasMascotas();
+    }
+
+    /**
+     * Muestra los detalles de una mascota por su ID.
+     * URL: http://localhost:8082/mascota/{id}
+     */
+    @GetMapping("/{id}")
+    public Mascota detalleMascota(@PathVariable Integer id, Model model) {
+        return mascotaService.obtenerMascotaPorId(id);
+    }
+
+    /**
+     * Lista las mascotas asociadas a un cliente específico.
+     * URL: http://localhost:8082/mascota/mascotas?idCliente=1
+     */
+    @GetMapping("/mascotas")
+    public List<Mascota> listarMascotas(@RequestParam("idCliente") Integer idCliente) {
+        return mascotaService.obtenerMascotasPorCliente(idCliente);
+    }
+
+    /**
+     * Crea una nueva mascota y la asocia a un cliente existente.
+     * URL: http://localhost:8082/mascota/agregar?idCliente=123
+     * Body: JSON con datos de la mascota.
+     */
+    @PostMapping("/agregar")
+    public ResponseEntity<Mascota> agregarMascota(@RequestBody Mascota mascota, @RequestParam Integer idCliente) {
+        // Busca el cliente por ID
+        Cliente cliente = clienteRepository.findById(idCliente)
+            .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+
+        // Asocia la mascota con el cliente
+        mascota.setCliente(cliente);
+
+        // Guarda la mascota en la base de datos
+        Mascota guardada = mascotaRepository.save(mascota);
+
+        // Devuelve la mascota guardada como respuesta
+        return ResponseEntity.ok(guardada);
+    }
+}
+
+/*Codigo usando Thymeleaf
+
+package com.veterinaria.demo.controlador;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -140,3 +227,4 @@ public class MascotaController {
         return "ver_mascota_cliente";
     }
 }
+*/
