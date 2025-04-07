@@ -1,12 +1,20 @@
 package com.veterinaria.demo.entidad;
 
-import jakarta.persistence.*;
-import lombok.*;
-
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "mascota")
@@ -21,11 +29,11 @@ public class Mascota {
     private String nombre;
     @Column(nullable = false)
     private String raza;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Integer edad;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Float peso;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String enfermedad;
     @Column(nullable = false)
     private String foto;

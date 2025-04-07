@@ -34,8 +34,8 @@ public class MascotaServiceImpl implements MascotaService {
     }
 
     @Override
-    public Mascota crearMascota(Mascota mascota, String cedula) {
-        Cliente cliente = clienteRepository.findByCedula(cedula);
+    public Mascota crearMascota(Mascota mascota, Integer idCliente) {
+        Cliente cliente = clienteRepository.findById(idCliente).orElse(null);
         mascota.setCliente(cliente);
         return mascotaRepository.save(mascota);
     }
