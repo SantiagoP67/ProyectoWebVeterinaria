@@ -6,12 +6,14 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.veterinaria.demo.ErrorHeading.NotFoundException;
 import com.veterinaria.demo.entidad.Cliente;
@@ -22,8 +24,9 @@ import com.veterinaria.demo.servicio.VeterinarioService;
 
 import jakarta.servlet.http.HttpSession;
 
-@Controller
+@RestController
 @RequestMapping("mascota")
+@CrossOrigin(origins = "http://localhost:4200")
 public class MascotaController {
 
     @Autowired
@@ -37,14 +40,15 @@ public class MascotaController {
 
 
     @GetMapping
-    public String mostrarMascotas(Model model) {
-        List<Mascota> mascotas = mascotaService.obtenerTodasMascotas();
-        model.addAttribute("mascotas", mascotas);
-        return "mascotas";
+    public List<Mascota> mostrarMascotas(Model model) {
+        //List<Mascota> mascotas = mascotaService.obtenerTodasMascotas();
+        //model.addAttribute("mascotas", mascotas);
+        //return "mascotas";
+        return mascotaService.obtenerTodasMascotas();
     }
 
-    @GetMapping("/{id}")
-    public String detalleMascota(@PathVariable Integer id, Model model) {
+    /*@GetMapping("/{id}")
+    public List<Mascota> detalleMascota(@PathVariable Integer id, Model model) {
         Mascota mascota = mascotaService.obtenerMascotaPorId(id);
         if(mascota!= null){
             model.addAttribute("mascota", mascota);
@@ -57,14 +61,14 @@ public class MascotaController {
     }
 
     @GetMapping("/crear")
-    public String mostrarFormularioCreacion(Model model) {
+    public List<Mascota> mostrarFormularioCreacion(Model model) {
         model.addAttribute("mascota", new Mascota());
         model.addAttribute("clientes", clienteService.obtenerTodosClientes());
         return "crear_mascota";
     }
 
     @PostMapping("/crear")
-    public String crearMascota(@RequestParam("cedula") String cedula,
+    public List<Mascota> crearMascota(@RequestParam("cedula") List<Mascota> cedula,
                                @ModelAttribute Mascota mascota,
                                HttpSession session, Model model) {
 
@@ -99,7 +103,7 @@ public class MascotaController {
             }
             session.setAttribute("clientesAtendidos", clientes);
 
-            String rol = (String) session.getAttribute("rol");
+            List<Mascota> rol = (List<Mascota>) session.getAttribute("rol");
             if ("VETERINARIO".equals(rol)) {
                 return "redirect:/veterinario";
             }
@@ -111,26 +115,26 @@ public class MascotaController {
     }
 
     @GetMapping("/editar/{id}")
-    public String mostrarFormularioEdicion(@PathVariable Integer id, Model model) {
+    public List<Mascota> mostrarFormularioEdicion(@PathVariable Integer id, Model model) {
         Mascota mascota = mascotaService.obtenerMascotaPorId(id);
         model.addAttribute("mascota", mascota);
         return "editar_mascota";
     }
 
     @PostMapping("/editar/{id}")
-    public String actualizarMascota(@PathVariable Integer id, @ModelAttribute Mascota mascota) {
+    public List<Mascota> actualizarMascota(@PathVariable Integer id, @ModelAttribute Mascota mascota) {
         mascotaService.actualizarMascota(id, mascota);
         return "redirect:/mascota";
     }
 
     @PostMapping("/eliminar/{id}")
-    public String eliminarMascota(@PathVariable Integer id, @ModelAttribute Mascota mascota) {
+    public List<Mascota> eliminarMascota(@PathVariable Integer id, @ModelAttribute Mascota mascota) {
         mascotaService.cambiarEstado(id, mascota);
         return "redirect:/mascota";
     }
 
     @GetMapping("/mascotas")
-    public String listarMascotas(@RequestParam("idCliente") Integer idCliente, Model model) {
+    public List<Mascota> listarMascotas(@RequestParam("idCliente") Integer idCliente, Model model) {
         Cliente cliente = clienteService.obtenerClientePorId(idCliente); // Método para obtener el cliente
         List<Mascota> mascotas = mascotaService.obtenerMascotasPorCliente(idCliente);
 
@@ -138,5 +142,5 @@ public class MascotaController {
         model.addAttribute("nombreCliente", cliente.getNombre());
 
         return "ver_mascota_cliente";
-    }
+    }*/
 }
