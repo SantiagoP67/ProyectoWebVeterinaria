@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.veterinaria.demo.servicio.ClienteService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/cliente")
@@ -66,16 +68,15 @@ public class ClienteController{
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<String> eliminarCliente(@PathVariable Integer id){
-        System.out.println("Intentando eliminar ID: " + id);
+    public ResponseEntity<Map<String, String>> eliminarCliente(@PathVariable Integer id) {
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado con ID: " + id));
 
-        if (mascotaRepository.existsById(id)) {
-            mascotaRepository.deleteById(id);
-            return ResponseEntity.ok("Cliente eliminado correctamente");
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no encontrado");
-        }
+        clienteRepository.delete(cliente);
+
+        Map<String, String> respuesta = new HashMap<>();
+        respuesta.put("mensaje", "Cliente eliminado correctamente");
+
+        return new ResponseEntity<>(respuesta, HttpStatus.OK);
     }
-
-
 }
