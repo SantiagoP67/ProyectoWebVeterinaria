@@ -114,19 +114,19 @@ public class MascotaController {
         return ResponseEntity.ok(mascotaGuardada);
     }
 
-    @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<String> eliminarMascota(@PathVariable Integer id) {
+    @PutMapping("/eliminar/{id}")
+    public ResponseEntity<Mascota> eliminarMascota(@PathVariable Integer id) {
         // Verifica si la mascota existe
         Mascota mascota = mascotaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Mascota no encontrada con ID: " + id));
 
         // Cambia el estado a 'inactiva' o el que uses para marcar eliminación lógica
-        mascota.setEstado(1); // o "ELIMINADA", según tu lógica de negocio
+        mascotaService.cambiarEstado(id, mascota);
 
         // Guarda la mascota con el nuevo estado
         mascotaRepository.save(mascota);
 
-        return ResponseEntity.ok("Mascota con ID " + id + " marcada como inactiva.");
+        return ResponseEntity.ok(mascota);
     }
 
 }

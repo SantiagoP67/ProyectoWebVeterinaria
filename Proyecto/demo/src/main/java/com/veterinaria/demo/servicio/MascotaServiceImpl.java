@@ -53,14 +53,21 @@ public class MascotaServiceImpl implements MascotaService {
         return mascotaRepository.save(mascotaActual);
     }
     @Override
-    public void cambiarEstado(Integer id, Mascota mascota){
+    public void cambiarEstado(Integer id, Mascota mascota) {
         Mascota mascotaActual = mascotaRepository.findById(id).orElse(null);
         if (mascotaActual != null) {
-            mascotaActual.setEstado(mascota.getEstado());
-            mascotaRepository.save(mascotaActual); 
+            // Si el estado actual es 1, lo cambiamos a 0
+            if (mascotaActual.getEstado().equals(1)) {
+                mascotaActual.setEstado(0);
+            }
+            // Si el estado actual es 0, lo cambiamos a 1
+            else if (mascotaActual.getEstado().equals(0)) {
+                mascotaActual.setEstado(1);
+            }
+            mascotaRepository.save(mascotaActual);
         }
     }
-    
+
 
     @Override
     public void eliminarMascota(Integer id) {
