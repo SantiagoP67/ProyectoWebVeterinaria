@@ -71,7 +71,7 @@ public class MascotaController {
     public ResponseEntity<Mascota> agregarMascota(@RequestBody Mascota mascota, @RequestParam Integer idCliente) {
         // Busca el cliente por ID
         Cliente cliente = clienteRepository.findById(idCliente)
-            .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
 
         // Asocia la mascota con el cliente
         mascota.setCliente(cliente);
@@ -82,6 +82,53 @@ public class MascotaController {
         // Devuelve la mascota guardada como respuesta
         return ResponseEntity.ok(guardada);
     }
+
+    @PutMapping("/editar/{id}")
+    public ResponseEntity<Mascota> editarMascota(@PathVariable Integer id, @RequestBody Mascota mascotaActualizada) {
+        // Verifica si la mascota existe
+        Mascota mascotaExistente = mascotaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Mascota no encontrada con ID: " + id));
+
+        // Actualiza los campos necesarios
+        mascotaExistente.setNombre(mascotaActualizada.getNombre());
+        mascotaExistente.setRaza(mascotaActualizada.getRaza());
+        mascotaExistente.setEdad(mascotaActualizada.getEdad());
+        mascotaExistente.setPeso(mascotaActualizada.getPeso());
+        mascotaExistente.setEstado(mascotaActualizada.getEstado());
+        mascotaExistente.setEnfermedad(mascotaActualizada.getEnfermedad());
+        mascotaExistente.setFoto(mascotaActualizada.getFoto());
+        mascotaExistente.setFechaNacimiento(mascotaActualizada.getFechaNacimiento());
+        mascotaExistente.setFechaIngreso(mascotaActualizada.getFechaIngreso());
+        mascotaExistente.setFechaSalida(mascotaActualizada.getFechaSalida());
+
+        // Si también se quiere actualizar el cliente asociado
+        if (mascotaActualizada.getCliente() != null) {
+            Integer idCliente = mascotaActualizada.getCliente().getIdCliente();
+            Cliente cliente = clienteRepository.findById(idCliente)
+                    .orElseThrow(() -> new RuntimeException("Cliente no encontrado con ID: " + idCliente));
+            mascotaExistente.setCliente(cliente);
+        }
+
+        // Guarda la mascota actualizada
+        Mascota mascotaGuardada = mascotaRepository.save(mascotaExistente);
+        return ResponseEntity.ok(mascotaGuardada);
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<String> eliminarMascota(@PathVariable Integer id) {
+        // Verifica si la mascota existe
+        Mascota mascota = mascotaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Mascota no encontrada con ID: " + id));
+
+        // Cambia el estado a 'inactiva' o el que uses para marcar eliminación lógica
+        mascota.setEstado(1); // o "ELIMINADA", según tu lógica de negocio
+
+        // Guarda la mascota con el nuevo estado
+        mascotaRepository.save(mascota);
+
+        return ResponseEntity.ok("Mascota con ID " + id + " marcada como inactiva.");
+    }
+
 }
 
 /*Codigo usando Thymeleaf
