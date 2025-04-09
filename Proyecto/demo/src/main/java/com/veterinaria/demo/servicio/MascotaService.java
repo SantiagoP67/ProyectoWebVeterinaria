@@ -12,4 +12,5 @@ public interface MascotaService {
     Mascota actualizarMascota(Integer id, Mascota mascota);
     void eliminarMascota(Integer id);
     void cambiarEstado(Integer id, Mascota mascota);
+    List<Mascota> buscarPorNombre(String nombre);
 }

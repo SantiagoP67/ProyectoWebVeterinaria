@@ -78,4 +78,10 @@ public class MascotaServiceImpl implements MascotaService {
     public List<Mascota> obtenerMascotasPorCliente(Integer idCliente) {
         return mascotaRepository.findByClienteIdCliente(idCliente);
     }
+    
+    @Override
+    public List<Mascota> buscarPorNombre(String nombre) {
+        return mascotaRepository.findByNombreContainingIgnoreCase(nombre);
+    }
+    
 }
