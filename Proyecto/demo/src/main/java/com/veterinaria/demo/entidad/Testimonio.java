@@ -14,10 +14,10 @@ public class Testimonio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idTestimonio;
+    
     @Column(nullable = false)
     private String texto;
-    @Column(nullable = false)
-    private String imagen;
+    
     @Column(nullable = false)
     private Integer calificacion;
 

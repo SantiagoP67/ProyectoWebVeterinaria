@@ -20,6 +20,6 @@ public class DemoApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         cargaMedicamentosService.cargarMedicamentosDesdeCSV();
-        System.out.println("✅ Medicamentos cargados desde el CSV.");
+        System.out.println("Medicamentos cargados desde el CSV.");
     }
 }

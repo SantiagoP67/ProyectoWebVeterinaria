@@ -3,8 +3,11 @@ package com.veterinaria.demo.entidad;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Collections;
+import java.util.Random;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -12,11 +15,13 @@ import org.springframework.stereotype.Component;
 
 import com.veterinaria.demo.repositorio.AdministradorRepository;
 import com.veterinaria.demo.repositorio.ClienteRepository;
+import com.veterinaria.demo.repositorio.CitaRepository;
 import com.veterinaria.demo.repositorio.FacturaRepository;
 import com.veterinaria.demo.repositorio.MascotaRepository;
 import com.veterinaria.demo.repositorio.MedicamentoRepository;
 import com.veterinaria.demo.repositorio.MetodoPagoRepository;
 import com.veterinaria.demo.repositorio.ServicioRepository;
+import com.veterinaria.demo.repositorio.TestimonioRepository;
 import com.veterinaria.demo.repositorio.TratamientoMedicamentoRepository;
 import com.veterinaria.demo.repositorio.TratamientoRepository;
 import com.veterinaria.demo.repositorio.VeterinarioRepository;
@@ -30,6 +35,8 @@ import lombok.RequiredArgsConstructor;
 public class DataBaseInit implements ApplicationRunner {
 
     private final ClienteRepository clienteRepository;
+    private final CitaRepository citaRepository;
+    private final TestimonioRepository testimonioRepository;
     private final VeterinarioRepository veterinarioRepository;
     private final AdministradorRepository administradorRepository;
     private final ServicioRepository servicioRepository;
@@ -340,22 +347,116 @@ public class DataBaseInit implements ApplicationRunner {
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSN6GFsKiPWtTdAKZyKXFQj1P8L7BZkX2ziLb1thmXaYtGlJlJirPSlaG8bKB6i7hRrLJY&usqp=CAU", 1, 8, "vet10", "pass10", null, null);
         veterinarioRepository.save(veterinario10);
 
-
-
         // Creación de administrador
         Administrador administrador = new Administrador(null, "Carlos López", "carlosl@gmail.com",
                 "https://portal.unbosque.edu.co/sites/default/files/inline-images/en-que-puede-trabajar-un-administrador-de-empresas.jpg",
                 "987654321", "admin", "123");
         administradorRepository.save(administrador);
 
-        // Creación de servicios
-        Servicio servicioConsulta = new Servicio(null, "Consulta General", "Revisión general de la mascota", 50000f,
-                null, null, null);
+        // Creación de servicios con imágenes
+        Servicio servicioConsulta = new Servicio(
+                null, 
+                "Consulta General", 
+                "Realizamos chequeos completos para garantizar la salud de tu mascota.", 
+                50000f,
+                "https://i.postimg.cc/WbXq7Lwq/consulta.png",
+                "https://i.postimg.cc/WbXq7Lwq/consulta.png",
+                null, null, null
+        );
         servicioRepository.save(servicioConsulta);
+        
+        Servicio servicioCirugia = new Servicio(
+                null, 
+                "Cirugía", 
+                "Contamos con quirófanos equipados para procedimientos seguros.", 
+                70000f,
+                "https://i.postimg.cc/Fs9Jcs3Q/cirugia.png",
+                "https://i.postimg.cc/Fs9Jcs3Q/cirugia.png",
+                null, null, null
+        );
+        servicioRepository.save(servicioCirugia);
+        
+        Servicio servicioEstetica = new Servicio(
+                null, 
+                "Estética y peluquería", 
+                "Ofrecemos servicios de baño, cortes de pelo y cuidado estético.", 
+                20000f,
+                "https://i.postimg.cc/J0dmGqj0/estetica.png",
+                "https://i.postimg.cc/J0dmGqj0/estetica.png",
+                null, null, null
+        );
+        servicioRepository.save(servicioEstetica);
+        
+        Servicio servicioHospitalizacion = new Servicio(
+                null, 
+                "Hospitalización", 
+                "Brindamos hospitalización para garantizar la recuperación de tu mascota.", 
+                65000f,
+                "https://i.postimg.cc/mgkzXXmX/hospital.png",
+                "https://i.postimg.cc/mgkzXXmX/hospital.png",
+                null, null, null
+        );
+        servicioRepository.save(servicioHospitalizacion);
+        
+        Servicio servicioMonitoreo = new Servicio(
+                null, 
+                "Monitoreo", 
+                "Seguimiento continuo para supervisar el estado de salud de tu mascota.", 
+                15000f,
+                "https://i.postimg.cc/sDvsbkRh/monitoreo.png",
+                "https://i.postimg.cc/sDvsbkRh/monitoreo.png",
+                null, null, null
+        );
+        servicioRepository.save(servicioMonitoreo);
+        
+        Servicio servicioVacunacion = new Servicio(
+                null, 
+                "Vacunación", 
+                "Ofrecemos una amplia gama de vacunas para mantener a tu mascota protegida y saludable.", 
+                5000f,
+                "https://i.postimg.cc/L4ymCHGS/vacunacion.png",
+                "https://i.postimg.cc/L4ymCHGS/vacunacion.png",
+                null, null, null
+        );
+        servicioRepository.save(servicioVacunacion);
+        
+        Servicio servicioLaboratorio = new Servicio(
+                null, 
+                "Laboratorio clínico", 
+                "Realizamos pruebas de laboratorio para diagnosticar y prevenir enfermedades.", 
+                25500f,
+                "https://i.postimg.cc/rw4cw5sy/lab.png",
+                "https://i.postimg.cc/rw4cw5sy/lab.png",
+                null, null, null
+        );
+        servicioRepository.save(servicioLaboratorio);
+        
+        Servicio servicioRehabilitacion = new Servicio(
+                null, 
+                "Rehabilitación", 
+                "Ofrecemos terapias físicas y rehabilitación para mejorar la movilidad y calidad de vida de tu mascota.", 
+                22500f,
+                "https://i.postimg.cc/WbXq7Lwq/consulta.png", // Imagen por defecto
+                "https://i.postimg.cc/WbXq7Lwq/consulta.png", // Imagen por defecto
+                null, null, null
+        );
+        servicioRepository.save(servicioRehabilitacion);
 
         // Creación de métodos de pago
         MetodoPago metodoPago = new MetodoPago(null, "Tarjeta de Crédito", null);
         metodoPagoRepository.save(metodoPago);
+
+        MetodoPago metodoPago2 = new MetodoPago(null, "Tarjeta de Débito", null);
+        metodoPagoRepository.save(metodoPago2);
+
+        MetodoPago metodoPago3 = new MetodoPago(null, "PSE", null);
+        metodoPagoRepository.save(metodoPago3);
+
+        MetodoPago metodoPago4 = new MetodoPago(null, "Efectivo", null);
+        metodoPagoRepository.save(metodoPago4);
+
+        MetodoPago metodoPago5 = new MetodoPago(null, "Transferencia bancaria", null);
+        metodoPagoRepository.save(metodoPago5);
 
         // Creación de una factura
         Factura factura = new Factura(null, new Timestamp(new Date().getTime()), 50000f, List.of(metodoPago),
@@ -893,20 +994,103 @@ public class DataBaseInit implements ApplicationRunner {
         );
         medicamentoRepository.saveAll(medicamentos);
 
-        // Asociar tratamientos con medicamentos (1 tratamiento = 1 medicamento)
+        // Asociar tratamientos con múltiples medicamentos distintos
         List<TratamientoMedicamento> tratamientosMedicamentos = new ArrayList<>();
-        for (int i = 0; i < tratamientos.size(); i++) {
-        Tratamiento tratamiento = tratamientos.get(i);
-        Medicamento medicamento = medicamentos.get(i); // Asociación 1 a 1
+        Random random = new Random();
 
-        TratamientoMedicamento tratamientoMedicamento = new TratamientoMedicamento(null, tratamiento, medicamento, 2);
-        tratamientosMedicamentos.add(tratamientoMedicamento);
+        for (Tratamiento tratamiento : tratamientos) {
+        // Selecciona una cantidad aleatoria de medicamentos entre 1 y 3
+        int cantidadMedicamentos = 1 + random.nextInt(3);
+
+        // Crea una copia aleatoria del listado para evitar repetidos
+        List<Medicamento> medicamentosAleatorios = new ArrayList<>(medicamentos);
+        Collections.shuffle(medicamentosAleatorios);
+
+        for (int j = 0; j < cantidadMedicamentos && j < medicamentosAleatorios.size(); j++) {
+                Medicamento medicamento = medicamentosAleatorios.get(j);
+                int cantidad = 1 + random.nextInt(3); // Entre 1 y 3 unidades
+
+                TratamientoMedicamento tratamientoMedicamento = new TratamientoMedicamento(
+                null, tratamiento, medicamento, cantidad
+                );
+                tratamientosMedicamentos.add(tratamientoMedicamento);
+        }
         }
 
         // Guardar asociaciones en la base de datos
         tratamientoMedicamentoRepository.saveAll(tratamientosMedicamentos);
 
-        
+        // Creación de citas
+        Cita cita1 = new Cita(null,
+        new Date(System.currentTimeMillis() + 3600 * 1000),
+        "Sucursal Norte",
+        mascotaRepository.findById(1).orElse(null),
+        veterinarioRepository.findById(1).orElse(null),
+        servicioRepository.findById(1).orElse(null)
+        );
+        citaRepository.save(cita1);
+
+        Cita cita2 = new Cita(null,
+        new Date(System.currentTimeMillis() + 7200 * 1000),
+        "Sucursal Centro",
+        mascotaRepository.findById(2).orElse(null),
+        veterinarioRepository.findById(2).orElse(null),
+        servicioRepository.findById(2).orElse(null)
+        );
+        citaRepository.save(cita2);
+
+        Cita cita3 = new Cita(null,
+        new Date(System.currentTimeMillis() + 10800 * 1000),
+        "Sucursal Sur",
+        mascotaRepository.findById(3).orElse(null),
+        veterinarioRepository.findById(1).orElse(null),
+        servicioRepository.findById(3).orElse(null)
+        );
+        citaRepository.save(cita3);
+
+        // Creación de testimonios
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.set(2025, Calendar.FEBRUARY, 1);
+        Date fecha1 = calendar1.getTime();
+
+        Testimonio testimonio1 = new Testimonio(
+            null,
+            "Excelente atención, mi perrita quedó preciosa después del baño.",
+            5,
+            fecha1,
+            clienteRepository.findById(1).orElse(null),
+            servicioRepository.findById(3).orElse(null)
+        );
+        testimonioRepository.save(testimonio1);
+
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.set(2025, Calendar.MARCH, 15);
+        Date fecha2 = calendar2.getTime();
+
+        Testimonio testimonio2 = new Testimonio(
+            null,
+            "El veterinario fue muy profesional y resolvió todas mis dudas.",
+            4,
+            fecha2,
+            clienteRepository.findById(2).orElse(null),
+            servicioRepository.findById(1).orElse(null)
+        );
+        testimonioRepository.save(testimonio2);
+
+        Calendar calendar3 = Calendar.getInstance();
+        calendar3.set(2025, Calendar.APRIL, 10);
+        Date fecha3 = calendar3.getTime();
+
+        Testimonio testimonio3 = new Testimonio(
+            null,
+            "Muy agradecido por la atención durante la hospitalización de mi gato.",
+            5,
+            fecha3,
+            clienteRepository.findById(3).orElse(null),
+            servicioRepository.findById(4).orElse(null)
+        );
+        testimonioRepository.save(testimonio3);
+
         System.out.println("Base de datos inicializada con datos de ejemplo.");
     }
 }
