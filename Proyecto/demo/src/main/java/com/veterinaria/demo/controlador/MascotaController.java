@@ -19,9 +19,9 @@ import com.veterinaria.demo.entidad.Cliente;
 import com.veterinaria.demo.entidad.Mascota;
 import com.veterinaria.demo.repositorio.ClienteRepository;
 import com.veterinaria.demo.repositorio.MascotaRepository;
-import com.veterinaria.demo.servicio.ClienteService;
+// import com.veterinaria.demo.servicio.ClienteService;
 import com.veterinaria.demo.servicio.MascotaService;
-import com.veterinaria.demo.servicio.VeterinarioService;
+// import com.veterinaria.demo.servicio.VeterinarioService;
 
 @RestController
 @RequestMapping("mascota")
@@ -34,14 +34,14 @@ public class MascotaController {
     @Autowired
     private MascotaRepository mascotaRepository;
 
-    @Autowired
-    private ClienteService clienteService;
+    // @Autowired
+    // private ClienteService clienteService;
 
     @Autowired
     private ClienteRepository clienteRepository;
 
-    @Autowired
-    private VeterinarioService veterinarioService;
+    // @Autowired
+    // private VeterinarioService veterinarioService;
 
     /**
      * Muestra todas las mascotas registradas.
