@@ -1,4 +1,4 @@
-package com.veterinaria.demo.dto;
+package com.veterinaria.demo.DTO;
 
 import com.veterinaria.demo.entidad.Testimonio;
 import java.text.SimpleDateFormat;

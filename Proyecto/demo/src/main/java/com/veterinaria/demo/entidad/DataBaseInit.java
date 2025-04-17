@@ -1083,7 +1083,7 @@ public class DataBaseInit implements ApplicationRunner {
 
         Testimonio testimonio3 = new Testimonio(
             null,
-            "Muy agradecido por la atención durante la hospitalización de mi gato.",
+            "Muy agradecido por la atención durante la hospitalización de mi mascota.",
             5,
             fecha3,
             clienteRepository.findById(3).orElse(null),
