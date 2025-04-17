@@ -2,10 +2,8 @@ package com.veterinaria.demo.controlador;
 
 import com.veterinaria.demo.entidad.Cliente;
 import com.veterinaria.demo.repositorio.ClienteRepository;
-// import com.veterinaria.demo.repositorio.MascotaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-// import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +24,6 @@ public class ClienteController{
     private ClienteService clienteService;
     @Autowired
     private ClienteRepository clienteRepository;
-    // @Autowired
-    // private MascotaRepository mascotaRepository;
 
     @GetMapping
     public List<Cliente> listar(){

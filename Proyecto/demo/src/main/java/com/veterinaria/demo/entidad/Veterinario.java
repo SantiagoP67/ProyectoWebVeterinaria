@@ -23,9 +23,11 @@ public class Veterinario {
     @Column(nullable = false)
     private String foto;
     @Column(nullable = false)
-    private Integer estado;
+    private String sede;
     @Column(nullable = false)
-    private Integer numeroAtenciones;
+    private Integer estado = 1;
+    @Column(nullable = false)
+    private Integer numeroAtenciones = 0;
 
     @Column(nullable = false, unique = true)
     private String nombreUsuario;

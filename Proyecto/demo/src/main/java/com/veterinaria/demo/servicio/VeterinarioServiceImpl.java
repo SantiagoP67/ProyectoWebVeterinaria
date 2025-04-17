@@ -42,6 +42,7 @@ public class VeterinarioServiceImpl implements VeterinarioService {
             veterinarioActual.setNombreUsuario(veterinario.getNombreUsuario());
             veterinarioActual.setContrasena(veterinario.getContrasena());
             veterinarioActual.setFoto(veterinario.getFoto());
+            veterinarioActual.setSede(veterinario.getSede());
             return veterinarioRepository.save(veterinarioActual);
         }).orElse(null);
     }
@@ -62,5 +63,14 @@ public class VeterinarioServiceImpl implements VeterinarioService {
     public List<Mascota> obtenerMascotasAtendidas(Integer idVeterinario) {
         return tratamientoRepository.findMascotasByVeterinarioId(idVeterinario);
     }
-    
+
+    @Override
+    public List<Veterinario> obtenerVeterinariosPorSede(String sede) {
+        return veterinarioRepository.findBySedeAndEstado(sede, 1);
+    }
+
+    @Override
+    public Veterinario obtenerVeterinarioConMenorAtencionesPorSede(String sede) {
+        return veterinarioRepository.findTopBySedeAndEstadoOrderByNumeroAtencionesAsc(sede, 1);
+    }
 }

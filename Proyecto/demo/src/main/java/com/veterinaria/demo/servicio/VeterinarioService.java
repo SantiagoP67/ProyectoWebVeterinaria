@@ -12,5 +12,8 @@ public interface VeterinarioService {
     Veterinario editarVeterinario(Integer id, Veterinario veterinario);
     void eliminarVeterinario(Integer id);
     Veterinario validarVeterinario(String username, String password);
-    List<Mascota> obtenerMascotasAtendidas(Integer idVeterinario); 
+    List<Mascota> obtenerMascotasAtendidas(Integer idVeterinario);
+    List<Veterinario> obtenerVeterinariosPorSede(String sede);
+    Veterinario obtenerVeterinarioConMenorAtencionesPorSede(String sede);
+
 }
