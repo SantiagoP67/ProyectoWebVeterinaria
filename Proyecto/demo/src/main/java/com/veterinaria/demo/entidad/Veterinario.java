@@ -2,6 +2,8 @@ package com.veterinaria.demo.entidad;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -36,8 +38,12 @@ public class Veterinario {
     private String contrasena;
 
     @OneToMany(mappedBy = "veterinario", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Cita> citas;
 
+
+    
     @OneToMany(mappedBy = "veterinario", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Tratamiento> tratamientos;
 }
