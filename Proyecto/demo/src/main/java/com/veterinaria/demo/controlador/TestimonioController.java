@@ -1,6 +1,6 @@
 package com.veterinaria.demo.controlador;
 
-import com.veterinaria.demo.DTO.TestimonioDTO;
+import com.veterinaria.demo.dto.TestimonioDTO;
 import com.veterinaria.demo.servicio.TestimonioService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

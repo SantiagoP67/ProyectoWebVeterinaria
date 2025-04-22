@@ -1,4 +1,4 @@
-package com.veterinaria.demo.DTO;
+package com.veterinaria.demo.dto;
 
 import java.util.Date;
 

@@ -1,6 +1,6 @@
 package com.veterinaria.demo.servicio;
 
-import com.veterinaria.demo.DTO.TestimonioDTO;
+import com.veterinaria.demo.dto.TestimonioDTO;
 import com.veterinaria.demo.entidad.Testimonio;
 import com.veterinaria.demo.repositorio.TestimonioRepository;
 import org.springframework.stereotype.Service;
