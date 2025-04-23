@@ -1,5 +1,6 @@
 package com.veterinaria.demo.entidad;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,12 +16,14 @@ public class Tratamiento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idTratamiento;
+
     @Column(nullable = false)
     private String codigo;
 
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
     private Date fecha;
+
     @Column(nullable = false)
     private String detalles;
 
@@ -30,15 +33,18 @@ public class Tratamiento {
     private Veterinario veterinario;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "idMascota", nullable = true)
     @org.hibernate.annotations.OnDelete(action = org.hibernate.annotations.OnDeleteAction.SET_NULL)
     private Mascota mascota;
 
     @ManyToOne
     @JoinColumn(name = "idServicio", nullable = true)
+    @JsonIgnore
     @org.hibernate.annotations.OnDelete(action = org.hibernate.annotations.OnDeleteAction.SET_NULL)
     private Servicio servicio;
 
     @OneToMany(mappedBy = "tratamiento", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<TratamientoMedicamento> tratamientoMedicamentos;
 }

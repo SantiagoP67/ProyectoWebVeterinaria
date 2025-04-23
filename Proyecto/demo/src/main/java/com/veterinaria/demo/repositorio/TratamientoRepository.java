@@ -11,8 +11,9 @@ import com.veterinaria.demo.entidad.Mascota;
 import com.veterinaria.demo.entidad.Tratamiento;
 
 @Repository
-public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> {
- 
-    @Query("SELECT t.mascota FROM Tratamiento t WHERE t.veterinario.id = :idVeterinario")
+public interface TratamientoRepository extends JpaRepository<Tratamiento, Integer> {
+
+    @Query("SELECT t.mascota FROM Tratamiento t WHERE t.veterinario.idVeterinario = :idVeterinario")
     List<Mascota> findMascotasByVeterinarioId(@Param("idVeterinario") Integer idVeterinario);
+    List<Tratamiento> findByMascota(Mascota mascota);
 }    

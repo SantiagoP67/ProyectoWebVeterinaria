@@ -1,28 +1,160 @@
 package com.veterinaria.demo.controlador;
 
+import com.veterinaria.demo.entidad.*;
+import com.veterinaria.demo.repositorio.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.veterinaria.demo.servicio.TratamientoService;
 
+import java.util.ArrayList;
+import java.util.List;
 
-@Controller
+
+@RestController
 @RequestMapping("/tratamiento")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TratamientoController{
 
     @Autowired
-    TratamientoService tratamientoService; 
+    private TratamientoService tratamientoService;
 
-    /*Pagina para mostrar tratamientos
-    @GetMapping ("/all")
-    public String mostrarTratamientos(){
-        return "mostrarTratamientos"; 
-    }*/ 
+    @Autowired
+    private TratamientoRepository tratamientoRepository;
 
-    /*Pagina para buscar tratamientos
-    @GetMapping ("/find")
-    public String buscarInfoTratamiento(){
-        return "mostrarInfoTratamiento"; 
-    }*/
+    @Autowired
+    private MascotaRepository mascotaRepository;
+
+    @Autowired
+    private ServicioRepository servicioRepository;
+
+    @Autowired
+    private MedicamentoRepository medicamentoRepository;
+
+    @Autowired
+    private VeterinarioRepository veterinarioRepository;
+
+    @GetMapping
+    public List<Tratamiento> mostrarTratamientos() {
+        return tratamientoService.obtenerTodosTratamientos();
+    }
+
+    @GetMapping("/{id}")
+    public Tratamiento detalleTratamiento(@PathVariable Integer id) {
+        return tratamientoService.obtenerTratamientoPorId(id);
+    }
+
+    @PostMapping("/crear")
+    public ResponseEntity<Tratamiento> crearTratamiento(
+            @RequestBody Tratamiento tratamiento,
+            @RequestParam Integer idMascota,
+            @RequestParam Integer idServicio,
+            @RequestParam(required = false) Integer idVeterinario,
+            @RequestParam List<Integer> idsMedicamentos) {
+
+        Veterinario veterinario = veterinarioRepository.findById(idVeterinario)
+                .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
+
+        Mascota mascota = mascotaRepository.findById(idMascota)
+                .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
+
+        Servicio servicio = servicioRepository.findById(idServicio)
+                .orElseThrow(() -> new RuntimeException("Servicio no encontrado"));
+
+        List<Medicamento> medicamentos = medicamentoRepository.findAllById(idsMedicamentos);
+
+        tratamiento.setVeterinario(veterinario);
+        tratamiento.setMascota(mascota);
+        tratamiento.setServicio(servicio);
+
+        List<TratamientoMedicamento> tratamientoMedicamentos = new ArrayList<>();
+
+        for (Medicamento medicamento : medicamentos) {
+            TratamientoMedicamento tm = new TratamientoMedicamento();
+            tm.setMedicamento(medicamento);
+            tm.setTratamiento(tratamiento);
+            tm.setCantidad(medicamentos.size());
+            tratamientoMedicamentos.add(tm);
+        }
+        tratamiento.setTratamientoMedicamentos(tratamientoMedicamentos);
+
+        Tratamiento tratamientoGuardado = tratamientoRepository.save(tratamiento);
+        return ResponseEntity.ok(tratamientoGuardado);
+    }
+
+    @PutMapping("/editar/{id}")
+    public ResponseEntity<Tratamiento> editarTratamiento(
+            @PathVariable Integer id,
+            @RequestBody Tratamiento tratamientoActualizado,
+            @RequestParam Integer idMascota,
+            @RequestParam Integer idServicio,
+            @RequestParam(required = false) Integer idVeterinario,
+            @RequestParam List<Integer> idsMedicamentos) {
+
+        Tratamiento tratamientoExistente = tratamientoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Tratamiento no encontrado"));
+
+        // Actualizar campos básicos
+        tratamientoExistente.setCodigo(tratamientoActualizado.getCodigo());
+        tratamientoExistente.setFecha(tratamientoActualizado.getFecha());
+        tratamientoExistente.setDetalles(tratamientoActualizado.getDetalles());
+
+        // Actualizar relaciones
+        Mascota mascota = mascotaRepository.findById(idMascota)
+                .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
+        tratamientoExistente.setMascota(mascota);
+
+        Servicio servicio = servicioRepository.findById(idServicio)
+                .orElseThrow(() -> new RuntimeException("Servicio no encontrado"));
+        tratamientoExistente.setServicio(servicio);
+
+        if (idVeterinario != null) {
+            Veterinario veterinario = veterinarioRepository.findById(idVeterinario)
+                    .orElseThrow(() -> new RuntimeException("Veterinario no encontrado"));
+            tratamientoExistente.setVeterinario(veterinario);
+        } else {
+            tratamientoExistente.setVeterinario(null);
+        }
+
+        // Limpiar medicamentos anteriores
+        tratamientoExistente.getTratamientoMedicamentos().clear();
+
+        List<TratamientoMedicamento> nuevosTM = new ArrayList<>();
+        List<Medicamento> medicamentos = medicamentoRepository.findAllById(idsMedicamentos);
+
+        for (Medicamento medicamento : medicamentos) {
+            TratamientoMedicamento tm = new TratamientoMedicamento();
+            tm.setTratamiento(tratamientoExistente);
+            tm.setMedicamento(medicamento);
+            tm.setCantidad(medicamentos.size());
+            // puedes agregar aquí dosis o duración si existe en la clase
+            nuevosTM.add(tm);
+        }
+
+        tratamientoExistente.getTratamientoMedicamentos().addAll(nuevosTM);
+
+        Tratamiento guardado = tratamientoRepository.save(tratamientoExistente);
+        return ResponseEntity.ok(guardado);
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<String> eliminarTratamiento(@PathVariable Integer id) {
+        Tratamiento tratamiento = tratamientoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Tratamiento no encontrado"));
+
+        tratamientoRepository.delete(tratamiento);
+
+        return ResponseEntity.ok("Tratamiento eliminado correctamente");
+    }
+
+    @GetMapping("/por-mascota/{idMascota}")
+    public ResponseEntity<List<Tratamiento>> obtenerTratamientosPorMascota(@PathVariable Integer idMascota) {
+        Mascota mascota = mascotaRepository.findById(idMascota)
+                .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
+
+        List<Tratamiento> tratamientos = tratamientoRepository.findByMascota(mascota);
+        return ResponseEntity.ok(tratamientos);
+    }
 }

@@ -1,7 +1,10 @@
 package com.veterinaria.demo.servicio;
 
-public interface TratamientoService{
-    /*public Tratamiento SearchById(int id); 
+import com.veterinaria.demo.entidad.Tratamiento;
 
-    public List<Tratamiento> SearchAll(); */
+import java.util.List;
+
+public interface TratamientoService{
+    List<Tratamiento> obtenerTodosTratamientos();
+    Tratamiento obtenerTratamientoPorId(Integer id);
 }

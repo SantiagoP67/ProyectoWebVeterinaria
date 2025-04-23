@@ -54,6 +54,4 @@ public class Mascota {
     @ManyToOne
     @JoinColumn(name = "idCliente", nullable = false)
     private Cliente cliente;
-
-   
 }
