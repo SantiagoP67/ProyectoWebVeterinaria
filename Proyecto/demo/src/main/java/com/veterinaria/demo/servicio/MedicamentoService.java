@@ -1,9 +1,12 @@
-package com.veterinaria.demo.servicio; 
+package com.veterinaria.demo.servicio;
+
+import com.veterinaria.demo.entidad.Medicamento;
+
+import java.util.List;
 
 public interface MedicamentoService{
 
-    /*public Medicamento SearchById(int id);
-    
-    public List<Medicamento> SearchAll(); */
+    List<Medicamento> obtenerTodosTratamientos();
+    Medicamento obtenerMedicamentoPorId(Integer id);
 
 }

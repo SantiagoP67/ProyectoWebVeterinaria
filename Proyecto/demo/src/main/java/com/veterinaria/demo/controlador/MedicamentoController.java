@@ -1,28 +1,30 @@
 package com.veterinaria.demo.controlador;
 
+import com.veterinaria.demo.entidad.Medicamento;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-import com.veterinaria.demo.servicio.MedicamentoService; 
+import com.veterinaria.demo.servicio.MedicamentoService;
 
-@Controller
+import java.util.List;
+
+@RestController
 @RequestMapping("/medicamento")
+@CrossOrigin(origins = "http://localhost:4200")
 public class MedicamentoController{
 
     @Autowired 
     MedicamentoService medicamentoService;
 
-    /*Pagina para mostrar Medicamentos 
-    @GetMapping ("/all")
-    public String mostrarMedicamentos(){
-        return "mostrarMedicamentos"; 
-    }*/ 
+    @GetMapping
+    public List<Medicamento> mostrarMedicamentos(){
+        return medicamentoService.obtenerTodosTratamientos();
+    }
 
-    /*Pagina para buscar medicamentos
-    @GetMapping ("/find")
-    public String buscarInfoMedicamento(){
-        return "mostrarInfoMedicamento"; 
-    }*/
+    @GetMapping("/{id}")
+    public Medicamento detalleMedicamento(@PathVariable Integer id){
+        return medicamentoService.obtenerMedicamentoPorId(id);
+    }
 }

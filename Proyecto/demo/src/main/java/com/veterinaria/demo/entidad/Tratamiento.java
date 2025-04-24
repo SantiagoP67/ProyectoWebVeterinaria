@@ -28,6 +28,7 @@ public class Tratamiento {
     private String detalles;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "idVeterinario", nullable = true)
     @org.hibernate.annotations.OnDelete(action = org.hibernate.annotations.OnDeleteAction.SET_NULL)
     private Veterinario veterinario;

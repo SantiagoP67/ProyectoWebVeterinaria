@@ -2,6 +2,8 @@ package com.veterinaria.demo.entidad;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,5 +28,6 @@ public class Medicamento {
     private Integer unidadesVendidas;
 
     @OneToMany(mappedBy = "medicamento", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<TratamientoMedicamento> tratamientoMedicamentos;
 }
