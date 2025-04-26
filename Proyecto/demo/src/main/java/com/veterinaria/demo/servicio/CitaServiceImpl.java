@@ -68,4 +68,6 @@ public class CitaServiceImpl implements CitaService {
         return citaRepository.findById(idCita)
                 .orElseThrow(() -> new RuntimeException("Cita no encontrada con ID: " + idCita));
     }
+
+    
 }

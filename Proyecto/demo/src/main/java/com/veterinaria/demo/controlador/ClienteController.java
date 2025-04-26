@@ -75,4 +75,16 @@ public class ClienteController{
 
         return new ResponseEntity<>(respuesta, HttpStatus.OK);
     }
+
+
+    @GetMapping("/idClientePorNombreUsuario/{nombreUsuario}")
+public ResponseEntity<Integer> obtenerIdClientePorNombreUsuario(@PathVariable String nombreUsuario) {
+    Integer idCliente = clienteService.obtenerIdClientePorNombreUsuario(nombreUsuario);
+    if (idCliente != null) {
+        return ResponseEntity.ok(idCliente);
+    } else {
+        return ResponseEntity.notFound().build();
+    }
+}
+
 }
