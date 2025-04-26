@@ -1,6 +1,7 @@
 package com.veterinaria.demo.controlador;
 
 import com.veterinaria.demo.entidad.Cliente;
+import com.veterinaria.demo.entidad.Mascota;
 import com.veterinaria.demo.repositorio.ClienteRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -86,5 +87,9 @@ public ResponseEntity<Integer> obtenerIdClientePorNombreUsuario(@PathVariable St
         return ResponseEntity.notFound().build();
     }
 }
-
+    @GetMapping("/buscar")
+    public ResponseEntity<List<Cliente>> buscarPorNombre(@RequestParam String nombre) {
+        List<Cliente> clientes = clienteRepository.findByNombreContainingIgnoreCase(nombre);
+        return ResponseEntity.ok(clientes);
+    }
 }
