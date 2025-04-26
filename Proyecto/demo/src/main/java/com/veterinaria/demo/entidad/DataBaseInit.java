@@ -471,32 +471,32 @@ public class DataBaseInit implements ApplicationRunner {
         // Creación de mascotas
         Mascota mascota1 = new Mascota(null, "Firulais", "Labrador", 3, 20.5f, "Otitis",
                 "https://img.huffingtonpost.es/files/image_1200_720/uploads/2023/06/22/un-perro-de-raza-labrador.jpeg",
-                new Date(), new Date(), null, 1, cliente28);
+                new Date(), new Date(), null, 1, cliente2);
         mascotaRepository.save(mascota1);
 
         Mascota mascota2 = new Mascota(null, "Max", "Bulldog", 2, 15.0f, "Problemas respiratorios",
                 "https://www.rover.com/blog/wp-content/uploads/2015/03/black-dog.jpg", new Date(), new Date(), null, 1,
-                cliente24);
+                cliente2);
         mascotaRepository.save(mascota2);
 
         Mascota mascota3 = new Mascota(null, "Luna", "Beagle", 4, 12.3f, "Alergia alimentaria",
                 "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
-                new Date(), new Date(), null, 1, cliente3);
+                new Date(), new Date(), null, 1, cliente2);
         mascotaRepository.save(mascota3);
 
         Mascota mascota4 = new Mascota(null, "Rocky", "Golden Retriever", 5, 25.0f, "Displasia de cadera",
                 "https://cdn.dogsplanet.com/wp-content/uploads/2019/10/beagle-sentado.jpg", new Date(), new Date(),
-                null, 1, cliente44);
+                null, 1, cliente2);
         mascotaRepository.save(mascota4);
 
         Mascota mascota5 = new Mascota(null, "Bella", "Poodle", 2, 8.5f, "Problemas dentales",
                 "https://img.huffingtonpost.es/files/image_1200_720/uploads/2023/06/22/un-perro-de-raza-labrador.jpeg",
-                new Date(), new Date(), null, 1, cliente5);
+                new Date(), new Date(), null, 1, cliente2);
         mascotaRepository.save(mascota5);
 
         Mascota mascota6 = new Mascota(null, "Toby", "Chihuahua", 1, 3.0f, "Hipoglucemia",
                 "https://www.rover.com/blog/wp-content/uploads/2015/03/black-dog.jpg", new Date(), new Date(), null, 1,
-                cliente6);
+                cliente2);
         mascotaRepository.save(mascota6);
 
         Mascota mascota7 = new Mascota(null, "Daisy", "Dálmata", 3, 18.0f, "Sordera congénita",
@@ -511,7 +511,7 @@ public class DataBaseInit implements ApplicationRunner {
 
         Mascota mascota9 = new Mascota(null, "Molly", "Shiba Inu", 2, 10.0f, "Dermatitis",
                 "https://img.huffingtonpost.es/files/image_1200_720/uploads/2023/06/22/un-perro-de-raza-labrador.jpeg",
-                new Date(), new Date(), null, 1, cliente9);
+                new Date(), new Date(), null, 1, cliente21);
         mascotaRepository.save(mascota9);
 
         Mascota mascota10 = new Mascota(null, "Buddy", "Husky", 3, 19.5f, "Hipotiroidismo",
