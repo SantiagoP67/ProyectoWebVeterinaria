@@ -1,6 +1,7 @@
 package com.veterinaria.demo.servicio;
 
 import java.util.List;
+import java.util.Optional; 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -83,5 +84,13 @@ public class MascotaServiceImpl implements MascotaService {
     public List<Mascota> buscarPorNombre(String nombre) {
         return mascotaRepository.findByNombreContainingIgnoreCase(nombre);
     }
+
+    @Override
+    public Integer countByClienteIdCliente(Integer idCliente) {
+        return mascotaRepository.countByClienteIdCliente(idCliente);
+    }
+    
+
+
     
 }

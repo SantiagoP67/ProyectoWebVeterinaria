@@ -11,4 +11,6 @@ public interface ClienteService{
     Cliente editarCliente(Integer id, Cliente cliente);
     void eliminarCliente(Integer id);
     Cliente validarCliente(String username, String password);
+    Integer obtenerIdClientePorNombreUsuario(String nombreUsuario);
+
 }

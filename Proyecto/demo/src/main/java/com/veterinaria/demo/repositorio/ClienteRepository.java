@@ -9,4 +9,6 @@ import com.veterinaria.demo.entidad.Cliente;
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
     Cliente findByCedula(String cedula);
     Cliente findByNombreUsuarioAndContrasena(String nombreUsuario,String contrasena);
+    Cliente findByNombreUsuario(String nombreUsuario);
+
 }
