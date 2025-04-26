@@ -471,7 +471,7 @@ public class DataBaseInit implements ApplicationRunner {
         // Creación de mascotas
         Mascota mascota1 = new Mascota(null, "Firulais", "Labrador", 3, 20.5f, "Otitis",
                 "https://img.huffingtonpost.es/files/image_1200_720/uploads/2023/06/22/un-perro-de-raza-labrador.jpeg",
-                new Date(), new Date(), null, 1, cliente2);
+                new Date(), new Date(), null, 0, cliente2);
         mascotaRepository.save(mascota1);
 
         Mascota mascota2 = new Mascota(null, "Max", "Bulldog", 2, 15.0f, "Problemas respiratorios",
@@ -481,7 +481,7 @@ public class DataBaseInit implements ApplicationRunner {
 
         Mascota mascota3 = new Mascota(null, "Luna", "Beagle", 4, 12.3f, "Alergia alimentaria",
                 "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
-                new Date(), new Date(), null, 1, cliente2);
+                new Date(), new Date(), null, 0, cliente2);
         mascotaRepository.save(mascota3);
 
         Mascota mascota4 = new Mascota(null, "Rocky", "Golden Retriever", 5, 25.0f, "Displasia de cadera",
@@ -491,11 +491,11 @@ public class DataBaseInit implements ApplicationRunner {
 
         Mascota mascota5 = new Mascota(null, "Bella", "Poodle", 2, 8.5f, "Problemas dentales",
                 "https://img.huffingtonpost.es/files/image_1200_720/uploads/2023/06/22/un-perro-de-raza-labrador.jpeg",
-                new Date(), new Date(), null, 1, cliente2);
+                new Date(), new Date(), null, 0, cliente2);
         mascotaRepository.save(mascota5);
 
         Mascota mascota6 = new Mascota(null, "Toby", "Chihuahua", 1, 3.0f, "Hipoglucemia",
-                "https://www.rover.com/blog/wp-content/uploads/2015/03/black-dog.jpg", new Date(), new Date(), null, 1,
+                "https://www.rover.com/blog/wp-content/uploads/2015/03/black-dog.jpg", new Date(), new Date(), null, 0,
                 cliente2);
         mascotaRepository.save(mascota6);
 
@@ -521,7 +521,7 @@ public class DataBaseInit implements ApplicationRunner {
 
         Mascota mascota11 = new Mascota(null, "Lola", "Bulldog Francés", 2, 12.0f, "Problemas oculares",
                 "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
-                new Date(), new Date(), null, 1, cliente11);
+                new Date(), new Date(), null, 0, cliente11);
         mascotaRepository.save(mascota11);
 
         Mascota mascota12 = new Mascota(null, "Zeus", "Pastor Alemán", 4, 28.0f, "Displasia de codo",

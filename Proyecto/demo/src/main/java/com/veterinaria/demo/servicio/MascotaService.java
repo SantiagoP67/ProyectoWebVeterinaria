@@ -13,4 +13,5 @@ public interface MascotaService {
     void eliminarMascota(Integer id);
     void cambiarEstado(Integer id, Mascota mascota);
     List<Mascota> buscarPorNombre(String nombre);
+    Integer countByClienteIdCliente(Integer idCliente);
 }

@@ -154,6 +154,18 @@ public class MascotaController {
         return ResponseEntity.ok(mascotasConTratamiento);
     }
 
+    @GetMapping("/cantidadMascotas")
+    public ResponseEntity<Long> cantidadMascotas() {
+        Long cantidad = mascotaRepository.count();  // Esto obtiene la cantidad de mascotas
+        return ResponseEntity.ok(cantidad);  // Devuelve la cantidad como respuesta
+    }
+    
+    @GetMapping("/cantidadMascotasPorCliente/{idCliente}")
+    public ResponseEntity<Integer> cantidadMascotasPorCliente(@PathVariable Integer idCliente) {
+        Integer cantidad = mascotaService.countByClienteIdCliente(idCliente);
+        return ResponseEntity.ok(cantidad);
+    }
+    
 
 }
 
