@@ -2,6 +2,8 @@ package com.veterinaria.demo.servicio;
 
 import java.util.List;
 
+import com.veterinaria.demo.entidad.Cita;
+import com.veterinaria.demo.repositorio.CitaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,8 @@ public class VeterinarioServiceImpl implements VeterinarioService {
     private VeterinarioRepository veterinarioRepository;
     @Autowired
     private TratamientoRepository tratamientoRepository;
+    @Autowired
+    private CitaRepository citaRepository;
 
     @Override
     public List<Veterinario> obtenerTodosVeterinarios() {
@@ -72,5 +76,15 @@ public class VeterinarioServiceImpl implements VeterinarioService {
     @Override
     public Veterinario obtenerVeterinarioConMenorAtencionesPorSede(String sede) {
         return veterinarioRepository.findTopBySedeAndEstadoOrderByNumeroAtencionesAsc(sede, 1);
+    }
+
+    @Override
+    public List<Cita> obtenerCitasAgendadas(Integer idVeterinario) {
+        return citaRepository.findByVeterinarioIdAndEstado(idVeterinario, "AGENDADA");
+    }
+
+    @Override
+    public List<Cita> obtenerHistorialCitas(Integer idVeterinario) {
+        return citaRepository.findByVeterinarioId(idVeterinario);
     }
 }

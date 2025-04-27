@@ -32,4 +32,7 @@ public class Cita {
     @ManyToOne
     @JoinColumn(name = "idServicio")
     private Servicio servicio;
+
+    @Column(nullable = false)
+    private String estado;
 }

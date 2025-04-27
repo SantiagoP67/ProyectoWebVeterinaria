@@ -1031,7 +1031,8 @@ public class DataBaseInit implements ApplicationRunner {
         "Sucursal Norte",
         mascotaRepository.findById(1).orElse(null),
         veterinarioRepository.findById(1).orElse(null),
-        servicioRepository.findById(1).orElse(null)
+        servicioRepository.findById(1).orElse(null),
+                "Agendada"
         );
         citaRepository.save(cita1);
 
@@ -1040,7 +1041,8 @@ public class DataBaseInit implements ApplicationRunner {
         "Sucursal Centro",
         mascotaRepository.findById(2).orElse(null),
         veterinarioRepository.findById(2).orElse(null),
-        servicioRepository.findById(2).orElse(null)
+        servicioRepository.findById(2).orElse(null),
+                "Agendada"
         );
         citaRepository.save(cita2);
 
@@ -1049,7 +1051,8 @@ public class DataBaseInit implements ApplicationRunner {
         "Sucursal Sur",
         mascotaRepository.findById(3).orElse(null),
         veterinarioRepository.findById(1).orElse(null),
-        servicioRepository.findById(3).orElse(null)
+        servicioRepository.findById(3).orElse(null),
+                "Agendada"
         );
         citaRepository.save(cita3);
 

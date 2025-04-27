@@ -3,6 +3,7 @@ package com.veterinaria.demo.controlador;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.veterinaria.demo.entidad.Cita;
 import com.veterinaria.demo.repositorio.VeterinarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -86,6 +87,32 @@ public class VeterinarioController{
         session.setAttribute("clientesAtendidos", clientes);
 
         return "veterinario";
+    }
+
+    // Citas agendadas del veterinario
+    @GetMapping("/citas_agendadas")
+    public ResponseEntity<List<Cita>> obtenerCitasAgendadas(HttpSession session) {
+        Integer idVeterinario = (Integer) session.getAttribute("idVeterinario");
+
+        if (idVeterinario == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        List<Cita> citasAgendadas = veterinarioService.obtenerCitasAgendadas(idVeterinario);
+        return ResponseEntity.ok(citasAgendadas);
+    }
+
+    // Historial de citas del veterinario
+    @GetMapping("/historial")
+    public ResponseEntity<List<Cita>> obtenerHistorialCitas(HttpSession session) {
+        Integer idVeterinario = (Integer) session.getAttribute("idVeterinario");
+
+        if (idVeterinario == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        List<Cita> historialCitas = veterinarioService.obtenerHistorialCitas(idVeterinario);
+        return ResponseEntity.ok(historialCitas);
     }
 
 }
