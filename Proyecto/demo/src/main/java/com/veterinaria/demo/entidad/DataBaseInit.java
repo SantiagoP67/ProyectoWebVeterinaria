@@ -1032,7 +1032,7 @@ public class DataBaseInit implements ApplicationRunner {
         mascotaRepository.findById(1).orElse(null),
         veterinarioRepository.findById(1).orElse(null),
         servicioRepository.findById(1).orElse(null),
-                "Agendada"
+                "AGENDADA"
         );
         citaRepository.save(cita1);
 
@@ -1042,7 +1042,7 @@ public class DataBaseInit implements ApplicationRunner {
         mascotaRepository.findById(2).orElse(null),
         veterinarioRepository.findById(2).orElse(null),
         servicioRepository.findById(2).orElse(null),
-                "Agendada"
+                "AGENDADA"
         );
         citaRepository.save(cita2);
 
@@ -1052,7 +1052,7 @@ public class DataBaseInit implements ApplicationRunner {
         mascotaRepository.findById(3).orElse(null),
         veterinarioRepository.findById(1).orElse(null),
         servicioRepository.findById(3).orElse(null),
-                "Agendada"
+                "AGENDADA"
         );
         citaRepository.save(cita3);
 
