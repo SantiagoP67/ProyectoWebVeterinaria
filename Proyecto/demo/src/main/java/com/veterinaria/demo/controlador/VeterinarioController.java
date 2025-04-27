@@ -64,26 +64,18 @@ public class VeterinarioController{
         return ResponseEntity.ok(veterinarioGuardado);
 
     }
-    
 
-    @GetMapping("mascotas_atendidas")
-    public String verMascotasAtendidas(HttpSession session) {
-        Integer idVeterinario = (Integer) session.getAttribute("idVeterinario");
+
+    // Mascotas atendidas
+    @GetMapping("/mascotas_atendidas/{idVeterinario}")
+    public ResponseEntity<List<Mascota>> obtenerMascotasAtendidas(@PathVariable Integer idVeterinario) {
 
         if (idVeterinario == null) {
-            return "redirect:/inicio_sesion";
+            return ResponseEntity.badRequest().build();
         }
 
         List<Mascota> mascotasAtendidas = veterinarioService.obtenerMascotasAtendidas(idVeterinario);
-        session.setAttribute("mascotasAtendidas", mascotasAtendidas);
-
-        List<Cliente> clientes = mascotasAtendidas.stream()
-            .map(Mascota::getCliente)
-            .distinct()
-            .collect(Collectors.toList());
-        session.setAttribute("clientesAtendidos", clientes);
-
-        return "veterinario";
+        return ResponseEntity.ok(mascotasAtendidas);
     }
 
     // Citas agendadas del veterinario
