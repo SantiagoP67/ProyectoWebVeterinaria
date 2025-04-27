@@ -22,4 +22,11 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Intege
     @Query("SELECT t FROM Tratamiento t WHERE t.fecha BETWEEN :fechaInicio AND :fechaFin")
     List<Tratamiento> findByFechaBetween(@Param("fechaInicio") Date fechaInicio, 
                                        @Param("fechaFin") Date fechaFin);
+                                       @Query("SELECT tm.medicamento.nombre as medicamento, SUM(tm.cantidad) as total " +
+                                       "FROM Tratamiento t JOIN t.tratamientoMedicamentos tm " +
+                                       "WHERE t.fecha BETWEEN :fechaInicio AND :fechaFin " +
+                                       "GROUP BY tm.medicamento.nombre " +
+                                       "ORDER BY total DESC")
+                                List<Object[]> findMedicamentosMasUsados(@Param("fechaInicio") Date fechaInicio, 
+                                                                       @Param("fechaFin") Date fechaFin);
 }

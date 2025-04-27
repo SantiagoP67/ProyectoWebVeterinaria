@@ -11,7 +11,7 @@ import com.veterinaria.demo.servicio.TratamientoService;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Map;
 
 @RestController
 @RequestMapping("/tratamiento")
@@ -129,7 +129,6 @@ public class TratamientoController{
             tm.setTratamiento(tratamientoExistente);
             tm.setMedicamento(medicamento);
             tm.setCantidad(medicamentos.size());
-            // puedes agregar aquí dosis o duración si existe en la clase
             nuevosTM.add(tm);
         }
 
@@ -168,5 +167,11 @@ public class TratamientoController{
     public ResponseEntity<List<Tratamiento>> obtenerTratamientosUltimos30Dias() {
         List<Tratamiento> tratamientos = tratamientoService.obtenerTratamientosUltimos30Dias();
         return ResponseEntity.ok(tratamientos);
+    }
+
+    @GetMapping("/medicamentos-mas-usados")
+    public ResponseEntity<Map<String, Integer>> obtenerMedicamentosMasUsados() {
+        Map<String, Integer> medicamentos = tratamientoService.obtenerMedicamentosMasUsadosUltimos30Dias();
+        return ResponseEntity.ok(medicamentos);
     }
 }

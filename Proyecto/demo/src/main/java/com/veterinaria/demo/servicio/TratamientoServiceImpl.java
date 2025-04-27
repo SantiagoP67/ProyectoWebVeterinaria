@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Service
 public class TratamientoServiceImpl implements TratamientoService{
@@ -43,5 +45,22 @@ public class TratamientoServiceImpl implements TratamientoService{
         Date fechaInicio = calendar.getTime();
         
         return tratamientoRepository.findByFechaBetween(fechaInicio, fechaFin);
+    }
+
+    @Override
+    public Map<String, Integer> obtenerMedicamentosMasUsadosUltimos30Dias() {
+        Calendar calendar = Calendar.getInstance();
+        Date fechaFin = calendar.getTime();
+        calendar.add(Calendar.DAY_OF_YEAR, -30);
+        Date fechaInicio = calendar.getTime();
+        
+        List<Object[]> resultados = tratamientoRepository.findMedicamentosMasUsados(fechaInicio, fechaFin);
+        
+        Map<String, Integer> medicamentosMap = new LinkedHashMap<>();
+        for (Object[] resultado : resultados) {
+            medicamentosMap.put((String) resultado[0], ((Number) resultado[1]).intValue());
+        }
+        
+        return medicamentosMap;
     }
 }
