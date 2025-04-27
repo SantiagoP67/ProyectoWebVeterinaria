@@ -99,8 +99,20 @@ public class VeterinarioController{
         return ResponseEntity.ok(citasAgendadas);
     }
 
+    // Historial de citas del veterinario
+    @GetMapping("/historial-citas/{idVeterinario}")
+    public ResponseEntity<List<Cita>> obtenerHistorialCitas(@PathVariable Integer idVeterinario) {
+
+        if (idVeterinario == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        List<Cita> historialCitas = veterinarioService.obtenerHistorialCitas(idVeterinario);
+        return ResponseEntity.ok(historialCitas);
+    }
+
     // Historial de tratamientos realizados por el veterinario a una mascota específica
-    @GetMapping("/historial-tratamientos/{idVeterinario}/{idMascota}")
+    @GetMapping("/historial-tratamientos-Mascota/{idVeterinario}/{idMascota}")
     public ResponseEntity<List<Tratamiento>> obtenerHistorialTratamientos(
             @PathVariable Integer idVeterinario,
             @PathVariable Integer idMascota) {
