@@ -7,4 +7,6 @@ import java.util.List;
 public interface TratamientoService{
     List<Tratamiento> obtenerTodosTratamientos();
     Tratamiento obtenerTratamientoPorId(Integer id);
+    long contarTratamientosUltimos30Dias();
+    List<Tratamiento> obtenerTratamientosUltimos30Dias();
 }

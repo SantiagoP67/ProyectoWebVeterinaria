@@ -14,5 +14,7 @@ public interface MascotaService {
     void cambiarEstado(Integer id, Mascota mascota);
     List<Mascota> buscarPorNombre(String nombre);
     Integer countByClienteIdCliente(Integer idCliente);
-
+    long contarTodasLasMascotas();
+    List<Mascota> obtenerMascotasActivas();
+    long contarMascotasActivas();
 }

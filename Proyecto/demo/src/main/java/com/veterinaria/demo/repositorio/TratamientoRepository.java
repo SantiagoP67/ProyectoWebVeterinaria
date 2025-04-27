@@ -1,7 +1,7 @@
 package com.veterinaria.demo.repositorio;
 
 import java.util.List;
-
+import java.util.Date;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,4 +16,10 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Intege
     @Query("SELECT t.mascota FROM Tratamiento t WHERE t.veterinario.idVeterinario = :idVeterinario")
     List<Mascota> findMascotasByVeterinarioId(@Param("idVeterinario") Integer idVeterinario);
     List<Tratamiento> findByMascota(Mascota mascota);
-}    
+    @Query("SELECT COUNT(t) FROM Tratamiento t WHERE t.fecha BETWEEN :fechaInicio AND :fechaFin")
+    long countByFechaBetween(@Param("fechaInicio") Date fechaInicio, 
+                           @Param("fechaFin") Date fechaFin);
+    @Query("SELECT t FROM Tratamiento t WHERE t.fecha BETWEEN :fechaInicio AND :fechaFin")
+    List<Tratamiento> findByFechaBetween(@Param("fechaInicio") Date fechaInicio, 
+                                       @Param("fechaFin") Date fechaFin);
+}

@@ -157,4 +157,16 @@ public class TratamientoController{
         List<Tratamiento> tratamientos = tratamientoRepository.findByMascota(mascota);
         return ResponseEntity.ok(tratamientos);
     }
+
+    @GetMapping("/cantidad-ultimos-30-dias")
+    public ResponseEntity<Long> contarTratamientosUltimos30Dias() {
+        Long cantidad = tratamientoService.contarTratamientosUltimos30Dias();
+        return ResponseEntity.ok(cantidad);
+    }
+
+    @GetMapping("/ultimos-30-dias")
+    public ResponseEntity<List<Tratamiento>> obtenerTratamientosUltimos30Dias() {
+        List<Tratamiento> tratamientos = tratamientoService.obtenerTratamientosUltimos30Dias();
+        return ResponseEntity.ok(tratamientos);
+    }
 }

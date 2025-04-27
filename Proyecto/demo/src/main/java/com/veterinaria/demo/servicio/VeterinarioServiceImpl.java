@@ -105,4 +105,24 @@ public class VeterinarioServiceImpl implements VeterinarioService {
                 .map(Veterinario::getTratamientos)
                 .orElseThrow(() -> new RuntimeException("Veterinario no encontrado con ID: " + idVeterinario));
     }
+    
+    @Override
+    public long contarVeterinariosActivos() {
+        return veterinarioRepository.countByEstado(1); // 1 = activo
+    }
+
+    @Override
+    public long contarVeterinariosInactivos() {
+        return veterinarioRepository.countByEstado(0); // 0 = inactivo
+    }
+
+    @Override
+    public List<Veterinario> obtenerVeterinariosActivos() {
+        return veterinarioRepository.findByEstado(1);
+    }
+
+    @Override
+    public List<Veterinario> obtenerVeterinariosInactivos() {
+        return veterinarioRepository.findByEstado(0);
+    }
 }

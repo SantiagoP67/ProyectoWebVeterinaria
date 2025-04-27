@@ -13,6 +13,8 @@ public interface MascotaRepository extends JpaRepository<Mascota, Integer> {
     List<Mascota> findByClienteIdCliente(Integer idCliente);
     List<Mascota> findByNombreContainingIgnoreCase(String nombre);
     List<Mascota> findByCliente(Cliente cliente);
-    Integer countByClienteIdCliente(Integer idCliente);  // Corregido
-    
+    Integer countByClienteIdCliente(Integer idCliente);
+    long count();
+    List<Mascota> findByEstado(Integer estado);
+    long countByEstado(Integer estado);
 }

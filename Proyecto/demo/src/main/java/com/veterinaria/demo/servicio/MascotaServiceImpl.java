@@ -89,8 +89,19 @@ public class MascotaServiceImpl implements MascotaService {
     public Integer countByClienteIdCliente(Integer idCliente) {
         return mascotaRepository.countByClienteIdCliente(idCliente);
     }
-    
 
+    @Override
+    public long contarTodasLasMascotas() {
+        return mascotaRepository.count();
+    }
 
-    
+    @Override
+    public List<Mascota> obtenerMascotasActivas() {
+        return mascotaRepository.findByEstado(1); // 1 representa estado activo
+    }
+
+    @Override
+    public long contarMascotasActivas() {
+        return mascotaRepository.countByEstado(1); // 1 representa estado activo
+    }
 }

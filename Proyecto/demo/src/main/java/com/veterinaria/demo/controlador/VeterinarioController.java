@@ -129,5 +129,29 @@ public class VeterinarioController{
         List<Tratamiento> tratamientos = veterinarioService.obtenerTodosTratamientosVeterinario(idVeterinario);
         return ResponseEntity.ok(tratamientos);
     }
+
+    @GetMapping("/cantidadVeterinariosActivos")
+    public ResponseEntity<Long> contarVeterinariosActivos() {
+        Long cantidad = veterinarioService.contarVeterinariosActivos();
+        return ResponseEntity.ok(cantidad);
+    }
+
+    @GetMapping("/cantidadVeterinariosInactivos")
+    public ResponseEntity<Long> contarVeterinariosInactivos() {
+        Long cantidad = veterinarioService.contarVeterinariosInactivos();
+        return ResponseEntity.ok(cantidad);
+    }
+
+    @GetMapping("/activos")
+    public ResponseEntity<List<Veterinario>> obtenerVeterinariosActivos() {
+        List<Veterinario> veterinarios = veterinarioService.obtenerVeterinariosActivos();
+        return ResponseEntity.ok(veterinarios);
+    }
+
+    @GetMapping("/inactivos")
+    public ResponseEntity<List<Veterinario>> obtenerVeterinariosInactivos() {
+        List<Veterinario> veterinarios = veterinarioService.obtenerVeterinariosInactivos();
+        return ResponseEntity.ok(veterinarios);
+    }
 }
 

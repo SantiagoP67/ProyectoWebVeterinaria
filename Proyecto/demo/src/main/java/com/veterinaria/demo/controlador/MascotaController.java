@@ -165,8 +165,24 @@ public class MascotaController {
         Integer cantidad = mascotaService.countByClienteIdCliente(idCliente);
         return ResponseEntity.ok(cantidad);
     }
-    
 
+    /**
+     * Obtiene la cantidad de mascotas activas (estado = 1)
+     * URL: GET http://localhost:8082/mascota/cantidadMascotasActivas
+     */
+    @GetMapping("/cantidadMascotasActivas")
+    public ResponseEntity<Long> contarMascotasActivas() {
+        Long cantidad = mascotaService.contarMascotasActivas();
+        return ResponseEntity.ok(cantidad);
+    }
+
+    /**
+     * Obtiene la lista de mascotas activas (estado = 1)
+     * URL: GET http://localhost:8082/mascota/activas
+     */
+    @GetMapping("/activas")
+    public ResponseEntity<List<Mascota>> obtenerMascotasActivas() {
+        List<Mascota> mascotasActivas = mascotaService.obtenerMascotasActivas();
+        return ResponseEntity.ok(mascotasActivas);
+    }
 }
-
-

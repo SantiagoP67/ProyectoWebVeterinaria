@@ -21,4 +21,8 @@ public interface VeterinarioService {
     List<Cita> obtenerHistorialCitas(Integer idVeterinario);
     List<Tratamiento> obtenerHistorialTratamientos(Integer idVeterinario,Integer idMascota);
     List<Tratamiento> obtenerTodosTratamientosVeterinario(Integer idVeterinario);
+    long contarVeterinariosActivos();
+    long contarVeterinariosInactivos();
+    List<Veterinario> obtenerVeterinariosActivos();
+    List<Veterinario> obtenerVeterinariosInactivos();
 }

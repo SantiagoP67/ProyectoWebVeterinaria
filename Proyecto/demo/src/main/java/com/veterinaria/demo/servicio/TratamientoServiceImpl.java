@@ -6,8 +6,9 @@ import com.veterinaria.demo.repositorio.TratamientoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.List;
-
+import java.util.Date;
 
 @Service
 public class TratamientoServiceImpl implements TratamientoService{
@@ -22,5 +23,25 @@ public class TratamientoServiceImpl implements TratamientoService{
     @Override
     public Tratamiento obtenerTratamientoPorId(Integer id) {
         return tratamientoRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public long contarTratamientosUltimos30Dias() {
+        Calendar calendar = Calendar.getInstance();
+        Date fechaFin = calendar.getTime();
+        calendar.add(Calendar.DAY_OF_YEAR, -30);
+        Date fechaInicio = calendar.getTime();
+        
+        return tratamientoRepository.countByFechaBetween(fechaInicio, fechaFin);
+    }
+
+    @Override
+    public List<Tratamiento> obtenerTratamientosUltimos30Dias() {
+        Calendar calendar = Calendar.getInstance();
+        Date fechaFin = calendar.getTime();
+        calendar.add(Calendar.DAY_OF_YEAR, -30);
+        Date fechaInicio = calendar.getTime();
+        
+        return tratamientoRepository.findByFechaBetween(fechaInicio, fechaFin);
     }
 }
