@@ -35,10 +35,13 @@ public class CitaController {
         List<Cita> citas = citaService.obtenerCitasPorSede(sede);
         return ResponseEntity.ok(citas);
     }
-    
-    @DeleteMapping("/{idCita}")
+
+    @PutMapping("cancelar-cita/{idCita}")
     public ResponseEntity<Void> cancelarCita(@PathVariable Integer idCita) {
-        citaService.cancelarCita(idCita);
+        boolean cancelada = citaService.cancelarCita(idCita);
+        if (!cancelada) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.noContent().build();
     }
     

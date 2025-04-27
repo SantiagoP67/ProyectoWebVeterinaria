@@ -34,12 +34,13 @@ public class CitaServiceImpl implements CitaService {
     public List<Cita> obtenerCitasPorSede(String sede) {
         return citaRepository.findBySede(sede);
     }
-    
+
     @Override
     public boolean cancelarCita(Integer idCita) {
         return citaRepository.findById(idCita)
                 .map(cita -> {
-                    citaRepository.delete(cita);
+                    cita.setEstado("CANCELADA"); // Asume que tu entidad Cita tiene un campo 'estado'
+                    citaRepository.save(cita);
                     return true;
                 })
                 .orElse(false);
