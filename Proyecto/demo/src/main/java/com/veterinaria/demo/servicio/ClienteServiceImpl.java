@@ -50,4 +50,14 @@ public class ClienteServiceImpl implements ClienteService{
     public Cliente validarCliente(String username, String password) {
         return clienteRepository.findByNombreUsuarioAndContrasena(username, password);
     }
+
+    @Override
+    public Integer obtenerIdClientePorNombreUsuario(String nombreUsuario) {
+        Cliente cliente = clienteRepository.findByNombreUsuario(nombreUsuario);
+        if (cliente != null) {
+            return cliente.getIdCliente();
+        } else {
+            return null;
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package com.veterinaria.demo.controlador;
 
 import com.veterinaria.demo.entidad.Cliente;
+import com.veterinaria.demo.entidad.Mascota;
 import com.veterinaria.demo.repositorio.ClienteRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -74,5 +75,21 @@ public class ClienteController{
         respuesta.put("mensaje", "Cliente eliminado correctamente");
 
         return new ResponseEntity<>(respuesta, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/idClientePorNombreUsuario/{nombreUsuario}")
+public ResponseEntity<Integer> obtenerIdClientePorNombreUsuario(@PathVariable String nombreUsuario) {
+    Integer idCliente = clienteService.obtenerIdClientePorNombreUsuario(nombreUsuario);
+    if (idCliente != null) {
+        return ResponseEntity.ok(idCliente);
+    } else {
+        return ResponseEntity.notFound().build();
+    }
+}
+    @GetMapping("/buscar")
+    public ResponseEntity<List<Cliente>> buscarPorNombre(@RequestParam String nombre) {
+        List<Cliente> clientes = clienteRepository.findByNombreContainingIgnoreCase(nombre);
+        return ResponseEntity.ok(clientes);
     }
 }
