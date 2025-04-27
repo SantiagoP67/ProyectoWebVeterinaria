@@ -80,11 +80,11 @@ public class VeterinarioServiceImpl implements VeterinarioService {
 
     @Override
     public List<Cita> obtenerCitasAgendadas(Integer idVeterinario) {
-        return citaRepository.findByVeterinarioIdAndEstado(idVeterinario, "AGENDADA");
+        return citaRepository.findByVeterinarioIdVeterinarioAndEstado(idVeterinario, "AGENDADA");
     }
 
     @Override
     public List<Cita> obtenerHistorialCitas(Integer idVeterinario) {
-        return citaRepository.findByVeterinarioId(idVeterinario);
+        return citaRepository.findByVeterinarioIdVeterinario(idVeterinario);
     }
 }
