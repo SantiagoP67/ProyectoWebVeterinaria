@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Collections;
 import java.util.Random;
+import java.text.SimpleDateFormat;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -969,18 +970,19 @@ public class DataBaseInit implements ApplicationRunner {
                 cliente50);
         mascotaRepository.save(mascota100);
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         // Creación de 10 tratamientos
         List<Tratamiento> tratamientos = Arrays.asList(
-        new Tratamiento(1, "TRAT001", new Date(), "Desparasitación interna", veterinario2, mascota1, servicioConsulta, null),
-        new Tratamiento(2, "TRAT002", new Date(), "Control de pulgas y garrapatas", veterinario1, mascota2, servicioConsulta, null),
+        new Tratamiento(1, "TRAT001", sdf.parse("2024-01-10"), "Desparasitación interna", veterinario2, mascota1, servicioConsulta, null),
+        new Tratamiento(2, "TRAT002", new Date(), "Control de pulgas y garrapatas", veterinario1, mascota2, servicioCirugia, null),
         new Tratamiento(3, "TRAT003", new Date(), "Tratamiento antiinflamatorio", veterinario5, mascota3, servicioConsulta, null),
-        new Tratamiento(4, "TRAT004", new Date(), "Antibiótico para infecciones", veterinario4, mascota4, servicioConsulta, null),
-        new Tratamiento(5, "TRAT005", new Date(), "Analgésico postoperatorio", veterinario1, mascota5, servicioConsulta, null),
-        new Tratamiento(6, "TRAT006", new Date(), "Reducción de estrés", veterinario6, mascota6, servicioConsulta, null),
-        new Tratamiento(7, "TRAT007", new Date(), "Cuidado renal", veterinario1, mascota7, servicioConsulta, null),
-        new Tratamiento(8, "TRAT008", new Date(), "Tratamiento digestivo", veterinario6, mascota8, servicioConsulta, null),
-        new Tratamiento(9, "TRAT009", new Date(), "Terapia para articulaciones", veterinario3, mascota9, servicioConsulta, null),
-        new Tratamiento(10, "TRAT010", new Date(), "Tratamiento para infecciones urinarias", veterinario6, mascota10, servicioConsulta, null)
+        new Tratamiento(4, "TRAT004", new Date(), "Antibiótico para infecciones", veterinario4, mascota4, servicioCirugia, null),
+        new Tratamiento(5, "TRAT005", new Date(), "Analgésico postoperatorio", veterinario1, mascota5, servicioCirugia, null),
+        new Tratamiento(6, "TRAT006", new Date(), "Reducción de estrés", veterinario6, mascota6, servicioHospitalizacion, null),
+        new Tratamiento(7, "TRAT007", sdf.parse("2025-03-09"), "Cuidado renal", veterinario1, mascota7, servicioHospitalizacion, null),
+        new Tratamiento(8, "TRAT008", sdf.parse("2024-12-24"), "Tratamiento digestivo", veterinario6, mascota8, servicioHospitalizacion, null),
+        new Tratamiento(9, "TRAT009", sdf.parse("2025-04-04"), "Terapia para articulaciones", veterinario3, mascota9, servicioConsulta, null),
+        new Tratamiento(10, "TRAT010", sdf.parse("2024-05-02"), "Tratamiento para infecciones urinarias", veterinario6, mascota10, servicioConsulta, null)
         );
         tratamientoRepository.saveAll(tratamientos);
 
