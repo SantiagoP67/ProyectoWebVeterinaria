@@ -3,6 +3,7 @@ package com.veterinaria.demo.servicio;
 import java.util.List;
 
 import com.veterinaria.demo.entidad.Cita;
+import com.veterinaria.demo.entidad.Tratamiento;
 import com.veterinaria.demo.repositorio.CitaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -86,5 +87,22 @@ public class VeterinarioServiceImpl implements VeterinarioService {
     @Override
     public List<Cita> obtenerHistorialCitas(Integer idVeterinario) {
         return citaRepository.findByVeterinarioIdVeterinario(idVeterinario);
+    }
+
+    @Override
+    public List<Tratamiento> obtenerHistorialTratamientos(Integer idVeterinario, Integer idMascota) {
+        return veterinarioRepository.findById(idVeterinario)
+                .map(veterinario -> veterinario.getTratamientos().stream()
+                        .filter(tratamiento -> tratamiento.getMascota() != null &&
+                                tratamiento.getMascota().getIdMascota().equals(idMascota))
+                        .toList())
+                .orElseThrow(() -> new RuntimeException("Veterinario no encontrado con ID: " + idVeterinario));
+    }
+
+    @Override
+    public List<Tratamiento> obtenerTodosTratamientosVeterinario(Integer idVeterinario) {
+        return veterinarioRepository.findById(idVeterinario)
+                .map(Veterinario::getTratamientos)
+                .orElseThrow(() -> new RuntimeException("Veterinario no encontrado con ID: " + idVeterinario));
     }
 }

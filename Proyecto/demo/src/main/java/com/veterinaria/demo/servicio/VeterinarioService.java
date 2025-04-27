@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.veterinaria.demo.entidad.Cita;
 import com.veterinaria.demo.entidad.Mascota;
+import com.veterinaria.demo.entidad.Tratamiento;
 import com.veterinaria.demo.entidad.Veterinario;
 
 public interface VeterinarioService {
@@ -18,4 +19,6 @@ public interface VeterinarioService {
     Veterinario obtenerVeterinarioConMenorAtencionesPorSede(String sede);
     List<Cita> obtenerCitasAgendadas(Integer idVeterinario);
     List<Cita> obtenerHistorialCitas(Integer idVeterinario);
+    List<Tratamiento> obtenerHistorialTratamientos(Integer idVeterinario,Integer idMascota);
+    List<Tratamiento> obtenerTodosTratamientosVeterinario(Integer idVeterinario);
 }

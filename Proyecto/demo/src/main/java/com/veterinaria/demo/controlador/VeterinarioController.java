@@ -3,16 +3,13 @@ package com.veterinaria.demo.controlador;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.veterinaria.demo.entidad.Cita;
+import com.veterinaria.demo.entidad.*;
 import com.veterinaria.demo.repositorio.VeterinarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.veterinaria.demo.entidad.Cliente;
-import com.veterinaria.demo.entidad.Mascota;
-import com.veterinaria.demo.entidad.Veterinario;
 import com.veterinaria.demo.servicio.VeterinarioService;
 
 import jakarta.servlet.http.HttpSession;
@@ -102,16 +99,31 @@ public class VeterinarioController{
         return ResponseEntity.ok(citasAgendadas);
     }
 
-    // Historial de citas del veterinario
-    @GetMapping("/historial/{idVeterinario}")
-    public ResponseEntity<List<Cita>> obtenerHistorialCitas(@PathVariable Integer idVeterinario) {
+    // Historial de tratamientos realizados por el veterinario a una mascota específica
+    @GetMapping("/historial-tratamientos/{idVeterinario}/{idMascota}")
+    public ResponseEntity<List<Tratamiento>> obtenerHistorialTratamientos(
+            @PathVariable Integer idVeterinario,
+            @PathVariable Integer idMascota) {
+
+        if (idVeterinario == null || idMascota == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        List<Tratamiento> historialTratamientos = veterinarioService.obtenerHistorialTratamientos(idVeterinario, idMascota);
+        return ResponseEntity.ok(historialTratamientos);
+    }
+
+    // Historial de todos los tratamientos realizados por el veterinario
+    @GetMapping("/historial-tratamientos/{idVeterinario}")
+    public ResponseEntity<List<Tratamiento>> obtenerTodosTratamientosVeterinario(
+            @PathVariable Integer idVeterinario) {
 
         if (idVeterinario == null) {
             return ResponseEntity.badRequest().build();
         }
 
-        List<Cita> historialCitas = veterinarioService.obtenerHistorialCitas(idVeterinario);
-        return ResponseEntity.ok(historialCitas);
+        List<Tratamiento> tratamientos = veterinarioService.obtenerTodosTratamientosVeterinario(idVeterinario);
+        return ResponseEntity.ok(tratamientos);
     }
-
 }
+
