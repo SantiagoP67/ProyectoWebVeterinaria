@@ -90,9 +90,9 @@ public class VeterinarioController{
     }
 
     // Citas agendadas del veterinario
-    @GetMapping("/citas_agendadas")
-    public ResponseEntity<List<Cita>> obtenerCitasAgendadas(HttpSession session) {
-        Integer idVeterinario = (Integer) session.getAttribute("idVeterinario");
+    @GetMapping("/citas_agendadas/{idVeterinario}")
+    public ResponseEntity<List<Cita>> obtenerCitasAgendadas(@PathVariable Integer idVeterinario) {
+
 
         if (idVeterinario == null) {
             return ResponseEntity.badRequest().build();
@@ -103,9 +103,8 @@ public class VeterinarioController{
     }
 
     // Historial de citas del veterinario
-    @GetMapping("/historial")
-    public ResponseEntity<List<Cita>> obtenerHistorialCitas(HttpSession session) {
-        Integer idVeterinario = (Integer) session.getAttribute("idVeterinario");
+    @GetMapping("/historial/{idVeterinario}")
+    public ResponseEntity<List<Cita>> obtenerHistorialCitas(@PathVariable Integer idVeterinario) {
 
         if (idVeterinario == null) {
             return ResponseEntity.badRequest().build();
