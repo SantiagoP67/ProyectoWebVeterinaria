@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.veterinaria.demo.servicio.ClienteService;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,15 +38,36 @@ public class ClienteController{
     }
 
     @PostMapping("/crear")
-    public ResponseEntity<String> crearCliente(@RequestBody Cliente cliente,
-                                               @RequestParam("confirm_password") String confirmPassword) {
-        if (!cliente.getContrasena().equals(confirmPassword)) {
-            return ResponseEntity.badRequest().body("Las contraseñas no coinciden");
+    public ResponseEntity<Map<String, String>> crearCliente(
+            @RequestBody Cliente cliente,
+            @RequestParam("confirm_password") String confirmPassword
+    ) {
+        // Verificar si la contraseña está vacía
+        if (cliente.getContrasena() == null || cliente.getContrasena().trim().isEmpty()) {
+            return ResponseEntity.badRequest().body(Collections.singletonMap("error", "La contraseña no puede estar vacía"));
         }
 
-        clienteService.crearCliente(cliente);
-        return ResponseEntity.ok("Usuario creado correctamente");
+        // Verificar si las contraseñas coinciden
+        if (!cliente.getContrasena().equals(confirmPassword)) {
+            return ResponseEntity.badRequest().body(Collections.singletonMap("error", "Las contraseñas no coinciden"));
+        }
+
+        // Crear el cliente
+        try {
+            clienteService.crearCliente(cliente);
+            // Devolver respuesta en formato JSON
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Usuario creado correctamente");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            // En caso de error, devolver un mensaje de error
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "Error al crear el cliente");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
     }
+
+
 
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<Cliente> actualizarCliente(@PathVariable Integer id, @RequestBody Cliente clienteactualizado){
