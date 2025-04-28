@@ -174,4 +174,10 @@ public class TratamientoController{
         Map<String, Integer> medicamentos = tratamientoService.obtenerMedicamentosMasUsadosUltimos30Dias();
         return ResponseEntity.ok(medicamentos);
     }
+
+    @GetMapping("/top3-medicamentos-vendidos")
+    public ResponseEntity<List<Map<String, Object>>> obtenerTop3MedicamentosMasVendidos() {
+        List<Map<String, Object>> medicamentos = tratamientoService.obtenerTop3MedicamentosMasVendidos();
+        return ResponseEntity.ok(medicamentos);
+    }
 }
