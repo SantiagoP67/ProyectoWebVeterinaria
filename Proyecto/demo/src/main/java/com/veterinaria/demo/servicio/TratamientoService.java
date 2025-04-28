@@ -12,4 +12,5 @@ public interface TratamientoService{
     List<Tratamiento> obtenerTratamientosUltimos30Dias();
     Map<String, Integer> obtenerMedicamentosMasUsadosUltimos30Dias();
     List<Map<String, Object>> obtenerTop3MedicamentosMasVendidos();
+    List<Tratamiento> obtenerTratamientosPorVeterinario(Integer idVeterinario);
 }

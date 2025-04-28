@@ -180,4 +180,14 @@ public class TratamientoController{
         List<Map<String, Object>> medicamentos = tratamientoService.obtenerTop3MedicamentosMasVendidos();
         return ResponseEntity.ok(medicamentos);
     }
+
+
+    @GetMapping("/veterinario/{idVeterinario}")
+    public ResponseEntity<List<Tratamiento>> obtenerTratamientosPorVeterinario(@PathVariable Integer idVeterinario) {
+        Veterinario veterinario = veterinarioRepository.findById(idVeterinario)
+                .orElseThrow(() -> new RuntimeException("Veterinario no encontrado"));
+
+        List<Tratamiento> tratamientos = tratamientoService.obtenerTratamientosPorVeterinario(idVeterinario);
+        return ResponseEntity.ok(tratamientos);
+    }
 }

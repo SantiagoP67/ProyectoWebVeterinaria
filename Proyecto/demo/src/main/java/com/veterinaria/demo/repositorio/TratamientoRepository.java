@@ -48,4 +48,7 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Intege
             "ORDER BY total DESC " +
             "LIMIT 3")
     List<Map<String, Object>> findTop3MedicamentosMasVendidos();
-}
+
+    @Query("SELECT t FROM Tratamiento t WHERE t.veterinario.idVeterinario = :idVeterinario")
+    List<Tratamiento> findByVeterinarioId(@Param("idVeterinario") Integer idVeterinario);
+    }

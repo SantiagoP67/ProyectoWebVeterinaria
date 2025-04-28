@@ -13,4 +13,5 @@ public interface VeterinarioRepository extends JpaRepository<Veterinario, Intege
     Veterinario findTopBySedeAndEstadoOrderByNumeroAtencionesAsc(String sede, Integer estado);
     long countByEstado(Integer estado);
     List<Veterinario> findByEstado(Integer estado);
+    Veterinario findByIdVeterinario(Integer idVeterinario);
 }

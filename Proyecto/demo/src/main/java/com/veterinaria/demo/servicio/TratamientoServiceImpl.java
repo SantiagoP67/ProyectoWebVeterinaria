@@ -68,4 +68,9 @@ public class TratamientoServiceImpl implements TratamientoService{
     public List<Map<String, Object>> obtenerTop3MedicamentosMasVendidos() {
         return tratamientoRepository.findTop3MedicamentosMasVendidos();
     }
+
+    @Override
+    public List<Tratamiento> obtenerTratamientosPorVeterinario(Integer idVeterinario) {
+        return tratamientoRepository.findByVeterinarioId(idVeterinario);
+    }
 }
