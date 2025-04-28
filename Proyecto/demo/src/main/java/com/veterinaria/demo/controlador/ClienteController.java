@@ -88,16 +88,19 @@ public class ClienteController{
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Map<String, String>> eliminarCliente(@PathVariable Integer id) {
-        Cliente cliente = clienteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado con ID: " + id));
-
-        clienteRepository.delete(cliente);
-
         Map<String, String> respuesta = new HashMap<>();
-        respuesta.put("mensaje", "Cliente eliminado correctamente");
 
+        if (!clienteRepository.existsById(id)) {
+            respuesta.put("mensaje", "Cliente no encontrado con ID: " + id);
+            return new ResponseEntity<>(respuesta, HttpStatus.NOT_FOUND);
+        }
+
+        clienteRepository.deleteById(id);
+
+        respuesta.put("mensaje", "Cliente eliminado correctamente");
         return new ResponseEntity<>(respuesta, HttpStatus.OK);
     }
+
 
 
     @GetMapping("/idClientePorNombreUsuario/{nombreUsuario}")
@@ -114,4 +117,6 @@ public ResponseEntity<Integer> obtenerIdClientePorNombreUsuario(@PathVariable St
         List<Cliente> clientes = clienteRepository.findByNombreContainingIgnoreCase(nombre);
         return ResponseEntity.ok(clientes);
     }
+
+
 }
