@@ -1,6 +1,10 @@
 package com.veterinaria.demo.controlador;
 
 import com.veterinaria.demo.entidad.Medicamento;
+import com.veterinaria.demo.entidad.Tratamiento;
+import com.veterinaria.demo.repositorio.TratamientoRepository;
+import com.veterinaria.demo.servicio.TratamientoService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.veterinaria.demo.servicio.MedicamentoService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/medicamento")
@@ -17,6 +22,9 @@ public class MedicamentoController{
 
     @Autowired 
     MedicamentoService medicamentoService;
+
+    @Autowired
+    TratamientoRepository tratamientoRepository;
 
     @GetMapping
     public List<Medicamento> mostrarMedicamentos(){
@@ -27,4 +35,29 @@ public class MedicamentoController{
     public Medicamento detalleMedicamento(@PathVariable Integer id){
         return medicamentoService.obtenerMedicamentoPorId(id);
     }
+
+    @GetMapping("/por-tratamiento/{idTratamiento}")
+    public ResponseEntity<List<Medicamento>> obtenerMedicamentosPorTratamiento(@PathVariable Integer idTratamiento) {
+        Tratamiento tratamiento = tratamientoRepository.findById(idTratamiento)
+                .orElse(null);
+
+        if (tratamiento == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        List<Medicamento> medicamentos = tratamiento.getTratamientoMedicamentos().stream()
+                .map(tm -> new Medicamento(
+                        tm.getMedicamento().getIdMedicamento(),
+                        tm.getMedicamento().getNombre(),
+                        tm.getMedicamento().getPrecioCompra(),
+                        tm.getMedicamento().getPrecioVenta(),
+                        tm.getMedicamento().getUnidadesDisponibles(),
+                        tm.getMedicamento().getUnidadesVendidas(),
+                        tm.getMedicamento().getTratamientoMedicamentos()
+                ))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(medicamentos);
+    }
+
 }

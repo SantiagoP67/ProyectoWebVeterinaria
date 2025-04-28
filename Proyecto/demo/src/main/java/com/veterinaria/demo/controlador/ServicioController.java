@@ -23,8 +23,6 @@ public class ServicioController {
     @Autowired
     private TratamientoRepository tratamientoRepository;
 
-
-    
     public ServicioController(ServicioService servicioService) {
         this.servicioService = servicioService;
     }
