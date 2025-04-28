@@ -65,7 +65,6 @@ public class VeterinarioController{
 
     }
 
-
     // Mascotas atendidas
     @GetMapping("/mascotas_atendidas/{idVeterinario}")
     public ResponseEntity<List<Mascota>> obtenerMascotasAtendidas(@PathVariable Integer idVeterinario) {

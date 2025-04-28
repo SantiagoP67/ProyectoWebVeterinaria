@@ -174,4 +174,6 @@ public class TratamientoController{
         Map<String, Integer> medicamentos = tratamientoService.obtenerMedicamentosMasUsadosUltimos30Dias();
         return ResponseEntity.ok(medicamentos);
     }
+
+
 }

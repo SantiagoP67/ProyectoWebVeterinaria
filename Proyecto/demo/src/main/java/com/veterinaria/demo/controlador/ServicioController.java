@@ -1,15 +1,17 @@
 package com.veterinaria.demo.controlador;
 
 import com.veterinaria.demo.entidad.Servicio;
+import com.veterinaria.demo.entidad.Tratamiento;
+import com.veterinaria.demo.repositorio.TratamientoRepository;
 import com.veterinaria.demo.servicio.ServicioService;
 
 import java.math.BigDecimal;
 import java.util.List;
+
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/servicios")
@@ -17,6 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class ServicioController {
     
     private final ServicioService servicioService;
+
+    @Autowired
+    private TratamientoRepository tratamientoRepository;
+
+
     
     public ServicioController(ServicioService servicioService) {
         this.servicioService = servicioService;
@@ -38,5 +45,19 @@ public class ServicioController {
     public ResponseEntity<BigDecimal> obtenerGananciasTotales() {
         BigDecimal gananciasTotales = servicioService.calcularGananciasTotales();
         return ResponseEntity.ok(gananciasTotales);
+    }
+
+    @GetMapping("/por-tratamiento/{id}")
+    public ResponseEntity<Servicio> obtenerPorTratamiento(@PathVariable Integer id) {
+        Tratamiento tratamiento = tratamientoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Tratamiento no encontrado"));
+
+        Servicio servicio = tratamiento.getServicio();
+
+        if(servicio == null){
+            throw new EntityNotFoundException("No hay servicio asociado a este tratamiento");
+        }
+
+        return ResponseEntity.ok(servicio);
     }
 }

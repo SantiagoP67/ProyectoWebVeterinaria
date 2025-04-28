@@ -2,7 +2,9 @@ package com.veterinaria.demo.controlador;
 
 import java.util.List;
 
+import com.veterinaria.demo.entidad.Tratamiento;
 import com.veterinaria.demo.repositorio.TratamientoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -184,5 +186,16 @@ public class MascotaController {
     public ResponseEntity<List<Mascota>> obtenerMascotasActivas() {
         List<Mascota> mascotasActivas = mascotaService.obtenerMascotasActivas();
         return ResponseEntity.ok(mascotasActivas);
+    }
+
+    @GetMapping("/por-tratamiento/{id}")
+    public ResponseEntity<Mascota> obtenerMascotaPorTratamiento(@PathVariable Integer id) {
+        Tratamiento tratamiento = tratamientoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Tratamiento no encontrado"));
+        Mascota mascota = tratamiento.getMascota();
+        if (mascota == null) {
+            throw new EntityNotFoundException("No hay mascota asociada a este tratamiento");
+        }
+        return ResponseEntity.ok(mascota);
     }
 }
