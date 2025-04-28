@@ -190,4 +190,13 @@ public class TratamientoController{
         List<Tratamiento> tratamientos = tratamientoService.obtenerTratamientosPorVeterinario(idVeterinario);
         return ResponseEntity.ok(tratamientos);
     }
+
+    @GetMapping("/mascota/{idMascota}")
+    public ResponseEntity<List<Tratamiento>> obtenerTratamientoPorMascota(@PathVariable Integer idMascota) {
+        Mascota mascota = mascotaRepository.findById(idMascota)
+                .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
+
+        List<Tratamiento> tratamientos = tratamientoRepository.findByMascota(mascota);
+        return ResponseEntity.ok(tratamientos);
+    }
 }
