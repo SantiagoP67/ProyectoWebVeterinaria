@@ -11,4 +11,5 @@ public interface TratamientoService{
     long contarTratamientosUltimos30Dias();
     List<Tratamiento> obtenerTratamientosUltimos30Dias();
     Map<String, Integer> obtenerMedicamentosMasUsadosUltimos30Dias();
+    List<Map<String, Object>> obtenerTop3MedicamentosMasVendidos();
 }

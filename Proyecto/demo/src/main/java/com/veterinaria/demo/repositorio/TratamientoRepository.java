@@ -2,6 +2,7 @@ package com.veterinaria.demo.repositorio;
 
 import java.util.List;
 import java.util.Date;
+import java.util.Map;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -39,4 +40,12 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Intege
             "ORDER BY total DESC")
     List<Object[]> findMedicamentosMasUsados(@Param("fechaInicio") Date fechaInicio,
             @Param("fechaFin") Date fechaFin);
+
+    @Query("SELECT m.nombre as medicamento, SUM(tm.cantidad) as total " +
+            "FROM TratamientoMedicamento tm " +
+            "JOIN tm.medicamento m " +
+            "GROUP BY m.nombre " +
+            "ORDER BY total DESC " +
+            "LIMIT 3")
+    List<Map<String, Object>> findTop3MedicamentosMasVendidos();
 }
