@@ -54,8 +54,10 @@ public class TratamientoController{
             @RequestParam(required = false) Integer idVeterinario,
             @RequestParam List<Integer> idsMedicamentos) {
 
-        Veterinario veterinario = veterinarioRepository.findById(idVeterinario)
-                .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
+        Veterinario veterinario = idVeterinario != null ?
+                veterinarioRepository.findById(idVeterinario)
+                        .orElseThrow(() -> new RuntimeException("Veterinario no encontrado")) :
+                null;
 
         Mascota mascota = mascotaRepository.findById(idMascota)
                 .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
@@ -65,6 +67,13 @@ public class TratamientoController{
 
         List<Medicamento> medicamentos = medicamentoRepository.findAllById(idsMedicamentos);
 
+        // Verificar stock antes de proceder
+        for (Medicamento medicamento : medicamentos) {
+            if (medicamento.getUnidadesDisponibles() <= 0) {
+                throw new RuntimeException("No hay unidades disponibles del medicamento: " + medicamento.getNombre());
+            }
+        }
+
         tratamiento.setVeterinario(veterinario);
         tratamiento.setMascota(mascota);
         tratamiento.setServicio(servicio);
@@ -72,12 +81,19 @@ public class TratamientoController{
         List<TratamientoMedicamento> tratamientoMedicamentos = new ArrayList<>();
 
         for (Medicamento medicamento : medicamentos) {
+            // Actualizar unidades del medicamento
+            medicamento.setUnidadesDisponibles(medicamento.getUnidadesDisponibles() - 1);
+            medicamento.setUnidadesVendidas(medicamento.getUnidadesVendidas() + 1);
+
+            medicamentoRepository.save(medicamento); // Guardar cambios en el medicamento
+
             TratamientoMedicamento tm = new TratamientoMedicamento();
             tm.setMedicamento(medicamento);
             tm.setTratamiento(tratamiento);
-            tm.setCantidad(medicamentos.size());
+            tm.setCantidad(1); // Asumiendo que se usa 1 unidad por medicamento
             tratamientoMedicamentos.add(tm);
         }
+
         tratamiento.setTratamientoMedicamentos(tratamientoMedicamentos);
 
         Tratamiento tratamientoGuardado = tratamientoRepository.save(tratamiento);
@@ -184,10 +200,16 @@ public class TratamientoController{
 
     @GetMapping("/veterinario/{idVeterinario}")
     public ResponseEntity<List<Tratamiento>> obtenerTratamientosPorVeterinario(@PathVariable Integer idVeterinario) {
-        Veterinario veterinario = veterinarioRepository.findById(idVeterinario)
-                .orElseThrow(() -> new RuntimeException("Veterinario no encontrado"));
-
         List<Tratamiento> tratamientos = tratamientoService.obtenerTratamientosPorVeterinario(idVeterinario);
+        return ResponseEntity.ok(tratamientos);
+    }
+
+    @GetMapping("/mascota/{idMascota}")
+    public ResponseEntity<List<Tratamiento>> obtenerTratamientoPorMascota(@PathVariable Integer idMascota) {
+        Mascota mascota = mascotaRepository.findById(idMascota)
+                .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
+
+        List<Tratamiento> tratamientos = tratamientoRepository.findByMascota(mascota);
         return ResponseEntity.ok(tratamientos);
     }
 }
