@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 import com.veterinaria.demo.servicio.ClienteService;
 
 import java.util.Collections;
@@ -67,8 +66,6 @@ public class ClienteController{
         }
     }
 
-
-
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<Cliente> actualizarCliente(@PathVariable Integer id, @RequestBody Cliente clienteactualizado){
         Cliente clienteExistente = clienteRepository.findById(id)
@@ -98,7 +95,6 @@ public class ClienteController{
 
         return new ResponseEntity<>(respuesta, HttpStatus.OK);
     }
-
 
     @GetMapping("/idClientePorNombreUsuario/{nombreUsuario}")
 public ResponseEntity<Integer> obtenerIdClientePorNombreUsuario(@PathVariable String nombreUsuario) {
