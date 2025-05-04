@@ -1,6 +1,7 @@
 package com.veterinaria.demo.controlador;
 
 import com.veterinaria.demo.entidad.Cita;
+import com.veterinaria.demo.entidad.Mascota;
 import com.veterinaria.demo.servicio.CitaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,13 @@ public class CitaController {
     public CitaController(CitaService citaService) {
         this.citaService = citaService;
     }
+
+    @GetMapping
+    public List<Cita> obtenerTodasMascotas() {
+        return citaService.obtenerTodasCitas();
+    }
     
-    @PostMapping
+    @PostMapping("/crear")
     public ResponseEntity<Cita> crearCita(@RequestBody Cita cita) {
         Cita nuevaCita = citaService.crearCita(cita);
         return ResponseEntity.ok(nuevaCita);
@@ -57,8 +63,8 @@ public class CitaController {
         return ResponseEntity.ok(citas);
     }
     
-    @PutMapping
-    public ResponseEntity<Cita> actualizarCita(@RequestBody Cita cita) {
+    @PutMapping("/actualizar/{idCita}")
+    public ResponseEntity<Cita> actualizarCita(@RequestBody Cita cita, @PathVariable Integer idCita) {
         Cita citaActualizada = citaService.actualizarCita(cita);
         return ResponseEntity.ok(citaActualizada);
     }
@@ -68,4 +74,6 @@ public class CitaController {
         Cita cita = citaService.obtenerCitaPorId(idCita);
         return ResponseEntity.ok(cita);
     }
+
+
 }
