@@ -1,7 +1,6 @@
 package com.veterinaria.demo.controlador;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.veterinaria.demo.entidad.*;
 import com.veterinaria.demo.repositorio.VeterinarioRepository;
@@ -11,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.veterinaria.demo.servicio.VeterinarioService;
-
-import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/veterinario")
