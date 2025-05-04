@@ -1,7 +1,6 @@
 package com.veterinaria.demo.repositorio;
 
 import com.veterinaria.demo.entidad.Cita;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -21,8 +20,8 @@ public interface CitaRepository extends JpaRepository<Cita, Integer> {
     List<Cita> findByVeterinario_IdVeterinario(Integer idVeterinario);
 
     List<Cita> findByVeterinarioIdVeterinario(Integer idVeterinario);
-    // 👈 OJO aquí
-    List<Cita> findByVeterinarioIdVeterinarioAndEstado(Integer idVeterinario, String estado); // 👈 Y aquí
+
+    List<Cita> findByVeterinarioIdVeterinarioAndEstado(Integer idVeterinario, String estado);
 
     @Query("SELECT c FROM Cita c WHERE c.fechaHora BETWEEN :inicio AND :fin")
     List<Cita> findCitasEntreFechas(Date inicio, Date fin);

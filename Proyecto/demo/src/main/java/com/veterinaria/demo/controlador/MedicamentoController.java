@@ -3,9 +3,7 @@ package com.veterinaria.demo.controlador;
 import com.veterinaria.demo.entidad.Medicamento;
 import com.veterinaria.demo.entidad.Tratamiento;
 import com.veterinaria.demo.repositorio.TratamientoRepository;
-import com.veterinaria.demo.servicio.TratamientoService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
