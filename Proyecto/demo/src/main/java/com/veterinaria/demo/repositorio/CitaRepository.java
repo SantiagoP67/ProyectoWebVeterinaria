@@ -21,9 +21,7 @@ public interface CitaRepository extends JpaRepository<Cita, Integer> {
     List<Cita> findByVeterinario_IdVeterinario(Integer idVeterinario);
 
     List<Cita> findByVeterinarioIdVeterinario(Integer idVeterinario);
-    // 👈 OJO aquí
-    List<Cita> findByVeterinarioIdVeterinarioAndEstado(Integer idVeterinario, String estado); // 👈 Y aquí
-
+    List<Cita> findByVeterinarioIdVeterinarioAndEstado(Integer idVeterinario, String estado);
     @Query("SELECT c FROM Cita c WHERE c.fechaHora BETWEEN :inicio AND :fin")
     List<Cita> findCitasEntreFechas(Date inicio, Date fin);
     
