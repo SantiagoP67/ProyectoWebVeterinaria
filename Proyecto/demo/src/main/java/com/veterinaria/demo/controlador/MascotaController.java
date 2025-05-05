@@ -5,7 +5,6 @@ import java.util.List;
 import com.veterinaria.demo.entidad.Tratamiento;
 import com.veterinaria.demo.repositorio.TratamientoRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -159,8 +158,8 @@ public class MascotaController {
 
     @GetMapping("/cantidadMascotas")
     public ResponseEntity<Long> cantidadMascotas() {
-        Long cantidad = mascotaRepository.count();  // Esto obtiene la cantidad de mascotas
-        return ResponseEntity.ok(cantidad);  // Devuelve la cantidad como respuesta
+        Long cantidad = mascotaRepository.count();
+        return ResponseEntity.ok(cantidad);
     }
     
     @GetMapping("/cantidadMascotasPorCliente/{idCliente}")

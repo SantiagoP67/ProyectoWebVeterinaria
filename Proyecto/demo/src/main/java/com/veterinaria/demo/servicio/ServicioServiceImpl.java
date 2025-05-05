@@ -14,6 +14,7 @@ public class ServicioServiceImpl implements ServicioService {
 
     private final ServicioRepository servicioRepository;
     private final TratamientoMedicamentoRepository tratamientoMedicamentoRepository;
+    @SuppressWarnings("unused")
     private final TratamientoRepository tratamientoRepository;
 
     // Constructor modificado para recibir los 3 repositorios

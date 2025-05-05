@@ -1,7 +1,6 @@
 package com.veterinaria.demo.controlador;
 
 import com.veterinaria.demo.entidad.Cita;
-import com.veterinaria.demo.entidad.Mascota;
 import com.veterinaria.demo.servicio.CitaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
