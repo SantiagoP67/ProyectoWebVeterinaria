@@ -3,7 +3,6 @@ package com.veterinaria.demo.service;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -131,12 +130,31 @@ public class TratamientoServiceTestNaive {
         List<Integer> idsMedicamentos = Arrays.asList(medicamento1.getIdMedicamento(), medicamento2.getIdMedicamento());
 
         // Act
-        Tratamiento newTratamiento = tratamientoService.crearTratamiento(tratamiento1);
-        newTratamiento = tratamientoService.crearTratamiento(tratamiento2);
+        Tratamiento newTratamiento = tratamientoService.crearTratamiento(
+            tratamiento, 
+            idMascota, 
+            idServicio, 
+            idVeterinario, 
+            idsMedicamentos
+        );
 
         // Assert
-        assertThat(nuevoTratamiento).isNotNull();
-        assertThat(nuevoTratamiento.getCodigo()).isEqualTo("COD123");
+        assertThat(newTratamiento).isNotNull();
+        assertThat(newTratamiento.getIdTratamiento()).isNotNull();
+        assertThat(newTratamiento.getCodigo()).isEqualTo("TRT001");        
+        assertThat(newTratamiento.getMascota()).isNotNull();
+        assertThat(newTratamiento.getMascota().getIdMascota()).isEqualTo(idMascota);        
+        assertThat(newTratamiento.getServicio()).isNotNull();
+        assertThat(newTratamiento.getServicio().getIdServicio()).isEqualTo(idServicio);        
+        assertThat(newTratamiento.getVeterinario()).isNotNull();
+        assertThat(newTratamiento.getVeterinario().getIdVeterinario()).isEqualTo(idVeterinario);        
+        assertThat(newTratamiento.getTratamientoMedicamentos()).hasSize(2);        
+        Medicamento updatedMed1 = medicamentoRepository.findById(medicamento1.getIdMedicamento()).orElse(null);
+        Medicamento updatedMed2 = medicamentoRepository.findById(medicamento2.getIdMedicamento()).orElse(null);        
+        assertThat(updatedMed1.getUnidadesDisponibles()).isEqualTo(9);
+        assertThat(updatedMed1.getUnidadesVendidas()).isEqualTo(1);        
+        assertThat(updatedMed2.getUnidadesDisponibles()).isEqualTo(7);
+        assertThat(updatedMed2.getUnidadesVendidas()).isEqualTo(1);
     }
 
     @Test
