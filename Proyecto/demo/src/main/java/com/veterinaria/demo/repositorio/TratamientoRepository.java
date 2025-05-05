@@ -55,4 +55,7 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Intege
 
     List<Tratamiento> findByMascota_IdMascota(Integer idMascota);
 
+    List<Tratamiento> findByCodigo(String codigo);
+
+
     }
