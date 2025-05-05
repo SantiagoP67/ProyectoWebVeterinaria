@@ -5,6 +5,7 @@ import java.util.List;
 import com.veterinaria.demo.entidad.Tratamiento;
 import com.veterinaria.demo.repositorio.TratamientoRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -198,4 +199,11 @@ public class MascotaController {
         }
         return ResponseEntity.ok(mascota);
     }
+
+    @GetMapping("/mascotas-cliente/{idCliente}")
+    public ResponseEntity<List<Mascota>> obtenerMascotasCliente(@PathVariable Integer idCliente) {
+        List<Mascota> mascotas = mascotaService.obtenerMascotasPorCliente(idCliente);
+        return ResponseEntity.ok(mascotas);
+    }
+
 }
