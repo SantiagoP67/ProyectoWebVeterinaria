@@ -10,9 +10,11 @@ import java.util.Collections;
 import java.util.Random;
 import java.text.SimpleDateFormat;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Controller;
 
 import com.veterinaria.demo.repositorio.AdministradorRepository;
 import com.veterinaria.demo.repositorio.ClienteRepository;
@@ -28,25 +30,46 @@ import com.veterinaria.demo.repositorio.TratamientoRepository;
 import com.veterinaria.demo.repositorio.VeterinarioRepository;
 
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 
-@Component
-@RequiredArgsConstructor
+@Controller
 @Transactional
+@Profile("default")
 public class DataBaseInit implements ApplicationRunner {
+    @Autowired
+    private ClienteRepository clienteRepository;
 
-    private final ClienteRepository clienteRepository;
-    private final CitaRepository citaRepository;
-    private final TestimonioRepository testimonioRepository;
-    private final VeterinarioRepository veterinarioRepository;
-    private final AdministradorRepository administradorRepository;
-    private final ServicioRepository servicioRepository;
-    private final MetodoPagoRepository metodoPagoRepository;
-    private final FacturaRepository facturaRepository;
-    private final MascotaRepository mascotaRepository;
-    private final TratamientoRepository tratamientoRepository;
-    private final MedicamentoRepository medicamentoRepository;
-    private final TratamientoMedicamentoRepository tratamientoMedicamentoRepository;
+    @Autowired
+    private CitaRepository citaRepository;
+
+    @Autowired
+    private TestimonioRepository testimonioRepository;
+
+    @Autowired
+    private VeterinarioRepository veterinarioRepository;
+
+    @Autowired
+    private AdministradorRepository administradorRepository;
+
+    @Autowired
+    private ServicioRepository servicioRepository;
+
+    @Autowired
+    private MetodoPagoRepository metodoPagoRepository;
+
+    @Autowired
+    private FacturaRepository facturaRepository;
+
+    @Autowired
+    private MascotaRepository mascotaRepository;
+
+    @Autowired
+    private TratamientoRepository tratamientoRepository;
+
+    @Autowired
+    private MedicamentoRepository medicamentoRepository;
+
+    @Autowired
+    private TratamientoMedicamentoRepository tratamientoMedicamentoRepository;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
