@@ -22,6 +22,7 @@ import com.veterinaria.demo.entidad.Cliente;
 import com.veterinaria.demo.entidad.Mascota;
 import com.veterinaria.demo.repositorio.ClienteRepository;
 import com.veterinaria.demo.repositorio.MascotaRepository;
+import com.veterinaria.demo.servicio.ClienteService;
 import com.veterinaria.demo.servicio.MascotaService;
 
 @RestController
@@ -41,6 +42,8 @@ public class MascotaController {
     @Autowired
     private TratamientoRepository tratamientoRepository;
 
+    @Autowired
+    private ClienteService clienteService;
     /**
      * Muestra todas las mascotas registradas.
      * URL: http://localhost:8082/mascota
@@ -75,12 +78,14 @@ public class MascotaController {
      */
     @PostMapping("/agregar")
     public ResponseEntity<Mascota> agregarMascota(@RequestBody Mascota mascota, @RequestParam Integer idCliente) {
-        Cliente cliente = clienteRepository.findById(idCliente)
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+        Cliente cliente = clienteService.obtenerClientePorId(idCliente);
+        if (cliente == null) {
+            return ResponseEntity.badRequest().body(null); // Cliente no encontrado
+        }
 
         mascota.setCliente(cliente);
 
-        Mascota guardada = mascotaRepository.save(mascota);
+        Mascota guardada = mascotaService.guardarMascota(mascota);
 
         return ResponseEntity.ok(guardada);
     }
@@ -88,8 +93,10 @@ public class MascotaController {
     @PutMapping("/editar/{id}")
     public ResponseEntity<Mascota> editarMascota(@PathVariable Integer id, @RequestBody Mascota mascotaActualizada) {
         // Verifica si la mascota existe
-        Mascota mascotaExistente = mascotaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Mascota no encontrada con ID: " + id));
+        Mascota mascotaExistente = mascotaService.obtenerMascotaPorId(id);
+        if (mascotaExistente == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         mascotaExistente.setNombre(mascotaActualizada.getNombre());
         mascotaExistente.setRaza(mascotaActualizada.getRaza());
@@ -104,26 +111,30 @@ public class MascotaController {
 
         if (mascotaActualizada.getCliente() != null) {
             Integer idCliente = mascotaActualizada.getCliente().getIdCliente();
-            Cliente cliente = clienteRepository.findById(idCliente)
-                    .orElseThrow(() -> new RuntimeException("Cliente no encontrado con ID: " + idCliente));
+            Cliente cliente = clienteService.obtenerClientePorId(idCliente);
+            if (cliente == null) {
+                return ResponseEntity.badRequest().body(null); // Cliente no encontrado
+            }
             mascotaExistente.setCliente(cliente);
         }
 
-        Mascota mascotaGuardada = mascotaRepository.save(mascotaExistente);
+        Mascota mascotaGuardada = mascotaService.guardarMascota(mascotaExistente);
         return ResponseEntity.ok(mascotaGuardada);
     }
 
     @PutMapping("/eliminar/{id}")
     public ResponseEntity<Mascota> eliminarMascota(@PathVariable Integer id) {
         // Verifica si la mascota existe
-        Mascota mascota = mascotaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Mascota no encontrada con ID: " + id));
+        Mascota mascota = mascotaService.obtenerMascotaPorId(id);
+        if (mascota == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         // Cambia el estado a 'inactiva' o el que uses para marcar eliminación lógica
         mascotaService.cambiarEstado(id, mascota);
 
         // Guarda la mascota con el nuevo estado
-        mascotaRepository.save(mascota);
+        mascotaService.guardarMascota(mascota);
 
         return ResponseEntity.ok(mascota);
     }
