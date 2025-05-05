@@ -2,6 +2,7 @@ package com.veterinaria.demo.controlador;
 
 import com.veterinaria.demo.entidad.*;
 import com.veterinaria.demo.repositorio.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,14 +13,36 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.veterinaria.demo.servicio.MascotaService;
+
 @RestController
 @RequestMapping("/tratamiento")
 @CrossOrigin(origins = "http://localhost:4200")
 public class TratamientoController{
 
+
+    @Autowired
+    private MascotaService mascotaService;
+
     @Autowired
     private TratamientoService tratamientoService;
 
+    @Autowired
+    private TratamientoRepository tratamientoRepository;
+
+    @Autowired
+    private MascotaRepository mascotaRepository;
+
+    @Autowired
+    private ServicioRepository servicioRepository;
+
+    @Autowired
+    private MedicamentoRepository medicamentoRepository;
+
+    @Autowired
+    private VeterinarioRepository veterinarioRepository;
+
+    
     @GetMapping
     public List<Tratamiento> mostrarTratamientos() {
         return tratamientoService.obtenerTodosTratamientos();
@@ -71,6 +94,7 @@ public class TratamientoController{
         List<Tratamiento> tratamientos = tratamientoRepository.findByMascota(mascota);
         return ResponseEntity.ok(tratamientos);
     }
+    
 
     @GetMapping("/cantidad-ultimos-30-dias")
     public ResponseEntity<Long> contarTratamientosUltimos30Dias() {

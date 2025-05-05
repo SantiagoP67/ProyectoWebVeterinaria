@@ -189,4 +189,9 @@ public class TratamientoServiceImpl implements TratamientoService{
         tratamientoRepository.delete(tratamiento);
     }
 
+    @Override
+    public List<Tratamiento> obtenerTratamientosPorMascota(Integer idMascota) {
+        return tratamientoRepository.findByMascotaId(idMascota);
+    }
+
 }
