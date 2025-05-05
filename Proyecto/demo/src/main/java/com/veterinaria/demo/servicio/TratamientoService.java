@@ -18,5 +18,4 @@ public interface TratamientoService{
     Tratamiento editarTratamiento(Integer id, Tratamiento tratamientoActualizado, Integer idMascota, Integer idServicio, Integer idVeterinario, List<Integer> idsMedicamentos);
     void eliminarTratamientoPorId(Integer id);
     List<Tratamiento> obtenerTratamientosPorMascota(Integer idMascota);
-
 }
