@@ -1,6 +1,7 @@
 package com.veterinaria.demo.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.veterinaria.demo.entidad.Tratamiento;
 import com.veterinaria.demo.entidad.Veterinario;
@@ -93,13 +95,15 @@ public class TratamientoServiceMockTest {
     @Test
     public void TratamientoService_contarTratamientosUltimos30Dias_Count() {
         // Arrange
-        Calendar calendar = Calendar.getInstance();
-        Date fechaFin = calendar.getTime();
-        calendar.add(Calendar.DAY_OF_YEAR, -30);
-        Date fechaInicio = calendar.getTime();
+        Calendar cal = Calendar.getInstance();
+        Date fechaFin = new Date(cal.getTime().getTime());
+        cal.add(Calendar.DAY_OF_YEAR, -30);
+        Date fechaInicio = new Date(cal.getTime().getTime());
         
-        when(tratamientoRepository.countByFechaBetween(fechaInicio, fechaFin))
-            .thenReturn(1L);
+        when(tratamientoRepository.countByFechaBetween(
+            argThat(date -> Math.abs(date.getTime() - fechaInicio.getTime()) <= 1000),
+            argThat(date -> Math.abs(date.getTime() - fechaFin.getTime()) <= 1000)
+        )).thenReturn(1L);
 
         // Act
         long count = tratamientoService.contarTratamientosUltimos30Dias();
@@ -130,13 +134,15 @@ public class TratamientoServiceMockTest {
     @Test
     public void TratamientoService_obtenerMedicamentosMasUsadosUltimos30Dias_NotEmptyListMedicamentos() {
         // Arrange
-        Calendar calendar = Calendar.getInstance();
-        Date fechaFin = calendar.getTime();
-        calendar.add(Calendar.DAY_OF_YEAR, -30);
-        Date fechaInicio = calendar.getTime();
+        Calendar cal = Calendar.getInstance();
+        Date fechaFin = new Date(cal.getTime().getTime());
+        cal.add(Calendar.DAY_OF_YEAR, -30);
+        Date fechaInicio = new Date(cal.getTime().getTime());
         
-        when(tratamientoRepository.findMedicamentosMasUsados(fechaInicio, fechaFin))
-            .thenReturn(Collections.emptyList());
+        when(tratamientoRepository.findMedicamentosMasUsados(
+            argThat(date -> Math.abs(date.getTime() - fechaInicio.getTime()) <= 1000),
+            argThat(date -> Math.abs(date.getTime() - fechaFin.getTime()) <= 1000)
+        )).thenReturn(Collections.emptyList());
 
         // Act
         Map<String, Integer> resultados = tratamientoService.obtenerMedicamentosMasUsadosUltimos30Dias();
