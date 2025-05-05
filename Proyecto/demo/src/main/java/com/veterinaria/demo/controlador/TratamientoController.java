@@ -32,7 +32,6 @@ public class TratamientoController{
     @Autowired
     private MascotaRepository mascotaRepository;
 
-    
     @GetMapping
     public List<Tratamiento> mostrarTratamientos() {
         return tratamientoService.obtenerTodosTratamientos();
@@ -89,8 +88,6 @@ public class TratamientoController{
         return ResponseEntity.ok(tratamientos);
     }
     
-    
-
     @GetMapping("/cantidad-ultimos-30-dias")
     public ResponseEntity<Long> contarTratamientosUltimos30Dias() {
         Long cantidad = tratamientoService.contarTratamientosUltimos30Dias();
