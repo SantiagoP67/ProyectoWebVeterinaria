@@ -191,7 +191,7 @@ public class TratamientoServiceImpl implements TratamientoService{
 
     @Override
     public List<Tratamiento> obtenerTratamientosPorMascota(Integer idMascota) {
-        return tratamientoRepository.findByMascotaId(idMascota);
+        return tratamientoRepository.findByMascota_IdMascota(idMascota);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.veterinaria.demo.servicio;
 
+import com.veterinaria.demo.entidad.Mascota;
 import com.veterinaria.demo.entidad.Tratamiento;
 
 import java.util.List;

@@ -86,14 +86,19 @@ public class TratamientoController{
         return ResponseEntity.ok("Tratamiento eliminado correctamente");
     }
 
+
     @GetMapping("/por-mascota/{idMascota}")
     public ResponseEntity<List<Tratamiento>> obtenerTratamientosPorMascota(@PathVariable Integer idMascota) {
-        Mascota mascota = mascotaRepository.findById(idMascota)
-                .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
-
-        List<Tratamiento> tratamientos = tratamientoRepository.findByMascota(mascota);
+        Mascota mascota = mascotaService.obtenerMascotaPorId(idMascota);
+        
+        if (mascota == null) {
+            return ResponseEntity.notFound().build();
+        }
+    
+        List<Tratamiento> tratamientos = tratamientoService.obtenerTratamientosPorMascota(idMascota);
         return ResponseEntity.ok(tratamientos);
     }
+    
     
 
     @GetMapping("/cantidad-ultimos-30-dias")
