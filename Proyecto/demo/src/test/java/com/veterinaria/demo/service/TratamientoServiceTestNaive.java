@@ -91,21 +91,19 @@ public class TratamientoServiceTestNaive {
             null));
     }
 
-    /*
     @Test
-    public void TratamientoService_createTratamiento_Tratamiento() {
+    public void TratamientoService_crearTratamiento_Tratamiento() {
         // Arrange
         Tratamiento tratamiento1 = new Tratamiento();
         Tratamiento tratamiento2 = new Tratamiento();
 
         // Act
-        Tratamiento newTratamiento = tratamientoService.createTratamiento(tratamiento1);
-        newTratamiento = tratamientoService.createTratamiento(tratamiento2);
+        Tratamiento newTratamiento = tratamientoService.crearTratamiento(tratamiento1);
+        newTratamiento = tratamientoService.crearTratamiento(tratamiento2);
 
         // Assert
         assertThat(newTratamiento).isNotNull();
     }
-    */
 
     @Test
     public void TratamientoService_obtenerTodosTratamientos_NotEmptyListTratamientos() {
