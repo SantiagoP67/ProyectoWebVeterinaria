@@ -3,7 +3,6 @@ package com.veterinaria.demo.controlador;
 import java.util.List;
 
 import com.veterinaria.demo.entidad.*;
-import com.veterinaria.demo.repositorio.VeterinarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -18,8 +17,7 @@ public class VeterinarioController{
 
     @Autowired
     private VeterinarioService veterinarioService;
-    @Autowired
-    private VeterinarioRepository veterinarioRepository;
+
 
     @GetMapping
     public List<Veterinario> listar(Model model){
