@@ -1,7 +1,6 @@
 package com.veterinaria.demo.controlador;
 
 import com.veterinaria.demo.entidad.*;
-import com.veterinaria.demo.repositorio.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,28 +17,25 @@ import com.veterinaria.demo.servicio.MascotaService;
 @RequestMapping("/tratamiento")
 @CrossOrigin(origins = "http://localhost:4200")
 public class TratamientoController{
-
-
     @Autowired
     private MascotaService mascotaService;
 
     @Autowired
     private TratamientoService tratamientoService;
 
-    @Autowired
-    private TratamientoRepository tratamientoRepository;
-
-    @Autowired
-    private MascotaRepository mascotaRepository;
-
     @GetMapping
-    public List<Tratamiento> mostrarTratamientos() {
-        return tratamientoService.obtenerTodosTratamientos();
+    public ResponseEntity<List<Tratamiento>> mostrarTratamientos() {
+        List<Tratamiento> tratamientos = tratamientoService.obtenerTodosTratamientos();
+        return ResponseEntity.ok(tratamientos);
     }
 
     @GetMapping("/{id}")
-    public Tratamiento detalleTratamiento(@PathVariable Integer id) {
-        return tratamientoService.obtenerTratamientoPorId(id);
+    public ResponseEntity<Tratamiento> detalleTratamiento(@PathVariable Integer id) {
+        Tratamiento tratamiento = tratamientoService.obtenerTratamientoPorId(id);
+        if (tratamiento == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(tratamiento);
     }
 
     @PostMapping("/crear")
