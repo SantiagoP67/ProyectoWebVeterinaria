@@ -121,10 +121,7 @@ public class TratamientoController{
 
     @GetMapping("/mascota/{idMascota}")
     public ResponseEntity<List<Tratamiento>> obtenerTratamientoPorMascota(@PathVariable Integer idMascota) {
-        Mascota mascota = mascotaRepository.findById(idMascota)
-                .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
-
-        List<Tratamiento> tratamientos = tratamientoRepository.findByMascota(mascota);
+        List<Tratamiento> tratamientos = tratamientoService.obtenerTratamientosPorMascota(idMascota);
         return ResponseEntity.ok(tratamientos);
     }
 }

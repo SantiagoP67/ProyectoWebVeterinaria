@@ -191,7 +191,10 @@ public class TratamientoServiceImpl implements TratamientoService{
 
     @Override
     public List<Tratamiento> obtenerTratamientosPorMascota(Integer idMascota) {
-        return tratamientoRepository.findByMascota_IdMascota(idMascota);
+        Mascota mascota = mascotaRepository.findById(idMascota)
+                .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
+
+        return tratamientoRepository.findByMascota(mascota);
     }
 
 }
