@@ -52,52 +52,11 @@ public class TratamientoController{
             @RequestParam Integer idServicio,
             @RequestParam(required = false) Integer idVeterinario,
             @RequestParam List<Integer> idsMedicamentos) {
-
-        Veterinario veterinario = idVeterinario != null ?
-                veterinarioRepository.findById(idVeterinario)
-                        .orElseThrow(() -> new RuntimeException("Veterinario no encontrado")) :
-                null;
-
-        Mascota mascota = mascotaRepository.findById(idMascota)
-                .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
-
-        Servicio servicio = servicioRepository.findById(idServicio)
-                .orElseThrow(() -> new RuntimeException("Servicio no encontrado"));
-
-        List<Medicamento> medicamentos = medicamentoRepository.findAllById(idsMedicamentos);
-
-        // Verificar stock antes de proceder
-        for (Medicamento medicamento : medicamentos) {
-            if (medicamento.getUnidadesDisponibles() <= 0) {
-                throw new RuntimeException("No hay unidades disponibles del medicamento: " + medicamento.getNombre());
-            }
-        }
-
-        tratamiento.setVeterinario(veterinario);
-        tratamiento.setMascota(mascota);
-        tratamiento.setServicio(servicio);
-
-        List<TratamientoMedicamento> tratamientoMedicamentos = new ArrayList<>();
-
-        for (Medicamento medicamento : medicamentos) {
-            // Actualizar unidades del medicamento
-            medicamento.setUnidadesDisponibles(medicamento.getUnidadesDisponibles() - 1);
-            medicamento.setUnidadesVendidas(medicamento.getUnidadesVendidas() + 1);
-
-            medicamentoRepository.save(medicamento); // Guardar cambios en el medicamento
-
-            TratamientoMedicamento tm = new TratamientoMedicamento();
-            tm.setMedicamento(medicamento);
-            tm.setTratamiento(tratamiento);
-            tm.setCantidad(1); // Asumiendo que se usa 1 unidad por medicamento
-            tratamientoMedicamentos.add(tm);
-        }
-
-        tratamiento.setTratamientoMedicamentos(tratamientoMedicamentos);
-
-        Tratamiento tratamientoGuardado = tratamientoRepository.save(tratamiento);
-        return ResponseEntity.ok(tratamientoGuardado);
+    
+        Tratamiento nuevoTratamiento = tratamientoService.crearTratamiento(tratamiento, idMascota, idServicio, idVeterinario, idsMedicamentos);
+        return ResponseEntity.ok(nuevoTratamiento);
     }
+    
 
     @PutMapping("/editar/{id}")
     public ResponseEntity<Tratamiento> editarTratamiento(
