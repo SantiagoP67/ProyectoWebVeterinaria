@@ -5,6 +5,7 @@ import java.util.List;
 
 public interface CitaService {
     Cita crearCita(Cita cita);
+    List<Cita> obtenerTodasCitas();
     List<Cita> obtenerCitasPorCliente(Integer idCliente);
     List<Cita> obtenerCitasPorSede(String sede);
     boolean cancelarCita(Integer idCita);

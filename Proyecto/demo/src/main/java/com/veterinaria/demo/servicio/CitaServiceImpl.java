@@ -36,6 +36,11 @@ public class CitaServiceImpl implements CitaService {
     }
 
     @Override
+    public List<Cita> obtenerTodasCitas() {
+        return citaRepository.findAll();
+    }
+
+    @Override
     public boolean cancelarCita(Integer idCita) {
         return citaRepository.findById(idCita)
                 .map(cita -> {
@@ -69,6 +74,4 @@ public class CitaServiceImpl implements CitaService {
         return citaRepository.findById(idCita)
                 .orElseThrow(() -> new RuntimeException("Cita no encontrada con ID: " + idCita));
     }
-
-    
 }
