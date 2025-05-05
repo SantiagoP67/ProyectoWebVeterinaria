@@ -2,7 +2,6 @@ package com.veterinaria.demo.controlador;
 
 import com.veterinaria.demo.entidad.Servicio;
 import com.veterinaria.demo.entidad.Tratamiento;
-import com.veterinaria.demo.repositorio.TratamientoRepository;
 import com.veterinaria.demo.servicio.ServicioService;
 import com.veterinaria.demo.servicio.TratamientoService;
 
@@ -20,9 +19,6 @@ import org.springframework.web.bind.annotation.*;
 public class ServicioController {
     
     private final ServicioService servicioService;
-
-    @Autowired
-    private TratamientoRepository tratamientoRepository;
 
     @Autowired
     private TratamientoService tratamientoService;

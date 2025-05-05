@@ -125,4 +125,9 @@ public class VeterinarioServiceImpl implements VeterinarioService {
     public List<Veterinario> obtenerVeterinariosInactivos() {
         return veterinarioRepository.findByEstado(0);
     }
+
+    @Override
+    public Veterinario guardarVeterinario(Veterinario veterinario){
+        return veterinarioRepository.save(veterinario);
+    }
 }

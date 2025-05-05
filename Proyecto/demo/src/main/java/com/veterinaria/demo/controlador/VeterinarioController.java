@@ -45,8 +45,10 @@ public class VeterinarioController{
 
     @PutMapping("/editar/{id}")
     public ResponseEntity<Veterinario> actualizarVeterinario(@PathVariable Integer id, @RequestBody Veterinario veterinarioactualizado) {
-        Veterinario veterinarioExistente = veterinarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Veterinario no encontrado con ID: " + id));
+        Veterinario veterinarioExistente = veterinarioService.obtenerVeterinarioPorId(id);
+        if (veterinarioExistente == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         veterinarioExistente.setNombre(veterinarioactualizado.getNombre());
         veterinarioExistente.setCedula(veterinarioactualizado.getCedula());
@@ -57,7 +59,7 @@ public class VeterinarioController{
         veterinarioExistente.setNombreUsuario(veterinarioactualizado.getNombreUsuario());
         veterinarioExistente.setContrasena(veterinarioactualizado.getContrasena());
 
-        Veterinario veterinarioGuardado = veterinarioRepository.save(veterinarioExistente);
+        Veterinario veterinarioGuardado = veterinarioService.guardarVeterinario(veterinarioExistente);
         return ResponseEntity.ok(veterinarioGuardado);
 
     }
