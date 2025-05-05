@@ -63,21 +63,11 @@ public class ClienteController{
     }
 
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Cliente> actualizarCliente(@PathVariable Integer id, @RequestBody Cliente clienteactualizado){
-        Cliente clienteExistente = clienteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado con ID: " + id));
-
-        clienteExistente.setNombre(clienteactualizado.getNombre());
-        clienteExistente.setCorreo(clienteactualizado.getCorreo());
-        clienteExistente.setCelular(clienteactualizado.getCelular());
-        clienteExistente.setFoto(clienteactualizado.getFoto());
-        clienteExistente.setCedula(clienteactualizado.getCedula());
-        clienteExistente.setNombreUsuario(clienteactualizado.getNombreUsuario());
-        clienteExistente.setContrasena(clienteactualizado.getContrasena());
-
-        Cliente clienteGuardado = clienteRepository.save(clienteExistente);
-        return ResponseEntity.ok(clienteGuardado);
+    public ResponseEntity<Cliente> actualizarCliente(@PathVariable Integer id, @RequestBody Cliente clienteActualizado) {
+        Cliente clienteEditado = clienteService.editarCliente(id, clienteActualizado);
+        return ResponseEntity.ok(clienteEditado);
     }
+    
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Map<String, String>> eliminarCliente(@PathVariable Integer id) {

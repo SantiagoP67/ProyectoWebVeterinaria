@@ -29,17 +29,21 @@ public class ClienteServiceImpl implements ClienteService{
     }
 
     @Override
-    public Cliente editarCliente(Integer id, Cliente cliente) {
-        Cliente clienteactual = clienteRepository.findById(id).orElse(null);
-        clienteactual.setNombre(cliente.getNombre());
-        clienteactual.setCorreo(cliente.getCorreo());
-        clienteactual.setCelular(cliente.getCelular());
-        clienteactual.setCedula( cliente.getCedula());
-        clienteactual.setNombreUsuario(cliente.getNombreUsuario());
-        clienteactual.setContrasena( cliente.getContrasena());
-        clienteactual.setFoto(cliente.getFoto());
-        return clienteRepository.save(clienteactual);
+    public Cliente editarCliente(Integer id, Cliente clienteActualizado) {
+        Cliente clienteExistente = clienteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado con ID: " + id));
+    
+        clienteExistente.setNombre(clienteActualizado.getNombre());
+        clienteExistente.setCorreo(clienteActualizado.getCorreo());
+        clienteExistente.setCelular(clienteActualizado.getCelular());
+        clienteExistente.setFoto(clienteActualizado.getFoto());
+        clienteExistente.setCedula(clienteActualizado.getCedula());
+        clienteExistente.setNombreUsuario(clienteActualizado.getNombreUsuario());
+        clienteExistente.setContrasena(clienteActualizado.getContrasena());
+    
+        return clienteRepository.save(clienteExistente);
     }
+    
 
     @Override
     public void eliminarCliente(Integer id) {

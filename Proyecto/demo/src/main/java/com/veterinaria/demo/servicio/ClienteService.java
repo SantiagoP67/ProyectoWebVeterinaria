@@ -8,7 +8,7 @@ public interface ClienteService{
     List<Cliente> obtenerTodosClientes();
     Cliente obtenerClientePorId(Integer id);
     Cliente crearCliente(Cliente cliente);
-    Cliente editarCliente(Integer id, Cliente cliente);
+    Cliente editarCliente(Integer id, Cliente clienteActualizado);
     void eliminarCliente(Integer id);
     Cliente validarCliente(String username, String password);
     Integer obtenerIdClientePorNombreUsuario(String nombreUsuario);
