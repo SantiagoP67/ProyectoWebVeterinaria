@@ -13,8 +13,8 @@ import java.util.List;
 public class ServicioServiceImpl implements ServicioService {
 
     private final ServicioRepository servicioRepository;
-    private final TratamientoRepository tratamientoRepository;
     private final TratamientoMedicamentoRepository tratamientoMedicamentoRepository;
+    private final TratamientoRepository tratamientoRepository;
 
     // Constructor modificado para recibir los 3 repositorios
     public ServicioServiceImpl(ServicioRepository servicioRepository,
@@ -40,10 +40,10 @@ public class ServicioServiceImpl implements ServicioService {
     
     @Override
     public BigDecimal calcularGananciasTotales() {
-        // 1. Sumar ventas de medicamentos (como en calcularVentasTotales)
+        // 1. Sumar ventas de medicamentos
         BigDecimal ventasMedicamentos = this.calcularVentasTotales();
         
-        // 2. Sumar precio base de TODOS los servicios (no solo los básicos)
+        // 2. Sumar precio base de TODOS los servicios
         BigDecimal totalServicios = servicioRepository.sumPrecioBaseAllServicios();
         
         return ventasMedicamentos.add(totalServicios != null ? totalServicios : BigDecimal.ZERO);
