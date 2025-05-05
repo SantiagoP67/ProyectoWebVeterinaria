@@ -155,14 +155,16 @@ public class VeterinarioController{
     @PutMapping("/cambiar-estado/{id}")
     public ResponseEntity<String> cambiarEstadoVeterinario(@PathVariable Integer id) {
         // Buscar al veterinario por ID
-        Veterinario veterinario = veterinarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Veterinario no encontrado con ID: " + id));
+        Veterinario veterinario = veterinarioService.obtenerVeterinarioPorId(id);
+        if (veterinario == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         // Cambiar el estado (si está en 1, lo cambia a 0; si está en 0, lo cambia a 1)
         veterinario.setEstado(veterinario.getEstado() == 1 ? 0 : 1);
 
         // Guardar el veterinario con el nuevo estado
-        veterinarioRepository.save(veterinario);
+        veterinarioService.guardarVeterinario(veterinario);
 
         return ResponseEntity.ok("Estado del veterinario cambiado exitosamente");
     }
