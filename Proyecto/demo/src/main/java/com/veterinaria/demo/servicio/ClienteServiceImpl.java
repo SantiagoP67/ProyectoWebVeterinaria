@@ -4,7 +4,11 @@ import com.veterinaria.demo.entidad.Cliente;
 import com.veterinaria.demo.repositorio.ClienteRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 
@@ -46,9 +50,19 @@ public class ClienteServiceImpl implements ClienteService{
     
 
     @Override
-    public void eliminarCliente(Integer id) {
+    public Map<String, String> eliminarCliente(Integer id) {
+        Map<String, String> respuesta = new HashMap<>();
+
+        if (!clienteRepository.existsById(id)) {
+            respuesta.put("mensaje", "Cliente no encontrado con ID: " + id);
+            return respuesta;
+        }
+
         clienteRepository.deleteById(id);
+        respuesta.put("mensaje", "Cliente eliminado correctamente");
+        return respuesta;
     }
+
 
     @Override
     public Cliente validarCliente(String username, String password) {

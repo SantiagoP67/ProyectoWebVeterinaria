@@ -71,19 +71,11 @@ public class ClienteController{
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Map<String, String>> eliminarCliente(@PathVariable Integer id) {
-        Map<String, String> respuesta = new HashMap<>();
-
-        if (!clienteRepository.existsById(id)) {
-            respuesta.put("mensaje", "Cliente no encontrado con ID: " + id);
-            return new ResponseEntity<>(respuesta, HttpStatus.NOT_FOUND);
-        }
-
-        clienteRepository.deleteById(id);
-
-        respuesta.put("mensaje", "Cliente eliminado correctamente");
-        return new ResponseEntity<>(respuesta, HttpStatus.OK);
+        Map<String, String> respuesta = clienteService.eliminarCliente(id);
+        HttpStatus estado = respuesta.get("mensaje").contains("no encontrado") ? HttpStatus.NOT_FOUND : HttpStatus.OK;
+        return new ResponseEntity<>(respuesta, estado);
     }
-
+    
 
 
     @GetMapping("/idClientePorNombreUsuario/{nombreUsuario}")
