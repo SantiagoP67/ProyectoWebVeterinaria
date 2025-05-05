@@ -22,6 +22,8 @@ import com.veterinaria.demo.entidad.Tratamiento;
 import com.veterinaria.demo.entidad.Veterinario;
 import com.veterinaria.demo.repositorio.TratamientoRepository;
 import com.veterinaria.demo.servicio.TratamientoServiceImpl;
+import org.springframework.test.context.ActiveProfiles;
+
 
 @ExtendWith(MockitoExtension.class)
 @ActiveProfiles("test")
@@ -64,27 +66,27 @@ public class TratamientoServiceMockTest {
     public void TratamientoService_obtenerTodosTratamientos_NotEmptyListTratamientos() {
         // Arrange
         when(tratamientoRepository.findAll())
-            .thenReturn(Arrays.asList(tratamientoReciente, tratamientoAntiguo));
+                .thenReturn(Arrays.asList(tratamientoReciente, tratamientoAntiguo));
 
         // Act
         List<Tratamiento> tratamientos = tratamientoService.obtenerTodosTratamientos();
-        
+
         // Assert
         assertThat(tratamientos).hasSize(2);
         assertThat(tratamientos)
-            .extracting(Tratamiento::getCodigo)
-            .containsExactly("TRAT-001", "TRAT-002");
+                .extracting(Tratamiento::getCodigo)
+                .containsExactly("TRAT-001", "TRAT-002");
     }
 
     @Test
     public void TratamientoService_obtenerTratamientoPorId_Tratamiento() {
         // Arrange
         when(tratamientoRepository.findById(1))
-            .thenReturn(Optional.of(tratamientoReciente));
+                .thenReturn(Optional.of(tratamientoReciente));
 
         // Act
         Tratamiento encontrado = tratamientoService.obtenerTratamientoPorId(1);
-        
+
         // Assert
         assertThat(encontrado).isNotNull();
         assertThat(encontrado.getCodigo()).isEqualTo("TRAT-001");
@@ -97,13 +99,13 @@ public class TratamientoServiceMockTest {
         Date fechaFin = calendar.getTime();
         calendar.add(Calendar.DAY_OF_YEAR, -30);
         Date fechaInicio = calendar.getTime();
-        
+
         when(tratamientoRepository.countByFechaBetween(fechaInicio, fechaFin))
-            .thenReturn(1L);
+                .thenReturn(1L);
 
         // Act
         long count = tratamientoService.contarTratamientosUltimos30Dias();
-        
+
         // Assert
         assertThat(count).isEqualTo(1);
     }
@@ -115,13 +117,13 @@ public class TratamientoServiceMockTest {
         Date fechaFin = calendar.getTime();
         calendar.add(Calendar.DAY_OF_YEAR, -30);
         Date fechaInicio = calendar.getTime();
-        
+
         when(tratamientoRepository.findByFechaBetween(fechaInicio, fechaFin))
-            .thenReturn(Collections.singletonList(tratamientoReciente));
+                .thenReturn(Collections.singletonList(tratamientoReciente));
 
         // Act
         List<Tratamiento> tratamientos = tratamientoService.obtenerTratamientosUltimos30Dias();
-        
+
         // Assert
         assertThat(tratamientos).hasSize(1);
         assertThat(tratamientos.get(0).getCodigo()).isEqualTo("TRAT-001");
@@ -134,13 +136,13 @@ public class TratamientoServiceMockTest {
         Date fechaFin = calendar.getTime();
         calendar.add(Calendar.DAY_OF_YEAR, -30);
         Date fechaInicio = calendar.getTime();
-        
+
         when(tratamientoRepository.findMedicamentosMasUsados(fechaInicio, fechaFin))
-            .thenReturn(Collections.emptyList());
+                .thenReturn(Collections.emptyList());
 
         // Act
         Map<String, Integer> resultados = tratamientoService.obtenerMedicamentosMasUsadosUltimos30Dias();
-        
+
         // Assert
         assertThat(resultados).isNotNull();
         assertThat(resultados).isEmpty();
@@ -150,11 +152,11 @@ public class TratamientoServiceMockTest {
     public void TratamientoService_obtenerTop3MedicamentosMasVendidos_NotEmptyListMedicamentos() {
         // Arrange
         when(tratamientoRepository.findTop3MedicamentosMasVendidos())
-            .thenReturn(Collections.emptyList());
+                .thenReturn(Collections.emptyList());
 
         // Act
         List<Map<String, Object>> resultados = tratamientoService.obtenerTop3MedicamentosMasVendidos();
-        
+
         // Assert
         assertThat(resultados).isNotNull();
         assertThat(resultados).isEmpty();
@@ -164,15 +166,15 @@ public class TratamientoServiceMockTest {
     public void TratamientoService_obtenerTratamientosPorVeterinario_NotEmptyListTratamientos() {
         // Arrange
         when(tratamientoRepository.findByVeterinarioId(1))
-            .thenReturn(Arrays.asList(tratamientoReciente, tratamientoAntiguo));
+                .thenReturn(Arrays.asList(tratamientoReciente, tratamientoAntiguo));
 
         // Act
         List<Tratamiento> tratamientos = tratamientoService.obtenerTratamientosPorVeterinario(1);
-        
+
         // Assert
         assertThat(tratamientos).hasSize(2);
         assertThat(tratamientos)
-            .extracting(t -> t.getVeterinario().getNombre())
-            .containsOnly("Dra. Laura");
+                .extracting(t -> t.getVeterinario().getNombre())
+                .containsOnly("Dra. Laura");
     }
 }
