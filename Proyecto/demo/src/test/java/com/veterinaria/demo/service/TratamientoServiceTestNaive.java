@@ -2,6 +2,7 @@ package com.veterinaria.demo.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -94,16 +95,26 @@ public class TratamientoServiceTestNaive {
     @Test
     public void TratamientoService_crearTratamiento_Tratamiento() {
         // Arrange
-        Tratamiento tratamiento1 = new Tratamiento();
-        Tratamiento tratamiento2 = new Tratamiento();
-
+        Tratamiento tratamiento = new Tratamiento();
+        tratamiento.setCodigo("COD123");
+        tratamiento.setDetalles("Tratamiento de prueba");
+        tratamiento.setFecha(new Date());
+    
+        Integer idMascota = 1; // Asume que existe en la BD
+        Integer idServicio = 1; // Asume que existe en la BD
+        Integer idVeterinario = 1; // Puede ser null si es opcional
+        List<Integer> idsMedicamentos = Arrays.asList(1, 2); // Asume que existen en la BD
+    
         // Act
-        Tratamiento newTratamiento = tratamientoService.crearTratamiento(tratamiento1);
-        newTratamiento = tratamientoService.crearTratamiento(tratamiento2);
-
+        Tratamiento nuevoTratamiento = tratamientoService.crearTratamiento(
+            tratamiento, idMascota, idServicio, idVeterinario, idsMedicamentos
+        );
+    
         // Assert
-        assertThat(newTratamiento).isNotNull();
+        assertThat(nuevoTratamiento).isNotNull();
+        assertThat(nuevoTratamiento.getCodigo()).isEqualTo("COD123");
     }
+    
 
     @Test
     public void TratamientoService_obtenerTodosTratamientos_NotEmptyListTratamientos() {
