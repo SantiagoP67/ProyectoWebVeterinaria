@@ -37,9 +37,6 @@ public class MascotaController {
     private MascotaRepository mascotaRepository;
 
     @Autowired
-    private ClienteRepository clienteRepository;
-
-    @Autowired
     private TratamientoRepository tratamientoRepository;
 
     @Autowired
@@ -141,14 +138,16 @@ public class MascotaController {
 
     @GetMapping("/buscar")
     public ResponseEntity<List<Mascota>> buscarPorNombre(@RequestParam String nombre) {
-        List<Mascota> mascotas = mascotaRepository.findByNombreContainingIgnoreCase(nombre);
+        List<Mascota> mascotas = mascotaService.buscarPorNombre(nombre);
         return ResponseEntity.ok(mascotas);
     }
 
     @GetMapping("/mascotas-en-tratamiento/{idCliente}")
     public ResponseEntity<List<Mascota>> obtenerMascotasEnTratamientoPorCliente(@PathVariable Integer idCliente) {
-        Cliente cliente = clienteRepository.findById(idCliente)
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+        Cliente cliente = clienteService.obtenerClientePorId(idCliente);
+        if (cliente == null) {
+            return ResponseEntity.badRequest().body(null); // Cliente no encontrado
+        }
 
         List<Mascota> mascotas = mascotaRepository.findByCliente(cliente);
 
