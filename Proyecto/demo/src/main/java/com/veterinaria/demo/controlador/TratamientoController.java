@@ -66,51 +66,11 @@ public class TratamientoController{
             @RequestParam Integer idServicio,
             @RequestParam(required = false) Integer idVeterinario,
             @RequestParam List<Integer> idsMedicamentos) {
-
-        Tratamiento tratamientoExistente = tratamientoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Tratamiento no encontrado"));
-
-        // Actualizar campos básicos
-        tratamientoExistente.setCodigo(tratamientoActualizado.getCodigo());
-        tratamientoExistente.setFecha(tratamientoActualizado.getFecha());
-        tratamientoExistente.setDetalles(tratamientoActualizado.getDetalles());
-
-        // Actualizar relaciones
-        Mascota mascota = mascotaRepository.findById(idMascota)
-                .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
-        tratamientoExistente.setMascota(mascota);
-
-        Servicio servicio = servicioRepository.findById(idServicio)
-                .orElseThrow(() -> new RuntimeException("Servicio no encontrado"));
-        tratamientoExistente.setServicio(servicio);
-
-        if (idVeterinario != null) {
-            Veterinario veterinario = veterinarioRepository.findById(idVeterinario)
-                    .orElseThrow(() -> new RuntimeException("Veterinario no encontrado"));
-            tratamientoExistente.setVeterinario(veterinario);
-        } else {
-            tratamientoExistente.setVeterinario(null);
-        }
-
-        // Limpiar medicamentos anteriores
-        tratamientoExistente.getTratamientoMedicamentos().clear();
-
-        List<TratamientoMedicamento> nuevosTM = new ArrayList<>();
-        List<Medicamento> medicamentos = medicamentoRepository.findAllById(idsMedicamentos);
-
-        for (Medicamento medicamento : medicamentos) {
-            TratamientoMedicamento tm = new TratamientoMedicamento();
-            tm.setTratamiento(tratamientoExistente);
-            tm.setMedicamento(medicamento);
-            tm.setCantidad(medicamentos.size());
-            nuevosTM.add(tm);
-        }
-
-        tratamientoExistente.getTratamientoMedicamentos().addAll(nuevosTM);
-
-        Tratamiento guardado = tratamientoRepository.save(tratamientoExistente);
-        return ResponseEntity.ok(guardado);
+    
+        Tratamiento actualizado = tratamientoService.editarTratamiento(id, tratamientoActualizado, idMascota, idServicio, idVeterinario, idsMedicamentos);
+        return ResponseEntity.ok(actualizado);
     }
+    
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<String> eliminarTratamiento(@PathVariable Integer id) {

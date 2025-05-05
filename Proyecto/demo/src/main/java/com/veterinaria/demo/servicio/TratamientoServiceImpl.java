@@ -135,4 +135,50 @@ public class TratamientoServiceImpl implements TratamientoService{
 
         return tratamientoRepository.save(tratamiento);
     }
+
+
+    @Override
+    public Tratamiento editarTratamiento(Integer id, Tratamiento tratamientoActualizado, Integer idMascota, Integer idServicio, Integer idVeterinario, List<Integer> idsMedicamentos) {
+
+        Tratamiento tratamientoExistente = tratamientoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Tratamiento no encontrado"));
+
+        tratamientoExistente.setCodigo(tratamientoActualizado.getCodigo());
+        tratamientoExistente.setFecha(tratamientoActualizado.getFecha());
+        tratamientoExistente.setDetalles(tratamientoActualizado.getDetalles());
+
+        Mascota mascota = mascotaRepository.findById(idMascota)
+                .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
+        tratamientoExistente.setMascota(mascota);
+
+        Servicio servicio = servicioRepository.findById(idServicio)
+                .orElseThrow(() -> new RuntimeException("Servicio no encontrado"));
+        tratamientoExistente.setServicio(servicio);
+
+        if (idVeterinario != null) {
+            Veterinario veterinario = veterinarioRepository.findById(idVeterinario)
+                    .orElseThrow(() -> new RuntimeException("Veterinario no encontrado"));
+            tratamientoExistente.setVeterinario(veterinario);
+        } else {
+            tratamientoExistente.setVeterinario(null);
+        }
+
+        tratamientoExistente.getTratamientoMedicamentos().clear();
+
+        List<TratamientoMedicamento> nuevosTM = new ArrayList<>();
+        List<Medicamento> medicamentos = medicamentoRepository.findAllById(idsMedicamentos);
+
+        for (Medicamento medicamento : medicamentos) {
+            TratamientoMedicamento tm = new TratamientoMedicamento();
+            tm.setTratamiento(tratamientoExistente);
+            tm.setMedicamento(medicamento);
+            tm.setCantidad(1); // Asumiendo 1 por medicamento; ajústalo si necesitas.
+            nuevosTM.add(tm);
+        }
+
+        tratamientoExistente.getTratamientoMedicamentos().addAll(nuevosTM);
+
+        return tratamientoRepository.save(tratamientoExistente);
+    }
+
 }

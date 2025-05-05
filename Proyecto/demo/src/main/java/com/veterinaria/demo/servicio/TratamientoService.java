@@ -14,5 +14,6 @@ public interface TratamientoService{
     List<Map<String, Object>> obtenerTop3MedicamentosMasVendidos();
     List<Tratamiento> obtenerTratamientosPorVeterinario(Integer idVeterinario);
     Tratamiento crearTratamiento(Tratamiento tratamiento, Integer idMascota, Integer idServicio, Integer idVeterinario, List<Integer> idsMedicamentos);
+    Tratamiento editarTratamiento(Integer id, Tratamiento tratamientoActualizado, Integer idMascota, Integer idServicio, Integer idVeterinario, List<Integer> idsMedicamentos);
 
 }
