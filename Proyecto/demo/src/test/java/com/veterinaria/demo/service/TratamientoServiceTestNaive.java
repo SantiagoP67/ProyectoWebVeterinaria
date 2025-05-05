@@ -3,6 +3,7 @@ package com.veterinaria.demo.service;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -130,13 +131,8 @@ public class TratamientoServiceTestNaive {
         List<Integer> idsMedicamentos = Arrays.asList(medicamento1.getIdMedicamento(), medicamento2.getIdMedicamento());
 
         // Act
-        Tratamiento newTratamiento = tratamientoService.crearTratamiento(
-            tratamiento, 
-            idMascota, 
-            idServicio, 
-            idVeterinario, 
-            idsMedicamentos
-        );
+        Tratamiento newTratamiento = tratamientoService.crearTratamiento(tratamiento1);
+        newTratamiento = tratamientoService.crearTratamiento(tratamiento2);
 
         // Assert
         assertThat(newTratamiento).isNotNull();
@@ -156,6 +152,7 @@ public class TratamientoServiceTestNaive {
         assertThat(updatedMed2.getUnidadesDisponibles()).isEqualTo(7);
         assertThat(updatedMed2.getUnidadesVendidas()).isEqualTo(1);
     }
+    
 
     @Test
     public void TratamientoService_obtenerTodosTratamientos_NotEmptyListTratamientos() {
