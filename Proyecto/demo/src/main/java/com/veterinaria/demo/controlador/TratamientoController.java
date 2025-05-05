@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.veterinaria.demo.servicio.TratamientoService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -32,15 +31,6 @@ public class TratamientoController{
 
     @Autowired
     private MascotaRepository mascotaRepository;
-
-    @Autowired
-    private ServicioRepository servicioRepository;
-
-    @Autowired
-    private MedicamentoRepository medicamentoRepository;
-
-    @Autowired
-    private VeterinarioRepository veterinarioRepository;
 
     
     @GetMapping
