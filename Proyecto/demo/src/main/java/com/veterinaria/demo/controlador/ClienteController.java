@@ -89,7 +89,8 @@ public ResponseEntity<Integer> obtenerIdClientePorNombreUsuario(@PathVariable St
 }
     @GetMapping("/buscar")
     public ResponseEntity<List<Cliente>> buscarPorNombre(@RequestParam String nombre) {
-        List<Cliente> clientes = clienteRepository.findByNombreContainingIgnoreCase(nombre);
+        List<Cliente> clientes = clienteService.buscarPorNombre(nombre);
         return ResponseEntity.ok(clientes);
     }
+
 }
