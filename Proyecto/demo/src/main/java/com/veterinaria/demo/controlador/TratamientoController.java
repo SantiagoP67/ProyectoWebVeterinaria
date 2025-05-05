@@ -20,21 +20,6 @@ public class TratamientoController{
     @Autowired
     private TratamientoService tratamientoService;
 
-    @Autowired
-    private TratamientoRepository tratamientoRepository;
-
-    @Autowired
-    private MascotaRepository mascotaRepository;
-
-    @Autowired
-    private ServicioRepository servicioRepository;
-
-    @Autowired
-    private MedicamentoRepository medicamentoRepository;
-
-    @Autowired
-    private VeterinarioRepository veterinarioRepository;
-
     @GetMapping
     public List<Tratamiento> mostrarTratamientos() {
         return tratamientoService.obtenerTodosTratamientos();
@@ -74,11 +59,7 @@ public class TratamientoController{
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<String> eliminarTratamiento(@PathVariable Integer id) {
-        Tratamiento tratamiento = tratamientoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Tratamiento no encontrado"));
-
-        tratamientoRepository.delete(tratamiento);
-
+        tratamientoService.eliminarTratamientoPorId(id);
         return ResponseEntity.ok("Tratamiento eliminado correctamente");
     }
 

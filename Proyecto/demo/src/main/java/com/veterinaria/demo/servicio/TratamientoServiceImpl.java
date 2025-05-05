@@ -181,4 +181,12 @@ public class TratamientoServiceImpl implements TratamientoService{
         return tratamientoRepository.save(tratamientoExistente);
     }
 
+    @Override
+    public void eliminarTratamientoPorId(Integer id) {
+        Tratamiento tratamiento = tratamientoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Tratamiento no encontrado"));
+
+        tratamientoRepository.delete(tratamiento);
+    }
+
 }
