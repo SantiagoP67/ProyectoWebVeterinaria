@@ -2,13 +2,13 @@ package com.veterinaria.demo.controlador;
 
 import com.veterinaria.demo.entidad.Medicamento;
 import com.veterinaria.demo.entidad.Tratamiento;
-import com.veterinaria.demo.repositorio.TratamientoRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
 import com.veterinaria.demo.servicio.MedicamentoService;
+import com.veterinaria.demo.servicio.TratamientoService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +22,7 @@ public class MedicamentoController{
     MedicamentoService medicamentoService;
 
     @Autowired
-    TratamientoRepository tratamientoRepository;
+    TratamientoService tratamientoService;
 
     @GetMapping
     public List<Medicamento> mostrarMedicamentos(){
@@ -36,13 +36,13 @@ public class MedicamentoController{
 
     @GetMapping("/por-tratamiento/{idTratamiento}")
     public ResponseEntity<List<Medicamento>> obtenerMedicamentosPorTratamiento(@PathVariable Integer idTratamiento) {
-        Tratamiento tratamiento = tratamientoRepository.findById(idTratamiento)
-                .orElse(null);
+        Tratamiento tratamiento = tratamientoService.obtenerTratamientoPorId(idTratamiento);
 
         if (tratamiento == null) {
             return ResponseEntity.notFound().build();
         }
 
+    
         List<Medicamento> medicamentos = tratamiento.getTratamientoMedicamentos().stream()
                 .map(tm -> new Medicamento(
                         tm.getMedicamento().getIdMedicamento(),
@@ -54,7 +54,8 @@ public class MedicamentoController{
                         tm.getMedicamento().getTratamientoMedicamentos()
                 ))
                 .collect(Collectors.toList());
-
+    
         return ResponseEntity.ok(medicamentos);
     }
+    
 }

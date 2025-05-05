@@ -2,8 +2,8 @@ package com.veterinaria.demo.controlador;
 
 import com.veterinaria.demo.entidad.Servicio;
 import com.veterinaria.demo.entidad.Tratamiento;
-import com.veterinaria.demo.repositorio.TratamientoRepository;
 import com.veterinaria.demo.servicio.ServicioService;
+import com.veterinaria.demo.servicio.TratamientoService;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -21,7 +21,7 @@ public class ServicioController {
     private final ServicioService servicioService;
 
     @Autowired
-    private TratamientoRepository tratamientoRepository;
+    private TratamientoService tratamientoService;
 
     public ServicioController(ServicioService servicioService) {
         this.servicioService = servicioService;
@@ -47,8 +47,10 @@ public class ServicioController {
 
     @GetMapping("/por-tratamiento/{id}")
     public ResponseEntity<Servicio> obtenerPorTratamiento(@PathVariable Integer id) {
-        Tratamiento tratamiento = tratamientoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Tratamiento no encontrado"));
+        Tratamiento tratamiento = tratamientoService.obtenerTratamientoPorId(id);
+        if (tratamiento == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         Servicio servicio = tratamiento.getServicio();
 

@@ -84,7 +84,7 @@ public class MascotaController {
 
         return ResponseEntity.ok(guardada);
     }
-
+    
     @PutMapping("/editar/{id}")
     public ResponseEntity<Mascota> editarMascota(@PathVariable Integer id, @RequestBody Mascota mascotaActualizada) {
         // Verifica si la mascota existe

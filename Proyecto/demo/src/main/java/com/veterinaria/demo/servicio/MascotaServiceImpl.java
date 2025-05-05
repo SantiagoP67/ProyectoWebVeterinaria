@@ -103,4 +103,19 @@ public class MascotaServiceImpl implements MascotaService {
     public long contarMascotasActivas() {
         return mascotaRepository.countByEstado(1); // 1 representa estado activo
     }
+
+    @Override
+    public Mascota agregarMascotaConCliente(Mascota mascota, Integer idCliente) {
+        Cliente cliente = clienteRepository.findById(idCliente)
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado con ID: " + idCliente));
+
+        mascota.setCliente(cliente);
+
+        return mascotaRepository.save(mascota);
+    }
+
+    @Override
+    public Mascota guardarMascota(Mascota mascota) {
+        return mascotaRepository.save(mascota);
+    }
 }
