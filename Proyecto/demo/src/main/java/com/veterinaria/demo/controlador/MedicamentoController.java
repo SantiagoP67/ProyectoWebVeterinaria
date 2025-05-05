@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 import com.veterinaria.demo.servicio.MedicamentoService;
+import com.veterinaria.demo.servicio.TratamientoService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +25,9 @@ public class MedicamentoController{
     @Autowired
     TratamientoRepository tratamientoRepository;
 
+    @Autowired
+    TratamientoService tratamientoService;
+
     @GetMapping
     public List<Medicamento> mostrarMedicamentos(){
         return medicamentoService.obtenerTodosTratamientos();
@@ -36,13 +40,13 @@ public class MedicamentoController{
 
     @GetMapping("/por-tratamiento/{idTratamiento}")
     public ResponseEntity<List<Medicamento>> obtenerMedicamentosPorTratamiento(@PathVariable Integer idTratamiento) {
-        Tratamiento tratamiento = tratamientoRepository.findById(idTratamiento)
-                .orElse(null);
+        Tratamiento tratamiento = tratamientoService.obtenerTratamientoPorId(idTratamiento);
 
         if (tratamiento == null) {
             return ResponseEntity.notFound().build();
         }
 
+    
         List<Medicamento> medicamentos = tratamiento.getTratamientoMedicamentos().stream()
                 .map(tm -> new Medicamento(
                         tm.getMedicamento().getIdMedicamento(),
@@ -54,7 +58,8 @@ public class MedicamentoController{
                         tm.getMedicamento().getTratamientoMedicamentos()
                 ))
                 .collect(Collectors.toList());
-
+    
         return ResponseEntity.ok(medicamentos);
     }
+    
 }
