@@ -115,13 +115,15 @@ public class TratamientoServiceMockTest {
     @Test
     public void TratamientoService_obtenerTratamientosUltimos30Dias_NotEmptyListTratamientos() {
         // Arrange
-        Calendar calendar = Calendar.getInstance();
-        Date fechaFin = calendar.getTime();
-        calendar.add(Calendar.DAY_OF_YEAR, -30);
-        Date fechaInicio = calendar.getTime();
+        Calendar cal = Calendar.getInstance();
+        Date fechaFin = new Date(cal.getTime().getTime());
+        cal.add(Calendar.DAY_OF_YEAR, -30);
+        Date fechaInicio = new Date(cal.getTime().getTime());
         
-        when(tratamientoRepository.findByFechaBetween(fechaInicio, fechaFin))
-            .thenReturn(Collections.singletonList(tratamientoReciente));
+        when(tratamientoRepository.findByFechaBetween(
+            argThat(date -> Math.abs(date.getTime() - fechaInicio.getTime()) <= 1000),
+            argThat(date -> Math.abs(date.getTime() - fechaFin.getTime()) <= 1000)
+        )).thenReturn(Collections.singletonList(tratamientoReciente));
 
         // Act
         List<Tratamiento> tratamientos = tratamientoService.obtenerTratamientosUltimos30Dias();
