@@ -73,6 +73,4 @@ public class CitaController {
         Cita cita = citaService.obtenerCitaPorId(idCita);
         return ResponseEntity.ok(cita);
     }
-
-
 }

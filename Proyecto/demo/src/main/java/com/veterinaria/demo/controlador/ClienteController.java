@@ -50,15 +50,12 @@ public class ClienteController{
             return ResponseEntity.badRequest().body(Collections.singletonMap("error", "Las contraseñas no coinciden"));
         }
 
-        // Crear el cliente
         try {
             clienteService.crearCliente(cliente);
-            // Devolver respuesta en formato JSON
             Map<String, String> response = new HashMap<>();
             response.put("message", "Usuario creado correctamente");
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            // En caso de error, devolver un mensaje de error
             Map<String, String> response = new HashMap<>();
             response.put("error", "Error al crear el cliente");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
@@ -113,6 +110,4 @@ public ResponseEntity<Integer> obtenerIdClientePorNombreUsuario(@PathVariable St
         List<Cliente> clientes = clienteRepository.findByNombreContainingIgnoreCase(nombre);
         return ResponseEntity.ok(clientes);
     }
-
-
 }

@@ -164,7 +164,4 @@ public class VeterinarioController{
 
         return ResponseEntity.ok("Estado del veterinario cambiado exitosamente");
     }
-
-
 }
-

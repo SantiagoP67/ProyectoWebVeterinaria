@@ -57,5 +57,4 @@ public class MedicamentoController{
 
         return ResponseEntity.ok(medicamentos);
     }
-
 }

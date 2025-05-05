@@ -75,17 +75,13 @@ public class MascotaController {
      */
     @PostMapping("/agregar")
     public ResponseEntity<Mascota> agregarMascota(@RequestBody Mascota mascota, @RequestParam Integer idCliente) {
-        // Busca el cliente por ID
         Cliente cliente = clienteRepository.findById(idCliente)
                 .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
 
-        // Asocia la mascota con el cliente
         mascota.setCliente(cliente);
 
-        // Guarda la mascota en la base de datos
         Mascota guardada = mascotaRepository.save(mascota);
 
-        // Devuelve la mascota guardada como respuesta
         return ResponseEntity.ok(guardada);
     }
 
@@ -95,7 +91,6 @@ public class MascotaController {
         Mascota mascotaExistente = mascotaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Mascota no encontrada con ID: " + id));
 
-        // Actualiza los campos necesarios
         mascotaExistente.setNombre(mascotaActualizada.getNombre());
         mascotaExistente.setRaza(mascotaActualizada.getRaza());
         mascotaExistente.setEdad(mascotaActualizada.getEdad());
@@ -107,7 +102,6 @@ public class MascotaController {
         mascotaExistente.setFechaIngreso(mascotaActualizada.getFechaIngreso());
         mascotaExistente.setFechaSalida(mascotaActualizada.getFechaSalida());
 
-        // Si también se quiere actualizar el cliente asociado
         if (mascotaActualizada.getCliente() != null) {
             Integer idCliente = mascotaActualizada.getCliente().getIdCliente();
             Cliente cliente = clienteRepository.findById(idCliente)
@@ -115,7 +109,6 @@ public class MascotaController {
             mascotaExistente.setCliente(cliente);
         }
 
-        // Guarda la mascota actualizada
         Mascota mascotaGuardada = mascotaRepository.save(mascotaExistente);
         return ResponseEntity.ok(mascotaGuardada);
     }
@@ -204,5 +197,4 @@ public class MascotaController {
         List<Mascota> mascotas = mascotaService.obtenerMascotasPorCliente(idCliente);
         return ResponseEntity.ok(mascotas);
     }
-
 }
