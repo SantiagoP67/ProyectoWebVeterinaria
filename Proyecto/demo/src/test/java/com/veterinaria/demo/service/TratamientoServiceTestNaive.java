@@ -2,6 +2,7 @@ package com.veterinaria.demo.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -16,11 +17,13 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.veterinaria.demo.entidad.Cliente;
 import com.veterinaria.demo.entidad.Mascota;
+import com.veterinaria.demo.entidad.Medicamento;
 import com.veterinaria.demo.entidad.Servicio;
 import com.veterinaria.demo.entidad.Tratamiento;
 import com.veterinaria.demo.entidad.Veterinario;
 import com.veterinaria.demo.repositorio.ClienteRepository;
 import com.veterinaria.demo.repositorio.MascotaRepository;
+import com.veterinaria.demo.repositorio.MedicamentoRepository;
 import com.veterinaria.demo.repositorio.ServicioRepository;
 import com.veterinaria.demo.repositorio.TratamientoRepository;
 import com.veterinaria.demo.repositorio.VeterinarioRepository;
@@ -48,6 +51,9 @@ public class TratamientoServiceTestNaive {
     
     @Autowired
     private ServicioRepository servicioRepository;
+
+    @Autowired
+    private MedicamentoRepository medicamentoRepository;
     
     @BeforeEach
     public void setUp() {
@@ -94,15 +100,61 @@ public class TratamientoServiceTestNaive {
     @Test
     public void TratamientoService_crearTratamiento_Tratamiento() {
         // Arrange
-        Tratamiento tratamiento1 = new Tratamiento();
-        Tratamiento tratamiento2 = new Tratamiento();
+        Tratamiento tratamiento = new Tratamiento();
+        tratamiento.setCodigo("TRT001");
+        tratamiento.setFecha(new Date());
+        tratamiento.setDetalles("Consulta de rutina");
+
+        // Obtenemos los IDs de los objetos creados en el setUp()
+        Integer idMascota = mascotaRepository.findAll().get(0).getIdMascota();
+        Integer idServicio = servicioRepository.findAll().get(0).getIdServicio();
+        Integer idVeterinario = veterinarioRepository.findAll().get(0).getIdVeterinario();
+        
+        // Creamos algunos medicamentos de prueba
+        Medicamento medicamento1 = new Medicamento();
+        medicamento1.setNombre("Paracetamol");
+        medicamento1.setPrecioCompra(10.0f);
+        medicamento1.setPrecioVenta(15.0f);
+        medicamento1.setUnidadesDisponibles(10);
+        medicamento1.setUnidadesVendidas(0);
+        medicamento1 = medicamentoRepository.save(medicamento1);
+
+        Medicamento medicamento2 = new Medicamento();
+        medicamento2.setNombre("Ibuprofeno");
+        medicamento2.setPrecioCompra(12.0f);
+        medicamento2.setPrecioVenta(18.0f);
+        medicamento2.setUnidadesDisponibles(8);
+        medicamento2.setUnidadesVendidas(0);
+        medicamento2 = medicamentoRepository.save(medicamento2);
+
+        List<Integer> idsMedicamentos = Arrays.asList(medicamento1.getIdMedicamento(), medicamento2.getIdMedicamento());
 
         // Act
-        Tratamiento newTratamiento = tratamientoService.crearTratamiento(tratamiento1);
-        newTratamiento = tratamientoService.crearTratamiento(tratamiento2);
+        Tratamiento newTratamiento = tratamientoService.crearTratamiento(
+            tratamiento, 
+            idMascota, 
+            idServicio, 
+            idVeterinario, 
+            idsMedicamentos
+        );
 
         // Assert
         assertThat(newTratamiento).isNotNull();
+        assertThat(newTratamiento.getIdTratamiento()).isNotNull();
+        assertThat(newTratamiento.getCodigo()).isEqualTo("TRT001");        
+        assertThat(newTratamiento.getMascota()).isNotNull();
+        assertThat(newTratamiento.getMascota().getIdMascota()).isEqualTo(idMascota);        
+        assertThat(newTratamiento.getServicio()).isNotNull();
+        assertThat(newTratamiento.getServicio().getIdServicio()).isEqualTo(idServicio);        
+        assertThat(newTratamiento.getVeterinario()).isNotNull();
+        assertThat(newTratamiento.getVeterinario().getIdVeterinario()).isEqualTo(idVeterinario);        
+        assertThat(newTratamiento.getTratamientoMedicamentos()).hasSize(2);        
+        Medicamento updatedMed1 = medicamentoRepository.findById(medicamento1.getIdMedicamento()).orElse(null);
+        Medicamento updatedMed2 = medicamentoRepository.findById(medicamento2.getIdMedicamento()).orElse(null);        
+        assertThat(updatedMed1.getUnidadesDisponibles()).isEqualTo(9);
+        assertThat(updatedMed1.getUnidadesVendidas()).isEqualTo(1);        
+        assertThat(updatedMed2.getUnidadesDisponibles()).isEqualTo(7);
+        assertThat(updatedMed2.getUnidadesVendidas()).isEqualTo(1);
     }
 
     @Test
@@ -121,7 +173,7 @@ public class TratamientoServiceTestNaive {
     @Test
     public void TratamientoService_obtenerTratamientoPorId_Tratamiento() {
         // Arrange
-        Integer id = tratamientoRepository.findByCodigo("TRAT-001").getIdTratamiento();
+        Integer id = tratamientoRepository.findByCodigo("TRAT-001").get(0).getIdTratamiento();
         
         // Act
         Tratamiento encontrado = tratamientoService.obtenerTratamientoPorId(id);
