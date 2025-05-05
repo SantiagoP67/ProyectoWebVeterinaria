@@ -17,4 +17,6 @@ public interface MascotaService {
     long contarTodasLasMascotas();
     List<Mascota> obtenerMascotasActivas();
     long contarMascotasActivas();
+    Mascota agregarMascotaConCliente(Mascota mascota, Integer idCliente);
+    Mascota guardarMascota(Mascota mascota);
 }

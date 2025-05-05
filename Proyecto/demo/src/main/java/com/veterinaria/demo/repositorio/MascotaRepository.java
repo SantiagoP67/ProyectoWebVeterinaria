@@ -17,4 +17,5 @@ public interface MascotaRepository extends JpaRepository<Mascota, Integer> {
     long count();
     List<Mascota> findByEstado(Integer estado);
     long countByEstado(Integer estado);
+    
 }

@@ -22,8 +22,6 @@ public class ClienteController{
 
     @Autowired
     private ClienteService clienteService;
-    @Autowired
-    private ClienteRepository clienteRepository;
 
     @GetMapping
     public List<Cliente> listar(){
