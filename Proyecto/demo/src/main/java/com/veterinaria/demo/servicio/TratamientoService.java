@@ -1,5 +1,6 @@
 package com.veterinaria.demo.servicio;
 
+import com.veterinaria.demo.entidad.Mascota;
 import com.veterinaria.demo.entidad.Tratamiento;
 
 import java.util.List;
@@ -13,4 +14,8 @@ public interface TratamientoService{
     Map<String, Integer> obtenerMedicamentosMasUsadosUltimos30Dias();
     List<Map<String, Object>> obtenerTop3MedicamentosMasVendidos();
     List<Tratamiento> obtenerTratamientosPorVeterinario(Integer idVeterinario);
+    Tratamiento crearTratamiento(Tratamiento tratamiento, Integer idMascota, Integer idServicio, Integer idVeterinario, List<Integer> idsMedicamentos);
+    Tratamiento editarTratamiento(Integer id, Tratamiento tratamientoActualizado, Integer idMascota, Integer idServicio, Integer idVeterinario, List<Integer> idsMedicamentos);
+    void eliminarTratamientoPorId(Integer id);
+    List<Tratamiento> obtenerTratamientosPorMascota(Integer idMascota);
 }

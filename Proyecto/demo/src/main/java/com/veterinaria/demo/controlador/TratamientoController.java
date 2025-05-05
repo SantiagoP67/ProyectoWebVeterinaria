@@ -2,6 +2,7 @@ package com.veterinaria.demo.controlador;
 
 import com.veterinaria.demo.entidad.*;
 import com.veterinaria.demo.repositorio.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.veterinaria.demo.servicio.MascotaService;
+
 @RestController
 @RequestMapping("/tratamiento")
 @CrossOrigin(origins = "http://localhost:4200")
 public class TratamientoController{
+
+
+    @Autowired
+    private MascotaService mascotaService;
 
     @Autowired
     private TratamientoService tratamientoService;
@@ -35,6 +42,7 @@ public class TratamientoController{
     @Autowired
     private VeterinarioRepository veterinarioRepository;
 
+    
     @GetMapping
     public List<Tratamiento> mostrarTratamientos() {
         return tratamientoService.obtenerTodosTratamientos();
@@ -52,52 +60,11 @@ public class TratamientoController{
             @RequestParam Integer idServicio,
             @RequestParam(required = false) Integer idVeterinario,
             @RequestParam List<Integer> idsMedicamentos) {
-
-        Veterinario veterinario = idVeterinario != null ?
-                veterinarioRepository.findById(idVeterinario)
-                        .orElseThrow(() -> new RuntimeException("Veterinario no encontrado")) :
-                null;
-
-        Mascota mascota = mascotaRepository.findById(idMascota)
-                .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
-
-        Servicio servicio = servicioRepository.findById(idServicio)
-                .orElseThrow(() -> new RuntimeException("Servicio no encontrado"));
-
-        List<Medicamento> medicamentos = medicamentoRepository.findAllById(idsMedicamentos);
-
-        // Verificar stock antes de proceder
-        for (Medicamento medicamento : medicamentos) {
-            if (medicamento.getUnidadesDisponibles() <= 0) {
-                throw new RuntimeException("No hay unidades disponibles del medicamento: " + medicamento.getNombre());
-            }
-        }
-
-        tratamiento.setVeterinario(veterinario);
-        tratamiento.setMascota(mascota);
-        tratamiento.setServicio(servicio);
-
-        List<TratamientoMedicamento> tratamientoMedicamentos = new ArrayList<>();
-
-        for (Medicamento medicamento : medicamentos) {
-            // Actualizar unidades del medicamento
-            medicamento.setUnidadesDisponibles(medicamento.getUnidadesDisponibles() - 1);
-            medicamento.setUnidadesVendidas(medicamento.getUnidadesVendidas() + 1);
-
-            medicamentoRepository.save(medicamento); // Guardar cambios en el medicamento
-
-            TratamientoMedicamento tm = new TratamientoMedicamento();
-            tm.setMedicamento(medicamento);
-            tm.setTratamiento(tratamiento);
-            tm.setCantidad(1); // Asumiendo que se usa 1 unidad por medicamento
-            tratamientoMedicamentos.add(tm);
-        }
-
-        tratamiento.setTratamientoMedicamentos(tratamientoMedicamentos);
-
-        Tratamiento tratamientoGuardado = tratamientoRepository.save(tratamiento);
-        return ResponseEntity.ok(tratamientoGuardado);
+    
+        Tratamiento nuevoTratamiento = tratamientoService.crearTratamiento(tratamiento, idMascota, idServicio, idVeterinario, idsMedicamentos);
+        return ResponseEntity.ok(nuevoTratamiento);
     }
+    
 
     @PutMapping("/editar/{id}")
     public ResponseEntity<Tratamiento> editarTratamiento(
@@ -107,70 +74,32 @@ public class TratamientoController{
             @RequestParam Integer idServicio,
             @RequestParam(required = false) Integer idVeterinario,
             @RequestParam List<Integer> idsMedicamentos) {
-
-        Tratamiento tratamientoExistente = tratamientoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Tratamiento no encontrado"));
-
-        // Actualizar campos básicos
-        tratamientoExistente.setCodigo(tratamientoActualizado.getCodigo());
-        tratamientoExistente.setFecha(tratamientoActualizado.getFecha());
-        tratamientoExistente.setDetalles(tratamientoActualizado.getDetalles());
-
-        // Actualizar relaciones
-        Mascota mascota = mascotaRepository.findById(idMascota)
-                .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
-        tratamientoExistente.setMascota(mascota);
-
-        Servicio servicio = servicioRepository.findById(idServicio)
-                .orElseThrow(() -> new RuntimeException("Servicio no encontrado"));
-        tratamientoExistente.setServicio(servicio);
-
-        if (idVeterinario != null) {
-            Veterinario veterinario = veterinarioRepository.findById(idVeterinario)
-                    .orElseThrow(() -> new RuntimeException("Veterinario no encontrado"));
-            tratamientoExistente.setVeterinario(veterinario);
-        } else {
-            tratamientoExistente.setVeterinario(null);
-        }
-
-        // Limpiar medicamentos anteriores
-        tratamientoExistente.getTratamientoMedicamentos().clear();
-
-        List<TratamientoMedicamento> nuevosTM = new ArrayList<>();
-        List<Medicamento> medicamentos = medicamentoRepository.findAllById(idsMedicamentos);
-
-        for (Medicamento medicamento : medicamentos) {
-            TratamientoMedicamento tm = new TratamientoMedicamento();
-            tm.setTratamiento(tratamientoExistente);
-            tm.setMedicamento(medicamento);
-            tm.setCantidad(medicamentos.size());
-            nuevosTM.add(tm);
-        }
-
-        tratamientoExistente.getTratamientoMedicamentos().addAll(nuevosTM);
-
-        Tratamiento guardado = tratamientoRepository.save(tratamientoExistente);
-        return ResponseEntity.ok(guardado);
+    
+        Tratamiento actualizado = tratamientoService.editarTratamiento(id, tratamientoActualizado, idMascota, idServicio, idVeterinario, idsMedicamentos);
+        return ResponseEntity.ok(actualizado);
     }
+    
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<String> eliminarTratamiento(@PathVariable Integer id) {
-        Tratamiento tratamiento = tratamientoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Tratamiento no encontrado"));
-
-        tratamientoRepository.delete(tratamiento);
-
+        tratamientoService.eliminarTratamientoPorId(id);
         return ResponseEntity.ok("Tratamiento eliminado correctamente");
     }
 
+
     @GetMapping("/por-mascota/{idMascota}")
     public ResponseEntity<List<Tratamiento>> obtenerTratamientosPorMascota(@PathVariable Integer idMascota) {
-        Mascota mascota = mascotaRepository.findById(idMascota)
-                .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
-
-        List<Tratamiento> tratamientos = tratamientoRepository.findByMascota(mascota);
+        Mascota mascota = mascotaService.obtenerMascotaPorId(idMascota);
+        
+        if (mascota == null) {
+            return ResponseEntity.notFound().build();
+        }
+    
+        List<Tratamiento> tratamientos = tratamientoService.obtenerTratamientosPorMascota(idMascota);
         return ResponseEntity.ok(tratamientos);
     }
+    
+    
 
     @GetMapping("/cantidad-ultimos-30-dias")
     public ResponseEntity<Long> contarTratamientosUltimos30Dias() {

@@ -51,4 +51,11 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Intege
 
     @Query("SELECT t FROM Tratamiento t WHERE t.veterinario.idVeterinario = :idVeterinario")
     List<Tratamiento> findByVeterinarioId(@Param("idVeterinario") Integer idVeterinario);
+
+
+    List<Tratamiento> findByMascota_IdMascota(Integer idMascota);
+
+    List<Tratamiento> findByCodigo(String codigo);
+
+
     }
