@@ -51,7 +51,8 @@ public class MedicamentoController{
                         tm.getMedicamento().getPrecioVenta(),
                         tm.getMedicamento().getUnidadesDisponibles(),
                         tm.getMedicamento().getUnidadesVendidas(),
-                        tm.getMedicamento().getTratamientoMedicamentos()
+                        tm.getMedicamento().getTratamientoMedicamentos(),
+                        tm.getMedicamento().getFacturaMedicamentos()
                 ))
                 .collect(Collectors.toList());
     

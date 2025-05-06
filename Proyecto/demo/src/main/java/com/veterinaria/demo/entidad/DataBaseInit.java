@@ -471,7 +471,7 @@ public class DataBaseInit implements ApplicationRunner {
         );
         servicioRepository.save(servicioRehabilitacion);
 
-        // Creación de métodos de pago
+        /* Creación de métodos de pago
         MetodoPago metodoPago = new MetodoPago(null, "Tarjeta de Crédito", null);
         metodoPagoRepository.save(metodoPago);
 
@@ -485,12 +485,7 @@ public class DataBaseInit implements ApplicationRunner {
         metodoPagoRepository.save(metodoPago4);
 
         MetodoPago metodoPago5 = new MetodoPago(null, "Transferencia bancaria", null);
-        metodoPagoRepository.save(metodoPago5);
-
-        // Creación de una factura
-        Factura factura = new Factura(null, new Timestamp(new Date().getTime()), 50000f, List.of(metodoPago),
-                List.of(servicioConsulta));
-        facturaRepository.save(factura);
+        metodoPagoRepository.save(metodoPago5);*/
 
         // Creación de mascotas
         Mascota mascota1 = new Mascota(null, "Firulais", "Labrador", 3, 20.5f, "Otitis",
@@ -1011,16 +1006,16 @@ public class DataBaseInit implements ApplicationRunner {
 
         // Creación de medicamentos
         List<Medicamento> medicamentos = Arrays.asList(
-        new Medicamento(null, "Advantix", 150.0f, 200.0f, 50, 10, null),
-        new Medicamento(null, "Drontal", 100.0f, 130.0f, 60, 15, null),
-        new Medicamento(null, "Vetoquinol", 80.0f, 110.0f, 40, 20, null),
-        new Medicamento(null, "Cortaf", 75.0f, 100.0f, 45, 12, null),
-        new Medicamento(null, "Milbemax", 120.0f, 150.0f, 70, 8, null),
-        new Medicamento(null, "Metronidazol", 90.0f, 120.0f, 55, 16, null),
-        new Medicamento(null, "Rimadyl", 200.0f, 250.0f, 30, 5, null),
-        new Medicamento(null, "Panacur", 85.0f, 110.0f, 50, 18, null),
-        new Medicamento(null, "Zylkene", 150.0f, 180.0f, 35, 6, null),
-        new Medicamento(null, "Bexacat", 110.0f, 140.0f, 40, 7, null)
+        new Medicamento(null, "Advantix", 150.0f, 200.0f, 50, 10, null,null),
+        new Medicamento(null, "Drontal", 100.0f, 130.0f, 60, 15, null,null),
+        new Medicamento(null, "Vetoquinol", 80.0f, 110.0f, 40, 20, null,null),
+        new Medicamento(null, "Cortaf", 75.0f, 100.0f, 45, 12, null,null),
+        new Medicamento(null, "Milbemax", 120.0f, 150.0f, 70, 8, null,null),
+        new Medicamento(null, "Metronidazol", 90.0f, 120.0f, 55, 16, null,null),
+        new Medicamento(null, "Rimadyl", 200.0f, 250.0f, 30, 5, null,null),
+        new Medicamento(null, "Panacur", 85.0f, 110.0f, 50, 18, null,null),
+        new Medicamento(null, "Zylkene", 150.0f, 180.0f, 35, 6, null,null),
+        new Medicamento(null, "Bexacat", 110.0f, 140.0f, 40, 7, null,null)
         );
         medicamentoRepository.saveAll(medicamentos);
 

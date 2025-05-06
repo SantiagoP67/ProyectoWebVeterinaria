@@ -29,4 +29,7 @@ public class Medicamento {
     @OneToMany(mappedBy = "medicamento", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<TratamientoMedicamento> tratamientoMedicamentos;
+
+    @OneToMany(mappedBy = "medicamento")
+    private List<FacturaMedicamento> facturaMedicamentos;
 }
