@@ -2,6 +2,7 @@ package com.veterinaria.demo.servicio;
 
 import java.util.List;
 
+import com.veterinaria.demo.entidad.Cliente;
 import com.veterinaria.demo.entidad.Mascota;
 
 public interface MascotaService {
@@ -19,4 +20,5 @@ public interface MascotaService {
     Mascota agregarMascotaConCliente(Mascota mascota, Integer idCliente);
     Mascota guardarMascota(Mascota mascota);
     List<Mascota> buscarPorNombre(String nombre);
+    Long contarMascotas();
 }

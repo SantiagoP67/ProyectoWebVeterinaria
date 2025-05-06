@@ -197,6 +197,4 @@ public class TratamientoServiceImpl implements TratamientoService{
         return tratamientoRepository.findByMascota(mascota);
     }
 
-
-
 }

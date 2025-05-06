@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.veterinaria.demo.entidad.Tratamiento;
 import com.veterinaria.demo.repositorio.TratamientoRepository;
+import com.veterinaria.demo.servicio.TratamientoService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,13 +35,11 @@ public class MascotaController {
     private MascotaService mascotaService;
 
     @Autowired
-    private MascotaRepository mascotaRepository;
-
-    @Autowired
-    private TratamientoRepository tratamientoRepository;
+    private TratamientoService tratamientoService;
 
     @Autowired
     private ClienteService clienteService;
+
     /**
      * Muestra todas las mascotas registradas.
      * URL: http://localhost:8082/mascota
@@ -149,11 +148,11 @@ public class MascotaController {
             return ResponseEntity.badRequest().body(null); // Cliente no encontrado
         }
 
-        List<Mascota> mascotas = mascotaRepository.findByCliente(cliente);
+        List<Mascota> mascotas = mascotaService.obtenerMascotasPorCliente(cliente.getIdCliente());
 
         // Filtrar mascotas que tengan al menos un tratamiento
         List<Mascota> mascotasConTratamiento = mascotas.stream()
-                .filter(mascota -> !tratamientoRepository.findByMascota(mascota).isEmpty())
+                .filter(mascota -> !tratamientoService.obtenerTratamientosPorMascota(mascota.getIdMascota()).isEmpty())
                 .toList();
 
         return ResponseEntity.ok(mascotasConTratamiento);
@@ -161,7 +160,7 @@ public class MascotaController {
 
     @GetMapping("/cantidadMascotas")
     public ResponseEntity<Long> cantidadMascotas() {
-        Long cantidad = mascotaRepository.count();
+        Long cantidad = mascotaService.contarMascotas();
         return ResponseEntity.ok(cantidad);
     }
     
@@ -193,8 +192,7 @@ public class MascotaController {
 
     @GetMapping("/por-tratamiento/{id}")
     public ResponseEntity<Mascota> obtenerMascotaPorTratamiento(@PathVariable Integer id) {
-        Tratamiento tratamiento = tratamientoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Tratamiento no encontrado"));
+        Tratamiento tratamiento = tratamientoService.obtenerTratamientoPorId(id);
         Mascota mascota = tratamiento.getMascota();
         if (mascota == null) {
             throw new EntityNotFoundException("No hay mascota asociada a este tratamiento");

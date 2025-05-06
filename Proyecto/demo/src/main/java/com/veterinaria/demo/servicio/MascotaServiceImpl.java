@@ -119,5 +119,8 @@ public class MascotaServiceImpl implements MascotaService {
         return mascotaRepository.save(mascota);
     }
 
-
+    @Override
+    public Long contarMascotas() {
+        return mascotaRepository.count();
+    }
 }
