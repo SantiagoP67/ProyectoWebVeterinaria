@@ -44,7 +44,7 @@ public class Factura {
     @org.hibernate.annotations.OnDelete(action = org.hibernate.annotations.OnDeleteAction.SET_NULL)
     private Servicio servicio;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "factura", cascade = CascadeType.ALL)
     private List<FacturaMedicamento> facturaMedicamentos;
 }

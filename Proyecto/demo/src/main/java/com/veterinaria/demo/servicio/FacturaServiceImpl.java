@@ -147,6 +147,7 @@ public class FacturaServiceImpl implements FacturaService {
             FacturaMedicamento fm = new FacturaMedicamento();
             fm.setMedicamento(medicamento);
             fm.setFactura(facturanueva);
+            facturaMedicamentos.add(fm);
             total += medicamento.getPrecioVenta();
         }
 
