@@ -50,4 +50,22 @@ public class FacturaController {
         Factura guardada = facturaService.crearFacturaPorMedicamentos(idCliente, idMedicamentos, factura);
         return ResponseEntity.ok(guardada);
     }
+
+    @PutMapping("/pagar/{id}")
+    public ResponseEntity<Factura> pagarFactura(@PathVariable Integer id){
+        Factura factura = facturaService.obtenerFacturaPorID(id);
+        if(factura == null) return ResponseEntity.notFound().build();
+
+        facturaService.pagarFactura(id);
+
+        facturaService.guardarFactura(factura);
+
+        return ResponseEntity.ok(factura);
+    }
+
+    @PutMapping("/pagar/facturas")
+    public ResponseEntity<String> pagarFacturas(@RequestParam List<Integer> idsFacturas) {
+        facturaService.pagarFacturas(idsFacturas);
+        return ResponseEntity.ok("Facturas pagadas correctamente");
+    }
 }

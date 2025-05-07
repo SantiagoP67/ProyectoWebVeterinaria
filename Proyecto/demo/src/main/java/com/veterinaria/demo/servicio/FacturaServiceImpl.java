@@ -29,6 +29,25 @@ public class FacturaServiceImpl implements FacturaService {
     private MedicamentoRepository medicamentoRepository;
 
     @Override
+    public Factura pagarFactura(Integer idFactura) {
+        Factura facturaActual = facturaRepository.findById(idFactura)
+                .orElseThrow(() -> new RuntimeException("Factura con ID " + idFactura + " no encontrada"));
+
+        if (Boolean.FALSE.equals(facturaActual.getPagada())) {
+            facturaActual.setPagada(true);
+            return facturaRepository.save(facturaActual);
+        }
+
+        return facturaActual;
+    }
+
+
+    @Override
+    public Factura guardarFactura(Factura factura) {
+        return facturaRepository.save(factura);
+    }
+
+    @Override
     public List<Factura> obtenerTodasFacturas() {
         return facturaRepository.findAll();
     }
@@ -37,6 +56,19 @@ public class FacturaServiceImpl implements FacturaService {
     public Factura obtenerFacturaPorID(Integer id) {
         return facturaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Factura no encontrada"));
+    }
+
+    @Override
+    public void pagarFacturas(List<Integer> idsFacturas) {
+        List<Factura> facturas = facturaRepository.findAllById(idsFacturas);
+
+        for (Factura factura : facturas) {
+            if(Boolean.FALSE.equals(factura.getPagada())) {
+                factura.setPagada(true);
+                facturaRepository.save(factura);
+            }
+        }
+
     }
 
     @Override

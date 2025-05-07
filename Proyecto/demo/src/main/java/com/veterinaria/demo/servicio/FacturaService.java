@@ -12,4 +12,8 @@ public interface FacturaService{
     Factura crearFacturaPorMedicamentos(Integer idCliente, List<Integer> idMedicamentos, Factura factura);
     Factura obtenerFacturaPorID(Integer id);
     List<Factura> obtenerTodasFacturas();
+    Factura guardarFactura(Factura factura);
+    Factura pagarFactura(Integer idFactura);
+    void pagarFacturas(List<Integer> idsFacturas);
+
 }
