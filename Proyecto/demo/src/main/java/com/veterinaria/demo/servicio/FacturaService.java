@@ -13,7 +13,7 @@ public interface FacturaService{
     Factura obtenerFacturaPorID(Integer id);
     List<Factura> obtenerTodasFacturas();
     Factura guardarFactura(Factura factura);
-    Factura pagarFactura(Integer idFactura);
+    void pagarFactura(Factura factura);
     void pagarFacturas(List<Integer> idsFacturas);
 
 }

@@ -29,16 +29,12 @@ public class FacturaServiceImpl implements FacturaService {
     private MedicamentoRepository medicamentoRepository;
 
     @Override
-    public Factura pagarFactura(Integer idFactura) {
-        Factura facturaActual = facturaRepository.findById(idFactura)
-                .orElseThrow(() -> new RuntimeException("Factura con ID " + idFactura + " no encontrada"));
+    public void pagarFactura(Factura factura) {
 
-        if (Boolean.FALSE.equals(facturaActual.getPagada())) {
-            facturaActual.setPagada(true);
-            return facturaRepository.save(facturaActual);
+        if (Boolean.FALSE.equals(factura.getPagada())) {
+            factura.setPagada(true);
+            facturaRepository.save(factura);
         }
-
-        return facturaActual;
     }
 
 

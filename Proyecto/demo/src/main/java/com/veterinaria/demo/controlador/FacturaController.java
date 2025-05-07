@@ -56,9 +56,7 @@ public class FacturaController {
         Factura factura = facturaService.obtenerFacturaPorID(id);
         if(factura == null) return ResponseEntity.notFound().build();
 
-        facturaService.pagarFactura(id);
-
-        facturaService.guardarFactura(factura);
+        facturaService.pagarFactura(factura);
 
         return ResponseEntity.ok(factura);
     }
