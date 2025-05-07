@@ -28,10 +28,26 @@ public class FacturaController {
     }
 
     @PostMapping("/crear/tratamiento")
-    public ResponseEntity<Factura> crearTratamiento(@RequestParam Integer idCliente,
+    public ResponseEntity<Factura> crearFacturaPorTratamiento(@RequestParam Integer idCliente,
                                                     @RequestParam Integer idTratamiento,
                                                     @RequestBody Factura factura){
         Factura guardada = facturaService.crearFacturaPorTratamiento(idCliente, idTratamiento, factura);
+        return ResponseEntity.ok(guardada);
+    }
+
+    @PostMapping("/crear/servicio")
+    public ResponseEntity<Factura> crearFacturaPorServicio(@RequestParam Integer idCliente,
+                                                           @RequestParam Integer idServicio,
+                                                           @RequestBody Factura factura){
+        Factura guardada = facturaService.crearFacturaPorServicio(idCliente, idServicio, factura);
+        return ResponseEntity.ok(guardada);
+    }
+
+    @PostMapping("/crear/medicamentos")
+    public ResponseEntity<Factura> crearFacturaPorMedicamentos(@RequestParam Integer idCliente,
+                                                               @RequestParam List<Integer> idMedicamentos,
+                                                               @RequestBody Factura factura){
+        Factura guardada = facturaService.crearFacturaPorMedicamentos(idCliente, idMedicamentos, factura);
         return ResponseEntity.ok(guardada);
     }
 }

@@ -1,10 +1,7 @@
 package com.veterinaria.demo.servicio;
 
 import com.veterinaria.demo.entidad.*;
-import com.veterinaria.demo.repositorio.ClienteRepository;
-import com.veterinaria.demo.repositorio.FacturaRepository;
-import com.veterinaria.demo.repositorio.ServicioRepository;
-import com.veterinaria.demo.repositorio.TratamientoRepository;
+import com.veterinaria.demo.repositorio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +24,9 @@ public class FacturaServiceImpl implements FacturaService {
 
     @Autowired
     private ServicioRepository servicioRepository;
+
+    @Autowired
+    private MedicamentoRepository medicamentoRepository;
 
     @Override
     public List<Factura> obtenerTodasFacturas() {
@@ -93,4 +93,72 @@ public class FacturaServiceImpl implements FacturaService {
     }
 
 
+    @Override
+    public Factura crearFacturaPorServicio(Integer idCliente, Integer idServicio, Factura factura) {
+
+        float total = 0f;
+
+        Cliente cliente = clienteRepository.findById(idCliente)
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+
+        Servicio servicio = servicioRepository.findById(idServicio)
+                .orElseThrow(() -> new RuntimeException("Servicio no encontrado"));
+
+        if (servicio != null) {
+            total += servicio.getPrecioBase();
+            factura.setServicio(servicio);
+        }
+
+        Factura facturanueva = new Factura();
+        facturanueva.setFechaHora(factura.getFechaHora());
+        facturanueva.setTotal(total);
+        facturanueva.setPagada(factura.getPagada());
+        facturanueva.setMetododepago(factura.getMetododepago());
+        facturanueva.setCliente(cliente);
+        facturanueva.setServicio(servicio);
+
+        facturaRepository.save(facturanueva);
+
+        return facturanueva;
+    }
+
+    @Override
+    public Factura crearFacturaPorMedicamentos(Integer idCliente, List<Integer> idMedicamentos, Factura factura) {
+        float total = 0f;
+
+        Cliente cliente = clienteRepository.findById(idCliente)
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+
+        Factura facturanueva = new Factura();
+
+        List<Medicamento> medicamentos = medicamentoRepository.findAllById(idMedicamentos);
+        for (Medicamento medicamento : medicamentos) {
+            if(medicamento.getUnidadesDisponibles() <= 0){
+                throw new RuntimeException("No hay unidades disponibles del medicamento: " + medicamento.getNombre());
+            }
+        }
+
+        List<FacturaMedicamento> facturaMedicamentos = new ArrayList<>();
+        for (Medicamento medicamento : medicamentos) {
+            medicamento.setUnidadesDisponibles(medicamento.getUnidadesDisponibles() - 1);
+            medicamento.setUnidadesVendidas(medicamento.getUnidadesVendidas() + 1);
+            medicamentoRepository.save(medicamento);
+
+            FacturaMedicamento fm = new FacturaMedicamento();
+            fm.setMedicamento(medicamento);
+            fm.setFactura(facturanueva);
+            total += medicamento.getPrecioVenta();
+        }
+
+        facturanueva.setFechaHora(factura.getFechaHora());
+        facturanueva.setTotal(total);
+        facturanueva.setPagada(factura.getPagada());
+        facturanueva.setMetododepago(factura.getMetododepago());
+        facturanueva.setCliente(cliente);
+        facturanueva.setFacturaMedicamentos(facturaMedicamentos);
+
+        facturaRepository.save(facturanueva);
+
+        return facturanueva;
+    }
 }
