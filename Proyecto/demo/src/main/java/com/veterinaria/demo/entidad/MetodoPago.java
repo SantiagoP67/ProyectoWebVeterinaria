@@ -17,7 +17,4 @@ public class MetodoPago {
 
     @Column(nullable = false)
     private String nombre;
-
-    @ManyToMany(mappedBy = "metodosPago")
-    private List<Factura> facturas;
 }

@@ -17,8 +17,6 @@ public class AdministradorController{
 
     @Autowired 
     private AdministradorService administradorService;
-    @Autowired
-    private AdministradorRepository administradorRepository;
 
     @GetMapping
     public List<Administrador> listar() {
@@ -43,17 +41,7 @@ public class AdministradorController{
 
     @PutMapping("/editar/{id}")
     public ResponseEntity<Administrador> editar(@PathVariable Integer id, @RequestBody Administrador adminActualizado) {
-        Administrador adminExistente = administradorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("administrador no encontrado con ID: " + id));
-
-        adminExistente.setNombre(adminActualizado.getNombre());
-        adminExistente.setCorreo(adminActualizado.getCorreo());
-        adminExistente.setFoto(adminActualizado.getFoto());
-        adminExistente.setCedula(adminActualizado.getCedula());
-        adminExistente.setNombreUsuario(adminActualizado.getNombreUsuario());
-        adminExistente.setContrasena(adminActualizado.getContrasena());
-
-        Administrador adminGuardado = administradorRepository.save(adminActualizado);
-        return ResponseEntity.ok(adminGuardado);
+        Administrador adminEditado = administradorService.editarAdministrador(id, adminActualizado);
+        return ResponseEntity.ok(adminEditado);
     }
 }

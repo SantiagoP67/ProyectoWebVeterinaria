@@ -28,15 +28,18 @@ public class AdministradorServiceImpl implements AdministradorService{
     }
 
     @Override
-    public Administrador editarAdministrador(Integer id, Administrador administrador) {
-        Administrador administradoractual = administradorRepository.findById(id).orElse(null);
-        administradoractual.setNombre(administrador.getNombre());
-        administradoractual.setCedula( administrador.getCedula());
-        administradoractual.setNombreUsuario(administrador.getNombreUsuario());
-        administradoractual.setContrasena( administrador.getContrasena());
-        administradoractual.setCorreo( administrador.getCorreo());
-        administradoractual.setFoto( administrador.getFoto());
-        return administradorRepository.save(administradoractual);
+    public Administrador editarAdministrador(Integer id, Administrador administradorActualizado) {
+        Administrador adminExistente = administradorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Administrador no encontrado con ID: " + id));
+
+        adminExistente.setNombre(administradorActualizado.getNombre());
+        adminExistente.setCorreo(administradorActualizado.getCorreo());
+        adminExistente.setFoto(administradorActualizado.getFoto());
+        adminExistente.setCedula(administradorActualizado.getCedula());
+        adminExistente.setNombreUsuario(administradorActualizado.getNombreUsuario());
+        adminExistente.setContrasena(administradorActualizado.getContrasena());
+
+        return administradorRepository.save(adminExistente);
     }
 
     @Override

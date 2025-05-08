@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.veterinaria.demo.entidad.Tratamiento;
 import com.veterinaria.demo.repositorio.TratamientoRepository;
+import com.veterinaria.demo.servicio.TratamientoService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ import com.veterinaria.demo.entidad.Cliente;
 import com.veterinaria.demo.entidad.Mascota;
 import com.veterinaria.demo.repositorio.ClienteRepository;
 import com.veterinaria.demo.repositorio.MascotaRepository;
+import com.veterinaria.demo.servicio.ClienteService;
 import com.veterinaria.demo.servicio.MascotaService;
 
 @RestController
@@ -33,13 +35,10 @@ public class MascotaController {
     private MascotaService mascotaService;
 
     @Autowired
-    private MascotaRepository mascotaRepository;
+    private TratamientoService tratamientoService;
 
     @Autowired
-    private ClienteRepository clienteRepository;
-
-    @Autowired
-    private TratamientoRepository tratamientoRepository;
+    private ClienteService clienteService;
 
     /**
      * Muestra todas las mascotas registradas.
@@ -75,21 +74,25 @@ public class MascotaController {
      */
     @PostMapping("/agregar")
     public ResponseEntity<Mascota> agregarMascota(@RequestBody Mascota mascota, @RequestParam Integer idCliente) {
-        Cliente cliente = clienteRepository.findById(idCliente)
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+        Cliente cliente = clienteService.obtenerClientePorId(idCliente);
+        if (cliente == null) {
+            return ResponseEntity.badRequest().body(null); // Cliente no encontrado
+        }
 
         mascota.setCliente(cliente);
 
-        Mascota guardada = mascotaRepository.save(mascota);
+        Mascota guardada = mascotaService.guardarMascota(mascota);
 
         return ResponseEntity.ok(guardada);
     }
-
+    
     @PutMapping("/editar/{id}")
     public ResponseEntity<Mascota> editarMascota(@PathVariable Integer id, @RequestBody Mascota mascotaActualizada) {
         // Verifica si la mascota existe
-        Mascota mascotaExistente = mascotaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Mascota no encontrada con ID: " + id));
+        Mascota mascotaExistente = mascotaService.obtenerMascotaPorId(id);
+        if (mascotaExistente == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         mascotaExistente.setNombre(mascotaActualizada.getNombre());
         mascotaExistente.setRaza(mascotaActualizada.getRaza());
@@ -104,46 +107,52 @@ public class MascotaController {
 
         if (mascotaActualizada.getCliente() != null) {
             Integer idCliente = mascotaActualizada.getCliente().getIdCliente();
-            Cliente cliente = clienteRepository.findById(idCliente)
-                    .orElseThrow(() -> new RuntimeException("Cliente no encontrado con ID: " + idCliente));
+            Cliente cliente = clienteService.obtenerClientePorId(idCliente);
+            if (cliente == null) {
+                return ResponseEntity.badRequest().body(null); // Cliente no encontrado
+            }
             mascotaExistente.setCliente(cliente);
         }
 
-        Mascota mascotaGuardada = mascotaRepository.save(mascotaExistente);
+        Mascota mascotaGuardada = mascotaService.guardarMascota(mascotaExistente);
         return ResponseEntity.ok(mascotaGuardada);
     }
 
     @PutMapping("/eliminar/{id}")
     public ResponseEntity<Mascota> eliminarMascota(@PathVariable Integer id) {
         // Verifica si la mascota existe
-        Mascota mascota = mascotaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Mascota no encontrada con ID: " + id));
+        Mascota mascota = mascotaService.obtenerMascotaPorId(id);
+        if (mascota == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         // Cambia el estado a 'inactiva' o el que uses para marcar eliminación lógica
         mascotaService.cambiarEstado(id, mascota);
 
         // Guarda la mascota con el nuevo estado
-        mascotaRepository.save(mascota);
+        mascotaService.guardarMascota(mascota);
 
         return ResponseEntity.ok(mascota);
     }
 
     @GetMapping("/buscar")
     public ResponseEntity<List<Mascota>> buscarPorNombre(@RequestParam String nombre) {
-        List<Mascota> mascotas = mascotaRepository.findByNombreContainingIgnoreCase(nombre);
+        List<Mascota> mascotas = mascotaService.buscarPorNombre(nombre);
         return ResponseEntity.ok(mascotas);
     }
 
     @GetMapping("/mascotas-en-tratamiento/{idCliente}")
     public ResponseEntity<List<Mascota>> obtenerMascotasEnTratamientoPorCliente(@PathVariable Integer idCliente) {
-        Cliente cliente = clienteRepository.findById(idCliente)
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+        Cliente cliente = clienteService.obtenerClientePorId(idCliente);
+        if (cliente == null) {
+            return ResponseEntity.badRequest().body(null); // Cliente no encontrado
+        }
 
-        List<Mascota> mascotas = mascotaRepository.findByCliente(cliente);
+        List<Mascota> mascotas = mascotaService.obtenerMascotasPorCliente(cliente.getIdCliente());
 
         // Filtrar mascotas que tengan al menos un tratamiento
         List<Mascota> mascotasConTratamiento = mascotas.stream()
-                .filter(mascota -> !tratamientoRepository.findByMascota(mascota).isEmpty())
+                .filter(mascota -> !tratamientoService.obtenerTratamientosPorMascota(mascota.getIdMascota()).isEmpty())
                 .toList();
 
         return ResponseEntity.ok(mascotasConTratamiento);
@@ -151,7 +160,7 @@ public class MascotaController {
 
     @GetMapping("/cantidadMascotas")
     public ResponseEntity<Long> cantidadMascotas() {
-        Long cantidad = mascotaRepository.count();
+        Long cantidad = mascotaService.contarMascotas();
         return ResponseEntity.ok(cantidad);
     }
     
@@ -183,8 +192,7 @@ public class MascotaController {
 
     @GetMapping("/por-tratamiento/{id}")
     public ResponseEntity<Mascota> obtenerMascotaPorTratamiento(@PathVariable Integer id) {
-        Tratamiento tratamiento = tratamientoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Tratamiento no encontrado"));
+        Tratamiento tratamiento = tratamientoService.obtenerTratamientoPorId(id);
         Mascota mascota = tratamiento.getMascota();
         if (mascota == null) {
             throw new EntityNotFoundException("No hay mascota asociada a este tratamiento");

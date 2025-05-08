@@ -25,4 +25,6 @@ public interface VeterinarioService {
     long contarVeterinariosInactivos();
     List<Veterinario> obtenerVeterinariosActivos();
     List<Veterinario> obtenerVeterinariosInactivos();
+    Veterinario guardarVeterinario(Veterinario veterinario);
+
 }

@@ -22,8 +22,6 @@ public class ClienteController{
 
     @Autowired
     private ClienteService clienteService;
-    @Autowired
-    private ClienteRepository clienteRepository;
 
     @GetMapping
     public List<Cliente> listar(){
@@ -63,37 +61,19 @@ public class ClienteController{
     }
 
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Cliente> actualizarCliente(@PathVariable Integer id, @RequestBody Cliente clienteactualizado){
-        Cliente clienteExistente = clienteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado con ID: " + id));
-
-        clienteExistente.setNombre(clienteactualizado.getNombre());
-        clienteExistente.setCorreo(clienteactualizado.getCorreo());
-        clienteExistente.setCelular(clienteactualizado.getCelular());
-        clienteExistente.setFoto(clienteactualizado.getFoto());
-        clienteExistente.setCedula(clienteactualizado.getCedula());
-        clienteExistente.setNombreUsuario(clienteactualizado.getNombreUsuario());
-        clienteExistente.setContrasena(clienteactualizado.getContrasena());
-
-        Cliente clienteGuardado = clienteRepository.save(clienteExistente);
-        return ResponseEntity.ok(clienteGuardado);
+    public ResponseEntity<Cliente> actualizarCliente(@PathVariable Integer id, @RequestBody Cliente clienteActualizado) {
+        Cliente clienteEditado = clienteService.editarCliente(id, clienteActualizado);
+        return ResponseEntity.ok(clienteEditado);
     }
+    
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Map<String, String>> eliminarCliente(@PathVariable Integer id) {
-        Map<String, String> respuesta = new HashMap<>();
-
-        if (!clienteRepository.existsById(id)) {
-            respuesta.put("mensaje", "Cliente no encontrado con ID: " + id);
-            return new ResponseEntity<>(respuesta, HttpStatus.NOT_FOUND);
-        }
-
-        clienteRepository.deleteById(id);
-
-        respuesta.put("mensaje", "Cliente eliminado correctamente");
-        return new ResponseEntity<>(respuesta, HttpStatus.OK);
+        Map<String, String> respuesta = clienteService.eliminarCliente(id);
+        HttpStatus estado = respuesta.get("mensaje").contains("no encontrado") ? HttpStatus.NOT_FOUND : HttpStatus.OK;
+        return new ResponseEntity<>(respuesta, estado);
     }
-
+    
 
 
     @GetMapping("/idClientePorNombreUsuario/{nombreUsuario}")
@@ -107,7 +87,8 @@ public ResponseEntity<Integer> obtenerIdClientePorNombreUsuario(@PathVariable St
 }
     @GetMapping("/buscar")
     public ResponseEntity<List<Cliente>> buscarPorNombre(@RequestParam String nombre) {
-        List<Cliente> clientes = clienteRepository.findByNombreContainingIgnoreCase(nombre);
+        List<Cliente> clientes = clienteService.buscarPorNombre(nombre);
         return ResponseEntity.ok(clientes);
     }
+
 }
