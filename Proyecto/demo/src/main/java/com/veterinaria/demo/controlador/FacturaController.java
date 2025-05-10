@@ -27,8 +27,8 @@ public class FacturaController {
     }
 
     @GetMapping("/cliente/{idCliente}")
-    public Factura obtenerFacturaPorCliente(@PathVariable Integer idCliente){
-        return facturaService.obtenerFacturaPorIdCliente(idCliente);
+    public List<Factura> obtenerFacturaPorCliente(@PathVariable Integer idCliente){
+        return facturaService.obtenerFacturasPorIdCliente(idCliente);
     }
 
     @PostMapping("/crear/tratamiento")

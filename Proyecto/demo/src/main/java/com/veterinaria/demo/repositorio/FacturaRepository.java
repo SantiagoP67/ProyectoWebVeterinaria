@@ -7,12 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface FacturaRepository extends JpaRepository<Factura, Integer> {
 
     @Query("SELECT f FROM Factura f WHERE f.cliente.idCliente = :idCliente")
-    Factura findByCliente(@Param("idCliente") Integer idCliente);
+    List<Factura> findAllByCliente(@Param("idCliente") Integer idCliente);
+
 
 }

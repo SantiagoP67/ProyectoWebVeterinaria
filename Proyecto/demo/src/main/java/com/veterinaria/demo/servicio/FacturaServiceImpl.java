@@ -68,11 +68,11 @@ public class FacturaServiceImpl implements FacturaService {
     }
 
     @Override
-    public Factura obtenerFacturaPorIdCliente(Integer idCliente) {
+    public List<Factura> obtenerFacturasPorIdCliente(Integer idCliente) {
         Cliente cliente = clienteRepository.findById(idCliente)
                 .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
 
-        return facturaRepository.findByCliente(idCliente);
+        return facturaRepository.findAllByCliente(idCliente);
     }
 
     @Override
