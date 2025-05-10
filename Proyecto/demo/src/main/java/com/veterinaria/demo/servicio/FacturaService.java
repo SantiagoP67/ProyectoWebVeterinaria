@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface FacturaService{
     Factura crearFacturaPorTratamiento(Integer idCliente, Integer idTratamiento, Factura factura);
+    List<Factura> crearFacturaPorTratamientos(Integer idCliente, List<Integer> idsTratamientos, Factura factura);
     Factura crearFacturaPorServicio(Integer idCliente,Integer idServicio, Factura factura);
     Factura crearFacturaPorMedicamentos(Integer idCliente, List<Integer> idMedicamentos, Factura factura);
     Factura obtenerFacturaPorID(Integer id);

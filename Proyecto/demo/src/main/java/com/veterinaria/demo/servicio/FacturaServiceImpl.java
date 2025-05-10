@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class FacturaServiceImpl implements FacturaService {
@@ -109,6 +107,7 @@ public class FacturaServiceImpl implements FacturaService {
             FacturaMedicamento fm = new FacturaMedicamento();
             fm.setMedicamento(med);
             fm.setFactura(facturanueva);
+            fm.setCantidad(cantidad);
             facturaMedicamentos.add(fm);
         }
 
@@ -128,6 +127,55 @@ public class FacturaServiceImpl implements FacturaService {
         return facturanueva;
     }
 
+    @Override
+    public List<Factura> crearFacturaPorTratamientos(Integer idCliente, List<Integer> idsTratamientos, Factura factura) {
+        Cliente cliente = clienteRepository.findById(idCliente)
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+
+        List<Factura> facturasGeneradas = new ArrayList<>();
+
+        for (Integer idTratamiento : idsTratamientos) {
+            Tratamiento tratamiento = tratamientoRepository.findById(idTratamiento)
+                    .orElseThrow(() -> new RuntimeException("Tratamiento con ID " + idTratamiento + " no encontrado"));
+
+            Servicio servicio = tratamiento.getServicio();
+            float totalServicio = (servicio != null) ? servicio.getPrecioBase() : 0f;
+            float totalMedicamentos = 0f;
+            List<FacturaMedicamento> facturaMedicamentos = new ArrayList<>();
+
+            for (TratamientoMedicamento tm : tratamiento.getTratamientoMedicamentos()) {
+                Medicamento med = tm.getMedicamento();
+                int cantidad = tm.getCantidad();
+                float subtotal = med.getPrecioVenta() * cantidad;
+                totalMedicamentos += subtotal;
+
+                FacturaMedicamento fm = new FacturaMedicamento();
+                fm.setMedicamento(med);
+                fm.setCantidad(cantidad);
+                facturaMedicamentos.add(fm);
+            }
+
+            Factura nuevaFactura = new Factura();
+            nuevaFactura.setFechaHora(factura.getFechaHora());
+            nuevaFactura.setMetododepago(factura.getMetododepago());
+            nuevaFactura.setPagada(factura.getPagada());
+            nuevaFactura.setCliente(cliente);
+            nuevaFactura.setTotal(totalServicio + totalMedicamentos);
+            nuevaFactura.setTratamiento(tratamiento);  // asignar tratamiento
+            nuevaFactura.setServicio(servicio);        // asignar servicio
+            nuevaFactura.setFacturaMedicamentos(facturaMedicamentos);
+
+            // Asociar esta factura a sus medicamentos
+            for (FacturaMedicamento fm : facturaMedicamentos) {
+                fm.setFactura(nuevaFactura);
+            }
+
+            facturaRepository.save(nuevaFactura);
+            facturasGeneradas.add(nuevaFactura);
+        }
+
+        return facturasGeneradas;
+    }
 
     @Override
     public Factura crearFacturaPorServicio(Integer idCliente, Integer idServicio, Factura factura) {
@@ -183,6 +231,7 @@ public class FacturaServiceImpl implements FacturaService {
             FacturaMedicamento fm = new FacturaMedicamento();
             fm.setMedicamento(medicamento);
             fm.setFactura(facturanueva);
+
             facturaMedicamentos.add(fm);
             total += medicamento.getPrecioVenta();
         }

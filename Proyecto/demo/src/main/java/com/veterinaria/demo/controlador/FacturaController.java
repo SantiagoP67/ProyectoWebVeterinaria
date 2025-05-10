@@ -33,10 +33,18 @@ public class FacturaController {
 
     @PostMapping("/crear/tratamiento")
     public ResponseEntity<Factura> crearFacturaPorTratamiento(@RequestParam Integer idCliente,
-                                                    @RequestParam Integer idTratamiento,
-                                                    @RequestBody Factura factura){
+                                                                    @RequestParam Integer idTratamiento,
+                                                                    @RequestBody Factura factura){
         Factura guardada = facturaService.crearFacturaPorTratamiento(idCliente, idTratamiento, factura);
         return ResponseEntity.ok(guardada);
+    }
+
+    @PostMapping("/crear/tratamientos")
+    public ResponseEntity<List<Factura>> crearFacturaPorTratamientos(@RequestParam Integer idCliente,
+                                                    @RequestParam List<Integer> idsTratamiento,
+                                                    @RequestBody Factura factura){
+        List<Factura> guardadas = facturaService.crearFacturaPorTratamientos(idCliente, idsTratamiento, factura);
+        return ResponseEntity.ok(guardadas);
     }
 
     @PostMapping("/crear/servicio")
