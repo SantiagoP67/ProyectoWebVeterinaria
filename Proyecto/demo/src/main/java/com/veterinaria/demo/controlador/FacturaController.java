@@ -16,7 +16,6 @@ public class FacturaController {
     @Autowired
     private FacturaService facturaService;
 
-
     @GetMapping
     public List<Factura> ObtenerTodasFacturas() {
         return facturaService.obtenerTodasFacturas();
@@ -25,6 +24,11 @@ public class FacturaController {
     @GetMapping("/{id}")
     public Factura obtenerFacturaPorId(@PathVariable Integer id){
         return facturaService.obtenerFacturaPorID(id);
+    }
+
+    @GetMapping("/cliente/{idCliente}")
+    public Factura obtenerFacturaPorCliente(@PathVariable Integer idCliente){
+        return facturaService.obtenerFacturaPorIdCliente(idCliente);
     }
 
     @PostMapping("/crear/tratamiento")
@@ -66,4 +70,6 @@ public class FacturaController {
         facturaService.pagarFacturas(idsFacturas);
         return ResponseEntity.ok("Facturas pagadas correctamente");
     }
+
+
 }
