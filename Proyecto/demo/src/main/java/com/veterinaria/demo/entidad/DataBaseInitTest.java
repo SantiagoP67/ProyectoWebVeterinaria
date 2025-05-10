@@ -74,10 +74,10 @@ public class DataBaseInitTest implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        // Creación de clientes
+        /* Creación de clientes
         Cliente cliente1 = new Cliente(null, "Juan Pérez", "juan.perez@gmail.com", "3001234567",
                 "https://www.mundopsicologos.com/site/article/49504/52397/las-personas-vitamina-0_ai1.jpg",
-                "123456789", "juanp", "pass1", null, null);
+                "123456789", "juanp", "pass1", new ArrayList<>(), new ArrayList<>());
         clienteRepository.save(cliente1);
 
         Cliente cliente2 = new Cliente(null, "Carlos Gómez", "carlos.gomez@gmail.com", "3112345678",
@@ -472,20 +472,7 @@ public class DataBaseInitTest implements ApplicationRunner {
         servicioRepository.save(servicioRehabilitacion);
 
         // Creación de métodos de pago
-        /*MetodoPago metodoPago = new MetodoPago(null, "Tarjeta de Crédito", null);
-        metodoPagoRepository.save(metodoPago);
 
-        MetodoPago metodoPago2 = new MetodoPago(null, "Tarjeta de Débito", null);
-        metodoPagoRepository.save(metodoPago2);
-
-        MetodoPago metodoPago3 = new MetodoPago(null, "PSE", null);
-        metodoPagoRepository.save(metodoPago3);
-
-        MetodoPago metodoPago4 = new MetodoPago(null, "Efectivo", null);
-        metodoPagoRepository.save(metodoPago4);
-
-        MetodoPago metodoPago5 = new MetodoPago(null, "Transferencia bancaria", null);
-        metodoPagoRepository.save(metodoPago5);*/
 
         // Creación de mascotas
         Mascota mascota1 = new Mascota(null, "Firulais", "Labrador", 3, 20.5f, "Otitis",
@@ -1123,6 +1110,6 @@ public class DataBaseInitTest implements ApplicationRunner {
         );
         testimonioRepository.save(testimonio3);
 
-        System.out.println("Base de datos inicializada con datos de ejemplo.");
+        System.out.println("Base de datos inicializada con datos de ejemplo.");*/
     }
 }
