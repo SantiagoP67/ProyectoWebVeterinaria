@@ -1019,6 +1019,10 @@ public class DataBaseInit implements ApplicationRunner {
         );
         medicamentoRepository.saveAll(medicamentos);
 
+        // Creación de una factura
+        Factura factura = new Factura(null, new Date(), 5000f, false, "Efectivo", cliente1 , tratamientos.get(1), null,null );
+        facturaRepository.save(factura);
+
         // Asociar tratamientos con múltiples medicamentos distintos
         List<TratamientoMedicamento> tratamientosMedicamentos = new ArrayList<>();
         Random random = new Random();
