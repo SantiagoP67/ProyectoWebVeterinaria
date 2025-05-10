@@ -1,8 +1,6 @@
 package com.veterinaria.demo.servicio;
 
 import com.veterinaria.demo.entidad.Factura;
-import com.veterinaria.demo.repositorio.FacturaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 

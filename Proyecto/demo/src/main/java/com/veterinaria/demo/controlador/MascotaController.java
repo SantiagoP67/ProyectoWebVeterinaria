@@ -3,7 +3,6 @@ package com.veterinaria.demo.controlador;
 import java.util.List;
 
 import com.veterinaria.demo.entidad.Tratamiento;
-import com.veterinaria.demo.repositorio.TratamientoRepository;
 import com.veterinaria.demo.servicio.TratamientoService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.veterinaria.demo.entidad.Cliente;
 import com.veterinaria.demo.entidad.Mascota;
-import com.veterinaria.demo.repositorio.ClienteRepository;
-import com.veterinaria.demo.repositorio.MascotaRepository;
 import com.veterinaria.demo.servicio.ClienteService;
 import com.veterinaria.demo.servicio.MascotaService;
 

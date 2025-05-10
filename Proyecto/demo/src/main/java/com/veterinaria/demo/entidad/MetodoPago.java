@@ -2,7 +2,6 @@ package com.veterinaria.demo.entidad;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.List;
 
 @Entity
 @Table(name = "metodoPago")
