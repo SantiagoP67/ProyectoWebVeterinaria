@@ -1020,7 +1020,7 @@ public class DataBaseInit implements ApplicationRunner {
 
         Factura factura2 = new Factura(null, new Date(), 5000f, false, "Efectivo", cliente2 , tratamientos.get(2), null,null );
         facturaRepository.save(factura);
-        facturaRepository.save(factura);
+        facturaRepository.save(factura2);
 
         // Asociar tratamientos con múltiples medicamentos distintos
         List<TratamientoMedicamento> tratamientosMedicamentos = new ArrayList<>();
