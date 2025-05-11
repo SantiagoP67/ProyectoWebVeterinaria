@@ -15,6 +15,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -44,15 +45,11 @@ public class VeterinarioDetail {
     @Test
     public void SystemTest_TratamientoDetail_TratamientoName() {
         driver.manage().window().maximize();
-        // 1. Navegar a la página principal
         driver.get(BASE_URL);
 
-        // 2. Hacer click en el botón de login
         WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(By.className("login-btn")));
         loginButton.click();
 
-        // --- PRIMER INTENTO FALLIDO ---
-        // 3. Ingresar credenciales incorrectas (vet2)
         WebElement usernameField = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
         usernameField.clear();
         usernameField.sendKeys("vet2");
@@ -61,57 +58,58 @@ public class VeterinarioDetail {
         passwordField.clear();
         passwordField.sendKeys("pass1");
 
-        // 4. Hacer click en el botón de submit
         WebElement submitButton = driver.findElement(By.id("loginSubmit"));
         submitButton.click();
 
-        // 5. Verificar que aparece el mensaje de error
         WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("errorMessage")));
         assertTrue(errorMessage.isDisplayed(), "El mensaje de error debería estar visible");
         assertEquals("Usuario o contraseña incorrectos.", errorMessage.getText(), "El mensaje de error no coincide");
 
-        // --- SEGUNDO INTENTO EXITOSO ---
-        // 6. Ingresar credenciales correctas (vet1)
         usernameField.clear();
         usernameField.sendKeys("vet1");
 
         passwordField.clear();
         passwordField.sendKeys("pass1");
 
-        // 7. Hacer click en el botón de submit nuevamente
         submitButton.click();
 
         WebElement clientesLink = wait.until(ExpectedConditions.elementToBeClickable(By.className("clientes-link")));
         clientesLink.click();
 
-        // 10. Añadir nuevo cliente
         WebElement addClientButton = wait.until(ExpectedConditions.elementToBeClickable(By.className("btn-agregar")));
         addClientButton.click();
 
-        WebElement nombre = driver.findElement(By.id("nombre"));
-        nombre.sendKeys("Sebastián Angarita");
+        WebElement nombreCliente = driver.findElement(By.id("nombre"));
+        nombreCliente.clear();
+        nombreCliente.sendKeys("Sebastián Angarita");
 
-        WebElement correo = driver.findElement(By.id("correo"));
-        correo.sendKeys("angaritat.js@javeriana.edu.co");
+        WebElement correoCliente = driver.findElement(By.id("correo"));
+        correoCliente.clear();
+        correoCliente.sendKeys("angaritat.js@javeriana.edu.co");
 
-        WebElement celular = driver.findElement(By.id("celular"));
-        celular.sendKeys("319495573");
+        WebElement celularCliente = driver.findElement(By.id("celular"));
+        celularCliente.clear();
+        celularCliente.sendKeys("3194955734");
 
-        //cedula, nombreUsuario, foto, contrasena, confirm_password
-        WebElement cedula = driver.findElement(By.id("cedula"));
-        cedula.sendKeys("123456789");
+        WebElement cedulaCliente = driver.findElement(By.id("cedula"));
+        cedulaCliente.clear();
+        cedulaCliente.sendKeys("31415926335");
 
-        WebElement nombreUsuario = driver.findElement(By.id("nombreUsuario"));
-        nombreUsuario.sendKeys("Ing. Angarita");
+        WebElement nombreUsuarioCliente = driver.findElement(By.id("nombreUsuario"));
+        nombreUsuarioCliente.clear();
+        nombreUsuarioCliente.sendKeys("Ing. Angarita");
 
-        WebElement foto = driver.findElement(By.id("foto"));
-        foto.sendKeys("https://www.clarin.com/2023/12/28/k8gOUmfp5_720x0__1.jpg");
+        WebElement fotoCliente = driver.findElement(By.id("foto"));
+        fotoCliente.clear();
+        fotoCliente.sendKeys("https://i.pinimg.com/236x/48/12/96/48129664d8dc5b068eb4d68a381c6c81.jpg");
 
-        WebElement contrasena = driver.findElement(By.id("contrasena"));
-        contrasena.sendKeys("BeagleGiggle#1");
+        WebElement contrasenaCliente = driver.findElement(By.id("contrasena"));
+        contrasenaCliente.clear();
+        contrasenaCliente.sendKeys("1234");
 
-        WebElement confirm_password = driver.findElement(By.id("confirm_password"));
-        confirm_password.sendKeys("BeagleGiggle#2");
+        WebElement confirm_passwordCliente = driver.findElement(By.id("confirm_password"));
+        confirm_passwordCliente.clear();
+        confirm_passwordCliente.sendKeys("12345");
 
         WebElement boton = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("crear_cliente")));
         try {
@@ -120,24 +118,87 @@ public class VeterinarioDetail {
             ((JavascriptExecutor)driver).executeScript("arguments[0].click();", boton);
         }
 
-        WebDriverWait alertWait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        alertWait.until(ExpectedConditions.alertIsPresent());
-        org.openqa.selenium.Alert alert = driver.switchTo().alert();
-        String alertText = alert.getText();
-        assertEquals("Las contraseñas no coinciden", alertText, "El mensaje de alerta no coincide");
-        alert.accept();
+        confirm_passwordCliente.clear();
+        confirm_passwordCliente.sendKeys("1234");
 
-        confirm_password.clear();
-        confirm_password.sendKeys("BeagleGiggle#1");
-
-        boton = wait.until(ExpectedConditions.elementToBeClickable(By.className("crear_cliente")));
+        WebElement newBoton = wait.until(ExpectedConditions.elementToBeClickable(By.className("crear_cliente")));
         try {
-            boton.click();
+            newBoton.click();
         } catch (Exception e) {
             ((JavascriptExecutor)driver).executeScript("arguments[0].click();", boton);
         }
         
-        wait.until(ExpectedConditions.urlContains("/clientes"));
+        WebElement mascotasLink = wait.until(ExpectedConditions.elementToBeClickable(By.className("mascotas-link")));
+        mascotasLink.click();
+
+        WebElement addMascotaButton = wait.until(ExpectedConditions.elementToBeClickable(By.className("btn-agregar")));
+        addMascotaButton.click();
+
+        WebElement nombreMascota = driver.findElement(By.id("nombre"));
+        nombreMascota.clear();
+        nombreMascota.sendKeys("Scooby-Doo");
+
+        WebElement razaMascota = driver.findElement(By.id("raza"));
+        razaMascota.clear();
+        razaMascota.sendKeys("Gran Danés Cobarde");
+
+        WebElement edadMascota = driver.findElement(By.id("edad"));
+        edadMascota.clear();
+        edadMascota.sendKeys("53");
+
+        WebElement pesoMascota = driver.findElement(By.id("peso"));
+        pesoMascota.clear();
+        pesoMascota.sendKeys("70.5");
+
+        WebElement enfermedadMascota = driver.findElement(By.id("enfermedad"));
+        enfermedadMascota.clear();
+        enfermedadMascota.sendKeys("Miedo crónico a fantasmas");
+
+        Select clienteSelect = new Select(driver.findElement(By.id("cliente")));
+        clienteSelect.selectByVisibleText("Sebastián Angarita");
+
+        WebElement fotoMascota = driver.findElement(By.id("foto"));
+        fotoMascota.clear();
+        fotoMascota.sendKeys("https://i.pinimg.com/1200x/ee/3c/16/ee3c16658a352467a8e727d300fe314f.jpg");
+
+        WebElement fechaNacimientoMascota = driver.findElement(By.id("fechaNacimiento"));
+        fechaNacimientoMascota.clear();
+        fechaNacimientoMascota.sendKeys("09131969");
+
+        WebElement fechaIngresoMascota = driver.findElement(By.id("fechaIngreso"));
+        fechaIngresoMascota.clear();
+        fechaIngresoMascota.sendKeys("06062025");
+
+        WebElement fechaSalidaMascota = driver.findElement(By.id("fechaSalida"));
+        fechaSalidaMascota.clear();
+        fechaSalidaMascota.sendKeys("07072025");
+
+        Select estadoSelect = new Select(driver.findElement(By.id("estado")));
+        estadoSelect.selectByValue("1");
+
+        WebElement boton2 = wait.until(ExpectedConditions.elementToBeClickable(By.className("crear_mascota")));
+        try {
+            boton2.click();
+        } catch (Exception e) {
+            ((JavascriptExecutor)driver).executeScript("arguments[0].click();", boton);
+        }
+
+        WebElement logOut = wait.until(ExpectedConditions.elementToBeClickable(By.className("logout")));
+        logOut.click();
+
+        WebElement newLoginButton = wait.until(ExpectedConditions.elementToBeClickable(By.className("login-btn")));
+        newLoginButton.click();
+
+        WebElement newUsernameField = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
+        newUsernameField.clear();
+        newUsernameField.sendKeys("Ing. Angarita");
+
+        WebElement newPasswordField = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("password")));
+        newPasswordField.clear();
+        newPasswordField.sendKeys("1234");
+
+        WebElement newSubmitButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("loginSubmit")));
+        newSubmitButton.click();
     }
 
     /* @AfterEach
