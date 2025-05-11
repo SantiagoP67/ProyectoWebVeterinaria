@@ -16,16 +16,25 @@ public class Medicamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idMedicamento;
+    
     @Column(nullable = false)
     private String nombre;
+    
     @Column(nullable = false)
-    private Float precioCompra;
+    @Builder.Default
+    private Float precioCompra = 0.0f;
+    
     @Column(nullable = false)
-    private Float precioVenta;
+    @Builder.Default
+    private Float precioVenta = 0.0f;
+    
     @Column(nullable = false)
-    private Integer unidadesDisponibles;
+    @Builder.Default
+    private Integer unidadesDisponibles = 0;
+    
     @Column(nullable = false)
-    private Integer unidadesVendidas;
+    @Builder.Default
+    private Integer unidadesVendidas = 0;
 
     @OneToMany(mappedBy = "medicamento", cascade = CascadeType.ALL)
     @JsonIgnore
@@ -41,5 +50,4 @@ public class Medicamento {
         this.unidadesDisponibles = unidadesDisponibles;
         this.unidadesVendidas = unidadesVendidas;
     }
-
 }

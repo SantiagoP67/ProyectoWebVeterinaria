@@ -38,6 +38,4 @@ public class Administrador {
         this.nombreUsuario = nombreUsuario;
         this.contrasena = contrasena;
     }
-
-
 }

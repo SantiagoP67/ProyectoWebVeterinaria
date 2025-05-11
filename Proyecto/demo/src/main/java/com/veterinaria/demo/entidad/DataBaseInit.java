@@ -1115,19 +1115,89 @@ public class DataBaseInit implements ApplicationRunner {
         );
         tratamientoRepository.saveAll(tratamientos);
 
-        // Creación de medicamentos
+        // Creación de medicamentos usando Builder Pattern
         List<Medicamento> medicamentos = Arrays.asList(
-        new Medicamento(null, "Advantix", 150.0f, 200.0f, 50, 10, null,null),
-        new Medicamento(null, "Drontal", 100.0f, 130.0f, 60, 15, null,null),
-        new Medicamento(null, "Vetoquinol", 80.0f, 110.0f, 40, 20, null,null),
-        new Medicamento(null, "Cortaf", 75.0f, 100.0f, 45, 12, null,null),
-        new Medicamento(null, "Milbemax", 120.0f, 150.0f, 70, 8, null,null),
-        new Medicamento(null, "Metronidazol", 90.0f, 120.0f, 55, 16, null,null),
-        new Medicamento(null, "Rimadyl", 200.0f, 250.0f, 30, 5, null,null),
-        new Medicamento(null, "Panacur", 85.0f, 110.0f, 50, 18, null,null),
-        new Medicamento(null, "Zylkene", 150.0f, 180.0f, 35, 6, null,null),
-        new Medicamento(null, "Bexacat", 110.0f, 140.0f, 40, 7, null,null)
+                Medicamento.builder()
+                .nombre("Advantix")
+                .precioCompra(150.0f)
+                .precioVenta(200.0f)
+                .unidadesDisponibles(50)
+                .unidadesVendidas(10)
+                .build(),
+                
+                Medicamento.builder()
+                .nombre("Drontal")
+                .precioCompra(100.0f)
+                .precioVenta(130.0f)
+                .unidadesDisponibles(60)
+                .unidadesVendidas(15)
+                .build(),
+                
+                Medicamento.builder()
+                .nombre("Vetoquinol")
+                .precioCompra(80.0f)
+                .precioVenta(110.0f)
+                .unidadesDisponibles(40)
+                .unidadesVendidas(20)
+                .build(),
+                
+                Medicamento.builder()
+                .nombre("Cortaf")
+                .precioCompra(75.0f)
+                .precioVenta(100.0f)
+                .unidadesDisponibles(45)
+                .unidadesVendidas(12)
+                .build(),
+                
+                Medicamento.builder()
+                .nombre("Milbemax")
+                .precioCompra(120.0f)
+                .precioVenta(150.0f)
+                .unidadesDisponibles(70)
+                .unidadesVendidas(8)
+                .build(),
+                
+                Medicamento.builder()
+                .nombre("Metronidazol")
+                .precioCompra(90.0f)
+                .precioVenta(120.0f)
+                .unidadesDisponibles(55)
+                .unidadesVendidas(16)
+                .build(),
+                
+                Medicamento.builder()
+                .nombre("Rimadyl")
+                .precioCompra(200.0f)
+                .precioVenta(250.0f)
+                .unidadesDisponibles(30)
+                .unidadesVendidas(5)
+                .build(),
+                
+                Medicamento.builder()
+                .nombre("Panacur")
+                .precioCompra(85.0f)
+                .precioVenta(110.0f)
+                .unidadesDisponibles(50)
+                .unidadesVendidas(18)
+                .build(),
+                
+                Medicamento.builder()
+                .nombre("Zylkene")
+                .precioCompra(150.0f)
+                .precioVenta(180.0f)
+                .unidadesDisponibles(35)
+                .unidadesVendidas(6)
+                .build(),
+                
+                Medicamento.builder()
+                .nombre("Bexacat")
+                .precioCompra(110.0f)
+                .precioVenta(140.0f)
+                .unidadesDisponibles(40)
+                .unidadesVendidas(7)
+                .build()
         );
+        
         medicamentoRepository.saveAll(medicamentos);
 
         // Creación de una factura

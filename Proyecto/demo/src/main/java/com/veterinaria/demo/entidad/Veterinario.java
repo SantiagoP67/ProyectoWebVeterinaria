@@ -27,10 +27,10 @@ public class Veterinario {
     private String foto;
     @Column(nullable = false)
     private String sede;
-    @Column(nullable = false)
-    private Integer estado = 1;
-    @Column(nullable = false)
-    private Integer numeroAtenciones = 0;
+    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 1")
+    private Integer estado;
+    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
+    private Integer numeroAtenciones;
 
     @Column(nullable = false, unique = true)
     private String nombreUsuario;

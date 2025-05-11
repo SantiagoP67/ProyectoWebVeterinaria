@@ -24,8 +24,8 @@ public class Factura {
     @Column(nullable = false)
     private Float total;
 
-    @Column(nullable = false)
-    private Boolean pagada = false;
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private Boolean pagada;
 
     @Column(nullable = false)
     private String metododepago;
@@ -55,5 +55,4 @@ public class Factura {
         this.pagada = pagada;
         this.metododepago = metododepago;
     }
-
 }
