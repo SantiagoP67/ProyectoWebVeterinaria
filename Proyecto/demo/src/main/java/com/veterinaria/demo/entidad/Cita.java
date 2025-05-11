@@ -11,6 +11,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Cita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,4 +36,13 @@ public class Cita {
 
     @Column(nullable = false)
     private String estado;
+
+
+    public Cita(Date fechaHora, String sede, String estado) {
+        this.fechaHora = fechaHora;
+        this.sede = sede;
+        this.estado = estado;
+    }
+
+
 }

@@ -8,6 +8,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Administrador {
 
     @Id
@@ -28,4 +29,15 @@ public class Administrador {
 
     @Column(name = "contrasenha", unique = true, nullable = false)
     private String contrasena;
+
+    public Administrador(String nombre, String correo, String foto, String cedula, String nombreUsuario, String contrasena) {
+        this.nombre = nombre;
+        this.correo = correo;
+        this.foto = foto;
+        this.cedula = cedula;
+        this.nombreUsuario = nombreUsuario;
+        this.contrasena = contrasena;
+    }
+
+
 }

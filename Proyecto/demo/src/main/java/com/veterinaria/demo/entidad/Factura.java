@@ -12,6 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Factura {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,4 +48,12 @@ public class Factura {
     @JsonIgnore
     @OneToMany(mappedBy = "factura", cascade = CascadeType.ALL)
     private List<FacturaMedicamento> facturaMedicamentos;
+
+    public Factura(Date fechaHora, Float total, Boolean pagada, String metododepago) {
+        this.fechaHora = fechaHora;
+        this.total = total;
+        this.pagada = pagada;
+        this.metododepago = metododepago;
+    }
+
 }

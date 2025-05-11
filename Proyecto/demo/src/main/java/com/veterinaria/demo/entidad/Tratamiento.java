@@ -12,6 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Tratamiento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,4 +49,11 @@ public class Tratamiento {
     @OneToMany(mappedBy = "tratamiento", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<TratamientoMedicamento> tratamientoMedicamentos;
+
+    public Tratamiento(String codigo, Date fecha, String detalles) {
+        this.codigo = codigo;
+        this.fecha = fecha;
+        this.detalles = detalles;
+    }
+
 }

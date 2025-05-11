@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,4 +42,16 @@ public class Cliente {
     @JsonIgnore
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Testimonio> testimonios;
+
+
+    public Cliente(String nombre, String correo, String celular, String foto, String cedula, String nombreUsuario, String contrasena) {
+        this.nombre = nombre;
+        this.correo = correo;
+        this.celular = celular;
+        this.foto = foto;
+        this.cedula = cedula;
+        this.nombreUsuario = nombreUsuario;
+        this.contrasena = contrasena;
+    }
+
 }
