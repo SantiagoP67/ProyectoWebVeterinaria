@@ -1019,7 +1019,6 @@ public class DataBaseInit implements ApplicationRunner {
         facturaRepository.save(factura);
 
         Factura factura2 = new Factura(null, new Date(), 5000f, false, "Efectivo", cliente2 , tratamientos.get(2), null,null );
-        facturaRepository.save(factura);
         facturaRepository.save(factura2);
 
         // Asociar tratamientos con múltiples medicamentos distintos
