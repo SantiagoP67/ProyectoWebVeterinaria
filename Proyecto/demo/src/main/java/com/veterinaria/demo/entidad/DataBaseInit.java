@@ -71,8 +71,7 @@ public class DataBaseInit implements ApplicationRunner {
 
 
 
-        //Creacion de Clinetes usando builder
-
+        //Creacion de Clientes usando builder
         Cliente clienteEntity= Cliente.builder().nombre("Josefina").correo("Josefina@gmail.com").contrasena("Josefina").cedula("12442326789").nombreUsuario("Josefina").celular("3001234567").foto("https://www.mundopsicologos.com/site/article/49504/52397/las-personas-vitamina-0_ai1.jpg").build();
         clienteRepository.save(clienteEntity);
         // Creación de clientes
@@ -326,56 +325,167 @@ public class DataBaseInit implements ApplicationRunner {
                 "100025", "marianab", "pass50", null, null);
         clienteRepository.save(cliente50);
 
-        // Creación de veterinarios
-        Veterinario veterinario1 = new Veterinario(null, "Dra. Martínez", "654321", "Especialista en Cirugía",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDcaEWpYQklMDUzSJPss_l5V9T7yC2xtK7OA&s",
-                "Los Pinos", 1, 12, "vet1", "pass1", null, null);
+        // Creación de veterinarios con patrón Builder
+        Veterinario veterinario1 = Veterinario.builder()
+                .idVeterinario(null)
+                .nombre("Dra. Martínez")
+                .cedula("654321")
+                .especialidad("Especialista en Cirugía")
+                .foto("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDcaEWpYQklMDUzSJPss_l5V9T7yC2xtK7OA&s")
+                .sede("Los Pinos")
+                .estado(1)
+                .numeroAtenciones(12)
+                .nombreUsuario("vet1")
+                .contrasena("pass1")
+                .citas(null)
+                .tratamientos(null)
+                .build();
         veterinarioRepository.save(veterinario1);
 
-        Veterinario veterinario2 = new Veterinario(null, "Dr. Gómez", "789012", "Dermatología Veterinaria",
-                "https://images.freeimages.com/images/premium/previews/1916/19167116-male-vet-in-lab-coat-with-cat.jpg",
-                "Los Pinos", 1, 8, "vet2", "pass2", null, null);
+        Veterinario veterinario2 = Veterinario.builder()
+                .idVeterinario(null)
+                .nombre("Dr. Gómez")
+                .cedula("789012")
+                .especialidad("Dermatología Veterinaria")
+                .foto("https://images.freeimages.com/images/premium/previews/1916/19167116-male-vet-in-lab-coat-with-cat.jpg")
+                .sede("Los Pinos")
+                .estado(1)
+                .numeroAtenciones(8)
+                .nombreUsuario("vet2")
+                .contrasena("pass2")
+                .citas(null)
+                .tratamientos(null)
+                .build();
         veterinarioRepository.save(veterinario2);
 
-        Veterinario veterinario3 = new Veterinario(null, "Dra. Fernández", "345678", "Cardiología Veterinaria",
-                "https://media.istockphoto.com/id/1995860815/es/foto/mujer-veterinaria-sosteniendo-al-perro-jack-russell.jpg?s=612x612&w=0&k=20&c=ZLFwLWVnPXnCx876vI312OhVUUOEU5Z_9ZHQfvBS4jk=",
-                "Los Pinos", 0, 15, "vet3", "pass3", null, null);
+        Veterinario veterinario3 = Veterinario.builder()
+                .idVeterinario(null)
+                .nombre("Dra. Fernández")
+                .cedula("345678")
+                .especialidad("Cardiología Veterinaria")
+                .foto("https://media.istockphoto.com/id/1995860815/es/foto/mujer-veterinaria-sosteniendo-al-perro-jack-russell.jpg?s=612x612&w=0&k=20&c=ZLFwLWVnPXnCx876vI312OhVUUOEU5Z_9ZHQfvBS4jk=")
+                .sede("Los Pinos")
+                .estado(0)
+                .numeroAtenciones(15)
+                .nombreUsuario("vet3")
+                .contrasena("pass3")
+                .citas(null)
+                .tratamientos(null)
+                .build();
         veterinarioRepository.save(veterinario3);
 
-        Veterinario veterinario4 = new Veterinario(null, "Dr. Rodríguez", "901234", "Neurología Veterinaria",
-                "https://www.shutterstock.com/image-photo/senior-greyhaired-man-wearing-veterinarian-260nw-2163179989.jpg",
-                "Patitas Felices", 1, 20, "vet4", "pass4", null, null);
+        Veterinario veterinario4 = Veterinario.builder()
+                .idVeterinario(null)
+                .nombre("Dr. Rodríguez")
+                .cedula("901234")
+                .especialidad("Neurología Veterinaria")
+                .foto("https://www.shutterstock.com/image-photo/senior-greyhaired-man-wearing-veterinarian-260nw-2163179989.jpg")
+                .sede("Patitas Felices")
+                .estado(1)
+                .numeroAtenciones(20)
+                .nombreUsuario("vet4")
+                .contrasena("pass4")
+                .citas(null)
+                .tratamientos(null)
+                .build();
         veterinarioRepository.save(veterinario4);
 
-        Veterinario veterinario5 = new Veterinario(null, "Dra. López", "567890", "Especialista en Animales Exóticos",
-                "https://i0.wp.com/blog.leasemd.mx/wp-content/uploads/2023/10/Leasing-Equipos-Veterinarios-Mexico.png?fit=800%2C533&ssl=1",
-                "Patitas Felices", 0, 18, "vet5", "pass5", null, null);
+        Veterinario veterinario5 = Veterinario.builder()
+                .idVeterinario(null)
+                .nombre("Dra. López")
+                .cedula("567890")
+                .especialidad("Especialista en Animales Exóticos")
+                .foto("https://i0.wp.com/blog.leasemd.mx/wp-content/uploads/2023/10/Leasing-Equipos-Veterinarios-Mexico.png?fit=800%2C533&ssl=1")
+                .sede("Patitas Felices")
+                .estado(0)
+                .numeroAtenciones(18)
+                .nombreUsuario("vet5")
+                .contrasena("pass5")
+                .citas(null)
+                .tratamientos(null)
+                .build();
         veterinarioRepository.save(veterinario5);
 
-        Veterinario veterinario6 = new Veterinario(null, "Dr. Ramírez", "678901", "Cirujano Veterinario",
-                "https://www.diarioveterinario.com/images/showid2/2860071?w=900&mh=700",
-                "Patitas Felices", 1, 15, "vet6", "pass6", null, null);
+        Veterinario veterinario6 = Veterinario.builder()
+                .idVeterinario(null)
+                .nombre("Dr. Ramírez")
+                .cedula("678901")
+                .especialidad("Cirujano Veterinario")
+                .foto("https://www.diarioveterinario.com/images/showid2/2860071?w=900&mh=700")
+                .sede("Patitas Felices")
+                .estado(1)
+                .numeroAtenciones(15)
+                .nombreUsuario("vet6")
+                .contrasena("pass6")
+                .citas(null)
+                .tratamientos(null)
+                .build();
         veterinarioRepository.save(veterinario6);
 
-        Veterinario veterinario7 = new Veterinario(null, "Dra. Fernández", "789012", "Especialista en Animales de Granja",
-                "https://sumimascotas.com/wp-content/uploads/2023/05/9.Dia-del-Veterinario-Colombia-1.jpg",
-                "Huellas", 0, 20, "vet7", "pass7", null, null);
+        Veterinario veterinario7 = Veterinario.builder()
+                .idVeterinario(null)
+                .nombre("Dra. Fernández")
+                .cedula("789012")
+                .especialidad("Especialista en Animales de Granja")
+                .foto("https://sumimascotas.com/wp-content/uploads/2023/05/9.Dia-del-Veterinario-Colombia-1.jpg")
+                .sede("Huellas")
+                .estado(0)
+                .numeroAtenciones(20)
+                .nombreUsuario("vet7")
+                .contrasena("pass7")
+                .citas(null)
+                .tratamientos(null)
+                .build();
         veterinarioRepository.save(veterinario7);
 
-        Veterinario veterinario8 = new Veterinario(null, "Dr. Morales", "890123", "Dermatólogo Veterinario",
-                "https://blog.agrovetmarket.com/wp-content/uploads/2020/05/vet.jpg",
-                "Huellas", 1, 12, "vet8", "pass8", null, null);
+        Veterinario veterinario8 = Veterinario.builder()
+                .idVeterinario(null)
+                .nombre("Dr. Morales")
+                .cedula("890123")
+                .especialidad("Dermatólogo Veterinario")
+                .foto("https://blog.agrovetmarket.com/wp-content/uploads/2020/05/vet.jpg")
+                .sede("Huellas")
+                .estado(1)
+                .numeroAtenciones(12)
+                .nombreUsuario("vet8")
+                .contrasena("pass8")
+                .citas(null)
+                .tratamientos(null)
+                .build();
         veterinarioRepository.save(veterinario8);
 
-        Veterinario veterinario9 = new Veterinario(null, "Dra. Castillo", "901234", "Especialista en Rehabilitación Animal",
-                "https://cdn0.expertoanimal.com/es/posts/3/6/3/cuando_llevar_a_mi_cachorro_al_veterinario_por_primera_vez_23363_600_square.jpg",
-                "Huellas", 0, 10, "vet9", "pass9", null, null);
+        Veterinario veterinario9 = Veterinario.builder()
+                .idVeterinario(null)
+                .nombre("Dra. Castillo")
+                .cedula("901234")
+                .especialidad("Especialista en Rehabilitación Animal")
+                .foto("https://cdn0.expertoanimal.com/es/posts/3/6/3/cuando_llevar_a_mi_cachorro_al_veterinario_por_primera_vez_23363_600_square.jpg")
+                .sede("Huellas")
+                .estado(0)
+                .numeroAtenciones(10)
+                .nombreUsuario("vet9")
+                .contrasena("pass9")
+                .citas(null)
+                .tratamientos(null)
+                .build();
         veterinarioRepository.save(veterinario9);
 
-        Veterinario veterinario10 = new Veterinario(null, "Dr. Pérez", "012345", "Especialista en Cirugía",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSN6GFsKiPWtTdAKZyKXFQj1P8L7BZkX2ziLb1thmXaYtGlJlJirPSlaG8bKB6i7hRrLJY&usqp=CAU",
-                "Huellas", 1, 8, "vet10", "pass10", null, null);
+        Veterinario veterinario10 = Veterinario.builder()
+                .idVeterinario(null)
+                .nombre("Dr. Pérez")
+                .cedula("012345")
+                .especialidad("Especialista en Cirugía")
+                .foto("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSN6GFsKiPWtTdAKZyKXFQj1P8L7BZkX2ziLb1thmXaYtGlJlJirPSlaG8bKB6i7hRrLJY&usqp=CAU")
+                .sede("Huellas")
+                .estado(1)
+                .numeroAtenciones(8)
+                .nombreUsuario("vet10")
+                .contrasena("pass10")
+                .citas(null)
+                .tratamientos(null)
+                .build();
         veterinarioRepository.save(veterinario10);
+
 
         // Creación de administrador
         Administrador administrador = new Administrador(null, "Carlos López", "carlosl@gmail.com",
