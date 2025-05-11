@@ -31,4 +31,11 @@ public class Testimonio {
     @ManyToOne
     @JoinColumn(name = "idServicio", nullable = false)
     private Servicio servicio;
+
+    public Testimonio(String texto, Integer calificacion, Date fecha) {
+        this.texto = texto;
+        this.calificacion = calificacion;
+        this.fecha = fecha;
+    }
+
 }

@@ -54,4 +54,20 @@ public class Mascota {
     @ManyToOne
     @JoinColumn(name = "idCliente", nullable = false)
     private Cliente cliente;
+
+    public Mascota(String nombre, String raza, Integer edad, Float peso, String enfermedad, String foto,
+                Date fechaNacimiento, Date fechaIngreso, Date fechaSalida, Integer estado) {
+        this.nombre = nombre;
+        this.raza = raza;
+        this.edad = edad;
+        this.peso = peso;
+        this.enfermedad = enfermedad;
+        this.foto = foto;
+        this.fechaNacimiento = fechaNacimiento;
+        this.fechaIngreso = fechaIngreso;
+        this.fechaSalida = fechaSalida;
+        this.estado = estado;
+    }
+
+
 }

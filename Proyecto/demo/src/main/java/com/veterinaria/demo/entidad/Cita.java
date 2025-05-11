@@ -35,4 +35,13 @@ public class Cita {
 
     @Column(nullable = false)
     private String estado;
+
+
+    public Cita(Date fechaHora, String sede, String estado) {
+        this.fechaHora = fechaHora;
+        this.sede = sede;
+        this.estado = estado;
+    }
+
+
 }

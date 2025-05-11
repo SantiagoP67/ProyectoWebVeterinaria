@@ -46,4 +46,14 @@ public class Veterinario {
     @OneToMany(mappedBy = "veterinario", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Tratamiento> tratamientos;
+
+    public Veterinario(String nombre, String cedula, String especialidad, String foto, String sede, String nombreUsuario, String contrasena) {
+        this.nombre = nombre;
+        this.cedula = cedula;
+        this.especialidad = especialidad;
+        this.foto = foto;
+        this.sede = sede;
+        this.nombreUsuario = nombreUsuario;
+        this.contrasena = contrasena;
+    }
 }

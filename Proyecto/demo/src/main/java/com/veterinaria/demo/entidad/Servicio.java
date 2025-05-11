@@ -47,4 +47,13 @@ public class Servicio {
             inverseJoinColumns = @JoinColumn(name = "idFactura")
     )
     private List<Factura> facturas;
+
+    public Servicio(String nombre, String descripcion, Float precioBase, String imagenFrontal, String imagenTrasera) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precioBase = precioBase;
+        this.imagenFrontal = imagenFrontal;
+        this.imagenTrasera = imagenTrasera;
+    }
+
 }
