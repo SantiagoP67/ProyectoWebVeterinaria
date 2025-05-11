@@ -1,6 +1,5 @@
 package com.veterinaria.demo.entidad;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -22,7 +21,6 @@ import com.veterinaria.demo.repositorio.CitaRepository;
 import com.veterinaria.demo.repositorio.FacturaRepository;
 import com.veterinaria.demo.repositorio.MascotaRepository;
 import com.veterinaria.demo.repositorio.MedicamentoRepository;
-import com.veterinaria.demo.repositorio.MetodoPagoRepository;
 import com.veterinaria.demo.repositorio.ServicioRepository;
 import com.veterinaria.demo.repositorio.TestimonioRepository;
 import com.veterinaria.demo.repositorio.TratamientoMedicamentoRepository;
@@ -52,9 +50,6 @@ public class DataBaseInit implements ApplicationRunner {
 
     @Autowired
     private ServicioRepository servicioRepository;
-
-    @Autowired
-    private MetodoPagoRepository metodoPagoRepository;
 
     @Autowired
     private FacturaRepository facturaRepository;

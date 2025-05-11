@@ -1,7 +1,6 @@
 package com.veterinaria.demo.controlador;
 
 import com.veterinaria.demo.entidad.Cliente;
-import com.veterinaria.demo.repositorio.ClienteRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -90,5 +89,4 @@ public ResponseEntity<Integer> obtenerIdClientePorNombreUsuario(@PathVariable St
         List<Cliente> clientes = clienteService.buscarPorNombre(nombre);
         return ResponseEntity.ok(clientes);
     }
-
 }

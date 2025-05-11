@@ -2,7 +2,6 @@ package com.veterinaria.demo.servicio;
 
 import java.util.List;
 
-import com.veterinaria.demo.entidad.Cliente;
 import com.veterinaria.demo.entidad.Mascota;
 
 public interface MascotaService {

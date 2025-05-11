@@ -2,7 +2,6 @@ package com.veterinaria.demo.controlador;
 
 import com.veterinaria.demo.entidad.Factura;
 import com.veterinaria.demo.servicio.FacturaService;
-import com.veterinaria.demo.servicio.MascotaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

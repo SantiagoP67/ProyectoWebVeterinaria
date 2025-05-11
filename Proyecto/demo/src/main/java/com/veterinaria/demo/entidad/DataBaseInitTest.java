@@ -1,6 +1,5 @@
 package com.veterinaria.demo.entidad;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -22,7 +21,6 @@ import com.veterinaria.demo.repositorio.CitaRepository;
 import com.veterinaria.demo.repositorio.FacturaRepository;
 import com.veterinaria.demo.repositorio.MascotaRepository;
 import com.veterinaria.demo.repositorio.MedicamentoRepository;
-import com.veterinaria.demo.repositorio.MetodoPagoRepository;
 import com.veterinaria.demo.repositorio.ServicioRepository;
 import com.veterinaria.demo.repositorio.TestimonioRepository;
 import com.veterinaria.demo.repositorio.TratamientoMedicamentoRepository;
@@ -33,7 +31,7 @@ import jakarta.transaction.Transactional;
 
 @Controller
 @Transactional
-@Profile("default")
+@Profile("test")
 public class DataBaseInitTest implements ApplicationRunner {
     @Autowired
     private ClienteRepository clienteRepository;
@@ -54,9 +52,6 @@ public class DataBaseInitTest implements ApplicationRunner {
     private ServicioRepository servicioRepository;
 
     @Autowired
-    private MetodoPagoRepository metodoPagoRepository;
-
-    @Autowired
     private FacturaRepository facturaRepository;
 
     @Autowired
@@ -74,7 +69,7 @@ public class DataBaseInitTest implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        /* Creación de clientes
+        //Creación de clientes
         Cliente cliente1 = new Cliente(null, "Juan Pérez", "juan.perez@gmail.com", "3001234567",
                 "https://www.mundopsicologos.com/site/article/49504/52397/las-personas-vitamina-0_ai1.jpg",
                 "123456789", "juanp", "pass1", new ArrayList<>(), new ArrayList<>());
@@ -1110,6 +1105,6 @@ public class DataBaseInitTest implements ApplicationRunner {
         );
         testimonioRepository.save(testimonio3);
 
-        System.out.println("Base de datos inicializada con datos de ejemplo.");*/
+        System.out.println("Base de datos inicializada con datos de ejemplo.");
     }
 }
