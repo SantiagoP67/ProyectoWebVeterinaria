@@ -11,6 +11,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Cita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

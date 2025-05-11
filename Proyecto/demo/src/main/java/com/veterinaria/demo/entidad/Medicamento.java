@@ -11,6 +11,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Medicamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

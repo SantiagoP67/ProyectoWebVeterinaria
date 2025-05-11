@@ -10,6 +10,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Testimonio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
