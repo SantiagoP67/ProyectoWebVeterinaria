@@ -68,12 +68,6 @@ public class DataBaseInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-
-
-
-        //Creacion de Clientes usando builder
-        Cliente clienteEntity= Cliente.builder().nombre("Josefina").correo("Josefina@gmail.com").contrasena("Josefina").cedula("12442326789").nombreUsuario("Josefina").celular("3001234567").foto("https://www.mundopsicologos.com/site/article/49504/52397/las-personas-vitamina-0_ai1.jpg").build();
-        clienteRepository.save(clienteEntity);
         // Creación de clientes
         Cliente cliente1 = new Cliente(null, "Juan Pérez", "juan.perez@gmail.com", "3001234567",
                 "https://www.mundopsicologos.com/site/article/49504/52397/las-personas-vitamina-0_ai1.jpg",

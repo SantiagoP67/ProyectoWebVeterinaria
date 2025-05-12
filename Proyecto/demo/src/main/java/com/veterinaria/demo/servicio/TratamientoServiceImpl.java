@@ -172,7 +172,7 @@ public class TratamientoServiceImpl implements TratamientoService{
             TratamientoMedicamento tm = new TratamientoMedicamento();
             tm.setTratamiento(tratamientoExistente);
             tm.setMedicamento(medicamento);
-            tm.setCantidad(1); // Asumiendo 1 por medicamento; ajústalo si necesitas.
+            tm.setCantidad(1);
             nuevosTM.add(tm);
         }
 
