@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Duration;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,7 +44,7 @@ public class VeterinarioDetail {
     }
 
     @Test
-    public void SystemTest_TratamientoDetail_TratamientoName() {
+    public void SystemTest_CrearMascota_Mascota() {
         driver.manage().window().maximize();
         driver.get(BASE_URL);
 
@@ -191,14 +192,34 @@ public class VeterinarioDetail {
 
         WebElement newUsernameField = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
         newUsernameField.clear();
-        newUsernameField.sendKeys("Ing. Angarita");
+        newUsernameField.sendKeys("carlosg"); //Ing. Angarita
 
         WebElement newPasswordField = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("password")));
         newPasswordField.clear();
-        newPasswordField.sendKeys("1234");
+        newPasswordField.sendKeys("pass2"); //1234
 
         WebElement newSubmitButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("loginSubmit")));
         newSubmitButton.click();
+
+        WebElement mascotasTable = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("recentOrders")));
+        assertTrue(mascotasTable.isDisplayed(), "La tabla de mascotas debería estar visible");
+
+        List<WebElement> mascotasRows = driver.findElements(By.className("fila-mascota"));
+        assertTrue(mascotasRows.size() > 0, "Debería haber al menos una mascota en la tabla");
+
+        WebElement primeraMascota = mascotasRows.get(0);
+        WebElement nombreMascotaCell = primeraMascota.findElement(By.className("celda-nombre"));
+        WebElement razaMascotaCell = primeraMascota.findElement(By.className("celda-raza"));
+        WebElement estadoMascotaCell = primeraMascota.findElement(By.className("status"));
+
+        assertEquals("Firulais", nombreMascotaCell.getText(), "El nombre de la mascota no coincide"); // Scooby-Doo
+        assertEquals("Labrador", razaMascotaCell.getText(), "La raza de la mascota no coincide"); // Gran Danés Cobarde
+        assertEquals("Activo", estadoMascotaCell.getText(), "El estado de la mascota no coincide");
+
+        WebElement fotoMascota2 = primeraMascota.findElement(By.className("img-mascota"));
+        assertTrue(fotoMascota2.isDisplayed(), "La foto de la mascota debería estar visible");
+        assertEquals("https://img.huffingtonpost.es/files/image_1200_720/uploads/2023/06/22/un-perro-de-raza-labrador.jpeg", fotoMascota2.getAttribute("src"), "La URL de la foto no coincide");
+        // https://i.pinimg.com/1200x/ee/3c/16/ee3c16658a352467a8e727d300fe314f.jpg
     }
 
     /* @AfterEach
