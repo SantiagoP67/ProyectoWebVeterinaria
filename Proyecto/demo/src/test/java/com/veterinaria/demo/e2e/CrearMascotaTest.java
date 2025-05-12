@@ -27,7 +27,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ActiveProfiles("test")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-public class VeterinarioDetail {
+public class CrearMascotaTest {
     private WebDriver driver;
     private WebDriverWait wait;
     private static final String BASE_URL = "http://localhost:4200";
@@ -247,72 +247,6 @@ public class VeterinarioDetail {
         assertEquals("https://i.pinimg.com/1200x/ee/3c/16/ee3c16658a352467a8e727d300fe314f.jpg", 
             imagenMascota.getAttribute("src"), "La URL de la foto no coincide");
         */
-    }
-
-    /* Caso de prueba 2 */
-    @Test
-    public void systemTest_CrearTratamiento_MostrarTratamiento() {
-        // Paso 1: Configuración inicial del navegador
-        driver.manage().window().maximize();
-        driver.get(BASE_URL);
-
-        // Paso 2: Login (vet1/pass1)
-        WebElement botonLogin = wait.until(ExpectedConditions.elementToBeClickable(By.className("login-btn")));
-        botonLogin.click();
-
-        WebElement campoUsuario = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
-        campoUsuario.clear();
-        campoUsuario.sendKeys("vet1");
-
-        WebElement campoContrasena = driver.findElement(By.id("password"));
-        campoContrasena.clear();
-        campoContrasena.sendKeys("pass1");
-
-        WebElement botonEnviarLogin = driver.findElement(By.id("loginSubmit"));
-        botonEnviarLogin.click();
-
-        // Paso 3: Navegación a sección de historial
-        WebElement enlaceHistorial = wait.until(ExpectedConditions.elementToBeClickable(By.className("historial-link")));
-        enlaceHistorial.click();
-
-        // Paso 4: Creación de tratamiento
-        WebElement botonAgregarTratamiento = wait.until(ExpectedConditions.elementToBeClickable(By.className("btn-agregar")));
-        botonAgregarTratamiento.click();
-
-        // Paso 5: Rellenar formulario de tratamiento
-        WebElement campoCodigo = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("codigo")));
-        campoCodigo.clear();
-        campoCodigo.sendKeys("TRAT-001");
-
-        WebElement selectServicio = driver.findElement(By.id("idServicio"));
-        Select servicioSelect = new Select(selectServicio);
-        servicioSelect.selectByVisibleText("Cirugía");
-
-        WebElement selectMascota = driver.findElement(By.id("idMascota"));
-        Select mascotaSelect = new Select(selectMascota);
-        mascotaSelect.selectByVisibleText("Firulais - Carlos Gómez");
-
-        WebElement campoDetalles = driver.findElement(By.id("detalles"));
-        campoDetalles.clear();
-        campoDetalles.sendKeys("Tratamiento postoperatorio para recuperación completa");
-
-        WebElement selectMedicamento = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("select-medicamento")));
-        Select medicamentoSelect = new Select(selectMedicamento);
-        medicamentoSelect.selectByVisibleText("Drontal");
-
-        WebElement campoDosis = driver.findElement(By.className("input-dosis"));
-        campoDosis.clear();
-        campoDosis.sendKeys("5");
-
-        WebElement botonGuardar = wait.until(ExpectedConditions.elementToBeClickable(By.className("btn-guardar")));
-        try {
-            botonGuardar.click();
-        } catch (Exception e) {
-            ((JavascriptExecutor)driver).executeScript("arguments[0].click();", botonGuardar);
-        }
-
-        WebElement successMessage = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("alert-success")));
-        assertTrue(successMessage.isDisplayed(), "El mensaje de éxito debería estar visible");
     }
 
     /* @AfterEach
