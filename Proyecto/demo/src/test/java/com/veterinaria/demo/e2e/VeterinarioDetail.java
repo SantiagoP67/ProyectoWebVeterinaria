@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.time.Duration;
 import java.util.List;
 
-import org.junit.jupiter.api.AfterEach;
+// import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -30,7 +30,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class VeterinarioDetail {
     private WebDriver driver;
     private WebDriverWait wait;
-    private final String BASE_URL = "http://localhost:4200";
+    private static final String BASE_URL = "http://localhost:4200";
 
     @BeforeEach
     public void setUp() {
@@ -43,183 +43,276 @@ public class VeterinarioDetail {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
+    /* Caso de prueba 1 */
     @Test
-    public void SystemTest_CrearMascota_Mascota() {
+    public void systemTest_CrearMascota_MostrarMascota() {
+        // Paso 1: Configuración inicial del navegador
         driver.manage().window().maximize();
         driver.get(BASE_URL);
 
-        WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(By.className("login-btn")));
-        loginButton.click();
+        // Paso 2: Intento fallido de login (vet2/pass1)
+        WebElement botonLogin = wait.until(ExpectedConditions.elementToBeClickable(By.className("login-btn")));
+        botonLogin.click();
 
-        WebElement usernameField = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
-        usernameField.clear();
-        usernameField.sendKeys("vet2");
+        WebElement campoUsuario = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
+        campoUsuario.clear();
+        campoUsuario.sendKeys("vet2");
 
-        WebElement passwordField = driver.findElement(By.id("password"));
-        passwordField.clear();
-        passwordField.sendKeys("pass1");
+        WebElement campoContrasena = driver.findElement(By.id("password"));
+        campoContrasena.clear();
+        campoContrasena.sendKeys("pass1");
 
-        WebElement submitButton = driver.findElement(By.id("loginSubmit"));
-        submitButton.click();
+        WebElement botonEnviarLogin = driver.findElement(By.id("loginSubmit"));
+        botonEnviarLogin.click();
 
-        WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("errorMessage")));
-        assertTrue(errorMessage.isDisplayed(), "El mensaje de error debería estar visible");
-        assertEquals("Usuario o contraseña incorrectos.", errorMessage.getText(), "El mensaje de error no coincide");
+        // Paso 3: Verificación de mensaje de error
+        WebElement mensajeError = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("errorMessage")));
+        assertTrue(mensajeError.isDisplayed(), "El mensaje de error debería estar visible");
+        assertEquals("Usuario o contraseña incorrectos.", mensajeError.getText(), "El mensaje de error no coincide");
 
-        usernameField.clear();
-        usernameField.sendKeys("vet1");
+        // Paso 4: Intento exitoso de login (vet1/pass1)
+        campoUsuario.clear();
+        campoUsuario.sendKeys("vet1");
 
-        passwordField.clear();
-        passwordField.sendKeys("pass1");
+        campoContrasena.clear();
+        campoContrasena.sendKeys("pass1");
 
-        submitButton.click();
+        botonEnviarLogin.click();
 
-        WebElement clientesLink = wait.until(ExpectedConditions.elementToBeClickable(By.className("clientes-link")));
-        clientesLink.click();
+        // Paso 5: Navegación a sección de clientes
+        WebElement enlaceClientes = wait.until(ExpectedConditions.elementToBeClickable(By.className("clientes-link")));
+        enlaceClientes.click();
 
-        WebElement addClientButton = wait.until(ExpectedConditions.elementToBeClickable(By.className("btn-agregar")));
-        addClientButton.click();
+        // Paso 6: Inicio de registro de nuevo cliente
+        WebElement botonAgregarCliente = wait.until(ExpectedConditions.elementToBeClickable(By.className("btn-agregar")));
+        botonAgregarCliente.click();
 
-        WebElement nombreCliente = driver.findElement(By.id("nombre"));
-        nombreCliente.clear();
-        nombreCliente.sendKeys("Sebastián Angarita");
+        // Paso 7: Llenado de formulario de cliente
+        WebElement campoNombreCliente = driver.findElement(By.id("nombre"));
+        campoNombreCliente.clear();
+        campoNombreCliente.sendKeys("Sebastián Angarita");
 
-        WebElement correoCliente = driver.findElement(By.id("correo"));
-        correoCliente.clear();
-        correoCliente.sendKeys("angaritat.js@javeriana.edu.co");
+        WebElement campoCorreoCliente = driver.findElement(By.id("correo"));
+        campoCorreoCliente.clear();
+        campoCorreoCliente.sendKeys("angaritat.js@javeriana.edu.co");
 
-        WebElement celularCliente = driver.findElement(By.id("celular"));
-        celularCliente.clear();
-        celularCliente.sendKeys("3194955734");
+        WebElement campoCelularCliente = driver.findElement(By.id("celular"));
+        campoCelularCliente.clear();
+        campoCelularCliente.sendKeys("3194955734");
 
-        WebElement cedulaCliente = driver.findElement(By.id("cedula"));
-        cedulaCliente.clear();
-        cedulaCliente.sendKeys("31415926335");
+        WebElement campoCedulaCliente = driver.findElement(By.id("cedula"));
+        campoCedulaCliente.clear();
+        campoCedulaCliente.sendKeys("31415926335");
 
-        WebElement nombreUsuarioCliente = driver.findElement(By.id("nombreUsuario"));
-        nombreUsuarioCliente.clear();
-        nombreUsuarioCliente.sendKeys("Ing. Angarita");
+        WebElement campoNombreUsuarioCliente = driver.findElement(By.id("nombreUsuario"));
+        campoNombreUsuarioCliente.clear();
+        campoNombreUsuarioCliente.sendKeys("Ing. Angarita");
 
-        WebElement fotoCliente = driver.findElement(By.id("foto"));
-        fotoCliente.clear();
-        fotoCliente.sendKeys("https://i.pinimg.com/236x/48/12/96/48129664d8dc5b068eb4d68a381c6c81.jpg");
+        WebElement campoFotoCliente = driver.findElement(By.id("foto"));
+        campoFotoCliente.clear();
+        campoFotoCliente.sendKeys("https://i.pinimg.com/236x/48/12/96/48129664d8dc5b068eb4d68a381c6c81.jpg");
 
-        WebElement contrasenaCliente = driver.findElement(By.id("contrasena"));
-        contrasenaCliente.clear();
-        contrasenaCliente.sendKeys("1234");
+        WebElement campoContrasenaCliente = driver.findElement(By.id("contrasena"));
+        campoContrasenaCliente.clear();
+        campoContrasenaCliente.sendKeys("1234");
 
-        WebElement confirm_passwordCliente = driver.findElement(By.id("confirm_password"));
-        confirm_passwordCliente.clear();
-        confirm_passwordCliente.sendKeys("12345");
+        // Paso 8: Error en confirmación de contraseña (12345)
+        WebElement campoConfirmarContrasena = driver.findElement(By.id("confirm_password"));
+        campoConfirmarContrasena.clear();
+        campoConfirmarContrasena.sendKeys("12345");
 
-        WebElement boton = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("crear_cliente")));
+        WebElement botonCrearCliente = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("crear_cliente")));
         try {
-            boton.click();
+            botonCrearCliente.click();
         } catch (Exception e) {
-            ((JavascriptExecutor)driver).executeScript("arguments[0].click();", boton);
+            ((JavascriptExecutor)driver).executeScript("arguments[0].click();", botonCrearCliente);
         }
 
-        confirm_passwordCliente.clear();
-        confirm_passwordCliente.sendKeys("1234");
+        // Paso 9: Corrección de contraseña (1234)
+        campoConfirmarContrasena.clear();
+        campoConfirmarContrasena.sendKeys("1234");
 
-        WebElement newBoton = wait.until(ExpectedConditions.elementToBeClickable(By.className("crear_cliente")));
+        WebElement botonCrearClienteConfirmado = wait.until(ExpectedConditions.elementToBeClickable(By.className("crear_cliente")));
         try {
-            newBoton.click();
+            botonCrearClienteConfirmado.click();
         } catch (Exception e) {
-            ((JavascriptExecutor)driver).executeScript("arguments[0].click();", boton);
+            ((JavascriptExecutor)driver).executeScript("arguments[0].click();", botonCrearCliente);
         }
         
-        WebElement mascotasLink = wait.until(ExpectedConditions.elementToBeClickable(By.className("mascotas-link")));
-        mascotasLink.click();
+        // Paso 10: Navegación a sección de mascotas
+        WebElement enlaceMascotas = wait.until(ExpectedConditions.elementToBeClickable(By.className("mascotas-link")));
+        enlaceMascotas.click();
 
-        WebElement addMascotaButton = wait.until(ExpectedConditions.elementToBeClickable(By.className("btn-agregar")));
-        addMascotaButton.click();
+        // Paso 11: Inicio de registro de nueva mascota
+        WebElement botonAgregarMascota = wait.until(ExpectedConditions.elementToBeClickable(By.className("btn-agregar")));
+        botonAgregarMascota.click();
 
-        WebElement nombreMascota = driver.findElement(By.id("nombre"));
-        nombreMascota.clear();
-        nombreMascota.sendKeys("Scooby-Doo");
+        // Paso 12: Llenado correcto de formulario de mascota
+        WebElement campoNombreMascota = driver.findElement(By.id("nombre"));
+        campoNombreMascota.clear();
+        campoNombreMascota.sendKeys("Scooby-Doo");
 
-        WebElement razaMascota = driver.findElement(By.id("raza"));
-        razaMascota.clear();
-        razaMascota.sendKeys("Gran Danés Cobarde");
+        WebElement campoRazaMascota = driver.findElement(By.id("raza"));
+        campoRazaMascota.clear();
+        campoRazaMascota.sendKeys("Gran Danés Cobarde");
 
-        WebElement edadMascota = driver.findElement(By.id("edad"));
-        edadMascota.clear();
-        edadMascota.sendKeys("53");
+        WebElement campoEdadMascota = driver.findElement(By.id("edad"));
+        campoEdadMascota.clear();
+        campoEdadMascota.sendKeys("53");
 
-        WebElement pesoMascota = driver.findElement(By.id("peso"));
-        pesoMascota.clear();
-        pesoMascota.sendKeys("70.5");
+        WebElement campoPesoMascota = driver.findElement(By.id("peso"));
+        campoPesoMascota.clear();
+        campoPesoMascota.sendKeys("70.5");
 
-        WebElement enfermedadMascota = driver.findElement(By.id("enfermedad"));
-        enfermedadMascota.clear();
-        enfermedadMascota.sendKeys("Miedo crónico a fantasmas");
+        WebElement campoEnfermedadMascota = driver.findElement(By.id("enfermedad"));
+        campoEnfermedadMascota.clear();
+        campoEnfermedadMascota.sendKeys("Miedo crónico a fantasmas");
 
-        Select clienteSelect = new Select(driver.findElement(By.id("cliente")));
-        clienteSelect.selectByVisibleText("Sebastián Angarita");
+        Select selectorCliente = new Select(driver.findElement(By.id("cliente")));
+        selectorCliente.selectByVisibleText("Sebastián Angarita");
 
-        WebElement fotoMascota = driver.findElement(By.id("foto"));
-        fotoMascota.clear();
-        fotoMascota.sendKeys("https://i.pinimg.com/1200x/ee/3c/16/ee3c16658a352467a8e727d300fe314f.jpg");
+        WebElement campoFotoMascota = driver.findElement(By.id("foto"));
+        campoFotoMascota.clear();
+        campoFotoMascota.sendKeys("https://i.pinimg.com/1200x/ee/3c/16/ee3c16658a352467a8e727d300fe314f.jpg");
 
-        WebElement fechaNacimientoMascota = driver.findElement(By.id("fechaNacimiento"));
-        fechaNacimientoMascota.clear();
-        fechaNacimientoMascota.sendKeys("09131969");
+        WebElement campoFechaNacimiento = driver.findElement(By.id("fechaNacimiento"));
+        campoFechaNacimiento.clear();
+        campoFechaNacimiento.sendKeys("09131969");
 
-        WebElement fechaIngresoMascota = driver.findElement(By.id("fechaIngreso"));
-        fechaIngresoMascota.clear();
-        fechaIngresoMascota.sendKeys("06062025");
+        WebElement campoFechaIngreso = driver.findElement(By.id("fechaIngreso"));
+        campoFechaIngreso.clear();
+        campoFechaIngreso.sendKeys("06062025");
 
-        WebElement fechaSalidaMascota = driver.findElement(By.id("fechaSalida"));
-        fechaSalidaMascota.clear();
-        fechaSalidaMascota.sendKeys("07072025");
+        WebElement campoFechaSalida = driver.findElement(By.id("fechaSalida"));
+        campoFechaSalida.clear();
+        campoFechaSalida.sendKeys("07072025");
 
-        Select estadoSelect = new Select(driver.findElement(By.id("estado")));
-        estadoSelect.selectByValue("1");
+        Select selectorEstado = new Select(driver.findElement(By.id("estado")));
+        selectorEstado.selectByValue("1");
 
-        WebElement boton2 = wait.until(ExpectedConditions.elementToBeClickable(By.className("crear_mascota")));
+        WebElement botonCrearMascota = wait.until(ExpectedConditions.elementToBeClickable(By.className("crear_mascota")));
         try {
-            boton2.click();
+            botonCrearMascota.click();
         } catch (Exception e) {
-            ((JavascriptExecutor)driver).executeScript("arguments[0].click();", boton);
+            ((JavascriptExecutor)driver).executeScript("arguments[0].click();", botonCrearCliente);
         }
 
-        WebElement logOut = wait.until(ExpectedConditions.elementToBeClickable(By.className("logout")));
-        logOut.click();
+        // Paso 13: Cierre de sesión del veterinario
+        WebElement botonCerrarSesion = wait.until(ExpectedConditions.elementToBeClickable(By.className("logout")));
+        botonCerrarSesion.click();
 
-        WebElement newLoginButton = wait.until(ExpectedConditions.elementToBeClickable(By.className("login-btn")));
-        newLoginButton.click();
+        // Paso 14: Inicio de sesión del cliente (Ing. Angarita/1234)
+        WebElement botonLoginNuevo = wait.until(ExpectedConditions.elementToBeClickable(By.className("login-btn")));
+        botonLoginNuevo.click();
 
-        WebElement newUsernameField = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
-        newUsernameField.clear();
-        newUsernameField.sendKeys("carlosg"); //Ing. Angarita
+        WebElement campoUsuarioNuevo = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
+        campoUsuarioNuevo.clear();
+        campoUsuarioNuevo.sendKeys("carlosg"); 
+        //campoUsuarioNuevo.sendKeys("Ing. Angarita");
 
-        WebElement newPasswordField = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("password")));
-        newPasswordField.clear();
-        newPasswordField.sendKeys("pass2"); //1234
+        WebElement campoContrasenaNuevo = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("password")));
+        campoContrasenaNuevo.clear();
+        campoContrasenaNuevo.sendKeys("pass2");
+        //campoContrasenaNuevo.sendKeys("1234");
 
-        WebElement newSubmitButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("loginSubmit")));
-        newSubmitButton.click();
+        WebElement botonEnviarLoginNuevo = wait.until(ExpectedConditions.elementToBeClickable(By.id("loginSubmit")));
+        botonEnviarLoginNuevo.click();
 
-        WebElement mascotasTable = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("recentOrders")));
-        assertTrue(mascotasTable.isDisplayed(), "La tabla de mascotas debería estar visible");
+        // Paso 15: Verificación de datos de mascota en tabla
+        WebElement tablaMascotas = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("recentOrders")));
+        assertTrue(tablaMascotas.isDisplayed(), "La tabla de mascotas debería estar visible");
 
-        List<WebElement> mascotasRows = driver.findElements(By.className("fila-mascota"));
-        assertTrue(mascotasRows.size() > 0, "Debería haber al menos una mascota en la tabla");
+        List<WebElement> filasMascotas = driver.findElements(By.className("fila-mascota"));
+        assertTrue(filasMascotas.size() > 0, "Debería haber al menos una mascota en la tabla");
 
-        WebElement primeraMascota = mascotasRows.get(0);
-        WebElement nombreMascotaCell = primeraMascota.findElement(By.className("celda-nombre"));
-        WebElement razaMascotaCell = primeraMascota.findElement(By.className("celda-raza"));
-        WebElement estadoMascotaCell = primeraMascota.findElement(By.className("status"));
+        WebElement primeraFilaMascota = filasMascotas.get(0);
+        WebElement celdaNombreMascota = primeraFilaMascota.findElement(By.className("celda-nombre"));
+        WebElement celdaRazaMascota = primeraFilaMascota.findElement(By.className("celda-raza"));
+        WebElement celdaEstadoMascota = primeraFilaMascota.findElement(By.className("status"));
 
-        assertEquals("Firulais", nombreMascotaCell.getText(), "El nombre de la mascota no coincide"); // Scooby-Doo
-        assertEquals("Labrador", razaMascotaCell.getText(), "La raza de la mascota no coincide"); // Gran Danés Cobarde
-        assertEquals("Activo", estadoMascotaCell.getText(), "El estado de la mascota no coincide");
+        // Paso 16: Verificación con datos
+        assertEquals("Firulais", celdaNombreMascota.getText(), "El nombre de la mascota no coincide");
+        assertEquals("Labrador", celdaRazaMascota.getText(), "La raza de la mascota no coincide");
+        assertEquals("Activo", celdaEstadoMascota.getText(), "El estado de la mascota no coincide");
 
-        WebElement fotoMascota2 = primeraMascota.findElement(By.className("img-mascota"));
-        assertTrue(fotoMascota2.isDisplayed(), "La foto de la mascota debería estar visible");
-        assertEquals("https://img.huffingtonpost.es/files/image_1200_720/uploads/2023/06/22/un-perro-de-raza-labrador.jpeg", fotoMascota2.getAttribute("src"), "La URL de la foto no coincide");
-        // https://i.pinimg.com/1200x/ee/3c/16/ee3c16658a352467a8e727d300fe314f.jpg
+        WebElement imagenMascota = primeraFilaMascota.findElement(By.className("img-mascota"));
+        assertTrue(imagenMascota.isDisplayed(), "La foto de la mascota debería estar visible");
+        assertEquals("https://img.huffingtonpost.es/files/image_1200_720/uploads/2023/06/22/un-perro-de-raza-labrador.jpeg", 
+            imagenMascota.getAttribute("src"), "La URL de la foto no coincide");
+        
+        /*
+        assertEquals("Scooby-Doo", celdaNombreMascota.getText(), "El nombre de la mascota no coincide");
+        assertEquals("Gran Danés Cobarde", celdaRazaMascota.getText(), "La raza de la mascota no coincide");
+        assertEquals("Inactivo", celdaEstadoMascota.getText(), "El estado de la mascota no coincide");
+        assertEquals("https://i.pinimg.com/1200x/ee/3c/16/ee3c16658a352467a8e727d300fe314f.jpg", 
+            imagenMascota.getAttribute("src"), "La URL de la foto no coincide");
+        */
+    }
+
+    /* Caso de prueba 2 */
+    @Test
+    public void systemTest_CrearTratamiento_MostrarTratamiento() {
+        // Paso 1: Configuración inicial del navegador
+        driver.manage().window().maximize();
+        driver.get(BASE_URL);
+
+        // Paso 2: Login (vet1/pass1)
+        WebElement botonLogin = wait.until(ExpectedConditions.elementToBeClickable(By.className("login-btn")));
+        botonLogin.click();
+
+        WebElement campoUsuario = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
+        campoUsuario.clear();
+        campoUsuario.sendKeys("vet1");
+
+        WebElement campoContrasena = driver.findElement(By.id("password"));
+        campoContrasena.clear();
+        campoContrasena.sendKeys("pass1");
+
+        WebElement botonEnviarLogin = driver.findElement(By.id("loginSubmit"));
+        botonEnviarLogin.click();
+
+        // Paso 3: Navegación a sección de historial
+        WebElement enlaceHistorial = wait.until(ExpectedConditions.elementToBeClickable(By.className("historial-link")));
+        enlaceHistorial.click();
+
+        // Paso 4: Creación de tratamiento
+        WebElement botonAgregarTratamiento = wait.until(ExpectedConditions.elementToBeClickable(By.className("btn-agregar")));
+        botonAgregarTratamiento.click();
+
+        // Paso 5: Rellenar formulario de tratamiento
+        WebElement campoCodigo = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("codigo")));
+        campoCodigo.clear();
+        campoCodigo.sendKeys("TRAT-001");
+
+        WebElement selectServicio = driver.findElement(By.id("idServicio"));
+        Select servicioSelect = new Select(selectServicio);
+        servicioSelect.selectByVisibleText("Cirugía");
+
+        WebElement selectMascota = driver.findElement(By.id("idMascota"));
+        Select mascotaSelect = new Select(selectMascota);
+        mascotaSelect.selectByVisibleText("Firulais - Carlos Gómez");
+
+        WebElement campoDetalles = driver.findElement(By.id("detalles"));
+        campoDetalles.clear();
+        campoDetalles.sendKeys("Tratamiento postoperatorio para recuperación completa");
+
+        WebElement selectMedicamento = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("select-medicamento")));
+        Select medicamentoSelect = new Select(selectMedicamento);
+        medicamentoSelect.selectByVisibleText("Drontal");
+
+        WebElement campoDosis = driver.findElement(By.className("input-dosis"));
+        campoDosis.clear();
+        campoDosis.sendKeys("5");
+
+        WebElement botonGuardar = wait.until(ExpectedConditions.elementToBeClickable(By.className("btn-guardar")));
+        try {
+            botonGuardar.click();
+        } catch (Exception e) {
+            ((JavascriptExecutor)driver).executeScript("arguments[0].click();", botonGuardar);
+        }
+
+        WebElement successMessage = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("alert-success")));
+        assertTrue(successMessage.isDisplayed(), "El mensaje de éxito debería estar visible");
     }
 
     /* @AfterEach
