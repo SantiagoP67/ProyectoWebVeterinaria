@@ -1,6 +1,7 @@
 package com.veterinaria.demo.controlador;
 
 import com.veterinaria.demo.dto.TestimonioDTO;
+import com.veterinaria.demo.dto.TestimonioMapper;
 import com.veterinaria.demo.servicio.TestimonioService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/testimonios")
@@ -23,7 +25,9 @@ public class TestimonioController {
     
     @GetMapping
     public ResponseEntity<List<TestimonioDTO>> obtenerTodosTestimonios() {
-        List<TestimonioDTO> testimonios = testimonioService.obtenerTodosTestimonios();
-        return ResponseEntity.ok(testimonios);
+        List<TestimonioDTO> dtos = testimonioService.obtenerTodosTestimonios().stream()
+            .map(TestimonioMapper.INSTANCE::convert)
+            .collect(Collectors.toList());
+        return ResponseEntity.ok(dtos);
     }
 }

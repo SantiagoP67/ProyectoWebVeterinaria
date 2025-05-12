@@ -2,8 +2,8 @@ package com.veterinaria.demo.servicio;
 
 import java.util.List;
 
-import com.veterinaria.demo.dto.TestimonioDTO;
+import com.veterinaria.demo.entidad.Testimonio;
 
 public interface TestimonioService {
-    List<TestimonioDTO> obtenerTodosTestimonios();
+    List<Testimonio> obtenerTodosTestimonios();
 }

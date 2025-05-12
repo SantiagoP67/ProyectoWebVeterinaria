@@ -38,5 +38,4 @@ public class Testimonio {
         this.calificacion = calificacion;
         this.fecha = fecha;
     }
-
 }
