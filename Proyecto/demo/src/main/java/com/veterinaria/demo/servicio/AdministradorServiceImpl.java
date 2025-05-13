@@ -47,8 +47,8 @@ public class AdministradorServiceImpl implements AdministradorService{
         administradorRepository.deleteById(id);
     }
 
-    @Override
+    /*@Override
     public Administrador validarAdministrador(String username, String password) {
         return administradorRepository.findByNombreUsuarioAndContrasena(username, password);
-    }
+    }*/
 }

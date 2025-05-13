@@ -1,6 +1,9 @@
 package com.veterinaria.demo.controlador;
 
 import com.veterinaria.demo.entidad.Cliente;
+import com.veterinaria.demo.entidad.UserEntity;
+import com.veterinaria.demo.repositorio.UserRepository;
+import com.veterinaria.demo.seguridad.CustomUserDetailsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -22,6 +25,12 @@ public class ClienteController{
     @Autowired
     private ClienteService clienteService;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
+
     @GetMapping
     public List<Cliente> listar(){
         return clienteService.obtenerTodosClientes();
@@ -37,6 +46,12 @@ public class ClienteController{
             @RequestBody Cliente cliente,
             @RequestParam("confirm_password") String confirmPassword
     ) {
+        if(userRepository.existsByUsername(cliente.getNombreUsuario())) {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "El nombre de usuario ya está registrado");
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+
         // Verificar si la contraseña está vacía
         if (cliente.getContrasena() == null || cliente.getContrasena().trim().isEmpty()) {
             return ResponseEntity.badRequest().body(Collections.singletonMap("error", "La contraseña no puede estar vacía"));
@@ -48,6 +63,8 @@ public class ClienteController{
         }
 
         try {
+            UserEntity userEntity = customUserDetailsService.clienteToUser(cliente);
+            cliente.setUser(userEntity);
             clienteService.crearCliente(cliente);
             Map<String, String> response = new HashMap<>();
             response.put("message", "Usuario creado correctamente");

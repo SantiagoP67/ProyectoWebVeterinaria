@@ -64,10 +64,10 @@ public class ClienteServiceImpl implements ClienteService{
     }
 
 
-    @Override
+    /*@Override
     public Cliente validarCliente(String username, String password) {
         return clienteRepository.findByNombreUsuarioAndContrasena(username, password);
-    }
+    }*/
 
     @Override
     public Integer obtenerIdClientePorNombreUsuario(String nombreUsuario) {

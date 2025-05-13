@@ -59,10 +59,10 @@ public class VeterinarioServiceImpl implements VeterinarioService {
         }
     }
 
-    @Override
+    /*@Override
     public Veterinario validarVeterinario(String username, String password) {
         return veterinarioRepository.findByNombreUsuarioAndContrasena(username, password);
-    }
+    }*/
 
     @Override 
     public List<Mascota> obtenerMascotasAtendidas(Integer idVeterinario) {

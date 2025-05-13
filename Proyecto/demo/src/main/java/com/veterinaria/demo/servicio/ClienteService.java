@@ -11,7 +11,7 @@ public interface ClienteService{
     Cliente crearCliente(Cliente cliente);
     Cliente editarCliente(Integer id, Cliente clienteActualizado);
     Map<String, String> eliminarCliente(Integer id);
-    Cliente validarCliente(String username, String password);
+    //Cliente validarCliente(String username, String password);
     Integer obtenerIdClientePorNombreUsuario(String nombreUsuario);
     List<Cliente> buscarPorNombre(String nombre);
 

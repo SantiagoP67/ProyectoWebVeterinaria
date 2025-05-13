@@ -13,7 +13,7 @@ public interface VeterinarioService {
     Veterinario crearVeterinario(Veterinario veterinario);
     Veterinario editarVeterinario(Integer id, Veterinario veterinario);
     void eliminarVeterinario(Integer id);
-    Veterinario validarVeterinario(String username, String password);
+    //Veterinario validarVeterinario(String username, String password);
     List<Mascota> obtenerMascotasAtendidas(Integer idVeterinario);
     List<Veterinario> obtenerVeterinariosPorSede(String sede);
     Veterinario obtenerVeterinarioConMenorAtencionesPorSede(String sede);

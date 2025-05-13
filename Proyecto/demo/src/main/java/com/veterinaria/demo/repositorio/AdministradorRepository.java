@@ -7,5 +7,5 @@ import com.veterinaria.demo.entidad.Administrador;
 @Repository
 public interface AdministradorRepository extends JpaRepository<Administrador, Integer> {
     Administrador findByCedula(String cedula);
-    Administrador findByNombreUsuarioAndContrasena(String nombreUsuario,String contrasena);
+    //Administrador findByNombreUsuarioAndContrasena(String nombreUsuario,String contrasena);
 }

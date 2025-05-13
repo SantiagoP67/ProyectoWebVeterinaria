@@ -1,9 +1,14 @@
 package com.veterinaria.demo.controlador;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.veterinaria.demo.entidad.*;
+import com.veterinaria.demo.repositorio.UserRepository;
+import com.veterinaria.demo.seguridad.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +22,12 @@ public class VeterinarioController{
 
     @Autowired
     private VeterinarioService veterinarioService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
 
 
     @GetMapping
@@ -32,10 +43,17 @@ public class VeterinarioController{
     @PostMapping("/crear")
     public ResponseEntity<String> crearVeterinario(@RequestBody Veterinario veterinario,
                                            @RequestParam("confirm_password") String confirmPassword) {
+
+        if(userRepository.existsByUsername(veterinario.getNombreUsuario())) {
+            return ResponseEntity.badRequest().body("El nombre de usuario ya está registrado");
+        }
+
         if (!veterinario.getContrasena().equals(confirmPassword)) {
             return ResponseEntity.badRequest().body("Las contraseñas no coinciden");
         }
 
+        UserEntity  userEntity = customUserDetailsService.veterinarioToUser(veterinario);
+        veterinario.setUser(userEntity);
         veterinarioService.crearVeterinario(veterinario);
         return ResponseEntity.ok("Veterinario creado");
     }

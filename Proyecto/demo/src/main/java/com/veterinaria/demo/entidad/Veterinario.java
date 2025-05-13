@@ -35,6 +35,7 @@ public class Veterinario {
     @Column(nullable = false, unique = true)
     private String nombreUsuario;
 
+    @Transient
     @Column(name = "contrasenha", nullable = false)
     private String contrasena;
 
@@ -45,8 +46,6 @@ public class Veterinario {
     @JsonIgnore
     private List<Cita> citas;
 
-
-    
     @OneToMany(mappedBy = "veterinario", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Tratamiento> tratamientos;

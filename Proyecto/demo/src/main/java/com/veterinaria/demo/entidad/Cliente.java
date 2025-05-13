@@ -32,6 +32,7 @@ public class Cliente {
     @Column(unique = true, nullable = false)
     private String nombreUsuario;
 
+    @Transient
     @Column(name = "contrasenha", nullable = false)
     private String contrasena;
 

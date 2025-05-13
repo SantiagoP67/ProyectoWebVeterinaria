@@ -38,7 +38,7 @@ public class AuthController {
         return "inicio_sesion";
     }
 
-    @PostMapping("/inicio_sesion")
+    /*@PostMapping("/inicio_sesion")
     public String iniciarSesion(@RequestParam("username") String username,
                                 @RequestParam("password") String password,
                                 Model model, HttpSession session) {
@@ -111,7 +111,7 @@ public class AuthController {
         // Si no coincide con ninguno, muestra error
         model.addAttribute("error", "Usuario o contraseña incorrectos");
         return "inicio_sesion";
-    }
+    }*/
 
     @GetMapping("index")
     public String mostrarPaginaIndex() {
