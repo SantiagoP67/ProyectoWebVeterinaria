@@ -79,6 +79,11 @@ public class CrearTratamientoTest {
         botonEnviarLogin.click();
 
         // Paso 3: Registrar métricas iniciales del dashboard
+        // - Esperar a que se carguen las méticas
+        wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(By.id("tratamientos-mes"), "0")));
+        wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(By.id("ventas-totales"), "0")));
+        wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(By.id("ganancias-totales"), "0")));
+
         // - Cantidad inicial de tratamientos
         WebElement tratamientosInicialesElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("tratamientos-mes")));
         int tratamientosIniciales = Integer.parseInt(tratamientosInicialesElement.getText());
