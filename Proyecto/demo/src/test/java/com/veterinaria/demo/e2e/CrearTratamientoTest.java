@@ -1,6 +1,8 @@
 package com.veterinaria.demo.e2e;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
@@ -48,15 +50,16 @@ public class CrearTratamientoTest {
     /* Caso de prueba 2 */
     @Test
     public void SystemTest_CrearTratamiento_MostrarTratamiento() {
-        // Paso 1: Configuración inicial del navegador
+        // Paso 1: Iniciar navegador
         driver.manage().window().maximize();
         driver.get(BASE_URL);
         
-        // Abrir nueva pestaña para admin
+        // Abrir segunda pestaña para tener sesiones paralelas
         ((JavascriptExecutor) driver).executeScript("window.open()");
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         
-        // Pestaña 1: Login como admin y obtener datos iniciales
+        // === PESTAÑA 1: ADMINISTRADOR ===
+        // Paso 2: Iniciar sesión como administrador para obtener datos iniciales
         driver.switchTo().window(tabs.get(0));
         driver.get(BASE_URL);
         
@@ -75,29 +78,24 @@ public class CrearTratamientoTest {
         WebElement botonEnviarLogin = driver.findElement(By.id("loginSubmit"));
         botonEnviarLogin.click();
 
-        // Obtener datos iniciales del dashboard
+        // Paso 3: Registrar métricas iniciales del dashboard
+        // - Esperar a que se carguen las méticas
+        wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(By.id("tratamientos-mes"), "0")));
+        wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(By.id("ventas-totales"), "0")));
+        wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(By.id("ganancias-totales"), "0")));
+
+        // - Cantidad inicial de tratamientos
         WebElement tratamientosInicialesElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("tratamientos-mes")));
         int tratamientosIniciales = Integer.parseInt(tratamientosInicialesElement.getText());
 
-        // Obtener cantidad inicial de Advantix
-        int advantixInicial = 0;
-        List<WebElement> medicamentosRows = driver.findElements(By.className("medicamento-row"));
-        for (WebElement row : medicamentosRows) {
-            WebElement nombre = row.findElement(By.className("medicamento-nombre"));
-            if (nombre.getText().equals("Advantix")) {
-                WebElement cantidad = row.findElement(By.className("medicamento-cantidad"));
-                advantixInicial = Integer.parseInt(cantidad.getText());
-                break;
-            }
-        }
-
+        // - Ventas y ganancias iniciales
         WebElement ventasInicialesElement = driver.findElement(By.id("ventas-totales"));
         BigDecimal ventasIniciales = new BigDecimal(ventasInicialesElement.getText().replace("$", "").replace(",", ""));
 
         WebElement gananciasInicialesElement = driver.findElement(By.id("ganancias-totales"));
         BigDecimal gananciasIniciales = new BigDecimal(gananciasInicialesElement.getText().replace("$", "").replace(",", ""));
 
-        // Obtener datos de medicamentos y servicios
+        // Paso 4: Obtener inventario inicial de Advantix desde la sección de medicamentos
         WebElement enlaceMedicamentos = wait.until(ExpectedConditions.elementToBeClickable(By.className("medicamentos-link")));
         enlaceMedicamentos.click();
         
@@ -109,9 +107,19 @@ public class CrearTratamientoTest {
         botonBuscar.click();
         
         WebElement filaMedicamento = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("medicamento-fila")));
+        
+        // Obtener unidades disponibles y vendidas de Advantix
+        WebElement unidadesDisponiblesElement = filaMedicamento.findElement(By.className("medicamento-disponibles"));
+        int advantixDisponiblesInicial = Integer.parseInt(unidadesDisponiblesElement.getText());
+        
+        WebElement unidadesVendidasElement = filaMedicamento.findElement(By.className("medicamento-vendidos"));
+        int advantixVendidosInicial = Integer.parseInt(unidadesVendidasElement.getText());
+        
+        // Obtener precio de venta de Advantix
         WebElement precioVentaElement = filaMedicamento.findElement(By.className("medicamento-precio-venta"));
         BigDecimal precioAdvantix = new BigDecimal(precioVentaElement.getText().replace("$", "").replace(",", ""));
         
+        // Obtener precio de Cirugía
         WebElement enlaceServicios = wait.until(ExpectedConditions.elementToBeClickable(By.className("servicios-link")));
         enlaceServicios.click();
         
@@ -130,7 +138,8 @@ public class CrearTratamientoTest {
         WebElement enlaceDashboard = wait.until(ExpectedConditions.elementToBeClickable(By.className("admin-link")));
         enlaceDashboard.click();
 
-        // Pestaña 2: Login como veterinario y crear tratamiento
+        // === PESTAÑA 2: VETERINARIO ===
+        // Paso 5: Iniciar sesión como veterinario para crear tratamiento
         driver.switchTo().window(tabs.get(1));
         driver.get(BASE_URL);
         
@@ -149,16 +158,18 @@ public class CrearTratamientoTest {
         botonEnviarLogin = driver.findElement(By.id("loginSubmit"));
         botonEnviarLogin.click();
 
-        // Crear tratamiento
+        // Paso 6: Navegar a la sección de tratamientos
         WebElement enlaceHistorial = wait.until(ExpectedConditions.elementToBeClickable(By.className("historial-link")));
         enlaceHistorial.click();
 
+        // Paso 7: Crear nuevo tratamiento
         WebElement botonAgregarTratamiento = wait.until(ExpectedConditions.elementToBeClickable(By.className("btn-agregar")));
         botonAgregarTratamiento.click();
 
+        // Rellenar formulario de tratamiento
         WebElement campoCodigo = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("codigo")));
         campoCodigo.clear();
-        campoCodigo.sendKeys("TRAT-001");
+        campoCodigo.sendKeys("TRAT100");
 
         WebElement selectServicio = driver.findElement(By.id("idServicio"));
         Select servicioSelect = new Select(selectServicio);
@@ -180,6 +191,7 @@ public class CrearTratamientoTest {
         campoDosis.clear();
         campoDosis.sendKeys("2");
 
+        // Guardar tratamiento (con manejo de posibles excepciones)
         WebElement botonGuardar = wait.until(ExpectedConditions.elementToBeClickable(By.className("btn-guardar")));
         try {
             botonGuardar.click();
@@ -187,38 +199,69 @@ public class CrearTratamientoTest {
             ((JavascriptExecutor)driver).executeScript("arguments[0].click();", botonGuardar);
         }
 
-        WebElement successMessage = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("alert-success")));
-        assertTrue(successMessage.isDisplayed(), "El mensaje de éxito debería estar visible");
+        // === VERIFICACIÓN EN LISTADO DE TRATAMIENTOS ===
+        // Paso 8: Buscar el tratamiento recién creado en la tabla
+        WebElement tablaTratamientos = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("tabla-tratamientos")));
+        List<WebElement> filasTratamientos = tablaTratamientos.findElements(By.tagName("tr"));
 
-        // Calcular valores esperados
+        WebElement tratamientoCreado = null;
+        for (WebElement fila : filasTratamientos) {
+            List<WebElement> celdas = fila.findElements(By.tagName("td"));
+            if (!celdas.isEmpty() && celdas.get(0).getText().equals("TRAT100")) {
+                tratamientoCreado = fila;
+                break;
+            }
+        }
+        assertNotNull(tratamientoCreado, "El tratamiento creado no aparece en la lista");
+
+        // Paso 9: Verificar datos básicos del tratamiento en el listado
+        List<WebElement> celdas = tratamientoCreado.findElements(By.tagName("td"));
+        assertFalse(celdas.get(1).getText().isEmpty(), "La fecha del tratamiento no debe estar vacía");
+        assertEquals("Firulais", celdas.get(2).getText(), "El nombre de la mascota no coincide");
+        assertEquals("Cirugía", celdas.get(3).getText(), "El nombre del servicio no coincide");
+
+        // Paso 10: Ver detalles completos del tratamiento
+        WebElement enlaceDetalles = celdas.get(4).findElement(By.className("btn-detalles"));
+        enlaceDetalles.click();
+
+        // Verificar todos los campos en la vista de detalles
+        WebElement codigoDetalle = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("tratamiento-codigo")));
+        assertTrue(codigoDetalle.getText().contains("TRAT100"), "El código del tratamiento no coincide");
+
+        WebElement fechaDetalle = driver.findElement(By.id("tratamiento-fecha"));
+        assertFalse(fechaDetalle.getText().isEmpty(), "La fecha del tratamiento no debe estar vacía");
+
+        WebElement detallesDetalle = driver.findElement(By.id("tratamiento-detalles"));
+        assertEquals("Tratamiento postoperatorio para recuperación completa", detallesDetalle.getText(), 
+            "Los detalles del tratamiento no coinciden");
+
+        WebElement servicioDetalle = driver.findElement(By.id("tratamiento-servicio"));
+        assertEquals("Cirugía", servicioDetalle.getText(), "El servicio del tratamiento no coincide");
+
+        WebElement mascotaDetalle = driver.findElement(By.id("tratamiento-mascota"));
+        assertEquals("Firulais", mascotaDetalle.getText(), "La mascota del tratamiento no coincide");
+
+        WebElement medicamentoDetalle = driver.findElement(By.id("tratamiento-medicamento"));
+        assertEquals("Advantix", medicamentoDetalle.getText(), "El medicamento del tratamiento no coincide");
+
+        // === VERIFICACIÓN EN PESTAÑA DE ADMINISTRADOR ===
+        // Paso 11: Calcular valores esperados después de crear el tratamiento
         int tratamientosEsperados = tratamientosIniciales + 1;
-        int advantixEsperado = advantixInicial + 2;
+        int advantixDisponiblesEsperado = advantixDisponiblesInicial - 2; // Se usaron 2 unidades
+        int advantixVendidosEsperado = advantixVendidosInicial + 2; // Se vendieron 2 unidades
         BigDecimal ventasEsperadas = ventasIniciales.add(precioAdvantix.multiply(new BigDecimal(2)));
         BigDecimal gananciasEsperadas = gananciasIniciales.add(precioAdvantix.multiply(new BigDecimal(2))).add(precioCirugia);
 
-        // Volver a pestaña de admin y verificar cambios
+        // Paso 12: Volver a pestaña de admin y verificar cambios
         driver.switchTo().window(tabs.get(0));
         driver.navigate().refresh();
         
-        // Verificaciones en dashboard
+        // Verificar actualización de tratamientos
         WebElement tratamientosActualesElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("tratamientos-mes")));
         int tratamientosActuales = Integer.parseInt(tratamientosActualesElement.getText());
         assertEquals(tratamientosEsperados, tratamientosActuales, "La cantidad de tratamientos no coincide");
 
-        // Verificar Advantix en dashboard
-        int advantixActual = 0;
-        medicamentosRows = driver.findElements(By.className("medicamento-row"));
-        for (WebElement row : medicamentosRows) {
-            WebElement nombre = row.findElement(By.className("medicamento-nombre"));
-            if (nombre.getText().equals("Advantix")) {
-                WebElement cantidad = row.findElement(By.className("medicamento-cantidad"));
-                advantixActual = Integer.parseInt(cantidad.getText());
-                break;
-            }
-        }
-        assertEquals(advantixEsperado, advantixActual, "Las unidades de Advantix no coinciden");
-
-        // Verificar ventas y ganancias
+        // Verificar actualización de ventas y ganancias
         WebElement ventasActualesElement = driver.findElement(By.id("ventas-totales"));
         BigDecimal ventasActuales = new BigDecimal(ventasActualesElement.getText().replace("$", "").replace(",", ""));
         assertEquals(ventasEsperadas, ventasActuales, "Las ventas totales no coinciden");
@@ -226,6 +269,31 @@ public class CrearTratamientoTest {
         WebElement gananciasActualesElement = driver.findElement(By.id("ganancias-totales"));
         BigDecimal gananciasActuales = new BigDecimal(gananciasActualesElement.getText().replace("$", "").replace(",", ""));
         assertEquals(gananciasEsperadas, gananciasActuales, "Las ganancias totales no coinciden");
+
+        // Paso 13: Verificar actualización de inventario de Advantix en la sección de medicamentos
+        WebElement nuevoEnlaceMedicamentos = wait.until(ExpectedConditions.elementToBeClickable(By.className("medicamentos-link")));
+        nuevoEnlaceMedicamentos.click();
+        
+        campoBusqueda = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("input-busqueda-medicamento")));
+        campoBusqueda.clear();
+        campoBusqueda.sendKeys("Advantix");
+        
+        botonBuscar = driver.findElement(By.className("btn-buscar"));
+        botonBuscar.click();
+        
+        filaMedicamento = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("medicamento-fila")));
+        
+        // Verificar unidades disponibles actualizadas
+        unidadesDisponiblesElement = filaMedicamento.findElement(By.className("medicamento-disponibles"));
+        int advantixDisponiblesActual = Integer.parseInt(unidadesDisponiblesElement.getText());
+        assertEquals(advantixDisponiblesEsperado, advantixDisponiblesActual, 
+            "Las unidades disponibles de Advantix no coinciden");
+        
+        // Verificar unidades vendidas actualizadas
+        unidadesVendidasElement = filaMedicamento.findElement(By.className("medicamento-vendidos"));
+        int advantixVendidosActual = Integer.parseInt(unidadesVendidasElement.getText());
+        assertEquals(advantixVendidosEsperado, advantixVendidosActual,
+            "Las unidades vendidas de Advantix no coinciden");
     }
 
     /* @AfterEach
