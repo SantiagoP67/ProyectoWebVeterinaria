@@ -30,6 +30,9 @@ public class Administrador {
     @Column(name = "contrasenha", unique = true, nullable = false)
     private String contrasena;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserEntity user;
+
     public Administrador(String nombre, String correo, String foto, String cedula, String nombreUsuario, String contrasena) {
         this.nombre = nombre;
         this.correo = correo;

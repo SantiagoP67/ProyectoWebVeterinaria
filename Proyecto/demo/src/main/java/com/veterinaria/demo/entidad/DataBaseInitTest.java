@@ -9,23 +9,13 @@ import java.util.Collections;
 import java.util.Random;
 import java.text.SimpleDateFormat;
 
+import com.veterinaria.demo.repositorio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-
-import com.veterinaria.demo.repositorio.AdministradorRepository;
-import com.veterinaria.demo.repositorio.ClienteRepository;
-import com.veterinaria.demo.repositorio.CitaRepository;
-import com.veterinaria.demo.repositorio.FacturaRepository;
-import com.veterinaria.demo.repositorio.MascotaRepository;
-import com.veterinaria.demo.repositorio.MedicamentoRepository;
-import com.veterinaria.demo.repositorio.ServicioRepository;
-import com.veterinaria.demo.repositorio.TestimonioRepository;
-import com.veterinaria.demo.repositorio.TratamientoMedicamentoRepository;
-import com.veterinaria.demo.repositorio.TratamientoRepository;
-import com.veterinaria.demo.repositorio.VeterinarioRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -66,257 +56,367 @@ public class DataBaseInitTest implements ApplicationRunner {
     @Autowired
     private TratamientoMedicamentoRepository tratamientoMedicamentoRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
+    RoleRepository roleRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         // Creación de clientes
         Cliente cliente1 = new Cliente(null, "Juan Pérez", "juan.perez@gmail.com", "3001234567",
                 "https://www.mundopsicologos.com/site/article/49504/52397/las-personas-vitamina-0_ai1.jpg",
-                "123456789", "juanp", "pass1", null, null);
+                "123456789", "juanp", "pass1", null,null, null);
+        UserEntity userEntity = saveCliente(cliente1);
+        cliente1.setUser(userEntity);
         clienteRepository.save(cliente1);
 
         Cliente cliente2 = new Cliente(null, "Carlos Gómez", "carlos.gomez@gmail.com", "3112345678",
                 "https://www.donnamoderna.com/content/uploads/2022/07/Donna-sorridente-830x625.jpg",
-                "987654321", "carlosg", "pass2", null, null);
+                "987654321", "carlosg", "pass2",null, null, null);
+        UserEntity userEntity2 = saveCliente(cliente2);
+        cliente2.setUser(userEntity2);
         clienteRepository.save(cliente2);
 
         Cliente cliente3 = new Cliente(null, "Ana Martínez", "ana.martinez@gmail.com", "3223456789",
                 "https://www.mundopsicologos.com/site/article/60606/50895/las-10-cualidades-de-una-persona-mas-valoradas-0_ai1.jpg",
-                "456789123", "anam", "pass3", null, null);
+                "456789123", "anam", "pass3",null, null, null);
+
+        UserEntity userEntity3 = saveCliente(cliente3);
+        cliente3.setUser(userEntity3);
         clienteRepository.save(cliente3);
 
         Cliente cliente4 = new Cliente(null, "Luis Rodríguez", "luis.rodriguez@gmail.com", "3009876543",
                 "https://www.clarin.com/2023/12/28/k8gOUmfp5_720x0__1.jpg",
-                "654321987", "luisr", "pass4", null, null);
+                "654321987", "luisr", "pass4",null, null, null);
+        UserEntity userEntity4 = saveCliente(cliente4);
+        cliente4.setUser(userEntity4);
         clienteRepository.save(cliente4);
 
         Cliente cliente5 = new Cliente(null, "María Fernanda López", "maria.lopez@gmail.com", "3205678901",
                 "https://concepto.de/wp-content/uploads/2018/08/persona-e1533759204552.jpg",
-                "741852963", "marial", "pass5", null, null);
+                "741852963", "marial", "pass5", null,null, null);
+        UserEntity userEntity5 = saveCliente(cliente5);
+        cliente5.setUser(userEntity5);
         clienteRepository.save(cliente5);
 
         Cliente cliente6 = new Cliente(null, "Pedro Sánchez", "pedro.sanchez@gmail.com", "3216789012",
                 "https://www.clarin.com/2023/12/01/rhVeUAooY_2000x1500__1.jpg",
-                "369258147", "pedros", "pass6", null, null);
+                "369258147", "pedros", "pass6", null,null, null);
+        UserEntity userEntity6 = saveCliente(cliente6);
+        cliente6.setUser(userEntity6);
         clienteRepository.save(cliente6);
 
         Cliente cliente7 = new Cliente(null, "Laura Torres", "laura.torres@gmail.com", "3127890123",
                 "https://aishlatino.b-cdn.net/wp-content/uploads/2021/11/que-tipo-de-persona-te-gustaria-ser-730x411-SP.jpg",
-                "852741963", "laurat", "pass7", null, null);
+                "852741963", "laurat", "pass7", null,null, null);
+        UserEntity userEntity7 = saveCliente(cliente7);
+        cliente7.setUser(userEntity7);
         clienteRepository.save(cliente7);
 
         Cliente cliente8 = new Cliente(null, "Ricardo Mendoza", "ricardo.mendoza@gmail.com", "3138901234",
                 "https://www.wellme.es/site/article/60493/50775/como-ser-mejor-persona-6-metodos-para-ser-la-mejor-version-de-ti-mismoa-0_ai1.jpg",
-                "147963852", "ricardom", "pass8", null, null);
+                "147963852", "ricardom", "pass8", null,null, null);
+        UserEntity userEntity8 = saveCliente(cliente8);
+        cliente8.setUser(userEntity8);
         clienteRepository.save(cliente8);
 
         Cliente cliente9 = new Cliente(null, "Sofía Ramírez", "sofia.ramirez@gmail.com", "3149012345",
                 "https://img.freepik.com/free-psd/portrait-man-teenager-isolated_23-2151745771.jpg",
-                "258147369", "sofiar", "pass9", null, null);
+                "258147369", "sofiar", "pass9", null,null, null);
+        UserEntity userEntity9 = saveCliente(cliente9);
+        cliente9.setUser(userEntity9);
         clienteRepository.save(cliente9);
 
         Cliente cliente10 = new Cliente(null, "Fernando Castillo", "fernando.castillo@gmail.com", "3150123456",
                 "https://centrointegraldepsicologia.com/wp-content/uploads/2023/06/El-Sindrome-de-la-Buena-Persona-Los-Limites-Olvidados-1024x576.png",
-                "369852741", "fernandoc", "pass10", null, null);
+                "369852741", "fernandoc", "pass10", null,null, null);
+        UserEntity userEntity10 = saveCliente(cliente10);
+        cliente10.setUser(userEntity10);
         clienteRepository.save(cliente10);
 
         Cliente cliente11 = new Cliente(null, "Carmen Gutiérrez", "carmen.gutierrez@gmail.com", "3161234567",
                 "https://media.diariouno.com.ar/p/76d6d1fd697f673cf18184008b6b2d09/adjuntos/298/imagenes/009/371/0009371021/1200x0/smart/psicologia-10-claves-buen-personajpg.jpg",
-                "741369852", "carmeng", "pass11", null, null);
+                "741369852", "carmeng", "pass11", null,null, null);
+        UserEntity userEntity11 = saveCliente(cliente11);
+        cliente11.setUser(userEntity11);
         clienteRepository.save(cliente11);
 
         Cliente cliente12 = new Cliente(null, "Javier Herrera", "javier.herrera@gmail.com", "3172345678",
                 "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg",
-                "852369147", "javierh", "pass12", null, null);
+                "852369147", "javierh", "pass12", null,null, null);
+        UserEntity userEntity12 = saveCliente(cliente12);
+        cliente12.setUser(userEntity12);
         clienteRepository.save(cliente12);
 
         Cliente cliente13 = new Cliente(null, "Elena Vargas", "elena.vargas@gmail.com", "3183456789",
                 "https://imagenes.eltiempo.com/files/image_1200_535/files/fp/uploads/2024/03/19/65f9d492598ea.r_d.1079-279-5658.jpeg",
-                "963741852", "elenav", "pass13", null, null);
+                "963741852", "elenav", "pass13", null,null, null);
+        UserEntity userEntity13 = saveCliente(cliente13);
+        cliente13.setUser(userEntity13);
         clienteRepository.save(cliente13);
 
         Cliente cliente14 = new Cliente(null, "Raúl Morales", "raul.morales@gmail.com", "3194567890",
                 "https://www.portafolio.co/files/article_new_multimedia/uploads/2024/02/06/65c27d24da9df.jpeg",
-                "147852963", "raulm", "pass14", null, null);
+                "147852963", "raulm", "pass14", null,null, null);
+        UserEntity userEntity14 = saveCliente(cliente14);
+        cliente14.setUser(userEntity14);
         clienteRepository.save(cliente14);
 
         Cliente cliente15 = new Cliente(null, "Andrea Suárez", "andrea.suarez@gmail.com", "3205678901",
                 "https://www.mundopsicologos.com/site/article/49504/52397/las-personas-vitamina-0_ai1.jpg",
-                "258963741", "andreas", "pass15", null, null);
+                "258963741", "andreas", "pass15", null,null, null);
+        UserEntity userEntity15 = saveCliente(cliente15);
+        cliente15.setUser(userEntity15);
         clienteRepository.save(cliente15);
 
         Cliente cliente16 = new Cliente(null, "Diego Paredes", "diego.paredes@gmail.com", "3216789012",
                 "https://concepto.de/wp-content/uploads/2018/08/persona-e1533759204552.jpg",
-                "369741852", "diegop", "pass16", null, null);
+                "369741852", "diegop", "pass16",null, null, null);
+        UserEntity userEntity16 = saveCliente(cliente16);
+        cliente16.setUser(userEntity16);
         clienteRepository.save(cliente16);
 
         Cliente cliente17 = new Cliente(null, "Paula Ríos", "paula.rios@gmail.com", "3227890123",
                 "https://www.mundopsicologos.com/site/article/60606/50895/las-10-cualidades-de-una-persona-mas-valoradas-0_ai1.jpg",
-                "741258963", "paular", "pass17", null, null);
+                "741258963", "paular", "pass17",null, null, null);
+        UserEntity userEntity17 = saveCliente(cliente17);
+        cliente17.setUser(userEntity17);
         clienteRepository.save(cliente17);
 
         Cliente cliente18 = new Cliente(null, "Hugo Benítez", "hugo.benitez@gmail.com", "3238901234",
                 "https://www.clarin.com/2023/12/28/k8gOUmfp5_720x0__1.jpg",
-                "852369741", "hugob", "pass18", null, null);
+                "852369741", "hugob", "pass18",null, null, null);
+        UserEntity userEntity18 = saveCliente(cliente18);
+        cliente18.setUser(userEntity18);
         clienteRepository.save(cliente18);
 
         Cliente cliente19 = new Cliente(null, "Diana Salazar", "diana.salazar@gmail.com", "3249012345",
                 "https://concepto.de/wp-content/uploads/2018/08/persona-e1533759204552.jpg",
-                "963147852", "dianas", "pass19", null, null);
+                "963147852", "dianas", "pass19", null,null, null);
+        UserEntity userEntity19 = saveCliente(cliente19);
+        cliente19.setUser(userEntity19);
         clienteRepository.save(cliente19);
 
         Cliente cliente20 = new Cliente(null, "Gabriel Flores", "gabriel.flores@gmail.com", "3250123456",
                 "https://www.clarin.com/2023/12/01/rhVeUAooY_2000x1500__1.jpg",
-                "147963258", "gabrielf", "pass20", null, null);
+                "147963258", "gabrielf", "pass20", null,null, null);
+        UserEntity userEntity20 = saveCliente(cliente20);
+        cliente20.setUser(userEntity20);
         clienteRepository.save(cliente20);
 
         Cliente cliente21 = new Cliente(null, "Verónica Méndez", "veronica.mendez@gmail.com", "3261234567",
                 "https://aishlatino.b-cdn.net/wp-content/uploads/2021/11/que-tipo-de-persona-te-gustaria-ser-730x411-SP.jpg",
-                "258741369", "veronicam", "pass21", null, null);
+                "258741369", "veronicam", "pass21", null,null, null);
+        UserEntity userEntity21 = saveCliente(cliente21);
+        cliente21.setUser(userEntity21);
         clienteRepository.save(cliente21);
 
         Cliente cliente22 = new Cliente(null, "Francisco Cortés", "francisco.cortes@gmail.com", "3272345678",
                 "https://www.wellme.es/site/article/60493/50775/como-ser-mejor-persona-6-metodos-para-ser-la-mejor-version-de-ti-mismoa-0_ai1.jpg",
-                "369852147", "franciscoc", "pass22", null, null);
+                "369852147", "franciscoc", "pass22", null,null, null);
+        UserEntity userEntity22 = saveCliente(cliente22);
+        cliente22.setUser(userEntity22);
         clienteRepository.save(cliente22);
 
         Cliente cliente23 = new Cliente(null, "Julia Ocampo", "julia.ocampo@gmail.com", "3283456789",
                 "https://img.freepik.com/free-psd/portrait-man-teenager-isolated_23-2151745771.jpg",
-                "741369258", "juliao", "pass23", null, null);
+                "741369258", "juliao", "pass23", null,null, null);
+        UserEntity userEntity23 = saveCliente(cliente23);
+        cliente23.setUser(userEntity23);
         clienteRepository.save(cliente23);
 
         Cliente cliente24 = new Cliente(null, "Óscar Naranjo", "oscar.naranjo@gmail.com", "3294567890",
                 "https://img.freepik.com/fotos-premium/retrato-hombre-joven-guapo_53876-38137.jpg?semt=ais_hybrid",
-                "852741369", "oscarn", "pass24", null, null);
+                "852741369", "oscarn", "pass24", null,null, null);
+        UserEntity userEntity24 = saveCliente(cliente24);
+        cliente24.setUser(userEntity24);
         clienteRepository.save(cliente24);
 
         Cliente cliente25 = new Cliente(null, "Mónica León", "monica.leon@gmail.com", "3305678901",
                 "https://media.diariouno.com.ar/p/76d6d1fd697f673cf18184008b6b2d09/adjuntos/298/imagenes/009/371/0009371021/1200x0/smart/psicologia-10-claves-buen-personajpg.jpg",
-                "963852741", "monical", "pass25", null, null);
+                "963852741", "monical", "pass25", null,null, null);
+        UserEntity userEntity25 = saveCliente(cliente25);
+        cliente25.setUser(userEntity25);
         clienteRepository.save(cliente25);
 
         Cliente cliente26 = new Cliente(null, "Renato Villalba", "renato.villalba@gmail.com", "3316789012",
                 "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg",
-                "100001", "renatov", "pass26", null, null);
+                "100001", "renatov", "pass26", null,null, null);
+        UserEntity userEntity26 = saveCliente(cliente26);
+        cliente26.setUser(userEntity26);
         clienteRepository.save(cliente26);
 
         Cliente cliente27 = new Cliente(null, "Lucía Méndez", "lucia.mendez@gmail.com", "3327890123",
                 "https://imagenes.eltiempo.com/files/image_1200_535/files/fp/uploads/2024/03/19/65f9d492598ea.r_d.1079-279-5658.jpeg",
-                "100002", "luciam", "pass27", null, null);
+                "100002", "luciam", "pass27", null,null, null);
+        UserEntity userEntity27 = saveCliente(cliente27);
+        cliente27.setUser(userEntity27);
         clienteRepository.save(cliente27);
 
         Cliente cliente28 = new Cliente(null, "Emilio Vargas", "emilio.vargas@gmail.com", "3338901234",
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6TxYHqrtHNmxOgeapPvtw6i9EkKaQ-khhRQ&s",
-                "100003", "emiliov", "pass28", null, null);
+                "100003", "emiliov", "pass28", null,null, null);
+        UserEntity userEntity28 = saveCliente(cliente28);
+        cliente28.setUser(userEntity28);
         clienteRepository.save(cliente28);
 
         Cliente cliente29 = new Cliente(null, "Natalia Ortega", "natalia.ortega@gmail.com", "3349012345",
                 "https://www.mundopsicologos.com/site/article/49504/52397/las-personas-vitamina-0_ai1.jpg",
-                "100004", "nataliao", "pass29", null, null);
+                "100004", "nataliao", "pass29", null,null, null);
+        UserEntity userEntity29 = saveCliente(cliente29);
+        cliente29.setUser(userEntity29);
         clienteRepository.save(cliente29);
 
         Cliente cliente30 = new Cliente(null, "Rodrigo Peña", "rodrigo.pena@gmail.com", "3350123456",
                 "https://www.donnamoderna.com/content/uploads/2022/07/Donna-sorridente-830x625.jpg",
-                "100005", "rodrigop", "pass30", null, null);
+                "100005", "rodrigop", "pass30", null,null, null);
+        UserEntity userEntity30 = saveCliente(cliente30);
+        cliente30.setUser(userEntity30);
         clienteRepository.save(cliente30);
 
         Cliente cliente31 = new Cliente(null, "Valeria Salinas", "valeria.salinas@gmail.com", "3361234567",
                 "https://www.mundopsicologos.com/site/article/60606/50895/las-10-cualidades-de-una-persona-mas-valoradas-0_ai1.jpg",
-                "100006", "valerias", "pass31", null, null);
+                "100006", "valerias", "pass31", null,null, null);
+        UserEntity userEntity31 = saveCliente(cliente31);
+        cliente31.setUser(userEntity31);
         clienteRepository.save(cliente31);
 
         Cliente cliente32 = new Cliente(null, "Esteban Rojas", "esteban.rojas@gmail.com", "3372345678",
                 "https://www.clarin.com/2023/12/28/k8gOUmfp5_720x0__1.jpg",
-                "100007", "estebanr", "pass32", null, null);
+                "100007", "estebanr", "pass32", null,null, null);
+        UserEntity userEntity32 = saveCliente(cliente32);
+        cliente32.setUser(userEntity32);
         clienteRepository.save(cliente32);
 
         Cliente cliente33 = new Cliente(null, "Isabela Herrera", "isabela.herrera@gmail.com", "3383456789",
                 "https://concepto.de/wp-content/uploads/2018/08/persona-e1533759204552.jpg",
-                "100008", "isabelah", "pass33", null, null);
+                "100008", "isabelah", "pass33", null,null, null);
+        UserEntity userEntity33 = saveCliente(cliente33);
+        cliente33.setUser(userEntity33);
         clienteRepository.save(cliente33);
 
         Cliente cliente34 = new Cliente(null, "Andrés Molina", "andres.molina@gmail.com", "3394567890",
                 "https://www.clarin.com/2023/12/01/rhVeUAooY_2000x1500__1.jpg",
-                "100009", "andresm", "pass34", null, null);
+                "100009", "andresm", "pass34", null,null, null);
+        UserEntity userEntity34 = saveCliente(cliente34);
+        cliente34.setUser(userEntity34);
         clienteRepository.save(cliente34);
 
         Cliente cliente35 = new Cliente(null, "Camila Fernández", "camila.fernandez@gmail.com", "3405678901",
                 "https://aishlatino.b-cdn.net/wp-content/uploads/2021/11/que-tipo-de-persona-te-gustaria-ser-730x411-SP.jpg",
-                "100010", "camilaf", "pass35", null, null);
+                "100010", "camilaf", "pass35", null,null, null);
+        UserEntity userEntity35 = saveCliente(cliente35);
+        cliente35.setUser(userEntity35);
         clienteRepository.save(cliente35);
 
         Cliente cliente36 = new Cliente(null, "Diego Castro", "diego.castro@gmail.com", "3416789012",
                 "https://www.wellme.es/site/article/60493/50775/como-ser-mejor-persona-6-metodos-para-ser-la-mejor-version-de-ti-mismoa-0_ai1.jpg",
-                "100011", "diegoc", "pass36", null, null);
+                "100011", "diegoc", "pass36",null, null, null);
+        UserEntity userEntity36 = saveCliente(cliente36);
+        cliente36.setUser(userEntity36);
         clienteRepository.save(cliente36);
 
         Cliente cliente37 = new Cliente(null, "Santiago Ramos", "santiago.ramos@gmail.com", "3427890123",
                 "https://img.freepik.com/free-psd/portrait-man-teenager-isolated_23-2151745771.jpg",
-                "100012", "santiagor", "pass37", null, null);
+                "100012", "santiagor", "pass37", null,null, null);
+        UserEntity userEntity37 = saveCliente(cliente37);
+        cliente37.setUser(userEntity37);
         clienteRepository.save(cliente37);
 
         Cliente cliente38 = new Cliente(null, "Gabriela Ríos", "gabriela.rios@gmail.com", "3438901234",
                 "https://centrointegraldepsicologia.com/wp-content/uploads/2023/06/El-Sindrome-de-la-Buena-Persona-Los-Limites-Olvidados-1024x576.png",
-                "100013", "gabrielar", "pass38", null, null);
+                "100013", "gabrielar", "pass38", null,null, null);
+        UserEntity userEntity38 = saveCliente(cliente38);
+        cliente38.setUser(userEntity38);
         clienteRepository.save(cliente38);
 
         Cliente cliente39 = new Cliente(null, "Fernando Ocampo", "fernando.ocampo@gmail.com", "3449012345",
                 "https://media.diariouno.com.ar/p/76d6d1fd697f673cf18184008b6b2d09/adjuntos/298/imagenes/009/371/0009371021/1200x0/smart/psicologia-10-claves-buen-personajpg.jpg",
-                "100014", "fernandoo", "pass39", null, null);
+                "100014", "fernandoo", "pass39", null,null, null);
+        UserEntity userEntity39 = saveCliente(cliente39);
+        cliente39.setUser(userEntity39);
         clienteRepository.save(cliente39);
 
         Cliente cliente40 = new Cliente(null, "Paola González", "paola.gonzalez@gmail.com", "3450123456",
                 "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg",
-                "100015", "paolag", "pass40", null, null);
+                "100015", "paolag", "pass40", null,null, null);
+        UserEntity userEntity40 = saveCliente(cliente40);
+        cliente40.setUser(userEntity40);
         clienteRepository.save(cliente40);
 
         Cliente cliente41 = new Cliente(null, "Ricardo Estrada", "ricardo.estrada@gmail.com", "3461234567",
                 "https://imagenes.eltiempo.com/files/image_1200_535/files/fp/uploads/2024/03/19/65f9d492598ea.r_d.1079-279-5658.jpeg",
-                "100016", "ricardoe", "pass41", null, null);
+                "100016", "ricardoe", "pass41", null,null, null);
+        UserEntity userEntity41 = saveCliente(cliente41);
+        cliente41.setUser(userEntity41);
         clienteRepository.save(cliente41);
 
         Cliente cliente42 = new Cliente(null, "Alejandra Campos", "alejandra.campos@gmail.com", "3472345678",
                 "https://www.portafolio.co/files/article_new_multimedia/uploads/2024/02/06/65c27d24da9df.jpeg",
-                "100017", "alejandrac", "pass42", null, null);
+                "100017", "alejandrac", "pass42", null,null, null);
+        UserEntity userEntity42 = saveCliente(cliente42);
+        cliente42.setUser(userEntity42);
         clienteRepository.save(cliente42);
 
         Cliente cliente43 = new Cliente(null, "Manuel Ortega", "manuel.ortega@gmail.com", "3483456789",
                 "https://www.mundopsicologos.com/site/article/49504/52397/las-personas-vitamina-0_ai1.jpg",
-                "100018", "manuelo", "pass43", null, null);
+                "100018", "manuelo", "pass43",null, null, null);
+        UserEntity userEntity43 = saveCliente(cliente43);
+        cliente43.setUser(userEntity43);
         clienteRepository.save(cliente43);
 
         Cliente cliente44 = new Cliente(null, "Beatriz Montes", "beatriz.montes@gmail.com", "3494567890",
                 "https://www.donnamoderna.com/content/uploads/2022/07/Donna-sorridente-830x625.jpg",
-                "100019", "beatrizm", "pass44", null, null);
+                "100019", "beatrizm", "pass44",null, null, null);
+        UserEntity userEntity44 = saveCliente(cliente44);
+        cliente44.setUser(userEntity44);
         clienteRepository.save(cliente44);
 
         Cliente cliente45 = new Cliente(null, "Joaquín Pacheco", "joaquin.pacheco@gmail.com", "3505678901",
                 "https://www.mundopsicologos.com/site/article/60606/50895/las-10-cualidades-de-una-persona-mas-valoradas-0_ai1.jpg",
-                "100020", "joaquinp", "pass45", null, null);
+                "100020", "joaquinp", "pass45", null,null, null);
+        UserEntity userEntity45 = saveCliente(cliente45);
+        cliente45.setUser(userEntity45);
         clienteRepository.save(cliente45);
 
         Cliente cliente46 = new Cliente(null, "Lorena Navarro", "lorena.navarro@gmail.com", "3516789012",
                 "https://www.clarin.com/2023/12/28/k8gOUmfp5_720x0__1.jpg",
-                "100021", "lorenan", "pass46", null, null);
+                "100021", "lorenan", "pass46", null,null, null);
+        UserEntity userEntity46 = saveCliente(cliente46);
+        cliente46.setUser(userEntity46);
         clienteRepository.save(cliente46);
 
         Cliente cliente47 = new Cliente(null, "Cristian Mendoza", "cristian.mendoza@gmail.com", "3527890123",
                 "https://concepto.de/wp-content/uploads/2018/08/persona-e1533759204552.jpg",
-                "100022", "cristianm", "pass47", null, null);
+                "100022", "cristianm", "pass47", null,null, null);
+        UserEntity userEntity47 = saveCliente(cliente47);
+        cliente47.setUser(userEntity47);
         clienteRepository.save(cliente47);
 
         Cliente cliente48 = new Cliente(null, "Patricia Vargas", "patricia.vargas@gmail.com", "3538901234",
                 "https://www.clarin.com/2023/12/01/rhVeUAooY_2000x1500__1.jpg",
-                "100023", "patriciav", "pass48", null, null);
+                "100023", "patriciav", "pass48", null,null, null);
+        UserEntity userEntity48 = saveCliente(cliente48);
+        cliente48.setUser(userEntity48);
         clienteRepository.save(cliente48);
 
         Cliente cliente49 = new Cliente(null, "Fabián Delgado", "fabian.delgado@gmail.com", "3549012345",
                 "https://aishlatino.b-cdn.net/wp-content/uploads/2021/11/que-tipo-de-persona-te-gustaria-ser-730x411-SP.jpg",
-                "100024", "fabiand", "pass49", null, null);
+                "100024", "fabiand", "pass49",null, null, null);
+        UserEntity userEntity49 = saveCliente(cliente49);
+        cliente49.setUser(userEntity49);
         clienteRepository.save(cliente49);
 
         Cliente cliente50 = new Cliente(null, "Mariana Bustos", "mariana.bustos@gmail.com", "3550123456",
                 "https://www.wellme.es/site/article/60493/50775/como-ser-mejor-persona-6-metodos-para-ser-la-mejor-version-de-ti-mismoa-0_ai1.jpg",
-                "100025", "marianab", "pass50", null, null);
+                "100025", "marianab", "pass50", null,null, null);
+        UserEntity userEntity50 = saveCliente(cliente50);
+        cliente50.setUser(userEntity50);
         clienteRepository.save(cliente50);
 
         // Creación de veterinarios con patrón Builder
@@ -334,6 +434,8 @@ public class DataBaseInitTest implements ApplicationRunner {
                 .citas(null)
                 .tratamientos(null)
                 .build();
+        UserEntity userEntityVet1 = saveVeterinario(veterinario1);
+        veterinario1.setUser(userEntityVet1);
         veterinarioRepository.save(veterinario1);
 
         Veterinario veterinario2 = Veterinario.builder()
@@ -350,6 +452,8 @@ public class DataBaseInitTest implements ApplicationRunner {
                 .citas(null)
                 .tratamientos(null)
                 .build();
+        UserEntity userEntityVet2 = saveVeterinario(veterinario2);
+        veterinario2.setUser(userEntityVet2);
         veterinarioRepository.save(veterinario2);
 
         Veterinario veterinario3 = Veterinario.builder()
@@ -366,6 +470,8 @@ public class DataBaseInitTest implements ApplicationRunner {
                 .citas(null)
                 .tratamientos(null)
                 .build();
+        UserEntity userEntityVet3 = saveVeterinario(veterinario3);
+        veterinario3.setUser(userEntityVet3);
         veterinarioRepository.save(veterinario3);
 
         Veterinario veterinario4 = Veterinario.builder()
@@ -382,6 +488,8 @@ public class DataBaseInitTest implements ApplicationRunner {
                 .citas(null)
                 .tratamientos(null)
                 .build();
+        UserEntity userEntityVet4 = saveVeterinario(veterinario4);
+        veterinario4.setUser(userEntityVet4);
         veterinarioRepository.save(veterinario4);
 
         Veterinario veterinario5 = Veterinario.builder()
@@ -398,6 +506,8 @@ public class DataBaseInitTest implements ApplicationRunner {
                 .citas(null)
                 .tratamientos(null)
                 .build();
+        UserEntity userEntityVet5 = saveVeterinario(veterinario5);
+        veterinario5.setUser(userEntityVet5);
         veterinarioRepository.save(veterinario5);
 
         Veterinario veterinario6 = Veterinario.builder()
@@ -414,6 +524,8 @@ public class DataBaseInitTest implements ApplicationRunner {
                 .citas(null)
                 .tratamientos(null)
                 .build();
+        UserEntity userEntityVet6 = saveVeterinario(veterinario6);
+        veterinario6.setUser(userEntityVet6);
         veterinarioRepository.save(veterinario6);
 
         Veterinario veterinario7 = Veterinario.builder()
@@ -430,6 +542,8 @@ public class DataBaseInitTest implements ApplicationRunner {
                 .citas(null)
                 .tratamientos(null)
                 .build();
+        UserEntity userEntityVet7 = saveVeterinario(veterinario7);
+        veterinario7.setUser(userEntityVet7);
         veterinarioRepository.save(veterinario7);
 
         Veterinario veterinario8 = Veterinario.builder()
@@ -446,6 +560,8 @@ public class DataBaseInitTest implements ApplicationRunner {
                 .citas(null)
                 .tratamientos(null)
                 .build();
+        UserEntity userEntityVet8 = saveVeterinario(veterinario8);
+        veterinario8.setUser(userEntityVet8);
         veterinarioRepository.save(veterinario8);
 
         Veterinario veterinario9 = Veterinario.builder()
@@ -462,6 +578,8 @@ public class DataBaseInitTest implements ApplicationRunner {
                 .citas(null)
                 .tratamientos(null)
                 .build();
+        UserEntity userEntityVet9 = saveVeterinario(veterinario9);
+        veterinario9.setUser(userEntityVet9);
         veterinarioRepository.save(veterinario9);
 
         Veterinario veterinario10 = Veterinario.builder()
@@ -478,13 +596,17 @@ public class DataBaseInitTest implements ApplicationRunner {
                 .citas(null)
                 .tratamientos(null)
                 .build();
+        UserEntity userEntityVet10 = saveVeterinario(veterinario10);
+        veterinario10.setUser(userEntityVet10);
         veterinarioRepository.save(veterinario10);
 
 
         // Creación de administrador
         Administrador administrador = new Administrador(null, "Carlos López", "carlosl@gmail.com",
                 "https://portal.unbosque.edu.co/sites/default/files/inline-images/en-que-puede-trabajar-un-administrador-de-empresas.jpg",
-                "987654321", "admin", "123");
+                "987654321", "admin", "123", null);
+        UserEntity userAdmin = saveAdministrador(administrador);
+        administrador.setUser(userAdmin);
         administradorRepository.save(administrador);
 
         // Creación de servicios con imágenes
@@ -1303,4 +1425,32 @@ public class DataBaseInitTest implements ApplicationRunner {
 
         System.out.println("Base de datos inicializada con datos de ejemplo.");
     }
+
+    private UserEntity saveCliente(Cliente cliente){
+        UserEntity user = new UserEntity();
+        user.setUsername(cliente.getNombreUsuario());
+        user.setPassword(passwordEncoder.encode(cliente.getContrasena()));
+        Role roles = roleRepository.findByName("CLIENTE").get();
+        user.setRoles(List.of(roles));
+        return userRepository.save(user);
+    }
+
+    private UserEntity saveVeterinario(Veterinario veterinario){
+        UserEntity user = new UserEntity();
+        user.setUsername(veterinario.getNombreUsuario());
+        user.setPassword(passwordEncoder.encode(veterinario.getContrasena()));
+        Role roles = roleRepository.findByName("VETERINARIO").get();
+        user.setRoles(List.of(roles));
+        return userRepository.save(user);
+    }
+
+    private UserEntity saveAdministrador(Administrador administrador){
+        UserEntity user = new UserEntity();
+        user.setUsername(administrador.getNombreUsuario());
+        user.setPassword(passwordEncoder.encode(administrador.getContrasena()));
+        Role roles = roleRepository.findByName("ADMIN").get();
+        user.setRoles(List.of(roles));
+        return userRepository.save(user);
+    }
 }
+

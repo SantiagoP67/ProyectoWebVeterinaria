@@ -35,6 +35,9 @@ public class Cliente {
     @Column(name = "contrasenha", nullable = false)
     private String contrasena;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserEntity user;
+
     @JsonIgnore
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Mascota> mascotas;

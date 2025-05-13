@@ -38,6 +38,9 @@ public class Veterinario {
     @Column(name = "contrasenha", nullable = false)
     private String contrasena;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserEntity user;
+
     @OneToMany(mappedBy = "veterinario", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Cita> citas;
