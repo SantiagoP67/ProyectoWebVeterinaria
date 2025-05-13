@@ -83,18 +83,6 @@ public class CrearTratamientoTest {
         WebElement tratamientosInicialesElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("tratamientos-mes")));
         int tratamientosIniciales = Integer.parseInt(tratamientosInicialesElement.getText());
 
-        // - Inventario inicial de Advantix
-        int advantixInicial = 0;
-        List<WebElement> medicamentosRows = driver.findElements(By.className("medicamento-row"));
-        for (WebElement row : medicamentosRows) {
-            WebElement nombre = row.findElement(By.className("medicamento-nombre"));
-            if (nombre.getText().equals("Advantix")) {
-                WebElement cantidad = row.findElement(By.className("medicamento-cantidad"));
-                advantixInicial = Integer.parseInt(cantidad.getText());
-                break;
-            }
-        }
-
         // - Ventas y ganancias iniciales
         WebElement ventasInicialesElement = driver.findElement(By.id("ventas-totales"));
         BigDecimal ventasIniciales = new BigDecimal(ventasInicialesElement.getText().replace("$", "").replace(",", ""));
@@ -102,7 +90,7 @@ public class CrearTratamientoTest {
         WebElement gananciasInicialesElement = driver.findElement(By.id("ganancias-totales"));
         BigDecimal gananciasIniciales = new BigDecimal(gananciasInicialesElement.getText().replace("$", "").replace(",", ""));
 
-        // Paso 4: Obtener precios de referencia (Advantix y Cirugía)
+        // Paso 4: Obtener inventario inicial de Advantix desde la sección de medicamentos
         WebElement enlaceMedicamentos = wait.until(ExpectedConditions.elementToBeClickable(By.className("medicamentos-link")));
         enlaceMedicamentos.click();
         
@@ -114,9 +102,19 @@ public class CrearTratamientoTest {
         botonBuscar.click();
         
         WebElement filaMedicamento = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("medicamento-fila")));
+        
+        // Obtener unidades disponibles y vendidas de Advantix
+        WebElement unidadesDisponiblesElement = filaMedicamento.findElement(By.className("medicamento-disponibles"));
+        int advantixDisponiblesInicial = Integer.parseInt(unidadesDisponiblesElement.getText());
+        
+        WebElement unidadesVendidasElement = filaMedicamento.findElement(By.className("medicamento-vendidos"));
+        int advantixVendidosInicial = Integer.parseInt(unidadesVendidasElement.getText());
+        
+        // Obtener precio de venta de Advantix
         WebElement precioVentaElement = filaMedicamento.findElement(By.className("medicamento-precio-venta"));
         BigDecimal precioAdvantix = new BigDecimal(precioVentaElement.getText().replace("$", "").replace(",", ""));
         
+        // Obtener precio de Cirugía
         WebElement enlaceServicios = wait.until(ExpectedConditions.elementToBeClickable(By.className("servicios-link")));
         enlaceServicios.click();
         
@@ -244,7 +242,8 @@ public class CrearTratamientoTest {
         // === VERIFICACIÓN EN PESTAÑA DE ADMINISTRADOR ===
         // Paso 11: Calcular valores esperados después de crear el tratamiento
         int tratamientosEsperados = tratamientosIniciales + 1;
-        int advantixEsperado = advantixInicial + 2;
+        int advantixDisponiblesEsperado = advantixDisponiblesInicial - 2; // Se usaron 2 unidades
+        int advantixVendidosEsperado = advantixVendidosInicial + 2; // Se vendieron 2 unidades
         BigDecimal ventasEsperadas = ventasIniciales.add(precioAdvantix.multiply(new BigDecimal(2)));
         BigDecimal gananciasEsperadas = gananciasIniciales.add(precioAdvantix.multiply(new BigDecimal(2))).add(precioCirugia);
 
@@ -257,19 +256,6 @@ public class CrearTratamientoTest {
         int tratamientosActuales = Integer.parseInt(tratamientosActualesElement.getText());
         assertEquals(tratamientosEsperados, tratamientosActuales, "La cantidad de tratamientos no coincide");
 
-        // Verificar actualización de inventario de Advantix
-        int advantixActual = 0;
-        medicamentosRows = driver.findElements(By.className("medicamento-row"));
-        for (WebElement row : medicamentosRows) {
-            WebElement nombre = row.findElement(By.className("medicamento-nombre"));
-            if (nombre.getText().equals("Advantix")) {
-                WebElement cantidad = row.findElement(By.className("medicamento-cantidad"));
-                advantixActual = Integer.parseInt(cantidad.getText());
-                break;
-            }
-        }
-        assertEquals(advantixEsperado, advantixActual, "Las unidades de Advantix no coinciden");
-
         // Verificar actualización de ventas y ganancias
         WebElement ventasActualesElement = driver.findElement(By.id("ventas-totales"));
         BigDecimal ventasActuales = new BigDecimal(ventasActualesElement.getText().replace("$", "").replace(",", ""));
@@ -278,6 +264,31 @@ public class CrearTratamientoTest {
         WebElement gananciasActualesElement = driver.findElement(By.id("ganancias-totales"));
         BigDecimal gananciasActuales = new BigDecimal(gananciasActualesElement.getText().replace("$", "").replace(",", ""));
         assertEquals(gananciasEsperadas, gananciasActuales, "Las ganancias totales no coinciden");
+
+        // Paso 13: Verificar actualización de inventario de Advantix en la sección de medicamentos
+        WebElement nuevoEnlaceMedicamentos = wait.until(ExpectedConditions.elementToBeClickable(By.className("medicamentos-link")));
+        nuevoEnlaceMedicamentos.click();
+        
+        campoBusqueda = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("input-busqueda-medicamento")));
+        campoBusqueda.clear();
+        campoBusqueda.sendKeys("Advantix");
+        
+        botonBuscar = driver.findElement(By.className("btn-buscar"));
+        botonBuscar.click();
+        
+        filaMedicamento = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("medicamento-fila")));
+        
+        // Verificar unidades disponibles actualizadas
+        unidadesDisponiblesElement = filaMedicamento.findElement(By.className("medicamento-disponibles"));
+        int advantixDisponiblesActual = Integer.parseInt(unidadesDisponiblesElement.getText());
+        assertEquals(advantixDisponiblesEsperado, advantixDisponiblesActual, 
+            "Las unidades disponibles de Advantix no coinciden");
+        
+        // Verificar unidades vendidas actualizadas
+        unidadesVendidasElement = filaMedicamento.findElement(By.className("medicamento-vendidos"));
+        int advantixVendidosActual = Integer.parseInt(unidadesVendidasElement.getText());
+        assertEquals(advantixVendidosEsperado, advantixVendidosActual,
+            "Las unidades vendidas de Advantix no coinciden");
     }
 
     /* @AfterEach
