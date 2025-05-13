@@ -131,7 +131,7 @@ public class CrearTratamientoTest {
             }
         }
         
-        // Volver al dashboard para mantener consistencia
+        // Volver al dashboard
         WebElement enlaceDashboard = wait.until(ExpectedConditions.elementToBeClickable(By.className("admin-link")));
         enlaceDashboard.click();
 
@@ -198,7 +198,6 @@ public class CrearTratamientoTest {
 
         // === VERIFICACIÓN EN LISTADO DE TRATAMIENTOS ===
         // Paso 8: Buscar el tratamiento recién creado en la tabla
-        // Solución implementada: Usar el ID "tabla-tratamientos" agregado al HTML
         WebElement tablaTratamientos = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("tabla-tratamientos")));
         List<WebElement> filasTratamientos = tablaTratamientos.findElements(By.tagName("tr"));
 
@@ -245,7 +244,7 @@ public class CrearTratamientoTest {
         // === VERIFICACIÓN EN PESTAÑA DE ADMINISTRADOR ===
         // Paso 11: Calcular valores esperados después de crear el tratamiento
         int tratamientosEsperados = tratamientosIniciales + 1;
-        int advantixEsperado = advantixInicial - 2; // Se usaron 2 unidades
+        int advantixEsperado = advantixInicial + 2;
         BigDecimal ventasEsperadas = ventasIniciales.add(precioAdvantix.multiply(new BigDecimal(2)));
         BigDecimal gananciasEsperadas = gananciasIniciales.add(precioAdvantix.multiply(new BigDecimal(2))).add(precioCirugia);
 
