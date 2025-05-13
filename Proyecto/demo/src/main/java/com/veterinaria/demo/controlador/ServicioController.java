@@ -35,15 +35,18 @@ public class ServicioController {
     
     @GetMapping("/ventas-totales")
     public ResponseEntity<BigDecimal> obtenerVentasTotales() {
-        BigDecimal ventasTotales = servicioService.calcularVentasTotales();
-        return ResponseEntity.ok(ventasTotales);
+        Float ventasTotales = tratamientoService.calcularVentasTotales();
+        BigDecimal ventasTotalesDecimal = new BigDecimal(Float.toString(ventasTotales));
+        return ResponseEntity.ok(ventasTotalesDecimal);
     }
-    
+
     @GetMapping("/ganancias-totales")
     public ResponseEntity<BigDecimal> obtenerGananciasTotales() {
-        BigDecimal gananciasTotales = servicioService.calcularGananciasTotales();
-        return ResponseEntity.ok(gananciasTotales);
+        Float gananciasTotales = tratamientoService.calcularGananciasTotales();
+        BigDecimal gananciasTotalesDecimal = new BigDecimal(Float.toString(gananciasTotales));
+        return ResponseEntity.ok(gananciasTotalesDecimal);
     }
+
 
     @GetMapping("/por-tratamiento/{id}")
     public ResponseEntity<Servicio> obtenerPorTratamiento(@PathVariable Integer id) {

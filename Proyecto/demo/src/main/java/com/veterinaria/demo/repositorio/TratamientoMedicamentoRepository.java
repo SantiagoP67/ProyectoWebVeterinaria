@@ -13,4 +13,7 @@ public interface TratamientoMedicamentoRepository extends JpaRepository<Tratamie
            "FROM TratamientoMedicamento tm " +
            "JOIN tm.medicamento m")
     BigDecimal sumPrecioVentaMedicamentos();
+
+    
 }
+

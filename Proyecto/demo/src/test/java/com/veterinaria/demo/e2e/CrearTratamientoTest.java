@@ -119,6 +119,11 @@ public class CrearTratamientoTest {
         WebElement precioVentaElement = filaMedicamento.findElement(By.className("medicamento-precio-venta"));
         BigDecimal precioAdvantix = new BigDecimal(precioVentaElement.getText().replace("$", "").replace(",", ""));
         
+        // Obtener precio de compra de Advantix
+        WebElement precioCompraElement = filaMedicamento.findElement(By.className("medicamento-precio-compra"));
+        BigDecimal precioCompraAdvantix = new BigDecimal(precioCompraElement.getText().replace("$", "").replace(",", ""));
+
+
         // Obtener precio de Cirugía
         WebElement enlaceServicios = wait.until(ExpectedConditions.elementToBeClickable(By.className("servicios-link")));
         enlaceServicios.click();
@@ -249,12 +254,25 @@ public class CrearTratamientoTest {
         int tratamientosEsperados = tratamientosIniciales + 1;
         int advantixDisponiblesEsperado = advantixDisponiblesInicial - 2; // Se usaron 2 unidades
         int advantixVendidosEsperado = advantixVendidosInicial + 2; // Se vendieron 2 unidades
-        BigDecimal ventasEsperadas = ventasIniciales.add(precioAdvantix.multiply(new BigDecimal(2)));
-        BigDecimal gananciasEsperadas = gananciasIniciales.add(precioAdvantix.multiply(new BigDecimal(2))).add(precioCirugia);
+        BigDecimal cantidadUsada = new BigDecimal(2);
+        BigDecimal gananciaMedicamento = precioAdvantix.subtract(precioCompraAdvantix).multiply(cantidadUsada);
+
+        BigDecimal ventasEsperadas = ventasIniciales
+                .add(precioCirugia) // precio del servicio
+                .add(precioAdvantix.multiply(cantidadUsada)); // ingreso por venta del medicamento
+
+        BigDecimal gananciasEsperadas = gananciasIniciales
+                .add(precioCirugia) // ganancia por servicio
+                .add(gananciaMedicamento); // ganancia neta por medicamento
 
         // Paso 12: Volver a pestaña de admin y verificar cambios
         driver.switchTo().window(tabs.get(0));
         driver.navigate().refresh();
+
+        // - Esperar a que se carguen las méticas
+        wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(By.id("tratamientos-mes"), "0")));
+        wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(By.id("ventas-totales"), "0")));
+        wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(By.id("ganancias-totales"), "0")));
         
         // Verificar actualización de tratamientos
         WebElement tratamientosActualesElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("tratamientos-mes")));

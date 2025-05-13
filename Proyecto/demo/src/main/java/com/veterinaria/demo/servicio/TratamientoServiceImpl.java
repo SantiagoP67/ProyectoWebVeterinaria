@@ -197,4 +197,60 @@ public class TratamientoServiceImpl implements TratamientoService{
         return tratamientoRepository.findByMascota(mascota);
     }
 
+    @Override
+    public float calcularGananciasTotales() {
+        List<Tratamiento> tratamientos = tratamientoRepository.findAll();
+        float gananciaTotal = 0.0f;
+
+        for (Tratamiento tratamiento : tratamientos) {
+            // Ganancia del servicio asociado
+            Servicio servicio = tratamiento.getServicio();
+            if (servicio != null) {
+                gananciaTotal += servicio.getPrecioBase();
+            }
+
+            // Ganancia de los medicamentos usados en el tratamiento
+            List<TratamientoMedicamento> tratamientoMedicamentos = tratamiento.getTratamientoMedicamentos();
+            if (tratamientoMedicamentos != null) {
+                for (TratamientoMedicamento tm : tratamientoMedicamentos) {
+                    Medicamento medicamento = tm.getMedicamento();
+                    if (medicamento != null) {
+                        float gananciaPorUnidad = medicamento.getPrecioVenta() - medicamento.getPrecioCompra();
+                        gananciaTotal += gananciaPorUnidad * tm.getCantidad();
+                    }
+                }
+            }
+        }
+
+        return gananciaTotal;
+    }
+
+
+    @Override
+    public float calcularVentasTotales() {
+        List<Tratamiento> tratamientos = tratamientoRepository.findAll();
+        float gananciaTotal = 0.0f;
+
+        for (Tratamiento tratamiento : tratamientos) {
+            // Ganancia del servicio asociado
+            Servicio servicio = tratamiento.getServicio();
+            if (servicio != null) {
+                gananciaTotal += servicio.getPrecioBase();
+            }
+
+            // Ganancia de los medicamentos usados en el tratamiento
+            List<TratamientoMedicamento> tratamientoMedicamentos = tratamiento.getTratamientoMedicamentos();
+            if (tratamientoMedicamentos != null) {
+                for (TratamientoMedicamento tm : tratamientoMedicamentos) {
+                    Medicamento medicamento = tm.getMedicamento();
+                    if (medicamento != null) {
+                        float gananciaPorUnidad = medicamento.getPrecioVenta();
+                        gananciaTotal += gananciaPorUnidad * tm.getCantidad();
+                    }
+                }
+            }
+        }
+
+        return gananciaTotal;
+    }
 }

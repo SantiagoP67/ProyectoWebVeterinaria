@@ -2,6 +2,7 @@ package com.veterinaria.demo.servicio;
 
 import com.veterinaria.demo.entidad.Tratamiento;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -17,4 +18,7 @@ public interface TratamientoService{
     Tratamiento editarTratamiento(Integer id, Tratamiento tratamientoActualizado, Integer idMascota, Integer idServicio, Integer idVeterinario, List<Integer> idsMedicamentos);
     void eliminarTratamientoPorId(Integer id);
     List<Tratamiento> obtenerTratamientosPorMascota(Integer idMascota);
+    float calcularGananciasTotales();
+    float calcularVentasTotales();
+
 }
