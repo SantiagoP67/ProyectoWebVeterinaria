@@ -20,9 +20,9 @@ public class CorsConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
-        config.setAllowedOriginPatterns(Arrays.asList("http://localhost:4200")); // o más dominios si deseas
+        config.setAllowedOriginPatterns(Arrays.asList("http://localhost:4200"));
         config.setAllowedHeaders(Arrays.asList("Content-Type", "Accept", "Authorization"));
-        config.setExposedHeaders(Arrays.asList("Authorization")); // si accedes al header en frontend
+        config.setExposedHeaders(Arrays.asList("Authorization"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 
         source.registerCorsConfiguration("/**", config);

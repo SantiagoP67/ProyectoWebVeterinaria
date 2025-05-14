@@ -60,8 +60,8 @@ public class TratamientoServiceTestNaive {
         clienteRepository.save(new Cliente(
             null, "Juan Pérez", "juan@example.com", "3216549870",
             "foto.jpg", "123456789", "juanp", "1234",
-            null, null));
-        
+            null, null, null));
+            
         mascotaRepository.save(new Mascota(
             null, "Firulais", "Labrador", 5, 20.0f,
             "Ninguna", "mascota.jpg", new Date(), new Date(),
@@ -70,7 +70,7 @@ public class TratamientoServiceTestNaive {
         veterinarioRepository.save(new Veterinario(
             null, "Dra. Laura", "987654321", "General",
             "fotoVet.jpg", "Sede A", 1, 0,
-            "laura.vet", "pass", null, null));
+            "laura.vet", "pass", null, null, null));
         
         servicioRepository.save(new Servicio(
             null, "Consulta General", "Chequeo médico completo", 60.0f,
