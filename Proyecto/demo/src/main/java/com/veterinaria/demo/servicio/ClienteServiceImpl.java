@@ -84,4 +84,8 @@ public class ClienteServiceImpl implements ClienteService{
         return clienteRepository.findByNombreContainingIgnoreCase(nombre);
     }
 
+    @Override
+    public Cliente buscarPorNombreUsuario(String nombreUsuario) {
+        return clienteRepository.findByNombreUsuario(nombreUsuario);
+    }
 }

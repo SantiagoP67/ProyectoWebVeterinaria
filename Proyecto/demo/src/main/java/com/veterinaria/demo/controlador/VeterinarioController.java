@@ -7,9 +7,14 @@ import java.util.Map;
 import com.veterinaria.demo.entidad.*;
 import com.veterinaria.demo.repositorio.UserRepository;
 import com.veterinaria.demo.seguridad.CustomUserDetailsService;
+import com.veterinaria.demo.seguridad.JWTGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +34,35 @@ public class VeterinarioController{
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JWTGenerator jwtGenerator;
+
+    @PostMapping("/login")
+    public ResponseEntity<String> loginVeterinario(@RequestBody Veterinario veterinario) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(veterinario.getNombreUsuario(), veterinario.getContrasena())
+        );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String token = jwtGenerator.generateToken(authentication);
+
+        return new ResponseEntity<String>(token, HttpStatus.OK);
+    }
+
+    @GetMapping("/details")
+    public ResponseEntity<Veterinario> buscarVeterinariro(){
+        Veterinario veterinario = veterinarioService.buscarPorNombreUsuario(
+                SecurityContextHolder.getContext().getAuthentication().getName()
+        );
+
+        if(veterinario == null){
+            return new ResponseEntity<Veterinario>(veterinario,HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Veterinario>(veterinario,HttpStatus.OK);
+    }
 
     @GetMapping
     public List<Veterinario> listar(Model model){

@@ -10,4 +10,5 @@ public interface AdministradorService{
     Administrador editarAdministrador(Integer id, Administrador administrador);
     void eliminarAdministrador(Integer id);
     //Administrador validarAdministrador(String username, String password);
+    Administrador buscarAdministradorPorNombreUsuario(String nombreUsuario);
 }

@@ -14,6 +14,7 @@ public interface ClienteService{
     //Cliente validarCliente(String username, String password);
     Integer obtenerIdClientePorNombreUsuario(String nombreUsuario);
     List<Cliente> buscarPorNombre(String nombre);
+    Cliente buscarPorNombreUsuario(String nombreUsuario);
 
 
 }

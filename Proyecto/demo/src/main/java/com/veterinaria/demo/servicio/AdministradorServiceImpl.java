@@ -51,4 +51,9 @@ public class AdministradorServiceImpl implements AdministradorService{
     public Administrador validarAdministrador(String username, String password) {
         return administradorRepository.findByNombreUsuarioAndContrasena(username, password);
     }*/
+
+    @Override
+    public Administrador buscarAdministradorPorNombreUsuario(String nombreUsuario) {
+        return administradorRepository.findByNombreUsuario(nombreUsuario);
+    }
 }

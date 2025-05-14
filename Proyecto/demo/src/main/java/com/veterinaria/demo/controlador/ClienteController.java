@@ -4,8 +4,14 @@ import com.veterinaria.demo.entidad.Cliente;
 import com.veterinaria.demo.entidad.UserEntity;
 import com.veterinaria.demo.repositorio.UserRepository;
 import com.veterinaria.demo.seguridad.CustomUserDetailsService;
+import com.veterinaria.demo.seguridad.JWTGenerator;
+import io.jsonwebtoken.Jwts;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +36,36 @@ public class ClienteController{
 
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JWTGenerator jwtGenerator;
+
+    @PostMapping("/login")
+    public ResponseEntity<String> LoginCLiente(@RequestBody Cliente cliente) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(cliente.getNombreUsuario(), cliente.getContrasena())
+        );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String token = jwtGenerator.generateToken(authentication);
+
+        return new ResponseEntity<String>(token, HttpStatus.OK);
+    }
+
+    @GetMapping("/details")
+    public ResponseEntity<Cliente> buscarCliente(){
+        Cliente cliente = clienteService.buscarPorNombreUsuario(
+                SecurityContextHolder.getContext().getAuthentication().getName()
+        );
+
+        if(cliente == null){
+            return new ResponseEntity<Cliente>(cliente,HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Cliente>(cliente,HttpStatus.OK);
+    }
 
     @GetMapping
     public List<Cliente> listar(){

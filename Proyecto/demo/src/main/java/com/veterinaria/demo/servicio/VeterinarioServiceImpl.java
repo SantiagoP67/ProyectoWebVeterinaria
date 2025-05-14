@@ -130,4 +130,9 @@ public class VeterinarioServiceImpl implements VeterinarioService {
     public Veterinario guardarVeterinario(Veterinario veterinario){
         return veterinarioRepository.save(veterinario);
     }
+
+    @Override
+    public Veterinario buscarPorNombreUsuario(String nombreUsuario) {
+        return veterinarioRepository.findByNombreUsuario(nombreUsuario);
+    }
 }
