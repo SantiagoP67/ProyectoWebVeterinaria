@@ -10,6 +10,7 @@ import java.util.Random;
 import java.text.SimpleDateFormat;
 
 import com.veterinaria.demo.repositorio.*;
+import org.apache.xmlbeans.impl.xb.xsdschema.Attribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -65,8 +66,19 @@ public class DataBaseInitTest implements ApplicationRunner {
     @Autowired
     UserRepository userRepository;
 
+
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
+        // Creación de roles
+        Role role1 = new Role("CLIENTE");
+        roleRepository.save(role1);
+        Role role2 = new Role("VETERINARIO");
+        roleRepository.save(role2);
+        Role role3 = new Role("ADMIN");
+        roleRepository.save(role3);
+
         // Creación de clientes
         Cliente cliente1 = new Cliente(null, "Juan Pérez", "juan.perez@gmail.com", "3001234567",
                 "https://www.mundopsicologos.com/site/article/49504/52397/las-personas-vitamina-0_ai1.jpg",
@@ -1453,4 +1465,3 @@ public class DataBaseInitTest implements ApplicationRunner {
         return userRepository.save(user);
     }
 }
-

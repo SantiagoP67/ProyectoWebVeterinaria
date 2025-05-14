@@ -9,6 +9,7 @@ import java.util.Map;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -20,6 +21,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.veterinaria.demo.controlador.TratamientoController;
 import com.veterinaria.demo.entidad.Mascota;
 import com.veterinaria.demo.entidad.Tratamiento;
+import com.veterinaria.demo.seguridad.JWTAuthenticationFilter;
+import com.veterinaria.demo.seguridad.JWTGenerator;
 import com.veterinaria.demo.servicio.CargaMedicamentosService;
 import com.veterinaria.demo.servicio.MascotaService;
 import com.veterinaria.demo.servicio.TratamientoService;
@@ -31,6 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(controllers = TratamientoController.class)
 @ActiveProfiles("test")
+@AutoConfigureMockMvc(addFilters = false)
 @RunWith(SpringRunner.class)
 public class TratamientoControllerTest {
     @Autowired
@@ -44,6 +48,13 @@ public class TratamientoControllerTest {
 
     @MockBean
     private CargaMedicamentosService cargaMedicamentosService;
+
+    @MockBean
+    private JWTAuthenticationFilter jwtAuthenticationFilter;
+
+    @MockBean
+    private JWTGenerator jwtGenerator;
+
 
     @Autowired
     ObjectMapper objectMapper;

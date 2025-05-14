@@ -79,16 +79,16 @@ public class CrearTratamientoTest {
         botonEnviarLogin.click();
 
         // Paso 3: Registrar métricas iniciales del dashboard
-        // - Esperar a que se carguen las méticas
+        // Esperar a que se carguen las méticas
         wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(By.id("tratamientos-mes"), "0")));
         wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(By.id("ventas-totales"), "0")));
         wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(By.id("ganancias-totales"), "0")));
 
-        // - Cantidad inicial de tratamientos
+        // Cantidad inicial de tratamientos
         WebElement tratamientosInicialesElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("tratamientos-mes")));
         int tratamientosIniciales = Integer.parseInt(tratamientosInicialesElement.getText());
 
-        // - Ventas y ganancias iniciales
+        // Ventas y ganancias iniciales
         WebElement ventasInicialesElement = driver.findElement(By.id("ventas-totales"));
         BigDecimal ventasIniciales = new BigDecimal(ventasInicialesElement.getText().replace("$", "").replace(",", ""));
 
@@ -252,18 +252,18 @@ public class CrearTratamientoTest {
         // === VERIFICACIÓN EN PESTAÑA DE ADMINISTRADOR ===
         // Paso 11: Calcular valores esperados después de crear el tratamiento
         int tratamientosEsperados = tratamientosIniciales + 1;
-        int advantixDisponiblesEsperado = advantixDisponiblesInicial - 2; // Se usaron 2 unidades
-        int advantixVendidosEsperado = advantixVendidosInicial + 2; // Se vendieron 2 unidades
+        int advantixDisponiblesEsperado = advantixDisponiblesInicial - 2;
+        int advantixVendidosEsperado = advantixVendidosInicial + 2;
         BigDecimal cantidadUsada = new BigDecimal(2);
         BigDecimal gananciaMedicamento = precioAdvantix.subtract(precioCompraAdvantix).multiply(cantidadUsada);
 
         BigDecimal ventasEsperadas = ventasIniciales
-                .add(precioCirugia) // precio del servicio
-                .add(precioAdvantix.multiply(cantidadUsada)); // ingreso por venta del medicamento
+                .add(precioCirugia)
+                .add(precioAdvantix.multiply(cantidadUsada));
 
         BigDecimal gananciasEsperadas = gananciasIniciales
-                .add(precioCirugia) // ganancia por servicio
-                .add(gananciaMedicamento); // ganancia neta por medicamento
+                .add(precioCirugia)
+                .add(gananciaMedicamento);
 
         // Paso 12: Volver a pestaña de admin y verificar cambios
         driver.switchTo().window(tabs.get(0));
