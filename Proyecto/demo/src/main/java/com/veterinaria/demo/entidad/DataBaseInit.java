@@ -10,7 +10,6 @@ import java.util.Random;
 import java.text.SimpleDateFormat;
 
 import com.veterinaria.demo.repositorio.*;
-import org.apache.xmlbeans.impl.xb.xsdschema.Attribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
