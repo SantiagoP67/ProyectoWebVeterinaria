@@ -1,5 +1,6 @@
 package com.veterinaria.demo.controlador;
 
+import com.veterinaria.demo.dto.MedicamentoCantidadDTO;
 import com.veterinaria.demo.entidad.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.veterinaria.demo.servicio.TratamientoService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -39,17 +41,53 @@ public class TratamientoController{
     }
 
     @PostMapping("/crear")
-    public ResponseEntity<Tratamiento> crearTratamiento(
-            @RequestBody Tratamiento tratamiento,
+    public ResponseEntity<?> crearTratamiento(
             @RequestParam Integer idMascota,
             @RequestParam Integer idServicio,
             @RequestParam(required = false) Integer idVeterinario,
-            @RequestParam List<Integer> idsMedicamentos) {
-    
-        Tratamiento nuevoTratamiento = tratamientoService.crearTratamiento(tratamiento, idMascota, idServicio, idVeterinario, idsMedicamentos);
-        return ResponseEntity.ok(nuevoTratamiento);
+            @RequestParam List<String> medicamentos
+    ) {
+        try {
+            System.out.println("idMascota: " + idMascota);
+            System.out.println("idServicio: " + idServicio);
+            System.out.println("idVeterinario: " + idVeterinario);
+            System.out.println("Medicamentos recibidos: " + medicamentos);
+
+            List<MedicamentoCantidadDTO> medicamentosCantidad = new ArrayList<>();
+            for (String med : medicamentos) {
+                System.out.println("Procesando medicamento: " + med);
+                String[] parts = med.split(":");
+                if (parts.length != 2) {
+                    System.out.println("Formato inválido en medicamento: " + med);
+                    return ResponseEntity.badRequest().body("Formato inválido para medicamentos");
+                }
+                Integer idMedicamento = Integer.parseInt(parts[0]);
+                Integer cantidad = Integer.parseInt(parts[1]);
+                MedicamentoCantidadDTO dto = new MedicamentoCantidadDTO();
+                dto.setIdMedicamento(idMedicamento);
+                dto.setCantidad(cantidad);
+                medicamentosCantidad.add(dto);
+            }
+
+            Tratamiento tratamiento = new Tratamiento();
+
+            Tratamiento nuevoTratamiento = tratamientoService.crearTratamiento(
+                    tratamiento, idMascota, idServicio, idVeterinario, medicamentosCantidad
+            );
+
+            return ResponseEntity.ok(nuevoTratamiento);
+
+        } catch (RuntimeException e) {
+            System.out.println("Error RuntimeException: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error Exception inesperado: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Error inesperado: " + e.getMessage());
+        }
     }
-    
+
 
     @PutMapping("/editar/{id}")
     public ResponseEntity<Tratamiento> editarTratamiento(
