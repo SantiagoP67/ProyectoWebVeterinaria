@@ -1,15 +1,12 @@
 package com.veterinaria.demo.e2e;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -188,6 +185,26 @@ public class CrearTratamientoTest {
             break;
         }
     }
+
+        /*Verificar datos básicos en listado
+        List<WebElement> celdas = tratamientoCreado.findElements(By.tagName("td"));
+        assertFalse(celdas.get(1).getText().isEmpty(), "La fecha del tratamiento no debe estar vacía");
+        assertEquals("Firulais", celdas.get(2).getText(), "El nombre de la mascota no coincide");
+        assertEquals("Cirugía", celdas.get(3).getText(), "El nombre del servicio no coincide");
+
+        // Ver detalles completos
+        WebElement enlaceDetalles = celdas.get(4).findElement(By.className("btn-detalles"));
+        enlaceDetalles.click();
+
+        assertTrue(wait.until(ExpectedConditions.presenceOfElementLocated(By.id("modal-detalles"))).isDisplayed(), "No se abrió el modal de detalles");
+    WebElement campoDetallesModal = driver.findElement(By.id("detalles"));
+    assertEquals("Tratamiento postoperatorio para recuperación completa", campoDetallesModal.getText(), "Los detalles del tratamiento no coinciden");
+
+    WebElement medicamentoModal = driver.findElement(By.id("medicamento-nombre"));
+    assertEquals("Advantix", medicamentoModal.getText(), "El medicamento no coincide");
+
+    WebElement dosisModal = driver.findElement(By.id("medicamento-dosis"));
+    assertEquals("2", dosisModal.getText(), "La dosis no coincide");*/
 
     // --- PESTAÑA 1: ADMINISTRADOR (revisar métricas actualizadas) ---
     driver.switchTo().window(tabs.get(0));
