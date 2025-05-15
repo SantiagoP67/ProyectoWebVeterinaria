@@ -1,5 +1,6 @@
 package com.veterinaria.demo.servicio;
 
+import com.veterinaria.demo.dto.MedicamentoCantidadDTO;
 import com.veterinaria.demo.entidad.Mascota;
 import com.veterinaria.demo.entidad.Medicamento;
 import com.veterinaria.demo.entidad.Servicio;
@@ -94,10 +95,12 @@ public class TratamientoServiceImpl implements TratamientoService{
     }
 
     @Override
-    public Tratamiento crearTratamiento(Tratamiento tratamiento, Integer idMascota, Integer idServicio, Integer idVeterinario, List<Integer> idsMedicamentos) {
+    public Tratamiento crearTratamiento(Tratamiento tratamiento, Integer idMascota, Integer idServicio, Integer idVeterinario, List<MedicamentoCantidadDTO> medicamentosCantidad) {
 
+        // Buscar entidades asociadas
         Mascota mascota = mascotaRepository.findById(idMascota)
                 .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
+
         Servicio servicio = servicioRepository.findById(idServicio)
                 .orElseThrow(() -> new RuntimeException("Servicio no encontrado"));
 
@@ -107,32 +110,50 @@ public class TratamientoServiceImpl implements TratamientoService{
                     .orElseThrow(() -> new RuntimeException("Veterinario no encontrado"));
         }
 
-        List<Medicamento> medicamentos = medicamentoRepository.findAllById(idsMedicamentos);
-        for (Medicamento medicamento : medicamentos) {
-            if (medicamento.getUnidadesDisponibles() <= 0) {
-                throw new RuntimeException("No hay unidades disponibles del medicamento: " + medicamento.getNombre());
-            }
-        }
+        // Asignar código único, fecha y detalles al tratamiento antes de guardarlo
+        tratamiento.setCodigo("T" + System.currentTimeMillis()); // Código único basado en tiempo
+        tratamiento.setFecha(new Date()); // Fecha actual
+        tratamiento.setDetalles("Tratamiento generado automáticamente");
 
-        tratamiento.setMascota(mascota);
-        tratamiento.setServicio(servicio);
-        tratamiento.setVeterinario(veterinario);
-
+        // Procesar medicamentos
         List<TratamientoMedicamento> tratamientoMedicamentos = new ArrayList<>();
-        for (Medicamento medicamento : medicamentos) {
-            medicamento.setUnidadesDisponibles(medicamento.getUnidadesDisponibles() - 1);
-            medicamento.setUnidadesVendidas(medicamento.getUnidadesVendidas() + 1);
+
+        for (MedicamentoCantidadDTO dto : medicamentosCantidad) {
+            Medicamento medicamento = medicamentoRepository.findById(dto.getIdMedicamento())
+                    .orElseThrow(() -> new RuntimeException("Medicamento con ID " + dto.getIdMedicamento() + " no encontrado"));
+
+            int cantidad = dto.getCantidad();
+
+            // Imprimir stock actual para depurar
+            System.out.println("Medicamento: " + medicamento.getNombre());
+            System.out.println("Unidades disponibles: " + medicamento.getUnidadesDisponibles());
+            System.out.println("Cantidad solicitada: " + cantidad);
+
+            // Verificar stock
+            if (medicamento.getUnidadesDisponibles() < cantidad) {
+                throw new RuntimeException("No hay suficientes unidades disponibles del medicamento: " + medicamento.getNombre());
+            }
+
+            // Actualizar stock del medicamento
+            medicamento.setUnidadesDisponibles(medicamento.getUnidadesDisponibles() - cantidad);
+            medicamento.setUnidadesVendidas(medicamento.getUnidadesVendidas() + cantidad);
             medicamentoRepository.save(medicamento);
 
+            // Asociar medicamento al tratamiento
             TratamientoMedicamento tm = new TratamientoMedicamento();
             tm.setTratamiento(tratamiento);
             tm.setMedicamento(medicamento);
-            tm.setCantidad(1);
+            tm.setCantidad(cantidad);
             tratamientoMedicamentos.add(tm);
         }
 
+        // Asociar relaciones al tratamiento
+        tratamiento.setMascota(mascota);
+        tratamiento.setServicio(servicio);
+        tratamiento.setVeterinario(veterinario);
         tratamiento.setTratamientoMedicamentos(tratamientoMedicamentos);
 
+        // Guardar el tratamiento completo
         return tratamientoRepository.save(tratamiento);
     }
 

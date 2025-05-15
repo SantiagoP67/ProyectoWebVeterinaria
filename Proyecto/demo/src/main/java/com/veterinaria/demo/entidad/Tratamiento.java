@@ -21,6 +21,8 @@ public class Tratamiento {
     @Column(nullable = false)
     private String codigo;
 
+
+
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
     private Date fecha;
@@ -55,5 +57,6 @@ public class Tratamiento {
         this.fecha = fecha;
         this.detalles = detalles;
     }
+
 
 }
