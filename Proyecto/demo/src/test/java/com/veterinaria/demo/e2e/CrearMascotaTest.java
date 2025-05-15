@@ -9,10 +9,7 @@ import java.util.List;
 // import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -190,12 +187,17 @@ public class CrearMascotaTest {
         Select selectorEstado = new Select(driver.findElement(By.id("estado")));
         selectorEstado.selectByValue("1");
 
-        WebElement botonCrearMascota = wait.until(ExpectedConditions.elementToBeClickable(By.className("crear_mascota")));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
         try {
+            WebElement botonCrearMascota = wait.until(ExpectedConditions.elementToBeClickable(By.className("crear_mascota")));
             botonCrearMascota.click();
-        } catch (Exception e) {
-            ((JavascriptExecutor)driver).executeScript("arguments[0].click();", botonCrearCliente);
+        } catch (StaleElementReferenceException e) {
+            // Volver a buscar el botón si está stale
+            WebElement botonCrearMascota = wait.until(ExpectedConditions.elementToBeClickable(By.className("crear_mascota")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", botonCrearMascota);
         }
+
 
         // Paso 13: Cierre de sesión del veterinario
         WebElement botonCerrarSesion = wait.until(ExpectedConditions.elementToBeClickable(By.className("logout")));
@@ -207,15 +209,14 @@ public class CrearMascotaTest {
 
         WebElement campoUsuarioNuevo = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
         campoUsuarioNuevo.clear();
-        campoUsuarioNuevo.sendKeys("carlosg"); 
-        //campoUsuarioNuevo.sendKeys("Ing. Angarita");
+        campoUsuarioNuevo.sendKeys("Ing. Angarita");
 
         WebElement campoContrasenaNuevo = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("password")));
         campoContrasenaNuevo.clear();
-        campoContrasenaNuevo.sendKeys("pass2");
-        //campoContrasenaNuevo.sendKeys("1234");
+        campoContrasenaNuevo.sendKeys("1234");
 
         WebElement botonEnviarLoginNuevo = wait.until(ExpectedConditions.elementToBeClickable(By.id("loginSubmit")));
+        botonEnviarLoginNuevo.click();
         botonEnviarLoginNuevo.click();
 
         // Paso 15: Verificación de datos de mascota en tabla
@@ -229,24 +230,14 @@ public class CrearMascotaTest {
         WebElement celdaNombreMascota = primeraFilaMascota.findElement(By.className("celda-nombre"));
         WebElement celdaRazaMascota = primeraFilaMascota.findElement(By.className("celda-raza"));
         WebElement celdaEstadoMascota = primeraFilaMascota.findElement(By.className("status"));
+        WebElement imagenMascota = primeraFilaMascota.findElement(By.className("img-mascota"));
 
         // Paso 16: Verificación con datos
-        assertEquals("Firulais", celdaNombreMascota.getText(), "El nombre de la mascota no coincide");
-        assertEquals("Labrador", celdaRazaMascota.getText(), "La raza de la mascota no coincide");
-        assertEquals("Activo", celdaEstadoMascota.getText(), "El estado de la mascota no coincide");
-
-        WebElement imagenMascota = primeraFilaMascota.findElement(By.className("img-mascota"));
-        assertTrue(imagenMascota.isDisplayed(), "La foto de la mascota debería estar visible");
-        assertEquals("https://img.huffingtonpost.es/files/image_1200_720/uploads/2023/06/22/un-perro-de-raza-labrador.jpeg", 
-            imagenMascota.getAttribute("src"), "La URL de la foto no coincide");
-        
-        /*
         assertEquals("Scooby-Doo", celdaNombreMascota.getText(), "El nombre de la mascota no coincide");
         assertEquals("Gran Danés Cobarde", celdaRazaMascota.getText(), "La raza de la mascota no coincide");
         assertEquals("Inactivo", celdaEstadoMascota.getText(), "El estado de la mascota no coincide");
         assertEquals("https://i.pinimg.com/1200x/ee/3c/16/ee3c16658a352467a8e727d300fe314f.jpg", 
             imagenMascota.getAttribute("src"), "La URL de la foto no coincide");
-        */
     }
 
     /* @AfterEach

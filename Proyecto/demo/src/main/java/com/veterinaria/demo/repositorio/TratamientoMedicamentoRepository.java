@@ -14,6 +14,8 @@ public interface TratamientoMedicamentoRepository extends JpaRepository<Tratamie
            "JOIN tm.medicamento m")
     BigDecimal sumPrecioVentaMedicamentos();
 
-    
+    @Query("SELECT COALESCE(SUM(m.precioCompra * tm.cantidad), 0) " +
+        "FROM TratamientoMedicamento tm " +
+        "JOIN tm.medicamento m")
+    BigDecimal sumPrecioCompraMedicamentos();
 }
-

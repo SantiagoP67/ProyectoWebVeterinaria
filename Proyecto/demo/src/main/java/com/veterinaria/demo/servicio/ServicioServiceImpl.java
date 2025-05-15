@@ -33,20 +33,27 @@ public class ServicioServiceImpl implements ServicioService {
 
     @Override
     public BigDecimal calcularVentasTotales() {
-        // 1. Sumar directamente el precio de venta de todos los medicamentos vendidos
+        // Sum of all medication sales
         BigDecimal totalMedicamentos = tratamientoMedicamentoRepository.sumPrecioVentaMedicamentos();
         
-        return totalMedicamentos != null ? totalMedicamentos : BigDecimal.ZERO;
+        // Sum of all service prices
+        BigDecimal totalServicios = servicioRepository.sumPrecioBaseAllServicios();
+        
+        // Combine both
+        return (totalMedicamentos != null ? totalMedicamentos : BigDecimal.ZERO)
+                .add(totalServicios != null ? totalServicios : BigDecimal.ZERO);
     }
     
     @Override
     public BigDecimal calcularGananciasTotales() {
-        // 1. Sumar ventas de medicamentos
-        BigDecimal ventasMedicamentos = this.calcularVentasTotales();
+        // Sum of medication profits (price - cost)
+        BigDecimal gananciaMedicamentos = tratamientoMedicamentoRepository.sumPrecioVentaMedicamentos()
+                .subtract(tratamientoMedicamentoRepository.sumPrecioCompraMedicamentos());
         
-        // 2. Sumar precio base de TODOS los servicios
-        BigDecimal totalServicios = servicioRepository.sumPrecioBaseAllServicios();
+        // Sum of service prices (assuming full profit for services)
+        BigDecimal gananciaServicios = servicioRepository.sumPrecioBaseAllServicios();
         
-        return ventasMedicamentos.add(totalServicios != null ? totalServicios : BigDecimal.ZERO);
+        return (gananciaMedicamentos != null ? gananciaMedicamentos : BigDecimal.ZERO)
+                .add(gananciaServicios != null ? gananciaServicios : BigDecimal.ZERO);
     }
 }
