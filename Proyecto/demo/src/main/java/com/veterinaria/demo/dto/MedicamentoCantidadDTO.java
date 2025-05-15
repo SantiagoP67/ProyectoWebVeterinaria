@@ -11,4 +11,9 @@ public class MedicamentoCantidadDTO {
         this.idMedicamento = idMedicamento;
         this.cantidad = cantidad;
     }
+
+    public MedicamentoCantidadDTO() {
+    // Constructor vacío requerido por frameworks como Spring o Jackson
+    }
+
 }
