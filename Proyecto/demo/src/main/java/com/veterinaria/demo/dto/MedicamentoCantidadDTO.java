@@ -6,4 +6,9 @@ import lombok.Data;
 public class MedicamentoCantidadDTO {
     private Integer idMedicamento;
     private Integer cantidad;
+
+    public MedicamentoCantidadDTO(Integer idMedicamento, Integer cantidad) {
+        this.idMedicamento = idMedicamento;
+        this.cantidad = cantidad;
+    }
 }

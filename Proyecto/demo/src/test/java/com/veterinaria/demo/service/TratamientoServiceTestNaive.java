@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
+import com.veterinaria.demo.dto.MedicamentoCantidadDTO;
 import com.veterinaria.demo.entidad.Cliente;
 import com.veterinaria.demo.entidad.Mascota;
 import com.veterinaria.demo.entidad.Medicamento;
@@ -97,63 +98,66 @@ public class TratamientoServiceTestNaive {
             null));
     }
 
-    @Test
-    public void TratamientoService_crearTratamiento_Tratamiento() {
-        // Arrange
-        Tratamiento tratamiento = new Tratamiento();
-        tratamiento.setCodigo("TRT001");
-        tratamiento.setFecha(new Date());
-        tratamiento.setDetalles("Consulta de rutina");
+@Test
+public void TratamientoService_crearTratamiento_Tratamiento() {
+    // Arrange
+    Tratamiento tratamiento = new Tratamiento();
 
-        Integer idMascota = mascotaRepository.findAll().get(0).getIdMascota();
-        Integer idServicio = servicioRepository.findAll().get(0).getIdServicio();
-        Integer idVeterinario = veterinarioRepository.findAll().get(0).getIdVeterinario();
-        
-        Medicamento medicamento1 = new Medicamento();
-        medicamento1.setNombre("Paracetamol");
-        medicamento1.setPrecioCompra(10.0f);
-        medicamento1.setPrecioVenta(15.0f);
-        medicamento1.setUnidadesDisponibles(10);
-        medicamento1.setUnidadesVendidas(0);
-        medicamento1 = medicamentoRepository.save(medicamento1);
+    Integer idMascota = mascotaRepository.findAll().get(0).getIdMascota();
+    Integer idServicio = servicioRepository.findAll().get(0).getIdServicio();
+    Integer idVeterinario = veterinarioRepository.findAll().get(0).getIdVeterinario();
 
-        Medicamento medicamento2 = new Medicamento();
-        medicamento2.setNombre("Ibuprofeno");
-        medicamento2.setPrecioCompra(12.0f);
-        medicamento2.setPrecioVenta(18.0f);
-        medicamento2.setUnidadesDisponibles(8);
-        medicamento2.setUnidadesVendidas(0);
-        medicamento2 = medicamentoRepository.save(medicamento2);
+    Medicamento medicamento1 = new Medicamento();
+    medicamento1.setNombre("Paracetamol");
+    medicamento1.setPrecioCompra(10.0f);
+    medicamento1.setPrecioVenta(15.0f);
+    medicamento1.setUnidadesDisponibles(10);
+    medicamento1.setUnidadesVendidas(0);
+    medicamento1 = medicamentoRepository.save(medicamento1);
 
-        List<Integer> idsMedicamentos = Arrays.asList(medicamento1.getIdMedicamento(), medicamento2.getIdMedicamento());
+    Medicamento medicamento2 = new Medicamento();
+    medicamento2.setNombre("Ibuprofeno");
+    medicamento2.setPrecioCompra(12.0f);
+    medicamento2.setPrecioVenta(18.0f);
+    medicamento2.setUnidadesDisponibles(8);
+    medicamento2.setUnidadesVendidas(0);
+    medicamento2 = medicamentoRepository.save(medicamento2);
 
-        // Act
-        Tratamiento newTratamiento = tratamientoService.crearTratamiento(
-            tratamiento, 
-            idMascota, 
-            idServicio, 
-            idVeterinario, 
-            idsMedicamentos
-        );
+    // Crear lista de DTOs con cantidades
+    List<MedicamentoCantidadDTO> medicamentosCantidad = Arrays.asList(
+        new MedicamentoCantidadDTO(medicamento1.getIdMedicamento(), 1),
+        new MedicamentoCantidadDTO(medicamento2.getIdMedicamento(), 1)
+    );
 
-        // Assert
-        assertThat(newTratamiento).isNotNull();
-        assertThat(newTratamiento.getIdTratamiento()).isNotNull();
-        assertThat(newTratamiento.getCodigo()).isEqualTo("TRT001");        
-        assertThat(newTratamiento.getMascota()).isNotNull();
-        assertThat(newTratamiento.getMascota().getIdMascota()).isEqualTo(idMascota);        
-        assertThat(newTratamiento.getServicio()).isNotNull();
-        assertThat(newTratamiento.getServicio().getIdServicio()).isEqualTo(idServicio);        
-        assertThat(newTratamiento.getVeterinario()).isNotNull();
-        assertThat(newTratamiento.getVeterinario().getIdVeterinario()).isEqualTo(idVeterinario);        
-        assertThat(newTratamiento.getTratamientoMedicamentos()).hasSize(2);        
-        Medicamento updatedMed1 = medicamentoRepository.findById(medicamento1.getIdMedicamento()).orElse(null);
-        Medicamento updatedMed2 = medicamentoRepository.findById(medicamento2.getIdMedicamento()).orElse(null);        
-        assertThat(updatedMed1.getUnidadesDisponibles()).isEqualTo(9);
-        assertThat(updatedMed1.getUnidadesVendidas()).isEqualTo(1);        
-        assertThat(updatedMed2.getUnidadesDisponibles()).isEqualTo(7);
-        assertThat(updatedMed2.getUnidadesVendidas()).isEqualTo(1);
-    }
+    // Act
+    Tratamiento newTratamiento = tratamientoService.crearTratamiento(
+        tratamiento, 
+        idMascota, 
+        idServicio, 
+        idVeterinario, 
+        medicamentosCantidad
+    );
+
+    // Assert
+    assertThat(newTratamiento).isNotNull();
+    assertThat(newTratamiento.getIdTratamiento()).isNotNull();
+    assertThat(newTratamiento.getCodigo()).startsWith("T");        
+    assertThat(newTratamiento.getMascota()).isNotNull();
+    assertThat(newTratamiento.getMascota().getIdMascota()).isEqualTo(idMascota);        
+    assertThat(newTratamiento.getServicio()).isNotNull();
+    assertThat(newTratamiento.getServicio().getIdServicio()).isEqualTo(idServicio);        
+    assertThat(newTratamiento.getVeterinario()).isNotNull();
+    assertThat(newTratamiento.getVeterinario().getIdVeterinario()).isEqualTo(idVeterinario);        
+    assertThat(newTratamiento.getTratamientoMedicamentos()).hasSize(2);        
+
+    // Verificar cambios en stock
+    Medicamento updatedMed1 = medicamentoRepository.findById(medicamento1.getIdMedicamento()).orElse(null);
+    Medicamento updatedMed2 = medicamentoRepository.findById(medicamento2.getIdMedicamento()).orElse(null);        
+    assertThat(updatedMed1.getUnidadesDisponibles()).isEqualTo(9);
+    assertThat(updatedMed1.getUnidadesVendidas()).isEqualTo(1);        
+    assertThat(updatedMed2.getUnidadesDisponibles()).isEqualTo(7);
+    assertThat(updatedMed2.getUnidadesVendidas()).isEqualTo(1);
+}
 
     @Test
     public void TratamientoService_obtenerTodosTratamientos_NotEmptyListTratamientos() {
