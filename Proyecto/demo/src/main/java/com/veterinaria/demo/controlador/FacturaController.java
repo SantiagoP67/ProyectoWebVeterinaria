@@ -77,6 +77,4 @@ public class FacturaController {
         facturaService.pagarFacturas(idsFacturas);
         return ResponseEntity.ok("Facturas pagadas correctamente");
     }
-
-
 }
