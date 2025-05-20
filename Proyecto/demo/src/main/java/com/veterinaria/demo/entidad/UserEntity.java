@@ -24,12 +24,12 @@ public class UserEntity {
     private String username;
 
     private String password;
-
+    
+    @Builder.Default
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "idUser"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "idRol"))
     private List<Role> roles = new ArrayList<>();
-
 }
