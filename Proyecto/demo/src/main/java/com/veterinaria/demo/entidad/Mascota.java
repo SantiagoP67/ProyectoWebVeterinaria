@@ -70,6 +70,4 @@ public class Mascota {
         this.fechaSalida = fechaSalida;
         this.estado = estado;
     }
-
-
 }

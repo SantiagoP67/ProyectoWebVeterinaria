@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 public class MedicamentoServiceImpl implements MedicamentoService{
     @Autowired
@@ -23,5 +22,4 @@ public class MedicamentoServiceImpl implements MedicamentoService{
     public Medicamento obtenerMedicamentoPorId(Integer id) {
         return medicamentoRepository.findById(id).orElse(null);
     }
-
 }

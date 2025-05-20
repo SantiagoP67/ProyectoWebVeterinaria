@@ -13,6 +13,4 @@ public interface FacturaRepository extends JpaRepository<Factura, Integer> {
 
     @Query("SELECT f FROM Factura f WHERE f.cliente.idCliente = :idCliente")
     List<Factura> findAllByCliente(@Param("idCliente") Integer idCliente);
-
-
 }

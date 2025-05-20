@@ -19,5 +19,4 @@ public interface TratamientoService{
     List<Tratamiento> obtenerTratamientosPorMascota(Integer idMascota);
     float calcularGananciasTotales();
     float calcularVentasTotales();
-
 }

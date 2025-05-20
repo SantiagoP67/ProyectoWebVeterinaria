@@ -43,6 +43,4 @@ public class Cita {
         this.sede = sede;
         this.estado = estado;
     }
-
-
 }

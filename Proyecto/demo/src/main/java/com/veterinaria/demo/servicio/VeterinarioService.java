@@ -27,5 +27,4 @@ public interface VeterinarioService {
     List<Veterinario> obtenerVeterinariosInactivos();
     Veterinario guardarVeterinario(Veterinario veterinario);
     Veterinario buscarPorNombreUsuario(String nombreUsuario);
-
 }

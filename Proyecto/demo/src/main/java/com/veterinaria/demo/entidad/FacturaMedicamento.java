@@ -25,6 +25,4 @@ public class FacturaMedicamento {
 
     @Column(nullable = false)
     private Integer cantidad;
-
-
 }

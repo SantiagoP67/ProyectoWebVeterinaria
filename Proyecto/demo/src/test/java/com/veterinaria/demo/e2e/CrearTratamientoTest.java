@@ -265,11 +265,29 @@ public class CrearTratamientoTest {
                 .add(precioCirugia)
                 .add(gananciaMedicamento);
 
-        // Paso 12: Volver a pestaña de admin y verificar cambios
+        // Paso 12: Volver a pestaña de admin, cerrar sesión y volver a ingresar
         driver.switchTo().window(tabs.get(0));
-        driver.navigate().refresh();
+        
+        // Cerrar sesión        
+        WebElement botonCerrarSesion = wait.until(ExpectedConditions.elementToBeClickable(By.className("logout")));
+        botonCerrarSesion.click();
+        
+        // Volver a iniciar sesión como admin
+        WebElement botonLoginAdmin = wait.until(ExpectedConditions.elementToBeClickable(By.className("login-btn")));
+        botonLoginAdmin.click();
 
-        // - Esperar a que se carguen las méticas
+        WebElement campoUsuarioAdmin = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
+        campoUsuarioAdmin.clear();
+        campoUsuarioAdmin.sendKeys("admin");
+
+        WebElement campoContrasenaAdmin = driver.findElement(By.id("password"));
+        campoContrasenaAdmin.clear();
+        campoContrasenaAdmin.sendKeys("1234");
+
+        WebElement botonEnviarLoginAdmin = driver.findElement(By.id("loginSubmit"));
+        botonEnviarLoginAdmin.click();
+
+        // Esperar a que se carguen las métricas
         wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(By.id("tratamientos-mes"), "0")));
         wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(By.id("ventas-totales"), "0")));
         wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(By.id("ganancias-totales"), "0")));

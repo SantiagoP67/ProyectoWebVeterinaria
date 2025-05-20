@@ -57,6 +57,4 @@ public class Tratamiento {
         this.fecha = fecha;
         this.detalles = detalles;
     }
-
-
 }

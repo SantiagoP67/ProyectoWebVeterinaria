@@ -1,9 +1,6 @@
 package com.veterinaria.demo.seguridad;
 
-
-
 import io.jsonwebtoken.security.Keys;
-import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -47,5 +44,4 @@ public class JWTGenerator {
             return false;
         }
     }
-
 }

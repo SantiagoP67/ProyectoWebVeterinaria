@@ -57,5 +57,4 @@ public class Cliente {
         this.nombreUsuario = nombreUsuario;
         this.contrasena = contrasena;
     }
-
 }

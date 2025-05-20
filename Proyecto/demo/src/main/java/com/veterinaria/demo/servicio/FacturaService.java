@@ -15,5 +15,4 @@ public interface FacturaService{
     List<Factura> obtenerFacturasPorIdCliente(Integer idCliente);
     void pagarFactura(Factura factura);
     void pagarFacturas(List<Integer> idsFacturas);
-
 }

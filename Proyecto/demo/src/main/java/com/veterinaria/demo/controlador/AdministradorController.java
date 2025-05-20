@@ -1,9 +1,7 @@
 package com.veterinaria.demo.controlador;
 
 import com.veterinaria.demo.entidad.Administrador;
-import com.veterinaria.demo.entidad.Cliente;
 import com.veterinaria.demo.entidad.UserEntity;
-import com.veterinaria.demo.entidad.Veterinario;
 import com.veterinaria.demo.repositorio.UserRepository;
 import com.veterinaria.demo.seguridad.CustomUserDetailsService;
 import com.veterinaria.demo.seguridad.JWTGenerator;

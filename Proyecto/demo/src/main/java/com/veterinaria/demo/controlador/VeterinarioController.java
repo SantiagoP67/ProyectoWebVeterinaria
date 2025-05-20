@@ -1,8 +1,6 @@
 package com.veterinaria.demo.controlador;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.veterinaria.demo.entidad.*;
 import com.veterinaria.demo.repositorio.UserRepository;

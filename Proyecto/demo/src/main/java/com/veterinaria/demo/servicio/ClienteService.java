@@ -15,6 +15,4 @@ public interface ClienteService{
     Integer obtenerIdClientePorNombreUsuario(String nombreUsuario);
     List<Cliente> buscarPorNombre(String nombre);
     Cliente buscarPorNombreUsuario(String nombreUsuario);
-
-
 }

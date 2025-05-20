@@ -5,7 +5,6 @@ import com.veterinaria.demo.entidad.UserEntity;
 import com.veterinaria.demo.repositorio.UserRepository;
 import com.veterinaria.demo.seguridad.CustomUserDetailsService;
 import com.veterinaria.demo.seguridad.JWTGenerator;
-import io.jsonwebtoken.Jwts;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -56,5 +56,4 @@ public class Servicio {
         this.imagenFrontal = imagenFrontal;
         this.imagenTrasera = imagenTrasera;
     }
-
 }
