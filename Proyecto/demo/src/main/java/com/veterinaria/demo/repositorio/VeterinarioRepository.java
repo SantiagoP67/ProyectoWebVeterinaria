@@ -1,6 +1,8 @@
 package com.veterinaria.demo.repositorio;
 
 import java.util.List;
+
+import com.veterinaria.demo.entidad.Medicamento;
 import com.veterinaria.demo.entidad.Veterinario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -15,4 +17,6 @@ public interface VeterinarioRepository extends JpaRepository<Veterinario, Intege
     List<Veterinario> findByEstado(Integer estado);
     Veterinario findByIdVeterinario(Integer idVeterinario);
     Veterinario findByNombreUsuario(String nombreusuario);
+    List<Veterinario> findByNombreContainingIgnoreCase(String nombre);
+
 }
