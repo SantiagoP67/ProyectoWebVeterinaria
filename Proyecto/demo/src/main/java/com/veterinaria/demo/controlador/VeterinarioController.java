@@ -212,4 +212,10 @@ public class VeterinarioController{
 
         return ResponseEntity.ok("Estado del veterinario cambiado exitosamente");
     }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<List<Veterinario>> buscarPorNombre(@RequestParam String nombre) {
+        List<Veterinario> veterinarios = veterinarioService.buscarPorNombreUsuario(nombre);
+        return ResponseEntity.ok(veterinarios);
+    }
 }
