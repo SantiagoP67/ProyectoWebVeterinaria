@@ -56,4 +56,10 @@ public class MedicamentoController {
     
         return ResponseEntity.ok(medicamentos);
     }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<List<Medicamento>> buscarPorNombre(@RequestParam String nombre) {
+        List<Medicamento> medicamentos = medicamentoService.buscarPorNombre(nombre);
+        return ResponseEntity.ok(medicamentos);
+    }
 }

@@ -1,12 +1,12 @@
 package com.veterinaria.demo.servicio;
 
-import com.veterinaria.demo.entidad.Medicamento;
-import com.veterinaria.demo.repositorio.MedicamentoRepository;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.veterinaria.demo.entidad.Medicamento;
+import com.veterinaria.demo.repositorio.MedicamentoRepository;
 
 @Service
 public class MedicamentoServiceImpl implements MedicamentoService {
@@ -21,5 +21,10 @@ public class MedicamentoServiceImpl implements MedicamentoService {
     @Override
     public Medicamento obtenerMedicamentoPorId(Integer id) {
         return medicamentoRepository.findById(id).orElse(null);
+    }
+
+      @Override
+    public List<Medicamento> buscarPorNombre(String nombre) {
+        return medicamentoRepository.findByNombreContainingIgnoreCase(nombre);
     }
 }
