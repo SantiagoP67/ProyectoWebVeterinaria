@@ -26,4 +26,4 @@
 ## 📅 Agenda tu cita fácilmente  
 Queremos que cuidar de tu mascota sea sencillo. ¡Reserva tu cita en minutos!  
 📞 **Llámanos:** +XX XXXX XXXX  
-📧 **Escríbenos:** contacto@beaglegiggle.com  
+📧 **Escríbenos:** beaglegiggle25@gmail.com  
