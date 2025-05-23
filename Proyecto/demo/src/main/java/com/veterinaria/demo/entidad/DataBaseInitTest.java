@@ -725,19 +725,19 @@ public class DataBaseInitTest implements ApplicationRunner {
         MetodoPago metodoPago5 = new MetodoPago(null, "Transferencia bancaria", null);
         metodoPagoRepository.save(metodoPago5);*/
 
-        // Creación de mascotas
+         // Creación de mascotas
         Mascota mascota1 = new Mascota(null, "Firulais", "Labrador", 3, 20.5f, "Otitis",
                 "https://img.huffingtonpost.es/files/image_1200_720/uploads/2023/06/22/un-perro-de-raza-labrador.jpeg",
                 new Date(), new Date(), null, 0, cliente2);
         mascotaRepository.save(mascota1);
 
         Mascota mascota2 = new Mascota(null, "Max", "Bulldog", 2, 15.0f, "Problemas respiratorios",
-                "https://www.rover.com/blog/wp-content/uploads/2015/03/black-dog.jpg", new Date(), new Date(), null, 1,
+                "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_58776564-768x491.jpg", new Date(), new Date(), null, 1,
                 cliente2);
         mascotaRepository.save(mascota2);
 
         Mascota mascota3 = new Mascota(null, "Luna", "Beagle", 4, 12.3f, "Alergia alimentaria",
-                "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
+                "https://media.istockphoto.com/id/1411469044/es/foto/beagle-perro-marr%C3%B3n-sentado-en-el-camino-en-la-ubicaci%C3%B3n-del-parque-natural-de-oto%C3%B1o-entre.jpg?s=612x612&w=0&k=20&c=eS96wdysCc3yDbkSAWbU-VFFWVxZiJ3O-MuFtCkIqPw=",
                 new Date(), new Date(), null, 0, cliente2);
         mascotaRepository.save(mascota3);
 
@@ -752,17 +752,17 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota5);
 
         Mascota mascota6 = new Mascota(null, "Toby", "Chihuahua", 1, 3.0f, "Hipoglucemia",
-                "https://www.rover.com/blog/wp-content/uploads/2015/03/black-dog.jpg", new Date(), new Date(), null, 0,
+                "https://media.istockphoto.com/id/1313232209/es/foto/chihuahua-marr%C3%B3n-sentado-en-el-suelo-perro-peque%C3%B1o-en-casa-asi%C3%A1tica-sentirse-feliz-y-relajarse.jpg?s=612x612&w=0&k=20&c=O8Ip4kGzyVBI9_BAzxLbbLy908-SUVwob_G8yt-LCl0=", new Date(), new Date(), null, 0,
                 cliente2);
         mascotaRepository.save(mascota6);
 
         Mascota mascota7 = new Mascota(null, "Daisy", "Dálmata", 3, 18.0f, "Sordera congénita",
-                "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
+                "https://www.zaunk.com/wp-content/uploads/2020/05/dalmata-caracteristicas-scaled.jpg",
                 new Date(), new Date(), null, 1, cliente7);
         mascotaRepository.save(mascota7);
 
         Mascota mascota8 = new Mascota(null, "Charlie", "Boxer", 4, 22.0f, "Cardiopatía",
-                "https://cdn.dogsplanet.com/wp-content/uploads/2019/10/beagle-sentado.jpg", new Date(), new Date(),
+                "https://media.istockphoto.com/id/1489772212/es/foto/perro-boxer.jpg?s=612x612&w=0&k=20&c=VbmTObu_ymhKolxjiOfirLEnV3uvYwlnJurA8GzLWbA=", new Date(), new Date(),
                 null, 1, cliente8);
         mascotaRepository.save(mascota8);
 
@@ -777,7 +777,7 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota10);
 
         Mascota mascota11 = new Mascota(null, "Lola", "Bulldog Francés", 2, 12.0f, "Problemas oculares",
-                "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
+                "https://blog.agrocampo.com.co/wp-content/uploads/2021/11/perro-bulldog-ingles.jpg",
                 new Date(), new Date(), null, 0, cliente11);
         mascotaRepository.save(mascota11);
 
@@ -792,7 +792,7 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota13);
 
         Mascota mascota14 = new Mascota(null, "Milo", "Beagle", 2, 11.0f, "Epilepsia",
-                "https://www.rover.com/blog/wp-content/uploads/2015/03/black-dog.jpg", new Date(), new Date(), null, 1,
+                "https://images.unsplash.com/photo-1572566830488-069bcc7fbcec?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGJlYWdsZXxlbnwwfHwwfHx8MA%3D%3D", new Date(), new Date(), null, 1,
                 cliente14);
         mascotaRepository.save(mascota14);
 
@@ -807,17 +807,17 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota16);
 
         Mascota mascota17 = new Mascota(null, "Lucky", "Chihuahua", 2, 4.0f, "Luxación de rótula",
-                "https://img.huffingtonpost.es/files/image_1200_720/uploads/2023/06/22/un-perro-de-raza-labrador.jpeg",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS43MdemPUJFdMPI7qQ-migHdyTOLuB8XUyXJfy34uvVT3Go5SwBMq1_Z6F4gqrJX75i9o&usqp=CAU",
                 new Date(), new Date(), null, 1, cliente17);
         mascotaRepository.save(mascota17);
 
         Mascota mascota18 = new Mascota(null, "Rex", "Dálmata", 3, 17.0f, "Cálculos urinarios",
-                "https://www.rover.com/blog/wp-content/uploads/2015/03/black-dog.jpg", new Date(), new Date(), null, 1,
+                "https://www.patasencasa.com/sites/default/files/styles/article_detail_1200/public/2024-07/perro%20d%C3%A1lmata_0.jpg.webp?itok=SO8y85Ya", new Date(), new Date(), null, 1,
                 cliente18);
         mascotaRepository.save(mascota18);
 
         Mascota mascota19 = new Mascota(null, "Sasha", "Boxer", 4, 21.0f, "Problemas cardíacos",
-                "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
+                "https://www.nylabone.com/-/media/project/oneweb/nylabone/images/dog101/breeds-a-z/boxer.jpg",
                 new Date(), new Date(), null, 1, cliente19);
         mascotaRepository.save(mascota19);
 
@@ -837,7 +837,7 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota22);
 
         Mascota mascota23 = new Mascota(null, "Mia", "Beagle", 2, 10.5f, "Problemas digestivos",
-                "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
+                "https://images.unsplash.com/photo-1606833695155-e3498374e701?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE1fHx8ZW58MHx8fHx8",
                 new Date(), new Date(), null, 1, cliente23);
         mascotaRepository.save(mascota23);
 
@@ -852,17 +852,17 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota25);
 
         Mascota mascota26 = new Mascota(null, "Roco", "Chihuahua", 2, 3.5f, "Problemas de conducta",
-                "https://www.rover.com/blog/wp-content/uploads/2015/03/black-dog.jpg", new Date(), new Date(), null, 1,
+                "https://img.freepik.com/foto-gratis/adorable-perro-chihuahua-afuera-hierba_23-2149880115.jpg?semt=ais_hybrid&w=740", new Date(), new Date(), null, 1,
                 cliente26);
         mascotaRepository.save(mascota26);
 
         Mascota mascota27 = new Mascota(null, "Luna", "Dálmata", 3, 16.0f, "Problemas hepáticos",
-                "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
+                "https://www.patasencasa.com/sites/default/files/styles/article_detail_desktop/public/inline-images/dalmatian_dog_head_pet_canine_breed_animal_mammal-1087071.jpg.webp?itok=712uE4eM",
                 new Date(), new Date(), null, 1, cliente27);
         mascotaRepository.save(mascota27);
 
         Mascota mascota28 = new Mascota(null, "Rocky", "Boxer", 4, 20.0f, "Problemas respiratorios",
-                "https://cdn.dogsplanet.com/wp-content/uploads/2019/10/beagle-sentado.jpg", new Date(), new Date(),
+                "https://www.escuelacaninamaya.com/images/xboxer.jpg.pagespeed.ic.Tt_reX5QUy.jpg", new Date(), new Date(),
                 null, 1, cliente28);
         mascotaRepository.save(mascota28);
 
@@ -877,7 +877,7 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota30);
 
         Mascota mascota31 = new Mascota(null, "Daisy", "Bulldog Francés", 2, 13.0f, "Problemas de audición",
-                "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
+                "https://www.zooplus.es/magazine/wp-content/uploads/2017/10/fotolia_58776564-768x491.jpg",
                 new Date(), new Date(), null, 1, cliente31);
         mascotaRepository.save(mascota31);
 
@@ -892,7 +892,7 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota33);
 
         Mascota mascota34 = new Mascota(null, "Milo", "Beagle", 2, 10.0f, "Problemas de alergia",
-                "https://www.rover.com/blog/wp-content/uploads/2015/03/black-dog.jpg", new Date(), new Date(), null, 1,
+                "https://plus.unsplash.com/premium_photo-1681883365008-49aee3640625?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YmVhZ2xlfGVufDB8fDB8fHww", new Date(), new Date(), null, 1,
                 cliente34);
         mascotaRepository.save(mascota34);
 
@@ -907,17 +907,17 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota36);
 
         Mascota mascota37 = new Mascota(null, "Lucky", "Chihuahua", 2, 3.2f, "Problemas de ansiedad",
-                "https://img.huffingtonpost.es/files/image_1200_720/uploads/2023/06/22/un-perro-de-raza-labrador.jpeg",
+                "https://cdn.wamiz.fr/cdn-cgi/image/format=auto,quality=80,width=532,height=532,fit=cover/animal/breed/pictures/674ed014e4587255595455.jpg",
                 new Date(), new Date(), null, 1, cliente37);
         mascotaRepository.save(mascota37);
 
         Mascota mascota38 = new Mascota(null, "Rex", "Dálmata", 3, 15.5f, "Problemas de audición",
-                "https://www.rover.com/blog/wp-content/uploads/2015/03/black-dog.jpg", new Date(), new Date(), null, 1,
+                "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-07Dalmatian1.jpg?itok=B_1aRoJh", new Date(), new Date(), null, 1,
                 cliente38);
         mascotaRepository.save(mascota38);
 
         Mascota mascota39 = new Mascota(null, "Sasha", "Boxer", 4, 19.0f, "Problemas cardíacos",
-                "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
+                "https://adiestrar-perros.com/wp-content/uploads/2024/12/boxer-min-scaled-1024x1024-1.webp",
                 new Date(), new Date(), null, 1, cliente39);
         mascotaRepository.save(mascota39);
 
@@ -927,7 +927,7 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota40);
 
         Mascota mascota41 = new Mascota(null, "Lola", "Bulldog", 3, 13.5f, "Problemas de piel",
-                "https://img.huffingtonpost.es/files/image_1200_720/uploads/2023/06/22/un-perro-de-raza-labrador.jpeg",
+                "https://www.tiendanimal.es/articulos/wp-content/uploads/2023/12/imagenes-raza-bulldog-ingles.jpg",
                 new Date(), new Date(), null, 1, cliente41);
         mascotaRepository.save(mascota41);
 
@@ -937,7 +937,7 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota42);
 
         Mascota mascota43 = new Mascota(null, "Mia", "Beagle", 2, 9.8f, "Problemas digestivos",
-                "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
+                "https://static.vecteezy.com/system/resources/previews/008/026/049/non_2x/beagle-in-the-park-dog-in-grass-field-photo.jpg",
                 new Date(), new Date(), null, 1, cliente43);
         mascotaRepository.save(mascota43);
 
@@ -952,17 +952,17 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota45);
 
         Mascota mascota46 = new Mascota(null, "Roco", "Chihuahua", 2, 3.0f, "Problemas de conducta",
-                "https://www.rover.com/blog/wp-content/uploads/2015/03/black-dog.jpg", new Date(), new Date(), null, 1,
+                "https://lacaseta.es/wp-content/uploads/2023/08/chihuahua.jpg", new Date(), new Date(), null, 1,
                 cliente46);
         mascotaRepository.save(mascota46);
 
         Mascota mascota47 = new Mascota(null, "Luna", "Dálmata", 3, 14.5f, "Problemas hepáticos",
-                "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
+                "https://media.graphassets.com/resize=height:404,width:938/output=format:webp/6VF5NepyTBS8ln35NZxs?width=938",
                 new Date(), new Date(), null, 1, cliente47);
         mascotaRepository.save(mascota47);
 
         Mascota mascota48 = new Mascota(null, "Rocky", "Boxer", 4, 18.0f, "Problemas respiratorios",
-                "https://cdn.dogsplanet.com/wp-content/uploads/2019/10/beagle-sentado.jpg", new Date(), new Date(),
+                "https://dinastiacachorros.com.co/wp-content/uploads/2024/11/Img-Dinastia-del-Cachorro-Raza-Individual-Home-boxer-colombia.png", new Date(), new Date(),
                 null, 1, cliente48);
         mascotaRepository.save(mascota48);
 
@@ -982,12 +982,12 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota51);
 
         Mascota mascota52 = new Mascota(null, "Luna", "Bulldog", 3, 16.0f, "Problemas respiratorios",
-                "https://www.rover.com/blog/wp-content/uploads/2015/03/black-dog.jpg", new Date(), new Date(), null, 1,
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHDI9oiEOUTcDwcITV7QxWQkUfH1ijOw0RqQ&s", new Date(), new Date(), null, 1,
                 cliente2);
         mascotaRepository.save(mascota52);
 
         Mascota mascota53 = new Mascota(null, "Rocky", "Beagle", 2, 11.5f, "Alergia alimentaria",
-                "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
+                "https://cdn0.uncomo.com/es/posts/9/3/9/es_importante_que_un_beagle_sea_de_raza_50939_0_600.jpg",
                 new Date(), new Date(), null, 1, cliente3);
         mascotaRepository.save(mascota53);
 
@@ -1002,17 +1002,17 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota55);
 
         Mascota mascota56 = new Mascota(null, "Daisy", "Chihuahua", 2, 3.5f, "Hipoglucemia",
-                "https://www.rover.com/blog/wp-content/uploads/2015/03/black-dog.jpg", new Date(), new Date(), null, 1,
+                "https://goldenretrieverperu.com/wp-content/uploads/2021/11/chihuahua1.jpg", new Date(), new Date(), null, 1,
                 cliente6);
         mascotaRepository.save(mascota56);
 
         Mascota mascota57 = new Mascota(null, "Charlie", "Dálmata", 4, 19.0f, "Sordera congénita",
-                "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
+                "https://www.zooplus.es/magazine/wp-content/uploads/2020/01/dalmata-1.jpg",
                 new Date(), new Date(), null, 1, cliente7);
         mascotaRepository.save(mascota57);
 
         Mascota mascota58 = new Mascota(null, "Molly", "Boxer", 3, 21.5f, "Cardiopatía",
-                "https://cdn.dogsplanet.com/wp-content/uploads/2019/10/beagle-sentado.jpg", new Date(), new Date(),
+                "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-07Boxer1.jpg?itok=Y2i45vCP", new Date(), new Date(),
                 null, 1, cliente8);
         mascotaRepository.save(mascota58);
 
@@ -1027,7 +1027,7 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota60);
 
         Mascota mascota61 = new Mascota(null, "Zeus", "Bulldog Francés", 4, 13.5f, "Problemas oculares",
-                "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
+                "https://blog.dogfydiet.com/wp-content/uploads/2023/05/Caracteristicas-bulldog-ingles.jpg",
                 new Date(), new Date(), null, 1, cliente11);
         mascotaRepository.save(mascota61);
 
@@ -1042,7 +1042,7 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota63);
 
         Mascota mascota64 = new Mascota(null, "Ruby", "Beagle", 3, 12.0f, "Epilepsia",
-                "https://www.rover.com/blog/wp-content/uploads/2015/03/black-dog.jpg", new Date(), new Date(), null, 1,
+                "https://img.freepik.com/fotos-premium/perros-beagle-vuelven-mirar-lado-sospecha_36755-34.jpg?semt=ais_hybrid&w=740", new Date(), new Date(), null, 1,
                 cliente14);
         mascotaRepository.save(mascota64);
 
@@ -1057,17 +1057,17 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota66);
 
         Mascota mascota67 = new Mascota(null, "Rex", "Chihuahua", 2, 4.5f, "Luxación de rótula",
-                "https://img.huffingtonpost.es/files/image_1200_720/uploads/2023/06/22/un-perro-de-raza-labrador.jpeg",
+                "https://www.kokogenetics.com/_nuxt/img/106.09284bb.webp",
                 new Date(), new Date(), null, 1, cliente17);
         mascotaRepository.save(mascota67);
 
         Mascota mascota68 = new Mascota(null, "Sasha", "Dálmata", 3, 16.5f, "Cálculos urinarios",
-                "https://www.rover.com/blog/wp-content/uploads/2015/03/black-dog.jpg", new Date(), new Date(), null, 1,
+                "https://centralpetsperu.com/wp-content/uploads/2022/03/dalmata1.jpg", new Date(), new Date(), null, 1,
                 cliente18);
         mascotaRepository.save(mascota68);
 
         Mascota mascota69 = new Mascota(null, "Bruno", "Boxer", 4, 20.5f, "Problemas cardíacos",
-                "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
+                "https://www.muyinteresante.com/wp-content/uploads/sites/5/2022/10/12/6346a2c72a77a.jpeg",
                 new Date(), new Date(), null, 1, cliente19);
         mascotaRepository.save(mascota69);
 
@@ -1077,7 +1077,7 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota70);
 
         Mascota mascota71 = new Mascota(null, "Thor", "Bulldog", 3, 14.5f, "Problemas de piel",
-                "https://img.huffingtonpost.es/files/image_1200_720/uploads/2023/06/22/un-perro-de-raza-labrador.jpeg",
+                "https://blog.dogfydiet.com/wp-content/uploads/2023/05/Caracteristicas-bulldog-ingles.jpg",
                 new Date(), new Date(), null, 1, cliente21);
         mascotaRepository.save(mascota71);
 
@@ -1087,7 +1087,7 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota72);
 
         Mascota mascota73 = new Mascota(null, "Simba", "Beagle", 2, 10.0f, "Problemas digestivos",
-                "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
+                "https://goldenretrieverperu.com/wp-content/uploads/2021/11/beagle3.jpg",
                 new Date(), new Date(), null, 1, cliente23);
         mascotaRepository.save(mascota73);
 
@@ -1102,17 +1102,17 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota75);
 
         Mascota mascota76 = new Mascota(null, "Luna", "Chihuahua", 2, 3.8f, "Problemas de conducta",
-                "https://www.rover.com/blog/wp-content/uploads/2015/03/black-dog.jpg", new Date(), new Date(), null, 1,
+                "https://caracol.com.co/resizer/v2/D627YQLQEBC27I5UQZ2Y44ZG5U.jpg?auth=342359cc2a7f8feeda6a0782ffdbaee21c8ee871bcebb97c5e87ef1b43f2483f&width=1440&height=1080&quality=70&smart=true", new Date(), new Date(), null, 1,
                 cliente26);
         mascotaRepository.save(mascota76);
 
         Mascota mascota77 = new Mascota(null, "Rocky", "Dálmata", 3, 15.0f, "Problemas hepáticos",
-                "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
+                "https://cdn-coodb.nitrocdn.com/YoOVXLwRMctAOcRroQYMJHRPeNnvDFno/assets/images/optimized/rev-408478d/topcriadores.com/wp-content/uploads/2021/02/g.jpg",
                 new Date(), new Date(), null, 1, cliente27);
         mascotaRepository.save(mascota77);
 
         Mascota mascota78 = new Mascota(null, "Bella", "Boxer", 4, 19.5f, "Problemas respiratorios",
-                "https://cdn.dogsplanet.com/wp-content/uploads/2019/10/beagle-sentado.jpg", new Date(), new Date(),
+                "https://image.petmd.com/files/inline-images/boxer-dog-3.jpg?VersionId=w_yp1hieep9vzAu5UslHVi4.ZC3FJnz9", new Date(), new Date(),
                 null, 1, cliente28);
         mascotaRepository.save(mascota78);
 
@@ -1127,7 +1127,7 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota80);
 
         Mascota mascota81 = new Mascota(null, "Charlie", "Bulldog Francés", 2, 12.5f, "Problemas de audición",
-                "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
+                "https://mivet.com/wp-content/uploads/2024/10/shutterstock_335066660.jpg",
                 new Date(), new Date(), null, 1, cliente31);
         mascotaRepository.save(mascota81);
 
@@ -1142,7 +1142,7 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota83);
 
         Mascota mascota84 = new Mascota(null, "Lola", "Beagle", 2, 11.0f, "Problemas de alergia",
-                "https://www.rover.com/blog/wp-content/uploads/2015/03/black-dog.jpg", new Date(), new Date(), null, 1,
+                "https://goldenretrieverperu.com/wp-content/uploads/2021/11/beagle3.jpg", new Date(), new Date(), null, 1,
                 cliente34);
         mascotaRepository.save(mascota84);
 
@@ -1157,17 +1157,17 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota86);
 
         Mascota mascota87 = new Mascota(null, "Milo", "Chihuahua", 2, 3.2f, "Problemas de ansiedad",
-                "https://img.huffingtonpost.es/files/image_1200_720/uploads/2023/06/22/un-perro-de-raza-labrador.jpeg",
+                "https://arquivet.com/img/cms/Todo%20lo%20que%20debes%20saber%20sobre%20los%20perros%20chihuahua.jpg",
                 new Date(), new Date(), null, 1, cliente37);
         mascotaRepository.save(mascota87);
 
         Mascota mascota88 = new Mascota(null, "Ruby", "Dálmata", 3, 14.0f, "Problemas de audición",
-                "https://www.rover.com/blog/wp-content/uploads/2015/03/black-dog.jpg", new Date(), new Date(), null, 1,
+                "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-07Dalmatian2.jpg?itok=WgnY-HKT", new Date(), new Date(), null, 1,
                 cliente38);
         mascotaRepository.save(mascota88);
 
         Mascota mascota89 = new Mascota(null, "Oscar", "Boxer", 4, 18.5f, "Problemas cardíacos",
-                "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
+                "https://www.zaunk.com/wp-content/uploads/2020/05/boxer-caracteristicas-scaled.jpg.webp",
                 new Date(), new Date(), null, 1, cliente39);
         mascotaRepository.save(mascota89);
 
@@ -1177,7 +1177,7 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota90);
 
         Mascota mascota91 = new Mascota(null, "Rex", "Bulldog", 3, 13.0f, "Problemas de piel",
-                "https://img.huffingtonpost.es/files/image_1200_720/uploads/2023/06/22/un-perro-de-raza-labrador.jpeg",
+                "https://media.cnn.com/api/v1/images/stellar/prod/cnne-1224502-220615105053-unhealthy-english-bulldogs-full-169.jpeg?q=w_1110,c_fill",
                 new Date(), new Date(), null, 1, cliente41);
         mascotaRepository.save(mascota91);
 
@@ -1187,7 +1187,7 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota92);
 
         Mascota mascota93 = new Mascota(null, "Bruno", "Beagle", 2, 9.5f, "Problemas digestivos",
-                "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
+                "https://limaonepets.com/wp-content/uploads/2023/05/bea-3-1024x1024.png",
                 new Date(), new Date(), null, 1, cliente43);
         mascotaRepository.save(mascota93);
 
@@ -1202,17 +1202,17 @@ public class DataBaseInitTest implements ApplicationRunner {
         mascotaRepository.save(mascota95);
 
         Mascota mascota96 = new Mascota(null, "Mia", "Chihuahua", 2, 3.5f, "Problemas de conducta",
-                "https://www.rover.com/blog/wp-content/uploads/2015/03/black-dog.jpg", new Date(), new Date(), null, 1,
+                "https://media.istockphoto.com/id/2162705183/es/foto/cute-chihuahua-dog.jpg?s=612x612&w=0&k=20&c=aw__EiyZtG54DC2wHnXCiKwjaazRVMeymnjtuJU-_r4=", new Date(), new Date(), null, 1,
                 cliente46);
         mascotaRepository.save(mascota96);
 
         Mascota mascota97 = new Mascota(null, "Simba", "Dálmata", 3, 14.5f, "Problemas hepáticos",
-                "https://s1.elespanol.com/2021/11/11/curiosidades/mascotas/626448862_214582614_1706x1280.jpg",
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Chien_sportif.jpg/250px-Chien_sportif.jpg",
                 new Date(), new Date(), null, 1, cliente47);
         mascotaRepository.save(mascota97);
 
         Mascota mascota98 = new Mascota(null, "Nala", "Boxer", 4, 17.5f, "Problemas respiratorios",
-                "https://cdn.dogsplanet.com/wp-content/uploads/2019/10/beagle-sentado.jpg", new Date(), new Date(),
+                "https://d128mjo55rz53e.cloudfront.net/media/images/boxer-5.max-400x400.format-jpeg.jpg", new Date(), new Date(),
                 null, 1, cliente48);
         mascotaRepository.save(mascota98);
 
