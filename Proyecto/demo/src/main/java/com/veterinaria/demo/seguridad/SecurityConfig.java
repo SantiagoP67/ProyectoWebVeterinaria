@@ -28,7 +28,10 @@ public class SecurityConfig {
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/h2-console/**").permitAll()
-                        .anyRequest().permitAll())
+                        .requestMatchers("/auth/inicio_sesion").permitAll()
+                        .requestMatchers("/api/testimonios").permitAll()
+                        .requestMatchers("/api/servicios").permitAll()
+                        .anyRequest().authenticated())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint));
 
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

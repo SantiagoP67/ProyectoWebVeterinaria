@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.security.Key;
 import java.util.Date;
 
+
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -22,12 +23,12 @@ public class JWTGenerator {
         String username = authentication.getName();
         Date currentDate = new Date();
         Date expirationDate = new Date(currentDate.getTime() + EXPIRATION_TIME);
-
-        String token = Jwts.builder().setSubject(username)
+        String token = Jwts.builder()
+                .setSubject(username)
                 .setIssuedAt(currentDate)
                 .setExpiration(expirationDate)
-                .signWith(key, SignatureAlgorithm.HS512).compact();
-
+                .signWith(key, SignatureAlgorithm.HS512)
+                .compact();
         return token;
     }
 
