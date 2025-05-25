@@ -18,5 +18,4 @@ public interface VeterinarioRepository extends JpaRepository<Veterinario, Intege
     Veterinario findByIdVeterinario(Integer idVeterinario);
     Veterinario findByNombreUsuario(String nombreusuario);
     List<Veterinario> findByNombreContainingIgnoreCase(String nombre);
-
 }
