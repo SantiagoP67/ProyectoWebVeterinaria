@@ -1,8 +1,18 @@
 package com.veterinaria.demo.servicio;
 
 import com.veterinaria.demo.entidad.Cita;
+import com.veterinaria.demo.entidad.Mascota;
+import com.veterinaria.demo.entidad.Servicio;
+import com.veterinaria.demo.entidad.Veterinario;
 import com.veterinaria.demo.repositorio.CitaRepository;
+import com.veterinaria.demo.repositorio.ClienteRepository;
+import com.veterinaria.demo.repositorio.MascotaRepository;
+import com.veterinaria.demo.repositorio.ServicioRepository;
+import com.veterinaria.demo.repositorio.VeterinarioRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.SpringTransactionAnnotationParser;
 
 import java.util.Date;
 import java.util.List;
@@ -11,6 +21,16 @@ import java.util.List;
 public class CitaServiceImpl implements CitaService {
     
     private final CitaRepository citaRepository;
+
+    @Autowired
+    private VeterinarioRepository veterinarioRepository;
+
+    @Autowired
+    private MascotaRepository mascotaRepository;
+
+    @Autowired
+    private ServicioRepository servicioRepository;
+    
     
     public CitaServiceImpl(CitaRepository citaRepository) {
         this.citaRepository = citaRepository;
@@ -22,6 +42,19 @@ public class CitaServiceImpl implements CitaService {
         if (cita.getFechaHora().before(new Date())) {
             throw new IllegalArgumentException("La fecha de la cita debe ser futura");
         }
+
+        Veterinario veterinario = veterinarioRepository.findById(cita.getVeterinario().getIdVeterinario())
+                .orElseThrow(() -> new RuntimeException("Veterinario no encontrado con ID: " + cita.getVeterinario().getIdVeterinario()));
+
+        Mascota mascota = mascotaRepository.findById(cita.getMascota().getIdMascota())
+                .orElseThrow(() -> new RuntimeException("Mascota no encontrada con ID: " + cita.getMascota().getIdMascota()));   
+
+        Servicio servicio = servicioRepository.findById(cita.getServicio().getIdServicio())
+                .orElseThrow(() -> new RuntimeException("Servicio no encontrado con ID: " + cita.getServicio().getIdServicio()));    
+                
+        cita.setServicio(servicio);
+        cita.setVeterinario(veterinario);
+        cita.setMascota(mascota);        
         return citaRepository.save(cita);
     }
     
