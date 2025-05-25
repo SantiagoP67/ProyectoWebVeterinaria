@@ -135,4 +135,10 @@ public class VeterinarioServiceImpl implements VeterinarioService {
     public List<Veterinario> buscarPorNombreUsuario(String nombreUsuario) {
         return veterinarioRepository.findByNombreContainingIgnoreCase(nombreUsuario);
     }
+
+    @Override
+    public Veterinario obtenerPorNombreUsuario(String nombreUsuario) {
+        return veterinarioRepository.findByNombreUsuario(nombreUsuario);
+    }
+
 }

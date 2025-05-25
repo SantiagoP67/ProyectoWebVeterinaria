@@ -51,15 +51,16 @@ public class VeterinarioController{
     }
 
     @GetMapping("/details")
-    public ResponseEntity<Veterinario> buscarVeterinariro(){
-        Veterinario veterinario = veterinarioService.buscarPorNombreUsuario(
-                SecurityContextHolder.getContext().getAuthentication().getName()
-        );
+    public ResponseEntity<Veterinario> obtenerDetallesVeterinario() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String nombreUsuario = authentication.getName();
 
-        if(veterinario == null){
-            return new ResponseEntity<Veterinario>(veterinario,HttpStatus.NOT_FOUND);
+        Veterinario veterinario = veterinarioService.obtenerPorNombreUsuario(nombreUsuario);
+        if (veterinario == null) {
+            return ResponseEntity.notFound().build();
         }
-        return new ResponseEntity<Veterinario>(veterinario,HttpStatus.OK);
+
+        return ResponseEntity.ok(veterinario);
     }
 
     @GetMapping
