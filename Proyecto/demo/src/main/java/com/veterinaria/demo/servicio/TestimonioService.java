@@ -6,4 +6,5 @@ import com.veterinaria.demo.entidad.Testimonio;
 
 public interface TestimonioService {
     List<Testimonio> obtenerTodosTestimonios();
+    Testimonio crearTestimonio(Testimonio testimonio);
 }
