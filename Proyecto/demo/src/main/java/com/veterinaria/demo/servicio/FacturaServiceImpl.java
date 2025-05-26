@@ -3,8 +3,6 @@ package com.veterinaria.demo.servicio;
 import com.veterinaria.demo.entidad.*;
 import com.veterinaria.demo.repositorio.*;
 
-import jakarta.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
