@@ -1,5 +1,6 @@
 package com.veterinaria.demo.servicio;
 
+import com.veterinaria.demo.entidad.Factura;
 import com.veterinaria.demo.entidad.Mascota;
 import com.veterinaria.demo.entidad.Medicamento;
 import com.veterinaria.demo.entidad.Servicio;

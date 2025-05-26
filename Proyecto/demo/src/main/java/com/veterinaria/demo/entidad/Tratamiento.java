@@ -52,6 +52,9 @@ public class Tratamiento {
     @JsonIgnore
     private List<TratamientoMedicamento> tratamientoMedicamentos;
 
+    
+
+
     public Tratamiento(String codigo, Date fecha, String detalles) {
         this.codigo = codigo;
         this.fecha = fecha;

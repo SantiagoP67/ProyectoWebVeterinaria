@@ -1,7 +1,6 @@
 package com.veterinaria.demo.servicio;
 
 import com.veterinaria.demo.entidad.Cliente;
-import com.veterinaria.demo.entidad.UserEntity;
 import com.veterinaria.demo.repositorio.ClienteRepository;
 import com.veterinaria.demo.repositorio.UserRepository;
 
@@ -10,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+
 
 import org.springframework.stereotype.Service;
 

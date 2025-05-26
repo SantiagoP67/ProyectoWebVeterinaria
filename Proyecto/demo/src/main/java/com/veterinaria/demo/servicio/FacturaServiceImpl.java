@@ -70,6 +70,15 @@ public class FacturaServiceImpl implements FacturaService {
         return facturaRepository.findAllByCliente(idCliente);
     }
 
+
+    @Override
+    public Factura obtenerFacturaPorTratamiento(Integer idTratamiento) {
+        Tratamiento tratamiento = tratamientoRepository.findById(idTratamiento)
+                .orElseThrow(() -> new RuntimeException("Tratamiento no encontrado"));
+
+        return facturaRepository.findByTratamiento(tratamiento);
+    }
+
     @Override
     public Factura crearFacturaPorTratamiento(Integer idCliente, Integer idTratamiento, Factura factura) {
         float total = 0f;

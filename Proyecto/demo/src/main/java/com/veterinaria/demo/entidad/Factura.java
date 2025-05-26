@@ -34,7 +34,7 @@ public class Factura {
     @JoinColumn(name = "idCliente", nullable = false)
     private Cliente cliente;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "idTratamiento", nullable = true)
     @org.hibernate.annotations.OnDelete(action = org.hibernate.annotations.OnDeleteAction.SET_NULL)
     private Tratamiento tratamiento;

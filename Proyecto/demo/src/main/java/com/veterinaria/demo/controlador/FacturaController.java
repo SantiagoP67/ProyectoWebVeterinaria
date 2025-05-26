@@ -77,4 +77,14 @@ public class FacturaController {
         facturaService.pagarFacturas(idsFacturas);
         return ResponseEntity.ok("Facturas pagadas correctamente");
     }
+
+    @GetMapping("/por-tratamiento/{idTratamiento}")
+    public ResponseEntity<Factura> getFacturaPorTratamiento(@PathVariable Integer idTratamiento) {
+        Factura factura = facturaService.obtenerFacturaPorTratamiento(idTratamiento);
+        if (factura == null) {
+            return ResponseEntity.ok(null);
+        }
+        return ResponseEntity.ok(factura);
+    }
+
 }
