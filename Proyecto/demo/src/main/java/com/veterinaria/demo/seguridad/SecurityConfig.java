@@ -31,6 +31,7 @@ public class SecurityConfig {
                         .requestMatchers("/auth/inicio_sesion").permitAll()
                         .requestMatchers("/api/testimonios").permitAll()
                         .requestMatchers("/api/servicios").permitAll()
+                        .requestMatchers("/factura/crear/medicamentos").permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint));
 

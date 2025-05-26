@@ -2,6 +2,9 @@ package com.veterinaria.demo.servicio;
 
 import com.veterinaria.demo.entidad.*;
 import com.veterinaria.demo.repositorio.*;
+
+import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -236,6 +239,7 @@ public class FacturaServiceImpl implements FacturaService {
 
             FacturaMedicamento fm = new FacturaMedicamento();
             fm.setMedicamento(medicamento);
+            fm.setCantidad(1);
             fm.setFactura(facturanueva);
 
             facturaMedicamentos.add(fm);
