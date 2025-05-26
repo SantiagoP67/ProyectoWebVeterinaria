@@ -27,6 +27,12 @@ public class ServicioServiceImpl implements ServicioService {
     }
 
     @Override
+    public Servicio obtenerServicioPorId(Integer id) {
+        return servicioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Servicio no encontrado con ID: " + id));
+    }
+
+    @Override
     public List<Servicio> obtenerTodosServicios() {
         return servicioRepository.findAllByOrderByNombreAsc();
     }

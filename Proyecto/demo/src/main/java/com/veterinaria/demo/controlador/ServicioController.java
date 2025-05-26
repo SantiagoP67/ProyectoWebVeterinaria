@@ -33,6 +33,15 @@ public class ServicioController {
         return ResponseEntity.ok(servicios);
     }
     
+    @GetMapping("/{id}")
+    public ResponseEntity<Servicio> obtenerServicioPorId(@PathVariable Integer id) {
+        Servicio servicio = servicioService.obtenerServicioPorId(id);
+        if (servicio == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(servicio);
+    }
+
     @GetMapping("/ventas-totales")
     public ResponseEntity<BigDecimal> obtenerVentasTotales() {
         Float ventasTotales = tratamientoService.calcularVentasTotales();

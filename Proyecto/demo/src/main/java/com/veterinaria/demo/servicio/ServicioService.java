@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface ServicioService {
     List<Servicio> obtenerTodosServicios();
+    Servicio obtenerServicioPorId(Integer id);
     BigDecimal calcularVentasTotales();
     BigDecimal calcularGananciasTotales();
 }
