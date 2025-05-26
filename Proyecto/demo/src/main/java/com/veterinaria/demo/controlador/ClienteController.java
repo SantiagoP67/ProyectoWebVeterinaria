@@ -105,6 +105,7 @@ public class ClienteController{
             response.put("message", "Usuario creado correctamente");
             return ResponseEntity.ok(response);
         } catch (Exception e) {
+            e.printStackTrace();
             Map<String, String> response = new HashMap<>();
             response.put("error", "Error al crear el cliente");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);

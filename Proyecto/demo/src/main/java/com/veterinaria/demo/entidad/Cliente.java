@@ -36,7 +36,8 @@ public class Cliente {
     @Column(name = "contrasenha", nullable = false)
     private String contrasena;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name = "user_id_user") // Esto asegura que el nombre de la columna coincida con la FK
     private UserEntity user;
 
     @JsonIgnore
@@ -47,6 +48,9 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Testimonio> testimonios;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Factura> facturas;
 
     public Cliente(String nombre, String correo, String celular, String foto, String cedula, String nombreUsuario, String contrasena) {
         this.nombre = nombre;

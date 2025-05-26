@@ -52,27 +52,27 @@ public class TratamientoRepositoryTest {
                 Cliente cliente1 = clienteRepository.save(new Cliente(
                                 null, "Juan Pérez", "juan@example.com", "3216549870",
                                 "foto1.jpg", "123456789", "juanp", "1234",
-                                null, null, null));
+                                null, null, null,null));
 
                 Cliente cliente2 = clienteRepository.save(new Cliente(
                                 null, "María Gómez", "maria@example.com", "3101234567",
                                 "foto2.jpg", "987654321", "mariag", "5678",
-                                null, null, null));
+                                null, null, null,null));
 
                 Mascota mascota1 = mascotaRepository.save(new Mascota(
                                 null, "Firulais", "Labrador", 5, 20.0f,
                                 "Ninguna", "mascota1.jpg", new Date(), new Date(),
-                                null, 1, cliente1));
+                                null, 1, cliente1,null));
 
                 Mascota mascota2 = mascotaRepository.save(new Mascota(
                                 null, "Michi", "Siamés", 3, 5.0f,
                                 "Alergia a pescado", "mascota2.jpg", new Date(), new Date(),
-                                null, 1, cliente1));
+                                null, 1, cliente1, null));
 
                 Mascota mascota3 = mascotaRepository.save(new Mascota(
                                 null, "Rex", "Pastor Alemán", 2, 25.0f,
                                 "Ninguna", "mascota3.jpg", new Date(), new Date(),
-                                null, 1, cliente2));
+                                null, 1, cliente2, null));
 
                 Veterinario veterinario1 = veterinarioRepository.save(new Veterinario(
                                 null, "Dra. Laura", "987654321", "General",

@@ -170,7 +170,7 @@ public class TratamientoControllerTest {
     @Test
     public void TratamientoController_obtenerTratamientosPorMascota_ListaTratamientos() throws Exception {
         // Arrange
-        Mascota mascota = new Mascota(1, "Firulais", "Labrador", 5, 20.0f, null, null, null, null, null, 1, null);
+        Mascota mascota = new Mascota(1, "Firulais", "Labrador", 5, 20.0f, null, null, null, null, null, 1, null,null);
         List<Tratamiento> tratamientos = Arrays.asList(
             new Tratamiento(1, "TRAT-001", new Date(), "Consulta", null, mascota, null, null)
         );

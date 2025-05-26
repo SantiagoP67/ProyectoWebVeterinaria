@@ -1,5 +1,9 @@
 package com.veterinaria.demo.entidad;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,4 +22,8 @@ public class Role {
     public Role(String name){
         this.name = name;
     }
+
+    @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<UserEntity> usuarios;
 }

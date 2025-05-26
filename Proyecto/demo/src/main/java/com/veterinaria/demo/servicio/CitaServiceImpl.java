@@ -5,14 +5,12 @@ import com.veterinaria.demo.entidad.Mascota;
 import com.veterinaria.demo.entidad.Servicio;
 import com.veterinaria.demo.entidad.Veterinario;
 import com.veterinaria.demo.repositorio.CitaRepository;
-import com.veterinaria.demo.repositorio.ClienteRepository;
 import com.veterinaria.demo.repositorio.MascotaRepository;
 import com.veterinaria.demo.repositorio.ServicioRepository;
 import com.veterinaria.demo.repositorio.VeterinarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.SpringTransactionAnnotationParser;
 
 import java.util.Date;
 import java.util.List;
