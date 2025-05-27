@@ -33,7 +33,7 @@ public class Cliente {
     private String nombreUsuario;
 
     @Transient
-    @Column(name = "contrasenha", nullable = false)
+    //@Column(name = "contrasenha", nullable = false)
     private String contrasena;
 
     @OneToOne

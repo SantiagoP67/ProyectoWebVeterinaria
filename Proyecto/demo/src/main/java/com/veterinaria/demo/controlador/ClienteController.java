@@ -99,8 +99,16 @@ public class ClienteController{
 
         try {
             UserEntity userEntity = customUserDetailsService.clienteToUser(cliente);
+    
+    // Primero guardas el userEntity
+            userRepository.save(userEntity);
+            
+            // Luego lo asocias al cliente
             cliente.setUser(userEntity);
+            
+            // Ahora guardas el cliente
             clienteService.crearCliente(cliente);
+
             Map<String, String> response = new HashMap<>();
             response.put("message", "Usuario creado correctamente");
             return ResponseEntity.ok(response);
