@@ -32,17 +32,25 @@ public class TestimonioServiceImpl implements TestimonioService {
     }
 
     @Override
-    public Testimonio crearTestimonio(Testimonio testimonio) {
-        Cliente cliente = clienteRepository.findById(testimonio.getCliente().getIdCliente())
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
-        
-        Servicio servicio = servicioRepository.findById(testimonio.getServicio().getIdServicio())
-                .orElseThrow(() -> new RuntimeException("Servicio no encontrado"));
+public Testimonio crearTestimonio(Testimonio testimonio) {
 
-        testimonio.setCliente(cliente);
-        testimonio.setServicio(servicio);
-        testimonio.setFecha(new Date());
+    // Buscar cliente por ID, lanzar excepción si no existe
+    Cliente cliente = clienteRepository.findById(testimonio.getCliente().getIdCliente())
+            .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
 
-        return testimonioRepository.save(testimonio);
-    }
+    // Buscar servicio por ID, lanzar excepción si no existe
+    Servicio servicio = servicioRepository.findById(testimonio.getServicio().getIdServicio())
+            .orElseThrow(() -> new RuntimeException("Servicio no encontrado"));
+
+    // Asignar cliente y servicio existentes al testimonio
+    testimonio.setCliente(cliente);
+    testimonio.setServicio(servicio);
+
+    // Establecer la fecha actual como fecha del testimonio
+    testimonio.setFecha(new Date());
+
+    // Guardar el testimonio en la base de datos
+    return testimonioRepository.save(testimonio);
+}
+
 }
